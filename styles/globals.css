@@ -1,9 +1,14 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Lexend Deca", sans-serif;
+  color: #2C2C2C;
 }
 
 a {
@@ -14,3 +19,146 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.container {
+  max-width: 1280px;
+  width: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100vh;
+  max-height: 653px;
+  position: relative;
+}
+
+.instagram {
+  background-image: url("../public/image/ig.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 45px;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 36px;
+}
+
+p {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+section h1 {
+  margin-bottom: 20px;
+}
+section .overview .left-overview {
+  border-right: 1px solid #000000;
+}
+section .overview h2 {
+  margin-bottom: 20px;
+}
+section .overview .right-overview p {
+  line-height: 36px;
+}
+section .overview .right-overview p:not(:last-child) {
+  margin-bottom: 40px;
+}
+section .text-image h2, section .multi-images h2 {
+  margin-bottom: 50px;
+}
+section .text-only h1 {
+  margin-bottom: 0;
+  line-height: 60px;
+}
+section .text-only h2 {
+  margin-top: 16px;
+}
+section .carousel {
+  border-top: 10px solid;
+  border-bottom: 10px solid;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-image: linear-gradient(to right, #4F5BD5, #962FBF, #D62976, #FA7E1E, #FEDA75) 1 stretch;
+}
+section .carousel .carousel-page {
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+section .carousel .carousel-page h2 {
+  margin-bottom: 9px;
+}
+section .carousel .carousel-page p:not(:last-of-type) {
+  margin-bottom: 21px;
+}
+section .carousel .swiper-button-next, section .carousel .swiper-button-prev {
+  color: #E5E5E5;
+  width: 81px;
+  height: 81px;
+  background: #292C36;
+  border-radius: 50%;
+}
+section .carousel .swiper-pagination-bullet {
+  width: 20px;
+  height: 20px;
+  background: #E5E5E5;
+  opacity: 1;
+}
+section .carousel .swiper-pagination-bullet-active {
+  background: linear-gradient(180deg, #4F5BD5 0%, #962FBF 24.48%, #D62976 47.92%, #FA7E1E 71.87%, #FEDA75 100%);
+}
+section .horizon .horizon-text {
+  max-width: 345px;
+  margin-right: 25px;
+}
+section .horizon .horizon-text h1 {
+  line-height: 60px;
+}
+section .list > div {
+  padding: 100px 0;
+}
+section .list .list-text {
+  margin-left: 40px;
+  margin-bottom: 30px;
+}
+section .list .list-text h2, section .list .list-text p {
+  margin: 0 100px;
+}
+section .list .list-text h2 {
+  margin-bottom: 10px;
+  position: relative;
+}
+section .list .list-text h2::before {
+  content: "• ";
+  position: absolute;
+  left: -20px;
+}
+section .list .list-text p {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+}
+section .list .yellow::before {
+  content: "";
+  background-color: #F5C261;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  width: 30%;
+  z-index: -1;
+}
+
+/*# sourceMappingURL=globals.css.map */

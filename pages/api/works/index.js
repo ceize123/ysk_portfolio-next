@@ -1,0 +1,5 @@
+import { works } from "../../../data/works";
+
+export default function handle(req, res) {
+	res.status(200).json(works);
+}
