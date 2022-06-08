@@ -1,5 +1,5 @@
-function Overview(prop) {
-	const data = prop.prop;
+function Overview({prop}) {
+	const data = prop.overview;
 	return (
 		<section className="mx-auto overview text-left grid gap-2 grid-cols-12" >
 			<div className="left-overview col-start-2 col-span-6">

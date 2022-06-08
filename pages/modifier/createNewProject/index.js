@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Input from "../../../components/Input";
 
-const labels = [
+const column = [
 	"title",
 	"description",
 	"navColor",
 	"heroImage"
 ];
 
+const overviewColumn = [
+	"subtile",
+	"paragraph",
+	"timeline",
+	"role",
+	"team"
+];
+
 function AddNew() {
-	const [work, setWork] = useState({
-		title: "",
-		description: "",
-		navColor: "",
-		heroImage: ""
-	});
+	const [work, setWork] = useState({});
+
+	const [overview, setOverview] = useState({});
+
+	useEffect(() => {
+		setWork({ ...work, overview: overview });
+	},[overview]);
 
 	const validateInput = (title, description, navColor,  heroImage) => {
 		if (title === "" || description === "" || navColor === "" || heroImage === "") {
@@ -44,8 +53,8 @@ function AddNew() {
 		console.log(data);
 	};
 	return (
-		<div className="mt-5 newProject">
-			<h1 className="text-3xl mb-3 text-center">Create New Project</h1>
+		<>
+			<h1 className="text-3xl text-center font-bold underline my-6">Create New Project</h1>
 			<div>
 				<form action="#" method="POST">
 					<div className="shadow overflow-hidden rounded-md">
@@ -63,7 +72,7 @@ function AddNew() {
 										className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 									/>
 								</div> */}
-								{labels.map((item, idx) => (
+								{column.map((item, idx) => (
 									<Input key={idx}
 										prop={item}
 										onChange={e => {
@@ -71,6 +80,14 @@ function AddNew() {
 										}} />
 								))}
 								{/* add overview */}
+								{overviewColumn.map((item, idx) => (
+									<Input key={idx}
+										prop={item}
+										onChange={e => {
+											setOverview({ ...overview, [item]: e.target.value });
+										}} />
+								))}
+								
 							</div>
 						</div>
 						<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -83,7 +100,7 @@ function AddNew() {
 					</div>
 				</form>
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -25,15 +25,22 @@ export const works = [
 		description: "instagram",
 		navColor: "#150F43",
 		heroImage: ig,
+		overview: {
+			subtitle: "I redesigned Andrea Ko Jewelry Design Courses Website (RWD) to make it more organized and clean.",
+			paragraph: "The original online presence and the information were lacking. ",
+			timeline: "2 Weeks",
+			role: "UI/UX Designer",
+			team: "Personal Project"
+		},
 		sections: [
-			{
-				type: "overview",
-				subtitle: "I redesigned Andrea Ko Jewelry Design Courses Website (RWD) to make it more organized and clean.",
-				paragraph: "The original online presence and the information were lacking. ",
-				timeline: "2 Weeks",
-				role: "UI/UX Designer",
-				team: "Personal Project"
-			},
+			// {
+			// 	type: "overview",
+			// 	subtitle: "I redesigned Andrea Ko Jewelry Design Courses Website (RWD) to make it more organized and clean.",
+			// 	paragraph: "The original online presence and the information were lacking. ",
+			// 	timeline: "2 Weeks",
+			// 	role: "UI/UX Designer",
+			// 	team: "Personal Project"
+			// },
 			{
 				type: "imageOnly",
 				image: imageOnly

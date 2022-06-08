@@ -219,8 +219,12 @@ section {
 // Sections Ends
 
 // Add new section starts
-.add-new-section {
-	margin-bottom: 100px;
+.addNewSection {
+	.imageOnly {
+		.color {
+			display: none;
+		}
+	}
 }
 
 // Add new section ends

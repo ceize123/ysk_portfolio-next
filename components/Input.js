@@ -1,7 +1,7 @@
 function Input({prop, onChange }) {
 
 	return (
-		<div>
+		<div className={prop}>
 			<label htmlFor={prop} className="block text-sm font-medium text-gray-700">
 				{prop.charAt(0).toUpperCase() + prop.slice(1)}
 			</label>

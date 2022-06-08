@@ -1,4 +1,3 @@
-import Overview from "./sections/Overview";
 import ImageOnly from "./sections/ImageOnly";
 import TextImage from "./sections/TextImage";                           
 import MultiImages from "./sections/MultiImages";
@@ -9,7 +8,6 @@ import List from "./sections/List";
 
 // Dynamic Layout used in the function dynamicComponent
 const LAYOUTS = {
-	Overview,
 	ImageOnly,
 	TextImage,
 	MultiImages,
@@ -19,8 +17,8 @@ const LAYOUTS = {
 	List
 };
 
-function Section(prop) {
-	const section = prop.prop;
+function TypeSection({prop}) {
+	const section = prop;
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
@@ -39,4 +37,4 @@ function Section(prop) {
 	);
 }
 
-export default Section;
+export default TypeSection;

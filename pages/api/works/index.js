@@ -10,7 +10,14 @@ export default function handle(req, res) {
 			title: work.title,
 			description: work.description,
 			navColor: work.navColor,
-			heroImage: work.heroImage
+			heroImage: work.heroImage,
+			overview: {
+				subtile: work.overview.subtile,
+				paragraph: work.overview.paragraph,
+				timeline: work.overview.timeline,
+				role: work.overview.role,
+				team: work.overview.team
+			}
 		};
 		works.push(newWork);
 		res.status(201).json(newWork);

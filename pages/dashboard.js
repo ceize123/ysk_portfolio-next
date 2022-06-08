@@ -1,16 +1,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import SelectInput from "../components/SelectInput";
+import SelectMenu from "../components/SelectMenu";
 
 const typeData = [
-	{
-		id: 1,
-		title: "Add New Section",
-	},
-	{
-		id: 2,
-		title: "Update Section",
-	}
+	"Add New Section",
+	"Update Section",
 ];
 
 function Dashboard() {
@@ -38,7 +32,7 @@ function Dashboard() {
 	}
 	function handleSubmit() {
 		if (isUpdate) {
-			router.push(`/modifier/updateCurProject/${type.id === 1 ? "addSection" : "updateSection"}/${work.id}`);
+			router.push(`/modifier/updateCurProject/${type === "Add New Section" ? "addSection" : "updateSection"}/${work.id}`);
 		} else {
 			router.push("/modifier/createNewProject");
 		}
@@ -62,8 +56,8 @@ function Dashboard() {
 					<>
 						{/* Pass data from child to parent */}
 						{/* https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component */}
-						<SelectInput data={DashboardData} option={work} name="Work" onChange={setWork}/>
-						<SelectInput data={typeData} option={type} name="Type" onChange={setType}/>
+						<SelectMenu prop={DashboardData} option={work} name="Work" onChange={setWork}/>
+						<SelectMenu prop={typeData} option={type} name="Type" onChange={setType}/>
 					</>
 				}
 				<button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
