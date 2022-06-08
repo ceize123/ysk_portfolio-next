@@ -129,7 +129,20 @@ section {
 			p:not(:last-of-type) {
 				margin-bottom: 21px;
 			}
+
+			.carousel-text-div {
+				margin-top: 50px;
+			}
+
+			.carousel-image-div {
+				overflow-y: scroll;
+			}
+
+			.carousel-page-active {
+				display: block;
+			}
 		}
+
 		.swiper-button-next, .swiper-button-prev {
 			color: #E5E5E5;
 			width: 81px;
@@ -204,3 +217,10 @@ section {
 }
 
 // Sections Ends
+
+// Add new section starts
+.add-new-section {
+	margin-bottom: 100px;
+}
+
+// Add new section ends

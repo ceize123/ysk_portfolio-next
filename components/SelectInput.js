@@ -32,9 +32,9 @@ function Select({ data , option, name, onChange }) {
 								leaveTo="opacity-0"
 							>
 								<Listbox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
-									{data.map((item) => (
+									{data.map((item, idx) => (
 										<Listbox.Option
-											key={item.id}
+											key={idx}
 											className={({ active }) =>
 												classNames(
 													active ? "text-white bg-indigo-600" : "text-gray-900",

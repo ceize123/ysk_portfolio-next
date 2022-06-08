@@ -36,10 +36,12 @@ function Dashboard() {
 	function handleClick() {
 		setIsUpdate(!isUpdate);
 	}
-	function handleClick2() {
-		console.log(work);
-		console.log(type);
-		router.push(`/modifier/updateCurProject/addSection/${work.id}`);
+	function handleSubmit() {
+		if (isUpdate) {
+			router.push(`/modifier/updateCurProject/${type.id === 1 ? "addSection" : "updateSection"}/${work.id}`);
+		} else {
+			router.push("/modifier/createNewProject");
+		}
 	}
 
 	if (isLoading) return <h1 className="text-3xl text-center font-bold mt-6">Loading...</h1>;
@@ -54,7 +56,7 @@ function Dashboard() {
 						<input type="checkbox" value="" id="toggle" className="sr-only peer" onClick={e => { handleClick(e); }}/>
 						<div className="w-12 h-6 bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600"></div>
 					</label>
-					<p className="mt-1 ml-3 text-sm font-medium text-gray-700">Add New Work</p>
+					<p className="mt-1 ml-3 text-sm font-medium text-gray-700">Create New Work</p>
 				</div>
 				{isUpdate &&
 					<>
@@ -64,7 +66,7 @@ function Dashboard() {
 						<SelectInput data={typeData} option={type} name="Type" onChange={setType}/>
 					</>
 				}
-				<button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleClick2}>Send</button>
+				<button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
 			</div>
 		</>
 	);

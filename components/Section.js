@@ -1,0 +1,42 @@
+import Overview from "./sections/Overview";
+import ImageOnly from "./sections/ImageOnly";
+import TextImage from "./sections/TextImage";                           
+import MultiImages from "./sections/MultiImages";
+import Carousel from "./sections/Carousel";
+import TextOnly from "./sections/TextOnly";
+import Horizon from "./sections/Horizon";
+import List from "./sections/List";
+
+// Dynamic Layout used in the function dynamicComponent
+const LAYOUTS = {
+	Overview,
+	ImageOnly,
+	TextImage,
+	MultiImages,
+	Carousel,
+	TextOnly,
+	Horizon,
+	List
+};
+
+function Section(prop) {
+	const section = prop.prop;
+
+	function capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	// https://stackoverflow.com/questions/66238016/reactjs-dynamic-component-name-with-closing-tag-and-children-elements
+	function dynamicComponent(prop, type) {
+		const Layout = LAYOUTS[type];
+		return <Layout prop={prop}/>;
+	}
+
+	return (
+		<>
+			{ dynamicComponent(section, capitalizeFirstLetter(section.type)) }
+		</>
+	);
+}
+
+export default Section;

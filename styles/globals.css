@@ -104,6 +104,15 @@ section .carousel .carousel-page h2 {
 section .carousel .carousel-page p:not(:last-of-type) {
   margin-bottom: 21px;
 }
+section .carousel .carousel-page .carousel-text-div {
+  margin-top: 50px;
+}
+section .carousel .carousel-page .carousel-image-div {
+  overflow-y: scroll;
+}
+section .carousel .carousel-page .carousel-page-active {
+  display: block;
+}
 section .carousel .swiper-button-next, section .carousel .swiper-button-prev {
   color: #E5E5E5;
   width: 81px;
@@ -159,6 +168,10 @@ section .list .yellow::before {
   top: 0px;
   width: 30%;
   z-index: -1;
+}
+
+.add-new-section {
+  margin-bottom: 100px;
 }
 
 /*# sourceMappingURL=globals.css.map */
