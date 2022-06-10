@@ -7,7 +7,7 @@ import Overview from "../../../../components/sections/Overview";
 import SelectMenu from "../../../../components/SelectMenu";
 import Input from "../../../../components/Input";
 import { types } from "../../../../data/type";
-import { overall, page, list } from "../../../../data/column";
+import { overallCol, pageCol, listCol } from "../../../../data/column";
 // import Overview from "../../../../components/sections/Overview";
 // import ImageOnly from "../../../../components/sections/ImageOnly";
 // import TextImage from "../../../../components/sections/TextImage";                           
@@ -29,9 +29,69 @@ import { overall, page, list } from "../../../../data/column";
 // 	List
 // };
 
+// const columns = [
+// 	overall,
+// 	page,
+// 	list
+// ];
+
 function AddNewSection({ work }) {
 	const [type, setType] = useState(types[0]);
-	const [column, setColumn] = useState({});
+	const [overall, setOverall] = useState({});
+	// const [page, setPage] = useState([]);
+	// const [list, setList] = useState([]);
+
+	// handle array of object from fields
+	const [array, setArray] = useState([]);
+
+	const handleArrayChange = (e, idx) => {
+		const { name, value } = e.target;
+		const ary = [...array];
+		ary[idx][name] = value;
+		setArray(ary);
+	};
+
+	const handleArrayRemove = (idx) => {
+		// store old array first, then splice the one that has been removed
+		const list = [...array];
+		list.splice(idx, 1);
+		setArray(list);
+	};
+
+	const handleArrayAdd = () => {
+		if (type === "List") {
+			setArray([...array, { listTitle: "", listParagraph: "" }]);
+		} else if (type === "Carousel") {
+			setArray([...array, { issue: "", description: "", solution: "" }]);
+		}
+		console.log(array);
+	};
+
+	useEffect(() => {
+		if (type === "List") {
+			setArray([{
+				listTitle: "",
+				listParagraph: ""
+			}]);
+		} else if (type === "Carousel") {
+			setArray([{
+				issue: "",
+				description: "",
+				solution: ""
+			}]);
+		}
+	}, [type]);
+	// handle array of object from fields
+
+
+	// useEffect(() => {
+
+	// 	setOverall(prevState => ({
+	// 		...overall,
+	// 		pages: [...prevState.pages, page],
+	// 		lists: [...prevState.lists, list],
+	// 	}));
+	// },[list, page]);
 
 	// Scroll to end of page
 	// https://stackoverflow.com/questions/23843619/js-for-smooth-scroll-to-the-bottom-of-the-page
@@ -43,7 +103,8 @@ function AddNewSection({ work }) {
 
 	const submitSection = (e) => {
 		e.preventDefault();
-		console.log(column);
+
+		console.log(overall);
 	};
 	// function capitalizeFirstLetter(string) {
 	// 	return string.charAt(0).toUpperCase() + string.slice(1);
@@ -79,24 +140,74 @@ function AddNewSection({ work }) {
 				))}
 				<section className="mx-10 mt-10">
 					<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
-					{/* {overall.map((item, idx) => (
-						<Input key={idx}
-							prop={item}
-							onChange={e => {
-								setColumn({ ...column, [item]: e.target.value });
-							}} />
-					))} */}
+
 					<div className="mt-5 addNewSection">
 						<form action="#" method="POST">
 							<div className="shadow overflow-hidden rounded-md">
 								<div className="px-4 py-5 bg-gray-50 sm:p-6">
 									<div className={`grid grid-cols-1 ${type.charAt(0).toLowerCase() + type.slice(1)}`}>
-										{overall.map((item, idx) => (
+										{/* {columns.map((column ,index) => (
+											<div key={index} className="mt-4">
+												{column.map((item, idx) => (
+													<Input key={idx}
+														prop={item}
+														onChange={e => {
+															setOverall({ ...overall, [item]: e.target.value });
+														}} />
+												))}
+											</div>
+										))} */}
+
+										<h3>Overall</h3>
+										{overallCol.map((item, idx) => (
 											<Input key={idx}
 												prop={item}
 												onChange={e => {
-													setColumn({ ...column, [item]: e.target.value });
+													setOverall({ ...overall, [item]: e.target.value });
 												}} />
+										))}
+										
+										<h3 className="col-text">{type === "List" ? "Lists" : "Pages"}</h3>
+										
+										{/* handle array of object from fields */}
+										{/* https://github.com/chaoocharles/add-remove-form-field/blob/main/src/App.js */}
+										{(type === "List" || type === "Carousel") && array.map((singleList, index) => (
+											<div key={index} className="flex mt-3">
+												<div className="w-3/4 shrink-0">
+													{type === "List"
+														? listCol.map((item, idx) => (
+															<Input key={idx}
+																prop={item}
+																onChange={(e) => handleArrayChange(e, index)}
+															/>
+														))
+														: pageCol.map((item, idx) => (
+															<Input key={idx}
+																prop={item}
+																val={singleList}
+																onChange={(e) => handleArrayChange(e, index)}
+															/>))}
+													{array.length - 1 === index && (
+														<button
+															type="button"
+															onClick={handleArrayAdd}
+															className="inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md border-indigo-600 hover:border-indigo-700">	
+															<span>Add a {type === "List" ? "List" : "Page"}</span>
+														</button>
+													)}
+												</div>
+												<div className="ml-10 self-center">
+													{array.length !== 1 && (
+														<button
+															type="button"
+															onClick={() => handleArrayRemove(index)}
+															className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+															<span>Remove</span>
+														</button>
+													)}
+												</div>
+											</div>
+											
 										))}
 									</div>
 								</div>

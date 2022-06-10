@@ -87,46 +87,46 @@ section .text-only h1 {
 section .text-only h2 {
   margin-top: 16px;
 }
-section .carousel {
+section .carousel-section {
   border-top: 10px solid;
   border-bottom: 10px solid;
   border-left-width: 0;
   border-right-width: 0;
   border-image: linear-gradient(to right, #4F5BD5, #962FBF, #D62976, #FA7E1E, #FEDA75) 1 stretch;
 }
-section .carousel .carousel-page {
+section .carousel-section .carousel-page {
   padding-top: 50px;
   padding-bottom: 100px;
 }
-section .carousel .carousel-page h2 {
+section .carousel-section .carousel-page h2 {
   margin-bottom: 9px;
 }
-section .carousel .carousel-page p:not(:last-of-type) {
+section .carousel-section .carousel-page p:not(:last-of-type) {
   margin-bottom: 21px;
 }
-section .carousel .carousel-page .carousel-text-div {
+section .carousel-section .carousel-page .carousel-text-div {
   margin-top: 50px;
 }
-section .carousel .carousel-page .carousel-image-div {
+section .carousel-section .carousel-page .carousel-image-div {
   overflow-y: scroll;
 }
-section .carousel .carousel-page .carousel-page-active {
+section .carousel-section .carousel-page .carousel-page-active {
   display: block;
 }
-section .carousel .swiper-button-next, section .carousel .swiper-button-prev {
+section .carousel-section .swiper-button-next, section .carousel-section .swiper-button-prev {
   color: #E5E5E5;
   width: 81px;
   height: 81px;
   background: #292C36;
   border-radius: 50%;
 }
-section .carousel .swiper-pagination-bullet {
+section .carousel-section .swiper-pagination-bullet {
   width: 20px;
   height: 20px;
   background: #E5E5E5;
   opacity: 1;
 }
-section .carousel .swiper-pagination-bullet-active {
+section .carousel-section .swiper-pagination-bullet-active {
   background: linear-gradient(180deg, #4F5BD5 0%, #962FBF 24.48%, #D62976 47.92%, #FA7E1E 71.87%, #FEDA75 100%);
 }
 section .horizon .horizon-text {
@@ -136,42 +136,46 @@ section .horizon .horizon-text {
 section .horizon .horizon-text h1 {
   line-height: 60px;
 }
-section .list > div {
+section .list-section > div {
   padding: 100px 0;
+  z-index: -1;
 }
-section .list .list-text {
-  margin-left: 40px;
+section .list-section .list-text {
+  margin-left: 30px;
   margin-bottom: 30px;
 }
-section .list .list-text h2, section .list .list-text p {
+section .list-section .list-text h2, section .list-section .list-text p {
   margin: 0 100px;
 }
-section .list .list-text h2 {
+section .list-section .list-text h2 {
   margin-bottom: 10px;
   position: relative;
 }
-section .list .list-text h2::before {
+section .list-section .list-text h2::before {
   content: "• ";
   position: absolute;
   left: -20px;
 }
-section .list .list-text p {
+section .list-section .list-text p {
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
 }
-section .list .yellow::before {
-  content: "";
-  background-color: #F5C261;
-  height: 100%;
-  position: absolute;
-  top: 0px;
-  width: 30%;
-  z-index: -1;
-}
 
-.addNewSection .imageOnly .color {
+.addNewSection .col-text, .addNewSection .color, .addNewSection .issue, .addNewSection .description, .addNewSection .solution, .addNewSection .listTitle, .addNewSection .listParagraph {
   display: none;
+}
+.addNewSection .imageOnly .title, .addNewSection .imageOnly .paragraph {
+  display: none;
+}
+.addNewSection .textOnly .image {
+  display: none;
+}
+.addNewSection .carousel .col-text, .addNewSection .carousel .issue, .addNewSection .carousel .description, .addNewSection .carousel .solution {
+  display: block;
+}
+.addNewSection .list .col-text, .addNewSection .list .color, .addNewSection .list .listTitle, .addNewSection .list .listParagraph {
+  display: block;
 }
 
 /*# sourceMappingURL=globals.css.map */

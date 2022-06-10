@@ -1,29 +1,17 @@
-export const overall = [
+export const overallCol = [
 	"title",
 	"paragraph",
 	"image",
-	"color",
-	"images",
-	"pages",
-	"lists",
+	"color"
 ];
 
-export const page = [
-	"title",
-	"paragraph",
-	"image",
-	"color",
-	"images",
-	"pages",
-	"lists",
+export const pageCol = [
+	"issue",
+	"description",
+	"solution",
 ];
 
-export const list = [
-	"title",
-	"paragraph",
-	"image",
-	"color",
-	"images",
-	"pages",
-	"lists",
+export const listCol = [
+	"listTitle",
+	"listParagraph",
 ];

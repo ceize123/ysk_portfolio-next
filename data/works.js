@@ -94,15 +94,15 @@ export const works = [
 			{
 				type: "list",
 				image: list,
-				color: "yellow",
+				color: "#F5C261",
 				lists: [
 					{
-						title: "AI pose detection",
-						paragraph: "To detect if the pose is correct or not, and with visual and voice alert simultaneously."
+						listTitle: "AI pose detection",
+						listParagraph: "To detect if the pose is correct or not, and with visual and voice alert simultaneously."
 					},
 					{
-						title: "Challenge by days",
-						paragraph: "Setting a short-term goal helps users feel less stressed about exercising. It allows users to choose a workout cycle which can be 7days, 14 days, 21 days or 30 days."
+						listTitle: "Challenge by days",
+						listParagraph: "Setting a short-term goal helps users feel less stressed about exercising. It allows users to choose a workout cycle which can be 7days, 14 days, 21 days or 30 days."
 					}
 				]
 			}

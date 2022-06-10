@@ -111,7 +111,7 @@ section {
 	}
 
 	// Carousel
-	.carousel {
+	.carousel-section {
 		border-top: 10px solid;
 		border-bottom: 10px solid;
 		border-left-width: 0;
@@ -175,12 +175,16 @@ section {
 	}
 
 	// List
-	.list {
+	.list-section {
+		// Back-end might need
+		// transform: scale(0.8) translateY(-10%);
+
 		> div {
 			padding: 100px 0;
+			z-index: -1;
 		}
 		.list-text {
-			margin-left: 40px;
+			margin-left: 30px;
 			margin-bottom: 30px;
 			h2, p {
 				margin: 0 100px;
@@ -202,17 +206,17 @@ section {
 				line-height: 22px;
 			}
 		}
-		.yellow {
-			&::before {
-					content: "";
-					background-color: #F5C261;
-					height: 100%;
-					position: absolute;
-					top: 0px;
-					width: 30%;
-					z-index: -1;
-				}
-		}
+		// .yellow {
+		// 	&::before {
+		// 			content: "";
+		// 			background-color: #F5C261;
+		// 			height: 100%;
+		// 			position: absolute;
+		// 			top: 0px;
+		// 			width: 30%;
+					
+		// 		}
+		// }
 	}
 }
 
@@ -220,11 +224,35 @@ section {
 
 // Add new section starts
 .addNewSection {
+	.col-text, .color, .issue, .description, .solution, .listTitle, .listParagraph {
+		display: none;
+	}
+
 	.imageOnly {
-		.color {
+		.title, .paragraph {
 			display: none;
 		}
 	}
+
+	.textOnly {
+		.image {
+			display: none;
+		}
+	}
+
+	.carousel {
+		.col-text, .issue, .description, .solution {
+			display: block;
+		}
+	}
+
+	.list {
+		.col-text, .color, .listTitle, .listParagraph {
+			display: block;
+		}
+	}
+
+	
 }
 
 // Add new section ends

@@ -12,7 +12,7 @@ function Carousel(prop) {
 	const data = prop.prop;
 	const pages = data.pages;
 	return (
-		<section className="carousel">
+		<section className="carousel-section">
 			<Swiper
 				cssMode={true}
 				navigation={true}

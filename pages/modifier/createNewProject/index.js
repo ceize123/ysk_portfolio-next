@@ -18,7 +18,6 @@ const overviewColumn = [
 
 function AddNew() {
 	const [work, setWork] = useState({});
-
 	const [overview, setOverview] = useState({});
 
 	useEffect(() => {
