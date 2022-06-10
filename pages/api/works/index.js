@@ -1,10 +1,14 @@
-import { works } from "../../../data/works";
+import { workData } from "../../../data/works";
 
 export default function handle(req, res) {
 	if (req.method === "GET") {
-		res.status(200).json(works);
+		res.status(200).json(workData);
 	} else if (req.method === "POST") {
-		const work = req.body.work;
+		const data = req.body.data;
+		const work = data.work;
+
+		let idx = workData.findIndex(i => i.category == data.category);
+		console.log(idx);
 		const newWork = {
 			id: Date.now(),
 			title: work.title,
@@ -19,7 +23,13 @@ export default function handle(req, res) {
 				team: work.overview.team
 			}
 		};
-		works.push(newWork);
-		res.status(201).json(newWork);
+		if (idx === -1) {
+			workData.push({ category: data.category, works: [] });
+			workData[workData.length - 1].works.push(newWork);
+		} else {
+			workData[idx].works.push(newWork);
+		}
+		
+		res.status(201).json(workData);
 	}
 }

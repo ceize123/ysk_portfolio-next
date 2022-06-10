@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import find from "../../../../components/Find";
-import TypeSection from "../../../../components/TypeSection";
-import Hero from "../../../../components/sections/Hero";
-import Overview from "../../../../components/sections/Overview";
-import SelectMenu from "../../../../components/SelectMenu";
-import Input from "../../../../components/Input";
-import { types } from "../../../../data/type";
-import { overallCol, pageCol, listCol } from "../../../../data/column";
+import find from "../../../components/Find";
+import TypeSection from "../../../components/TypeSection";
+import Hero from "../../../components/sections/Hero";
+import Overview from "../../../components/sections/Overview";
+import SelectMenu from "../../../components/SelectMenu";
+import Input from "../../../components/Input";
+import { types } from "../../../data/type";
+import { overallCol, pageCol, listCol } from "../../../data/column";
 // import Overview from "../../../../components/sections/Overview";
 // import ImageOnly from "../../../../components/sections/ImageOnly";
 // import TextImage from "../../../../components/sections/TextImage";                           
@@ -233,10 +233,25 @@ export async function getStaticPaths() {
 	const response = await fetch("http://localhost:3000/api/works");
 	const data = await response.json();
 
-	const paths = data.map(work => {
+	let idArray = [];
+	// console.log(data[0].works);
+	// const paths = data.map(work => {
+	// 	return {
+	// 		params: {
+	// 			workId: `${work.id}`
+	// 		}
+	// 	};
+	// });
+	data.map(category => {	
+		category.works.map(work => {
+			idArray.push(work.id);
+		});
+	});
+
+	const paths = idArray.map(id => {
 		return {
 			params: {
-				workId: `${work.id}`
+				workId: `${id}`
 			}
 		};
 	});
@@ -251,7 +266,7 @@ export async function getStaticProps(context) {
 	const { params } = context;
 	const { workId } = params;
 	const work = find(workId);
-	console.log(work);
+	console.log("work", work);
 
 	return {
 		props: {

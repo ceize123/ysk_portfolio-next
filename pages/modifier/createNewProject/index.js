@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import Input from "../../../components/Input";
+import SelectMenu from "../../../components/SelectMenu";
+import { categories } from "../../../data/category";
+
 
 const column = [
 	"title",
@@ -17,7 +20,13 @@ const overviewColumn = [
 ];
 
 function AddNew() {
-	const [work, setWork] = useState({});
+	const [category, setCategory] = useState(categories[0]);
+	const [work, setWork] = useState({
+		title: "",
+		description: "",
+		navColor: "",
+		heroImage: ""
+	});
 	const [overview, setOverview] = useState({});
 
 	useEffect(() => {
@@ -41,15 +50,18 @@ function AddNew() {
 			return null;
 		}
 
+		const data = { category: category, work: work };
+		console.log(data);
+
 		const response = await fetch("/api/works", {
 			method: "POST",
-			body: JSON.stringify({ work }),
+			body: JSON.stringify({ data }),
 			headers: {
 				"Content-Type": "application/json"
 			}
 		});
-		const data = await response.json();
-		console.log(data);
+		const result = await response.json();
+		console.log(result);
 	};
 	return (
 		<>
@@ -71,21 +83,29 @@ function AddNew() {
 										className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 									/>
 								</div> */}
-								{column.map((item, idx) => (
-									<Input key={idx}
-										prop={item}
-										onChange={e => {
-											setWork({ ...work, [item]: e.target.value });
-										}} />
-								))}
+								<SelectMenu prop={categories} option={category} name="Type" onChange={setCategory} />
+
+								<div className="mt-3">
+									<h3>Info</h3>
+									{column.map((item, idx) => (
+										<Input key={idx}
+											prop={item}
+											onChange={e => {
+												setWork({ ...work, [item]: e.target.value });
+											}} />
+									))}
+								</div>
 								{/* add overview */}
-								{overviewColumn.map((item, idx) => (
-									<Input key={idx}
-										prop={item}
-										onChange={e => {
-											setOverview({ ...overview, [item]: e.target.value });
-										}} />
-								))}
+								<div className="mt-3">
+									<h3>Overview</h3>
+									{overviewColumn.map((item, idx) => (
+										<Input key={idx}
+											prop={item}
+											onChange={e => {
+												setOverview({ ...overview, [item]: e.target.value });
+											}} />
+									))}
+								</div>
 								
 							</div>
 						</div>

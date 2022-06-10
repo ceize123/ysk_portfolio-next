@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
+import { categories } from "../data/category";
 
 const typeData = [
 	"Add New Section",
@@ -9,8 +10,10 @@ const typeData = [
 
 function Dashboard() {
 	const [isLoading, setIsLoading] = useState(true);
-	const [DashboardData, setDashboardData] = useState(null); 
+	const [dashboardData, setDashboardData] = useState(null); 
 	const [isUpdate, setIsUpdate] = useState(true); 
+	const [category, setCategory] = useState(categories[0]);
+	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();
 	const [type, setType] = useState();
 	const router = useRouter();
@@ -21,18 +24,29 @@ function Dashboard() {
 			const data = await response.json();
 			setDashboardData(data);
 			setIsLoading(false);
-			setWork(data[0]);
+			setWork(data[0].works[0]);
 			setType(typeData[0]);
 		}
 		fetchData();
 	}, []);
 
+	useEffect(() => {
+		setIdx(categories.indexOf(category));
+	}, [category]);
+
+	useEffect(() => {
+		if (dashboardData !== null) {
+			setWork(dashboardData[idx].works[0]);
+		}
+	}, [idx]);
+
 	function handleClick() {
 		setIsUpdate(!isUpdate);
 	}
+
 	function handleSubmit() {
 		if (isUpdate) {
-			router.push(`/modifier/updateCurProject/${type === "Add New Section" ? "addSection" : "updateSection"}/${work.id}`);
+			router.push(`/modifier/updateCurProject/${work.id}`);
 		} else {
 			router.push("/modifier/createNewProject");
 		}
@@ -56,8 +70,9 @@ function Dashboard() {
 					<>
 						{/* Pass data from child to parent */}
 						{/* https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component */}
-						<SelectMenu prop={DashboardData} option={work} name="Work" onChange={setWork}/>
-						<SelectMenu prop={typeData} option={type} name="Type" onChange={setType}/>
+						<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory}/>
+						<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork}/>
+						{/* <SelectMenu prop={typeData} option={type} name="Type" onChange={setType}/> */}
 					</>
 				}
 				<button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
