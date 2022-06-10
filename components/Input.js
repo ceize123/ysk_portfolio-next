@@ -11,7 +11,7 @@ function Input({ prop, val = "", onChange }) {
 				name={prop}
 				id={prop}
 				required
-				value={val[key]}
+				value={val[key] !== undefined ? val[key] : ""}
 				onChange={onChange}
 				className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 			/>

@@ -5,6 +5,7 @@ import TypeSection from "../../../components/TypeSection";
 import Hero from "../../../components/sections/Hero";
 import Overview from "../../../components/sections/Overview";
 import SelectMenu from "../../../components/SelectMenu";
+import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import { types } from "../../../data/type";
 import { overallCol, pageCol, listCol } from "../../../data/column";
@@ -29,12 +30,6 @@ import { overallCol, pageCol, listCol } from "../../../data/column";
 // 	List
 // };
 
-// const columns = [
-// 	overall,
-// 	page,
-// 	list
-// ];
-
 function AddNewSection({ work }) {
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
@@ -44,11 +39,26 @@ function AddNewSection({ work }) {
 	// handle array of object from fields
 	const [array, setArray] = useState([]);
 
+	function pushArray(ary) {
+		if (type === "List") {
+			setOverall({
+				...overall,
+				lists: ary
+			});
+		} else if (type === "Carousel") {
+			setOverall({
+				...overall,
+				pages: ary
+			});
+		}
+	}
+
 	const handleArrayChange = (e, idx) => {
 		const { name, value } = e.target;
 		const ary = [...array];
 		ary[idx][name] = value;
 		setArray(ary);
+		// pushArray(ary);
 	};
 
 	const handleArrayRemove = (idx) => {
@@ -56,6 +66,7 @@ function AddNewSection({ work }) {
 		const list = [...array];
 		list.splice(idx, 1);
 		setArray(list);
+		// pushArray(list);
 	};
 
 	const handleArrayAdd = () => {
@@ -64,22 +75,72 @@ function AddNewSection({ work }) {
 		} else if (type === "Carousel") {
 			setArray([...array, { issue: "", description: "", solution: "" }]);
 		}
-		console.log(array);
 	};
 
 	useEffect(() => {
-		if (type === "List") {
-			setArray([{
-				listTitle: "",
-				listParagraph: ""
-			}]);
-		} else if (type === "Carousel") {
+		setOverall({
+			title: "",
+			paragraph: "",
+			image: "",
+		});
+
+		switch (type) {
+		case "ImageOnly":
+			setOverall({
+				image: "",
+			});
+			break;
+		// case "MultiImages":
+		// 	setOverall({
+		// 		image: "",
+		// 	});
+		// 	break;
+		case "Carousel":
 			setArray([{
 				issue: "",
 				description: "",
 				solution: ""
 			}]);
+			break;
+		case "TextOnly":
+			setOverall({
+				title: "",
+				paragraph: ""
+			});
+			break;
+		case "List":
+			setOverall({
+				title: "",
+				paragraph: "",
+				image: "",
+				color: ""
+			});
+			setArray([{
+				listTitle: "",
+				listParagraph: ""
+			}]);
+			break;
+		default:
+			break;
+
 		}
+		
+		// if (type === "List") {
+		// 	setOverall({
+		// 		...overall,
+		// 		color: ""
+		// 	});
+		// 	setArray([{
+		// 		listTitle: "",
+		// 		listParagraph: ""
+		// 	}]);
+		// } else if (type === "Carousel") {
+		// 	setArray([{
+		// 		issue: "",
+		// 		description: "",
+		// 		solution: ""
+		// 	}]);
+		// }
 	}, [type]);
 	// handle array of object from fields
 
@@ -101,21 +162,22 @@ function AddNewSection({ work }) {
 	}, [pathname]);
 
 
-	const submitSection = (e) => {
+	const submitSection = async (e) => {
 		e.preventDefault();
 
-		console.log(overall);
+		// const data = { category: category, work: work };
+		// console.log(data);
+
+		// const response = await fetch("/api/works", {
+		// 	method: "POST",
+		// 	body: JSON.stringify({ data }),
+		// 	headers: {
+		// 		"Content-Type": "application/json"
+		// 	}
+		// });
+		// const result = await response.json();
+		// console.log(result);
 	};
-	// function capitalizeFirstLetter(string) {
-	// 	return string.charAt(0).toUpperCase() + string.slice(1);
-	// }
-
-
-	// // https://stackoverflow.com/questions/66238016/reactjs-dynamic-component-name-with-closing-tag-and-children-elements
-	// function dynamicComponent(prop, type) {
-	// 	const Layout = LAYOUTS[type];
-	// 	return <Layout prop={prop}/>;
-	// }
 
 	return (
 		<div className="mt-3">
@@ -134,11 +196,11 @@ function AddNewSection({ work }) {
 				{work.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
 						<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
-						{/* {dynamicComponent(section, capitalizeFirstLetter(section.type))} */}
 						<TypeSection prop={section}/>
 					</section>
 				))}
-				<section className="mx-10 mt-10">
+				<section className="mx-10 mt-12">
+					<h2 className="text-center">Add Sections:</h2>
 					<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
 
 					<div className="mt-5 addNewSection">
@@ -146,38 +208,29 @@ function AddNewSection({ work }) {
 							<div className="shadow overflow-hidden rounded-md">
 								<div className="px-4 py-5 bg-gray-50 sm:p-6">
 									<div className={`grid grid-cols-1 ${type.charAt(0).toLowerCase() + type.slice(1)}`}>
-										{/* {columns.map((column ,index) => (
-											<div key={index} className="mt-4">
-												{column.map((item, idx) => (
-													<Input key={idx}
-														prop={item}
-														onChange={e => {
-															setOverall({ ...overall, [item]: e.target.value });
-														}} />
-												))}
-											</div>
-										))} */}
 
 										<h3>Overall</h3>
 										{overallCol.map((item, idx) => (
 											<Input key={idx}
 												prop={item}
+												val={overall}
 												onChange={e => {
 													setOverall({ ...overall, [item]: e.target.value });
 												}} />
 										))}
 										
-										<h3 className="col-text">{type === "List" ? "Lists" : "Pages"}</h3>
+										<h3 className="col-text mt-2">{type === "List" ? "Lists" : "Pages"}</h3>
 										
 										{/* handle array of object from fields */}
 										{/* https://github.com/chaoocharles/add-remove-form-field/blob/main/src/App.js */}
 										{(type === "List" || type === "Carousel") && array.map((singleList, index) => (
-											<div key={index} className="flex mt-3">
+											<div key={index} className="flex mb-3">
 												<div className="w-3/4 shrink-0">
 													{type === "List"
 														? listCol.map((item, idx) => (
 															<Input key={idx}
 																prop={item}
+																val={singleList}
 																onChange={(e) => handleArrayChange(e, index)}
 															/>
 														))
@@ -188,22 +241,18 @@ function AddNewSection({ work }) {
 																onChange={(e) => handleArrayChange(e, index)}
 															/>))}
 													{array.length - 1 === index && (
-														<button
-															type="button"
-															onClick={handleArrayAdd}
-															className="inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md border-indigo-600 hover:border-indigo-700">	
-															<span>Add a {type === "List" ? "List" : "Page"}</span>
-														</button>
+														<Button onClick={handleArrayAdd} text={`Add a ${type === "List" ? "List" : "Page"}`} color="indigo"/>
 													)}
 												</div>
 												<div className="ml-10 self-center">
 													{array.length !== 1 && (
-														<button
-															type="button"
-															onClick={() => handleArrayRemove(index)}
-															className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-															<span>Remove</span>
-														</button>
+														<Button onClick={() => handleArrayRemove(index)} text="Remove" color="red"/>
+														// <button
+														// 	type="button"
+														// 	onClick={() => handleArrayRemove(index)}
+														// 	className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md border-red-600 hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+														// 	<span>Remove</span>
+														// </button>
 													)}
 												</div>
 											</div>
