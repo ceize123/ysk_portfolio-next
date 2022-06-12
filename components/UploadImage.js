@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { useBetween } from "use-between";
-import { useShareableState } from "../components/ShareFile";
+import { useShareFiles } from "../components/ShareFile";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 
 // https://react-dropzone.js.org/
 function UploadImage({ type }) {
 	// const [files, setFiles] = useState([]);
-	const { files, setFiles} = useBetween(useShareableState);
+	const { files, setFiles} = useBetween(useShareFiles);
 
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: {

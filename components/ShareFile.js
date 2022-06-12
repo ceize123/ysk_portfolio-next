@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useShareableState = () => {
+export const useShareFiles = () => {
 	const [files, setFiles] = useState([]);
 	return {
 		files,
