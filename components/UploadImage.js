@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from "react";
+import { useBetween } from "use-between";
+import { useShareableState } from "../components/ShareFile";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 
 // https://react-dropzone.js.org/
-function UploadImage({ prop, type }) {
-	const [files, setFiles] = useState([]);
+function UploadImage({ type }) {
+	// const [files, setFiles] = useState([]);
+	const { files, setFiles} = useBetween(useShareableState);
+
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: {
 			"image/*": []
@@ -42,13 +46,12 @@ function UploadImage({ prop, type }) {
 	}, [files]);
 
 	return (
-		<section className={`mb-2 ${prop} upload-section`}>
+		<section className="my-2 upload-section">
 			<div {...getRootProps({ className: "dropzone" })}>
-				<input
-					{...getInputProps()}
-					name={prop}
-					id={prop} />
-				<p className="p-3 text-center bg-indigo-500 hover:bg-indigo-300 rounded text-white">Image Upload</p>
+				<input {...getInputProps()} />
+				<p className="p-3 text-center bg-indigo-500 hover:bg-indigo-300 rounded text-white">
+					Image{(type === "MultiImages" || type === "Carousel") && <span className="text-red-700 hover:text-red-500">[s]</span>} Upload
+				</p>
 			</div>
 			<aside className="mt-2">
 				{thumbs}

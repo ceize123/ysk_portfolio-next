@@ -62,24 +62,25 @@ export const workData = [
 					},
 					{
 						type: "carousel",
+						images: [carousel1, carousel2, carousel3, carousel4, carousel5, carousel6, carousel7, carousel8],
 						pages: [
 							{
 								issue: "It's hard to find the hiding friends function.",
 								description: "From my observation, though there is a setting icon in the top right corner on the creating story page, no one found it. It takes them many steps to hide their friends, and even the users who frequently use the function choose to hide the friend after they publish it, which they don't like the way.",
 								solution: "It is intuitive to hide the friend before they publish it. Thus, I put the story setting function on the editing story page.",
-								images: [carousel1, carousel2]
+								imagesNeed: 2
 							},
 							{
 								issue: "User can't cut picture and adjust video length in story editing.",
 								description: "Users have to leave Instagram and edit the picture size and video length, making them feel annoyed.",
 								solution: "I added these two essential functions to help them finish the editing without leaving Instagram.",
-								images: [carousel3, carousel4]
+								imagesNeed: 2
 							},
 							{
 								issue: "Forget friends' accounts when the user wants to tag them.",
 								description: "Most users don't know they can tag friends by typing friends' \"Name.\" Mostly, they struggle to recall friends' accounts. However, tagging by typing \"Name\" doesn't work every time (Technical issue). Further, when a friend doesn't have a \"Name\" on the profile, users can't find it by typing \"Name.\"",
 								solution: "I added these two essential functions to help them finish the editing without leaving Instagram.",
-								images: [carousel5, carousel6, carousel7, carousel8]
+								imagesNeed: 4
 							},
 						]
 					},
@@ -176,24 +177,25 @@ export const workData = [
 					},
 					{
 						type: "carousel",
+						images: [carousel1, carousel2, carousel3, carousel4, carousel5, carousel6, carousel7, carousel8],
 						pages: [
 							{
 								issue: "It's hard to find the hiding friends function.",
 								description: "From my observation, though there is a setting icon in the top right corner on the creating story page, no one found it. It takes them many steps to hide their friends, and even the users who frequently use the function choose to hide the friend after they publish it, which they don't like the way.",
 								solution: "It is intuitive to hide the friend before they publish it. Thus, I put the story setting function on the editing story page.",
-								images: [carousel1, carousel2]
+								imagesNeed: 2
 							},
 							{
 								issue: "User can't cut picture and adjust video length in story editing.",
 								description: "Users have to leave Instagram and edit the picture size and video length, making them feel annoyed.",
 								solution: "I added these two essential functions to help them finish the editing without leaving Instagram.",
-								images: [carousel3, carousel4]
+								imagesNeed: 2
 							},
 							{
 								issue: "Forget friends' accounts when the user wants to tag them.",
 								description: "Most users don't know they can tag friends by typing friends' \"Name.\" Mostly, they struggle to recall friends' accounts. However, tagging by typing \"Name\" doesn't work every time (Technical issue). Further, when a friend doesn't have a \"Name\" on the profile, users can't find it by typing \"Name.\"",
 								solution: "I added these two essential functions to help them finish the editing without leaving Instagram.",
-								images: [carousel5, carousel6, carousel7, carousel8]
+								imagesNeed: 4
 							},
 						]
 					},

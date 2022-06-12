@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useBetween } from "use-between";
 import findCat from "../../../../../components/FindCat";
 import findId from "../../../../../components/FindId";
 import TypeSection from "../../../../../components/TypeSection";
@@ -8,12 +9,15 @@ import Overview from "../../../../../components/sections/Overview";
 import SelectMenu from "../../../../../components/SelectMenu";
 import Button from "../../../../../components/Button";
 import Input from "../../../../../components/Input";
+import UploadImage from "../../../../../components/UploadImage";
 import { types } from "../../../../../data/type";
 import { overallCol, pageCol, listCol } from "../../../../../data/column";
+import { useShareableState } from "../../../../../components/ShareFile";
 
 function WorkDetail({category, work}) {
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
+	const { files } = useBetween(useShareableState);
 
 	// handle array of object from fields
 	const [array, setArray] = useState([]);
@@ -52,21 +56,25 @@ function WorkDetail({category, work}) {
 		if (type === "List") {
 			setArray([...array, { listTitle: "", listParagraph: "" }]);
 		} else if (type === "Carousel") {
-			setArray([...array, { issue: "", description: "", solution: "" }]);
+			setArray([...array, { issue: "", description: "", solution: "", imagesNeed: 2 }]);
 		}
 	};
+
+	useEffect(() => {
+		setOverall({ ...overall, images: files });
+	}, [files]);
 
 	useEffect(() => {
 		setOverall({
 			title: "",
 			paragraph: "",
-			images: "",
+			images: [],
 		});
 
 		switch (type) {
 		case "ImageOnly":
 			setOverall({
-				images: "",
+				images: [],
 			});
 			break;
 		// case "MultiImages":
@@ -75,11 +83,15 @@ function WorkDetail({category, work}) {
 		// 	});
 		// 	break;
 		case "Carousel":
+			setOverall({
+				title: "",
+				paragraph: "",
+			});
 			setArray([{
 				issue: "",
 				description: "",
 				solution: "",
-				images: ""
+				imagesNeed: 2
 			}]);
 			break;
 		case "TextOnly":
@@ -92,7 +104,7 @@ function WorkDetail({category, work}) {
 			setOverall({
 				title: "",
 				paragraph: "",
-				images: "",
+				images: [],
 				color: ""
 			});
 			setArray([{
@@ -144,7 +156,6 @@ function WorkDetail({category, work}) {
 
 	const submitSection = async (e) => {
 		e.preventDefault();
-		console.log(category);
 
 		const response = await fetch(`/api/works/category/${category}/${work.id}`, {
 			method: "POST",
@@ -239,8 +250,8 @@ function WorkDetail({category, work}) {
 													)}
 												</div>
 											</div>
-											
 										))}
+										<UploadImage type={type} />
 									</div>
 								</div>
 								<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">

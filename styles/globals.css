@@ -168,17 +168,14 @@ section .list-section .list-text p {
 .addNewSection .imageOnly .title, .addNewSection .imageOnly .paragraph {
   display: none;
 }
-.addNewSection .textOnly .images, .addNewSection .carousel .images {
-  display: none;
-}
 .addNewSection .carousel .col-text, .addNewSection .carousel .issue, .addNewSection .carousel .description, .addNewSection .carousel .solution {
-  display: block;
-}
-.addNewSection .carousel .sub-section .images {
   display: block;
 }
 .addNewSection .list .col-text, .addNewSection .list .color, .addNewSection .list .listTitle, .addNewSection .list .listParagraph {
   display: block;
+}
+.addNewSection .textOnly .upload-section {
+  display: none;
 }
 .addNewSection .upload-section .dropzone {
   max-width: 300px;

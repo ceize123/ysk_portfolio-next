@@ -234,27 +234,21 @@ section {
 		}
 	}
 
-	.textOnly, .carousel {
-		.images {
-			display: none;
-		}
-	}
-
 	.carousel {
 		.col-text, .issue, .description, .solution {
 			display: block;
-		}
-
-		.sub-section {
-			.images {
-				display: block;
-			}
 		}
 	}
 
 	.list {
 		.col-text, .color, .listTitle, .listParagraph {
 			display: block;
+		}
+	}
+
+	.textOnly {
+		.upload-section {
+			display: none;
 		}
 	}
 
