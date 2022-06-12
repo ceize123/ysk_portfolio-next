@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-function TextImage(prop) {
-	const data = prop.prop;
-	const imageUrl = data.image;
+function TextImage({prop}) {
+	const data = prop;
+	const imageUrl = data.images[0];
 	return (
 		// style={{ maxWidth: `${imageUrl.width}px` }} make div's max width as image width
 		<section className="relative mx-auto text-image" style={{ maxWidth: `${imageUrl.width}px` }} >

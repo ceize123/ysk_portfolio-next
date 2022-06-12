@@ -1,4 +1,4 @@
-import find from "../../../../components/Find";
+import find from "../../../../../components/Find";
 
 function UpdateWork({ work }) {
 	return (

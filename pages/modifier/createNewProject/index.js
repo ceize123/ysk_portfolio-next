@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import InputNoVal from "../../../components/InputNoVal";
 import Input from "../../../components/Input";
 import SelectMenu from "../../../components/SelectMenu";
 import { categories } from "../../../data/category";
@@ -31,7 +32,23 @@ function AddNew() {
 
 	useEffect(() => {
 		setWork({ ...work, overview: overview });
-	},[overview]);
+	}, [overview]);
+	
+	useEffect(() => {
+		setWork({
+			title: "",
+			description: "",
+			navColor: "",
+			heroImage: ""
+		});
+		setOverview({
+			subtile: "",
+			paragraph: "",
+			timeline: "",
+			role: "",
+			team: "",
+		});
+	},[category]);
 
 	const validateInput = (title, description, navColor,  heroImage) => {
 		if (title === "" || description === "" || navColor === "" || heroImage === "") {
@@ -50,12 +67,11 @@ function AddNew() {
 			return null;
 		}
 
-		const data = { category: category, work: work };
-		console.log(data);
+		// const data = { category: category, work: work };
 
-		const response = await fetch("/api/works", {
+		const response = await fetch(`/api/works/category/${category}`, {
 			method: "POST",
-			body: JSON.stringify({ data }),
+			body: JSON.stringify({work}),
 			headers: {
 				"Content-Type": "application/json"
 			}
@@ -83,13 +99,14 @@ function AddNew() {
 										className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
 									/>
 								</div> */}
-								<SelectMenu prop={categories} option={category} name="Type" onChange={setCategory} />
+								<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />
 
 								<div className="mt-3">
 									<h3>Info</h3>
 									{column.map((item, idx) => (
 										<Input key={idx}
 											prop={item}
+											val={work}
 											onChange={e => {
 												setWork({ ...work, [item]: e.target.value });
 											}} />
@@ -101,6 +118,7 @@ function AddNew() {
 									{overviewColumn.map((item, idx) => (
 										<Input key={idx}
 											prop={item}
+											val={overview}
 											onChange={e => {
 												setOverview({ ...overview, [item]: e.target.value });
 											}} />

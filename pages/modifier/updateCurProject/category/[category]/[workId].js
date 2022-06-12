@@ -1,40 +1,19 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import find from "../../../components/FindId";
-import TypeSection from "../../../components/TypeSection";
-import Hero from "../../../components/sections/Hero";
-import Overview from "../../../components/sections/Overview";
-import SelectMenu from "../../../components/SelectMenu";
-import Button from "../../../components/Button";
-import Input from "../../../components/Input";
-import { types } from "../../../data/type";
-import { overallCol, pageCol, listCol } from "../../../data/column";
-// import Overview from "../../../../components/sections/Overview";
-// import ImageOnly from "../../../../components/sections/ImageOnly";
-// import TextImage from "../../../../components/sections/TextImage";                           
-// import MultiImages from "../../../../components/sections/MultiImages";
-// import Carousel from "../../../../components/sections/Carousel";
-// import TextOnly from "../../../../components/sections/TextOnly";
-// import Horizon from "../../../../components/sections/Horizon";
-// import List from "../../../../components/sections/List";
+import findCat from "../../../../../components/FindCat";
+import findId from "../../../../../components/FindId";
+import TypeSection from "../../../../../components/TypeSection";
+import Hero from "../../../../../components/sections/Hero";
+import Overview from "../../../../../components/sections/Overview";
+import SelectMenu from "../../../../../components/SelectMenu";
+import Button from "../../../../../components/Button";
+import Input from "../../../../../components/Input";
+import { types } from "../../../../../data/type";
+import { overallCol, pageCol, listCol } from "../../../../../data/column";
 
-// Dynamic Layout used in the function dynamicComponent
-// const LAYOUTS = {
-// 	Overview,
-// 	ImageOnly,
-// 	TextImage,
-// 	MultiImages,
-// 	Carousel,
-// 	TextOnly,
-// 	Horizon,
-// 	List
-// };
-
-function AddNewSection({ work }) {
+function WorkDetail({category, work}) {
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
-	// const [page, setPage] = useState([]);
-	// const [list, setList] = useState([]);
 
 	// handle array of object from fields
 	const [array, setArray] = useState([]);
@@ -81,13 +60,13 @@ function AddNewSection({ work }) {
 		setOverall({
 			title: "",
 			paragraph: "",
-			image: "",
+			images: "",
 		});
 
 		switch (type) {
 		case "ImageOnly":
 			setOverall({
-				image: "",
+				images: "",
 			});
 			break;
 		// case "MultiImages":
@@ -99,7 +78,8 @@ function AddNewSection({ work }) {
 			setArray([{
 				issue: "",
 				description: "",
-				solution: ""
+				solution: "",
+				images: ""
 			}]);
 			break;
 		case "TextOnly":
@@ -112,7 +92,7 @@ function AddNewSection({ work }) {
 			setOverall({
 				title: "",
 				paragraph: "",
-				image: "",
+				images: "",
 				color: ""
 			});
 			setArray([{
@@ -164,17 +144,17 @@ function AddNewSection({ work }) {
 
 	const submitSection = async (e) => {
 		e.preventDefault();
-		// console.log()
+		console.log(category);
 
-		// const response = await fetch(`/api/works/${work.id}`, {
-		// 	method: "POST",
-		// 	body: JSON.stringify({ id: work.id, type: type, overall }),
-		// 	headers: {
-		// 		"Content-Type": "application/json"
-		// 	}
-		// });
-		// const result = await response.json();
-		// console.log(result);
+		const response = await fetch(`/api/works/category/${category}/${work.id}`, {
+			method: "POST",
+			body: JSON.stringify({ id: work.id, type: type, overall }),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		const result = await response.json();
+		console.log(result);
 	};
 
 	return (
@@ -190,6 +170,7 @@ function AddNewSection({ work }) {
 				<h2 className="text-2xl mb-3">2. Overview</h2>
 				<Overview prop={work} />
 			</section>
+
 			<div className="mx-auto container">
 				{work.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
@@ -202,6 +183,7 @@ function AddNewSection({ work }) {
 					<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
 
 					<div className="mt-5 addNewSection">
+
 						<form action="#" method="POST">
 							<div className="shadow overflow-hidden rounded-md">
 								<div className="px-4 py-5 bg-gray-50 sm:p-6">
@@ -212,6 +194,7 @@ function AddNewSection({ work }) {
 											<Input key={idx}
 												prop={item}
 												val={overall}
+												type={type}
 												onChange={e => {
 													setOverall({ ...overall, [item]: e.target.value });
 												}} />
@@ -223,7 +206,7 @@ function AddNewSection({ work }) {
 										{/* https://github.com/chaoocharles/add-remove-form-field/blob/main/src/App.js */}
 										{(type === "List" || type === "Carousel") && array.map((singleList, index) => (
 											<div key={index} className="flex mb-3">
-												<div className="w-3/4 shrink-0">
+												<div className="w-3/4 shrink-0 sub-section">
 													{type === "List"
 														? listCol.map((item, idx) => (
 															<Input key={idx}
@@ -236,12 +219,14 @@ function AddNewSection({ work }) {
 															<Input key={idx}
 																prop={item}
 																val={singleList}
+																type={type}
 																onChange={(e) => handleArrayChange(e, index)}
 															/>))}
 													{array.length - 1 === index && (
 														<Button onClick={handleArrayAdd} text={`Add a ${type === "List" ? "List" : "Page"}`} color="indigo"/>
 													)}
 												</div>
+
 												<div className="ml-10 self-center">
 													{array.length !== 1 && (
 														<Button onClick={() => handleArrayRemove(index)} text="Remove" color="red"/>
@@ -274,31 +259,26 @@ function AddNewSection({ work }) {
 	);
 }
 
-export default AddNewSection;
+export default WorkDetail;
 
 export async function getStaticPaths() {
 	const response = await fetch("http://localhost:3000/api/works");
 	const data = await response.json();
 
-	let idArray = [];
-	// console.log(data[0].works);
-	// const paths = data.map(work => {
-	// 	return {
-	// 		params: {
-	// 			workId: `${work.id}`
-	// 		}
-	// 	};
-	// });
+	let dataArray = [];
+
 	data.map(category => {	
 		category.works.map(work => {
-			idArray.push(work.id);
+			const param = { category: category.category, id: work.id };
+			dataArray.push(param);
 		});
 	});
 
-	const paths = idArray.map(id => {
+	const paths = dataArray.map(item => {
 		return {
 			params: {
-				workId: `${id}`
+				category: `${item.category}`,
+				workId: `${item.id}`
 			}
 		};
 	});
@@ -311,12 +291,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 	const { params } = context;
-	const { workId } = params;
-	const work = find(workId);
-	console.log("work", work);
+	const { category, workId } = params;
+	const works = findCat(category);
+	const work = findId(works, workId);
+	console.log(work);
 
 	return {
 		props: {
+			category: category,
 			work,
 		}
 	};

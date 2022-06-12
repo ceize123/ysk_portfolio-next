@@ -1,7 +1,7 @@
 export const overallCol = [
 	"title",
 	"paragraph",
-	"image",
+	"images",
 	"color"
 ];
 
@@ -9,6 +9,7 @@ export const pageCol = [
 	"issue",
 	"description",
 	"solution",
+	"images"
 ];
 
 export const listCol = [

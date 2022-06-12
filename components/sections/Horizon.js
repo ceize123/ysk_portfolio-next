@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-function Horizon(prop) {
-	const data = prop.prop;
-	const imageUrl = data.image;
+function Horizon({prop}) {
+	const data = prop;
+	const imageUrl = data.images[0];
 	return (
 		<section className="horizon flex justify-center">
 			<div className="text-left horizon-text self-center">

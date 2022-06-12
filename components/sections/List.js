@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function List({prop}) {
 	const data = prop;
-	const imageUrl = data.image;
+	const imageUrl = data.images[0];
 	const lists = data.lists;
 	return (
 		<section className="list-section">

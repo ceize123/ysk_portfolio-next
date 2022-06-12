@@ -1,5 +1,5 @@
 export const categories = [
-	"UIUX",
-	"Motion",
-	"Graphic"
+	"uiux",
+	"motion",
+	"graphic"
 ];

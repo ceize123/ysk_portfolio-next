@@ -234,8 +234,8 @@ section {
 		}
 	}
 
-	.textOnly {
-		.image {
+	.textOnly, .carousel {
+		.images {
 			display: none;
 		}
 	}
@@ -243,6 +243,12 @@ section {
 	.carousel {
 		.col-text, .issue, .description, .solution {
 			display: block;
+		}
+
+		.sub-section {
+			.images {
+				display: block;
+			}
 		}
 	}
 
@@ -252,7 +258,15 @@ section {
 		}
 	}
 
-	
+	.upload-section {
+		.dropzone {
+			max-width: 300px;
+		}
+
+		aside {
+			display: flex;
+		}
+	}
 }
 
 // Add new section ends

@@ -46,7 +46,8 @@ function Dashboard() {
 
 	function handleSubmit() {
 		if (isUpdate) {
-			router.push(`/modifier/updateCurProject/${work.id}`);
+			router.push(`/modifier/updateCurProject/category/${category}/${work.id}`);
+			// router.push(`/modifier/updateCurProject/${work.id}`);
 		} else {
 			router.push("/modifier/createNewProject");
 		}
