@@ -3,7 +3,7 @@ import InputNoVal from "../../../components/InputNoVal";
 import Input from "../../../components/Input";
 import SelectMenu from "../../../components/SelectMenu";
 import { categories } from "../../../data/category";
-import PostSectionForm from "../../../components/PostSectionForm";
+import PostFormSection from "../../../components/PostFormSection";
 
 function AddNew() {
 	// const [category, setCategory] = useState(categories[0]);
@@ -65,7 +65,7 @@ function AddNew() {
 	return (
 		<>
 			<h1 className="text-3xl text-center font-bold underline my-6">Create New Project</h1>
-			<PostSectionForm filter="create" />
+			<PostFormSection filter="create" />
 			{/* <form action="#" method="POST">
 					<div className="shadow overflow-hidden rounded-md">
 						<div className="px-4 py-5 bg-gray-50 sm:p-6">

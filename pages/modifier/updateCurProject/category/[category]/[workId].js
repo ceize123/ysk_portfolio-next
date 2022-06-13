@@ -6,7 +6,8 @@ import findId from "../../../../../components/FindId";
 import TypeSection from "../../../../../components/TypeSection";
 import Hero from "../../../../../components/sections/Hero";
 import Overview from "../../../../../components/sections/Overview";
-import PostSectionForm from "../../../../../components/PostSectionForm";
+import PostFormSection from "../../../../../components/PostFormSection";
+import PutFormSection from "../../../../../components/PutFormSection";
 import SelectMenu from "../../../../../components/SelectMenu";
 import Button from "../../../../../components/Button";
 import UpdateBtn from "../../../../../components/UpdateButtons";
@@ -14,7 +15,6 @@ import Input from "../../../../../components/Input";
 import UploadImage from "../../../../../components/UploadImage";
 import { overallCol, pageCol, listCol } from "../../../../../data/column";
 import { types } from "../../../../../data/type";
-import { useShareFiles } from "../../../../../components/ShareFile";
 
 function WorkDetail({ category, work }) {
 	const [updateNo, setUpdateNo] = useState();
@@ -161,14 +161,22 @@ function WorkDetail({ category, work }) {
 					<UpdateBtn number={updateNo} index={1} handleUpdate={handleUpdate} handleCancel={handleCancel} />
 				</div>
 			</section>
-			<Hero data={work} />
+			{/* <Hero data={work} /> */}
+			{(updateNo !== 1)
+				? <Hero data={work} />
+				: <PutFormSection prop={work} isOverview={false} filter="hero" />
+			}
 
 			<section className="mt-5 mx-auto container">
 				<div className="flex justify-between items-center">
 					<h2 className="text-2xl mb-3">2. Overview</h2>
 					<UpdateBtn number={updateNo} index={2} handleUpdate={handleUpdate} handleCancel={handleCancel} />
 				</div>
-				<Overview prop={work} />
+				{/* <Overview prop={work} /> */}
+				{(updateNo !== 2)
+					? <Overview prop={work} />
+					: <PutFormSection prop={work} isOverview={true} filter="overview" />
+				}
 			</section>
 
 			<div className="mx-auto container">
@@ -187,7 +195,7 @@ function WorkDetail({ category, work }) {
 						</div>
 						{(updateNo !== idx + 3)
 							? <TypeSection prop={section} />
-							: <Button onClick={() => handleUpdate(idx)} text="Delete" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
+							: <PutFormSection prop={section} filter="sections" />
 						}
 					</section>
 				))}
@@ -195,7 +203,7 @@ function WorkDetail({ category, work }) {
 				<section className="mx-10 mt-12">
 					<div className="mt-5 addNewSection">
 						<h2 className="text-center">Add Sections:</h2>
-						<PostSectionForm param={category} workId={work.id} filter="add" />
+						<PostFormSection param={category} workId={work.id} filter="details" />
 						{/* <form action="#" method="POST">
 							<div className="shadow overflow-hidden rounded-md">
 								<div className="px-4 py-5 bg-gray-50 sm:p-6">

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { useBetween } from "use-between";
-import { useShareFiles } from "../components/ShareFile";
+import { useShareFiles } from "./ShareStates";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 

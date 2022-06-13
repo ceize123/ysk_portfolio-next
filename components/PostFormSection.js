@@ -5,12 +5,13 @@ import firstLetter from "./FirstLetter";
 import Button from "./Button";
 import Input from "./Input";
 import UploadImage from "./UploadImage";
-import { useShareFiles } from "./ShareFile";
+import DetailCols from "./DetailCols";
+import { useShareFiles, useShareType, useShareOverall } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
 import { categories } from "../data/category";
 
-function PostSectionForm({ param = "", workId = "", filter }) {
+function PostFormSection({ param = "", workId = "", filter }) {
 	// Create work part
 	const [category, setCategory] = useState(categories[0]);
 	const [work, setWork] = useState({
@@ -50,7 +51,7 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 		return true;
 	};
 
-	// Add section part
+	// // Add section part
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
 	const { files } = useBetween(useShareFiles);
@@ -177,13 +178,11 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 	// 	}));
 	// },[list, page]);
 
-	// Scroll to end of page
-	// https://stackoverflow.com/questions/23843619/js-for-smooth-scroll-to-the-bottom-of-the-page
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (filter === "add") {
+		if (filter === "details") {
 			const response = await fetch(`/api/works/category/${param}/${workId}`, {
 				method: "POST",
 				body: JSON.stringify({ id: workId, type: type, overall }),
@@ -217,7 +216,7 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 		<form action="#" method="POST">
 			<div className="shadow overflow-hidden rounded-md">
 				<div className="px-4 py-5 bg-gray-50 sm:p-6">
-					{filter === "add"
+					{filter === "details"
 						? <div className={`grid grid-cols-1 ${firstLetter("lower", type)}`}>
 							<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
 
@@ -227,7 +226,7 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 									<Input key={idx}
 										prop={item}
 										val={overall}
-										type={type}
+										// type={type}
 										onChange={e => {
 											setOverall({ ...overall, [item]: e.target.value });
 										}} />
@@ -252,7 +251,7 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 													<Input key={idx}
 														prop={item}
 														val={singleList}
-														type={type}
+														// type={type}
 														onChange={(e) => handleArrayChange(e, index)}
 													/>))}
 											{array.length - 1 === index && (
@@ -299,15 +298,11 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 					}
 				</div>
 				<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-					<button type="submit"
-						onClick={(e) => { handleSubmit(e); }}
-						className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-						Save
-					</button>
+					<Button type="submit" onClick={(e) => handleSubmit(e)} text="Save" color="text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" />
 				</div>
 			</div>
 		</form>
 	);
 }
 
-export default PostSectionForm;
+export default PostFormSection;

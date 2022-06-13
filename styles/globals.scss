@@ -252,14 +252,15 @@ section {
 		}
 	}
 
-	.upload-section {
-		.dropzone {
-			max-width: 300px;
-		}
+}
 
-		aside {
-			display: flex;
-		}
+.upload-section {
+	.dropzone {
+		max-width: 300px;
+	}
+
+	aside {
+		display: flex;
 	}
 }
 

@@ -177,10 +177,11 @@ section .list-section .list-text p {
 .addNewSection .textOnly .upload-section {
   display: none;
 }
-.addNewSection .upload-section .dropzone {
+
+.upload-section .dropzone {
   max-width: 300px;
 }
-.addNewSection .upload-section aside {
+.upload-section aside {
   display: flex;
 }
 
