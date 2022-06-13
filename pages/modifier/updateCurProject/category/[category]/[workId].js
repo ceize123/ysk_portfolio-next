@@ -9,16 +9,28 @@ import Overview from "../../../../../components/sections/Overview";
 import PostSectionForm from "../../../../../components/PostSectionForm";
 import SelectMenu from "../../../../../components/SelectMenu";
 import Button from "../../../../../components/Button";
+import UpdateBtn from "../../../../../components/UpdateButtons";
 import Input from "../../../../../components/Input";
 import UploadImage from "../../../../../components/UploadImage";
 import { overallCol, pageCol, listCol } from "../../../../../data/column";
 import { types } from "../../../../../data/type";
 import { useShareFiles } from "../../../../../components/ShareFile";
 
-function WorkDetail({category, work}) {
+function WorkDetail({ category, work }) {
+	const [updateNo, setUpdateNo] = useState();
+	const [updating, setUpdating] = useState(false);
 	// const {type} = useBetween(useShareType);
 	// const [overall, setOverall] = useState({});
 	// const { files } = useBetween(useShareFiles);
+
+	const handleUpdate = (idx) => {
+		setUpdateNo(idx);
+		setUpdating(!updating);
+	};
+	const handleCancel = () => {
+		setUpdateNo();
+		setUpdating(!updating);
+	};
 
 	// handle array of object from fields
 	// const [array, setArray] = useState([]);
@@ -144,19 +156,39 @@ function WorkDetail({category, work}) {
 				Add New Section to {work.id} | {work.title} | {work.description}
 			</h1>
 			<section className="mx-auto container">
-				<h2 className="text-2xl mb-3">1. Hero</h2>
+				<div className="flex justify-between items-center">
+					<h2 className="text-2xl mb-3">1. Hero</h2>
+					<UpdateBtn number={updateNo} index={1} handleUpdate={handleUpdate} handleCancel={handleCancel} />
+				</div>
 			</section>
 			<Hero data={work} />
+
 			<section className="mt-5 mx-auto container">
-				<h2 className="text-2xl mb-3">2. Overview</h2>
+				<div className="flex justify-between items-center">
+					<h2 className="text-2xl mb-3">2. Overview</h2>
+					<UpdateBtn number={updateNo} index={2} handleUpdate={handleUpdate} handleCancel={handleCancel} />
+				</div>
 				<Overview prop={work} />
 			</section>
 
 			<div className="mx-auto container">
 				{work.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
-						<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
-						<TypeSection prop={section}/>
+						<div className="flex justify-between items-center">
+							<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
+							{/* {updateNo !== idx
+								? <Button onClick={() => handleUpdate(idx)} text="Update" color="border-lime-600 hover:bg-lime-500 focus:ring-lime-500" />
+								: <div>
+									<Button onClick={handleCancel} text="Cancel" color="border-gray-600 hover:bg-gray-500 focus:ring-gray-500" />
+									<Button onClick={() => handleUpdate(idx)} text="Save" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" />
+								</div>
+							} */}
+							<UpdateBtn number={updateNo} index={idx + 3} handleUpdate={handleUpdate} handleCancel={handleCancel} />
+						</div>
+						{(updateNo !== idx + 3)
+							? <TypeSection prop={section} />
+							: <Button onClick={() => handleUpdate(idx)} text="Delete" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
+						}
 					</section>
 				))}
 

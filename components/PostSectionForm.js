@@ -256,13 +256,13 @@ function PostSectionForm({ param = "", workId = "", filter }) {
 														onChange={(e) => handleArrayChange(e, index)}
 													/>))}
 											{array.length - 1 === index && (
-												<Button onClick={handleArrayAdd} text={`Add a ${type === "List" ? "List" : "Page"}`} color="indigo" />
+												<Button onClick={handleArrayAdd} text={`Add a ${type === "List" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
 											)}
 										</div>
 
 										<div className="ml-10 self-center">
 											{array.length !== 1 && (
-												<Button onClick={() => handleArrayRemove(index)} text="Remove" color="red" />
+												<Button onClick={() => handleArrayRemove(index)} text="Remove" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
 											)}
 										</div>
 									</div>
