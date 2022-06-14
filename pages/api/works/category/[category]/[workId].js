@@ -22,5 +22,11 @@ export default function handler(req, res) {
 
 		work.sections.push(newSection);
 		res.status(201).json(work);
+	} else if (req.method === "PUT") {
+		const { number, data } = req.body;
+		const cat = findCat(category);
+		const work = findId(cat, workId);
+		work.sections[number] = data;
+		res.status(201).json(work.sections[number]);
 	}
 }

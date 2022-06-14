@@ -156,7 +156,7 @@ function WorkDetail({ category, work }) {
 				Add New Section to {work.id} | {work.title} | {work.description}
 			</h1>
 			<section className="mx-auto container">
-				<div className="flex justify-between items-center">
+				<div className="flex justify-between items-center mt-12 mb-7">
 					<h2 className="text-2xl mb-3">1. Hero</h2>
 					<UpdateBtn number={updateNo} index={1} handleUpdate={handleUpdate} handleCancel={handleCancel} />
 				</div>
@@ -164,25 +164,27 @@ function WorkDetail({ category, work }) {
 			{/* <Hero data={work} /> */}
 			{(updateNo !== 1)
 				? <Hero data={work} />
-				: <PutFormSection prop={work} isOverview={false} filter="hero" />
+				: <section className="mx-auto container">
+					<PutFormSection prop={work} isOverview={false} param={category} workId={work.id} filter="hero" />
+				</section>
 			}
 
 			<section className="mt-5 mx-auto container">
-				<div className="flex justify-between items-center">
+				<div className="flex justify-between items-center mt-12 mb-7">
 					<h2 className="text-2xl mb-3">2. Overview</h2>
 					<UpdateBtn number={updateNo} index={2} handleUpdate={handleUpdate} handleCancel={handleCancel} />
 				</div>
 				{/* <Overview prop={work} /> */}
 				{(updateNo !== 2)
 					? <Overview prop={work} />
-					: <PutFormSection prop={work} isOverview={true} filter="overview" />
+					: <PutFormSection prop={work} isOverview={true} param={category} workId={work.id} filter="overview" />
 				}
 			</section>
 
 			<div className="mx-auto container">
 				{work.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
-						<div className="flex justify-between items-center">
+						<div className="flex justify-between items-center mt-12 mb-7">
 							<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
 							{/* {updateNo !== idx
 								? <Button onClick={() => handleUpdate(idx)} text="Update" color="border-lime-600 hover:bg-lime-500 focus:ring-lime-500" />
@@ -195,7 +197,12 @@ function WorkDetail({ category, work }) {
 						</div>
 						{(updateNo !== idx + 3)
 							? <TypeSection prop={section} />
-							: <PutFormSection prop={section} filter="sections" />
+							: <PutFormSection
+								prop={section}
+								param={category}
+								workId={work.id}
+								filter="sections"
+								sectionNo={idx} />
 						}
 					</section>
 				))}

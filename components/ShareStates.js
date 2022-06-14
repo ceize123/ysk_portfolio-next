@@ -10,10 +10,10 @@ export const useShareFiles = () => {
 };
 
 export const useShareUpdateFiles = () => {
-	const [files, setFiles] = useState([]);
+	const [updateFiles, setUpdateFiles] = useState();
 	return {
-		files,
-		setFiles,
+		updateFiles,
+		setUpdateFiles,
 	};
 };
 

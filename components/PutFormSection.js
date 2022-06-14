@@ -6,11 +6,11 @@ import Input from "./Input";
 import UploadImage from "./UploadImage";
 import { useShareUpdateFiles } from "./ShareStates";
 
-function PutFormSection({ prop, isOverview = false, filter }) {
+function PutFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "" }) {
 
 	// 
 	const [work, setWork] = useState(prop);
-	const [overview, setOverview] = useState({});
+	const [overview, setOverview] = useState();
 
 	useEffect(() => {
 		setWork({ ...work, overview: overview });
@@ -18,7 +18,7 @@ function PutFormSection({ prop, isOverview = false, filter }) {
 
 
 	// 
-	const { files } = useBetween(useShareUpdateFiles);
+	const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
 	const [overall, setOverall] = useState(prop);
 	const [array, setArray] = useState([]);
 	const [hasImage, setHasImage] = useState(false);
@@ -69,27 +69,32 @@ function PutFormSection({ prop, isOverview = false, filter }) {
 	};
 
 	useEffect(() => {
-		setOverall({ ...overall, images: files });
-	}, [files]);
+		if (filter === "sections") {
+			setOverall({ ...overall, images: updateFiles });
+		} else {
+			setWork({ ...work, heroImage: updateFiles });
+		}
+		console.log(overall);
+	}, [updateFiles]);
 
 	useEffect(() => {
 		
-		if (prop.type !== undefined) {
+		if (filter === "sections") {
 			if (overall.type === "list") {
 				setArray(overall.lists);
-				// setSubKeys(Object.keys(overall.lists[0]));
 			} else if (overall.type === "carousel") {
 				setArray(overall.pages);
-				// setSubKeys(Object.keys(overall.pages[0]));
-				// console.log((Object.keys(overall.pages[0])).length);
 			}
 			
 			if (overall.type !== "textOnly") {
 				setHasImage(true);
+				setUpdateFiles(prop.images);
 			} else {
 				setHasImage(false);
 			}
 		} else {
+			setOverview(prop.overview);
+			setUpdateFiles(prop.heroImage);
 			setHasImage(true);
 			// setSubKeys(Object.keys(work[overview]));
 			if (isOverview) {
@@ -100,61 +105,74 @@ function PutFormSection({ prop, isOverview = false, filter }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(overall);
+		const data = (filter === "sections" ? overall: work);
+		console.log(data);
+		const response = await fetch(`/api/works/category/${param}/${workId}`, {
+			method: "PUT",
+			body: JSON.stringify({ number: sectionNo, data }),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		const result = await response.json();
+		console.log(result);
+		
 	};
 
 	return (
 		<form action="#" method="PUT">
 			<div className="shadow overflow-hidden rounded-md">
 				<div className="px-4 py-5 bg-gray-50 sm:p-6">
-					{ filter === "sections" ? <div className={`grid grid-cols-1 ${firstLetter("lower", overall.type)}`}>
-						<div className="mt-3">
-							{keys.map((key, idx) => (
-								(key !== "images" && key !== "lists" && key !== "pages")
-								&& <Input key={idx}
-									prop={key}
-									val={overall}
-									onChange={e => {
-										setOverall({ ...overall, [key]: e.target.value });
-									}} />
-								
-							))}
-						</div>
-						<div className="mt-3">
-							<h3 className="col-text">
-								{overall.type === "list" ? "Lists" : overall.type === "carousel" ? "Pages" : ""}
-							</h3>
-							{(overall.type === "list" || overall.type === "carousel") && array.map((singleList, index) => (
-								<div key={index} className="flex mb-5">
-									<div className="w-3/4 shrink-0 sub-section">
-										{subKeys.map((item, idx) => (
-											<Input key={idx}
-												prop={item}
-												val={singleList}
-												onChange={(e) => handleArrayChange(e, index)}
-											/>
-										))}
-										{array.length - 1 === index && (
-											<Button onClick={handleArrayAdd} text={`Add a ${overall.type === "list" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
-										)}
-									</div>
+					{filter === "sections"
+						? <div className={`grid grid-cols-1 ${firstLetter("lower", overall.type)}`}>
+							<div className="mt-3">
+								{keys.map((key, idx) => (
+									(key !== "images" && key !== "lists" && key !== "pages")
+									&& <Input key={idx}
+										prop={key}
+										val={overall}
+										onChange={e => {
+											setOverall({ ...overall, [key]: e.target.value });
+										}} />
+									
+								))}
+							</div>
+							<div className="mt-3">
+								<h3 className="col-text">
+									{overall.type === "list" ? "Lists" : overall.type === "carousel" ? "Pages" : ""}
+								</h3>
+								{(overall.type === "list" || overall.type === "carousel") && array.map((singleList, index) => (
+									<div key={index} className="flex mb-5">
+										<div className="w-3/4 shrink-0 sub-section">
+											{subKeys.map((item, idx) => (
+												<Input key={idx}
+													prop={item}
+													val={singleList}
+													onChange={(e) => handleArrayChange(e, index)}
+												/>
+											))}
+											{array.length - 1 === index && (
+												<Button onClick={handleArrayAdd} text={`Add a ${overall.type === "list" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
+											)}
+										</div>
 
-									<div className="ml-10 self-center">
-										{array.length !== 1 && (
-											<Button onClick={() => handleArrayRemove(index)} text="Remove" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
-										)}
+										<div className="ml-10 self-center">
+											{array.length !== 1 && (
+												<Button onClick={() => handleArrayRemove(index)} text="Remove" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
+											)}
+										</div>
 									</div>
-								</div>
-							))}
-						</div>
-						{hasImage && <UploadImage type={overall.type} />}
-					</div> 
+								))}
+							</div>
+							{hasImage && <UploadImage type={overall.type} isUpdate={true}/>}
+						</div> 
 						: <div className="grid grid-cols-1">
 							<div className="mt-3">
 								{!isOverview
 									? <>
 										<h3>Info</h3>
-										{keys.map((key, idx) => (
+										{/* Title, Description, NavColor */}
+										{keys.slice(1, 4).map((key, idx) => (
 											<Input key={idx}
 												prop={key}
 												val={work}
@@ -179,7 +197,7 @@ function PutFormSection({ prop, isOverview = false, filter }) {
 									</>
 								}
 							</div>
-							
+							{hasImage && <UploadImage isUpdate={true}/>}
 						</div>	
 					}
 				</div>
