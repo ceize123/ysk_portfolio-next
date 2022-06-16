@@ -6,11 +6,10 @@ import Image from "next/image";
 import firstLetter from "./FirstLetter";
 
 // https://react-dropzone.js.org/
-function UploadImage({ type, isUpdate = false }) {
+function UploadImage({ type = "", isUpdate = false }) {
 	// const [files, setFiles] = useState([]);
 	const { files, setFiles} = useBetween(useShareFiles);
 	const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
-	console.log(firstLetter("lower", type));
 
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: {

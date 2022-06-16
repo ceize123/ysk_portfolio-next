@@ -4,10 +4,11 @@ import firstLetter from "./FirstLetter";
 import Button from "./Button";
 import Input from "./Input";
 import UploadImage from "./UploadImage";
-import { useShareUpdateFiles } from "./ShareStates";
+import { useShareUpdateFiles, useShareUpdateNo } from "./ShareStates";
 
-function PutFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "" }) {
+function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "" }) {
 
+	const { setUpdateNo } = useBetween(useShareUpdateNo);
 	// 
 	const [work, setWork] = useState(prop);
 	const [overview, setOverview] = useState();
@@ -15,7 +16,6 @@ function PutFormSection({ prop, isOverview = false, param, workId, filter, secti
 	useEffect(() => {
 		setWork({ ...work, overview: overview });
 	}, [overview]);
-
 
 	// 
 	const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
@@ -74,7 +74,6 @@ function PutFormSection({ prop, isOverview = false, param, workId, filter, secti
 		} else {
 			setWork({ ...work, heroImage: updateFiles });
 		}
-		console.log(overall);
 	}, [updateFiles]);
 
 	useEffect(() => {
@@ -103,10 +102,9 @@ function PutFormSection({ prop, isOverview = false, param, workId, filter, secti
 		}
 	}, []);
 
-	const handleSubmit = async (e) => {
+	const handleSave = async (e) => {
 		e.preventDefault();
 		const data = (filter === "sections" ? overall: work);
-		console.log(data);
 		const response = await fetch(`/api/works/category/${param}/${workId}`, {
 			method: "PUT",
 			body: JSON.stringify({ number: sectionNo, data }),
@@ -114,9 +112,23 @@ function PutFormSection({ prop, isOverview = false, param, workId, filter, secti
 				"Content-Type": "application/json"
 			}
 		});
+		setUpdateNo();
 		const result = await response.json();
 		console.log(result);
-		
+	};
+
+	const handleDelete = async (e) => {
+		e.preventDefault();
+		const response = await fetch(`/api/works/category/${param}/${workId}`, {
+			method: "DELETE",
+			body: JSON.stringify({ number: sectionNo }),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		setUpdateNo();
+		const result = await response.json();
+		console.log(result);
 	};
 
 	return (
@@ -127,7 +139,7 @@ function PutFormSection({ prop, isOverview = false, param, workId, filter, secti
 						? <div className={`grid grid-cols-1 ${firstLetter("lower", overall.type)}`}>
 							<div className="mt-3">
 								{keys.map((key, idx) => (
-									(key !== "images" && key !== "lists" && key !== "pages")
+									(key !== "type" && key !== "images" && key !== "lists" && key !== "pages")
 									&& <Input key={idx}
 										prop={key}
 										val={overall}
@@ -203,12 +215,12 @@ function PutFormSection({ prop, isOverview = false, param, workId, filter, secti
 				</div>
 				
 				<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-					<Button onClick={(e) => handleSubmit(e)} text="Delete" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
-					<Button type="submit" onClick={(e) => handleSubmit(e)} text="Save" color="text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" />
+					{filter === "sections" && <Button onClick={(e) => handleDelete(e)} text="Delete" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />}
+					<Button type="submit" onClick={(e) => handleSave(e)} text="Save" color="text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" />
 				</div>
 			</div>
 		</form>
 	);
 }
 
-export default PutFormSection;
+export default UpdateFormSection;

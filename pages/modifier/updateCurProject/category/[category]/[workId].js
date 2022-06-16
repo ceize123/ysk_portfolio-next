@@ -7,7 +7,8 @@ import TypeSection from "../../../../../components/TypeSection";
 import Hero from "../../../../../components/sections/Hero";
 import Overview from "../../../../../components/sections/Overview";
 import PostFormSection from "../../../../../components/PostFormSection";
-import PutFormSection from "../../../../../components/PutFormSection";
+import UpdateFormSection from "../../../../../components/UpdateFormSection";
+import { useShareUpdateNo, useShareProject } from "../../../../../components/ShareStates";
 import SelectMenu from "../../../../../components/SelectMenu";
 import Button from "../../../../../components/Button";
 import UpdateBtn from "../../../../../components/UpdateButtons";
@@ -17,20 +18,24 @@ import { overallCol, pageCol, listCol } from "../../../../../data/column";
 import { types } from "../../../../../data/type";
 
 function WorkDetail({ category, work }) {
-	const [updateNo, setUpdateNo] = useState();
-	const [updating, setUpdating] = useState(false);
+	const { updateNo, setUpdateNo } = useBetween(useShareUpdateNo);
+	const [ project, setProject ] = useState(work);
+	
 	// const {type} = useBetween(useShareType);
 	// const [overall, setOverall] = useState({});
 	// const { files } = useBetween(useShareFiles);
 
 	const handleUpdate = (idx) => {
 		setUpdateNo(idx);
-		setUpdating(!updating);
 	};
 	const handleCancel = () => {
 		setUpdateNo();
-		setUpdating(!updating);
 	};
+
+	useEffect(() => {
+		setProject(work);
+		console.log(work);
+	}, [work]);
 
 	// handle array of object from fields
 	// const [array, setArray] = useState([]);
@@ -153,7 +158,7 @@ function WorkDetail({ category, work }) {
 	return (
 		<div className="mt-3">
 			<h1 className="text-3xl mb-3 text-center">
-				Add New Section to {work.id} | {work.title} | {work.description}
+				Add New Section to {project.id} | {project.title} | {project.description}
 			</h1>
 			<section className="mx-auto container">
 				<div className="flex justify-between items-center mt-12 mb-7">
@@ -163,9 +168,9 @@ function WorkDetail({ category, work }) {
 			</section>
 			{/* <Hero data={work} /> */}
 			{(updateNo !== 1)
-				? <Hero data={work} />
+				? <Hero data={project} />
 				: <section className="mx-auto container">
-					<PutFormSection prop={work} isOverview={false} param={category} workId={work.id} filter="hero" />
+					<UpdateFormSection prop={project} isOverview={false} param={category} workId={project.id} filter="hero" />
 				</section>
 			}
 
@@ -176,13 +181,13 @@ function WorkDetail({ category, work }) {
 				</div>
 				{/* <Overview prop={work} /> */}
 				{(updateNo !== 2)
-					? <Overview prop={work} />
-					: <PutFormSection prop={work} isOverview={true} param={category} workId={work.id} filter="overview" />
+					? <Overview prop={project} />
+					: <UpdateFormSection prop={project} isOverview={true} param={category} workId={project.id} filter="overview"  />
 				}
 			</section>
 
 			<div className="mx-auto container">
-				{work.sections.map((section, idx) => (
+				{project.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
 						<div className="flex justify-between items-center mt-12 mb-7">
 							<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
@@ -197,12 +202,13 @@ function WorkDetail({ category, work }) {
 						</div>
 						{(updateNo !== idx + 3)
 							? <TypeSection prop={section} />
-							: <PutFormSection
+							: <UpdateFormSection
 								prop={section}
 								param={category}
-								workId={work.id}
+								workId={project.id}
 								filter="sections"
-								sectionNo={idx} />
+								sectionNo={idx}
+							/>
 						}
 					</section>
 				))}
@@ -210,7 +216,7 @@ function WorkDetail({ category, work }) {
 				<section className="mx-10 mt-12">
 					<div className="mt-5 addNewSection">
 						<h2 className="text-center">Add Sections:</h2>
-						<PostFormSection param={category} workId={work.id} filter="details" />
+						<PostFormSection param={category} workId={project.id} filter="details" />
 						{/* <form action="#" method="POST">
 							<div className="shadow overflow-hidden rounded-md">
 								<div className="px-4 py-5 bg-gray-50 sm:p-6">
@@ -324,6 +330,7 @@ export async function getStaticProps(context) {
 		props: {
 			category: category,
 			work,
-		}
+		},
+		revalidate: 10
 	};
 }

@@ -6,12 +6,13 @@ import Button from "./Button";
 import Input from "./Input";
 import UploadImage from "./UploadImage";
 import DetailCols from "./DetailCols";
-import { useShareFiles, useShareType, useShareOverall } from "./ShareStates";
+import { useShareFiles } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
 import { categories } from "../data/category";
 
 function PostFormSection({ param = "", workId = "", filter }) {
+
 	// Create work part
 	const [category, setCategory] = useState(categories[0]);
 	const [work, setWork] = useState({
@@ -190,6 +191,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 					"Content-Type": "application/json"
 				}
 			});
+			
 			const result = await response.json();
 			console.log("From Add section");
 			console.log(result);

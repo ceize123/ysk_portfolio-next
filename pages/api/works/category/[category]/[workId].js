@@ -2,10 +2,18 @@ import findCat from "../../../../../components/FindCat";
 import findId from "../../../../../components/FindId";
 import firstLetter from "../../../../../components/FirstLetter";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
 	const { category, workId } = req.query;
+	
 	if (req.method === "GET") {
-		console.log(req.query);
+		
+		// try {
+		// 	const works = await Work.find();
+		// 	res.status(200).json(works);
+		// } catch (err) {
+		// 	res.status(500).json(err);
+		// }
+
 		const works = findCat(category);
 		const work = findId(works, workId);
 		res.status(200).json(work);
@@ -28,5 +36,13 @@ export default function handler(req, res) {
 		const work = findId(cat, workId);
 		work.sections[number] = data;
 		res.status(201).json(work.sections[number]);
+	} else if (req.method === "DELETE") {
+		const { number } = req.body;
+		const cat = findCat(category);
+		const work = findId(cat, workId);
+		console.log(number);
+		console.log(work.sections[number]);
+		work.sections.splice(number, 1);
+		res.status(201).json(work.sections);
 	}
 }

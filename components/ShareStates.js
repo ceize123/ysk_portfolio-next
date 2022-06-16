@@ -17,26 +17,42 @@ export const useShareUpdateFiles = () => {
 	};
 };
 
-export const useShareType = () => {
-	const [type, setType] = useState(types[0]);
+export const useShareUpdateNo = () => {
+	const [updateNo, setUpdateNo] = useState();
 	return {
-		type,
-		setType,
+		updateNo,
+		setUpdateNo,
 	};
 };
 
-export const useShareOverall = () => {
-	const [overall, setOverall] = useState({});
+export const useShareProject = () => {
+	const [project, setProject] = useState();
 	return {
-		overall,
-		setOverall,
+		project,
+		setProject,
 	};
 };
 
-export const useShareArray = () => {
-	const [array, setArray] = useState([]);
-	return {
-		array,
-		setArray,
-	};
-};
+// export const useShareType = () => {
+// 	const [type, setType] = useState(types[0]);
+// 	return {
+// 		type,
+// 		setType,
+// 	};
+// };
+
+// export const useShareOverall = () => {
+// 	const [overall, setOverall] = useState({});
+// 	return {
+// 		overall,
+// 		setOverall,
+// 	};
+// };
+
+// export const useShareArray = () => {
+// 	const [array, setArray] = useState([]);
+// 	return {
+// 		array,
+// 		setArray,
+// 	};
+// };

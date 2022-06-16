@@ -27,7 +27,7 @@ export const workData = [
 				title: "IG",
 				description: "instagram",
 				navColor: "#150F43",
-				heroImage: ig,
+				heroImage: [ig],
 				overview: {
 					subtitle: "I redesigned Andrea Ko Jewelry Design Courses Website (RWD) to make it more organized and clean.",
 					paragraph: "The original online presence and the information were lacking. ",
@@ -150,7 +150,7 @@ export const workData = [
 				title: "Hey",
 				description: "instagram",
 				navColor: "#150F43",
-				heroImage: ig,
+				heroImage: [ig],
 				overview: {
 					subtitle: "I redesigned Andrea Ko Jewelry Design Courses Website (RWD).",
 					paragraph: "The original online presence and the information were lacking. ",
