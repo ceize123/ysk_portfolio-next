@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { types } from "../data/type";
 
 export const useShareFiles = () => {
@@ -32,6 +32,28 @@ export const useShareProject = () => {
 		setProject,
 	};
 };
+
+export const useShareCategories = () => {
+	const [categories, setCategories] = useState();
+	const [category, setCategory] = useState();
+	useEffect(() => {
+		async function fetchData() {
+			const response = await fetch("/api/works");
+			const data = await response.json();
+			setCategories(data.map(value => value.category));
+			setCategory(data[0].category);
+		}
+		fetchData();
+	}, []);
+	return {
+		categories,
+		setCategories,
+		category,
+		setCategory
+	};
+};
+
+
 
 // export const useShareType = () => {
 // 	const [type, setType] = useState(types[0]);

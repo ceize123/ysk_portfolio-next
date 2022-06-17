@@ -1,6 +1,7 @@
 import findCat from "../../../../../components/FindCat";
 import dbConnect from "../../../../../util/connection";
 import Category from "../../../../../models/Category";
+import Work from "../../../../../models/Work";
 
 export default async function handler(req, res) {
 	const { category } = req.query;
@@ -19,14 +20,19 @@ export default async function handler(req, res) {
 		// res.status(200).json(works);
 	}
 
-	// if (req.method === "POST") {
-	// 	try {
-	// 		const category = await Category.create(req.body);
-	// 		res.status(201).json(category);
-	// 	} catch (err) {
-	// 		res.status(500).json(err);
-	// 	}
-	// }
+	if (req.method === "POST") {
+		try {
+			const newWork = await Work.create(req.body.work);
+			const cate = await Category.findOneAndUpdate({ category: category },
+				{ $addToSet: { works: newWork } },
+				{ new: true }
+			).exec();
+			
+			res.status(201).json(cate);
+		} catch (err) {
+			res.status(500).json(err);
+		}
+	}
 	// else if (req.method === "POST") {
 	// 	const { work } = req.body;
 	// 	const { category } = req.query;

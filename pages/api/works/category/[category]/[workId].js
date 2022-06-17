@@ -2,10 +2,22 @@ import findCat from "../../../../../components/FindCat";
 import findId from "../../../../../components/FindId";
 import firstLetter from "../../../../../components/FirstLetter";
 
+import dbConnect from "../../../../../util/connection";
+import Category from "../../../../../models/Category";
+import Work from "../../../../../models/Work";
+
 export default async function handler(req, res) {
 	const { category, workId } = req.query;
+	dbConnect();
 	
 	if (req.method === "GET") {
+
+		try {
+			const work = await Work.findOne({ "_id": workId });
+			res.status(200).json(work);
+		} catch (err) {
+			res.status(500).json(err);
+		}
 		
 		// try {
 		// 	const works = await Work.find();

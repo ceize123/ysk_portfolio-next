@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import { useBetween } from "use-between";
 import { useShareFiles, useShareUpdateFiles } from "./ShareStates";
 import { useDropzone } from "react-dropzone";
@@ -8,26 +8,50 @@ import firstLetter from "./FirstLetter";
 // https://react-dropzone.js.org/
 function UploadImage({ type = "", isUpdate = false }) {
 	// const [files, setFiles] = useState([]);
-	const { files, setFiles} = useBetween(useShareFiles);
+	const { files, setFiles } = useBetween(useShareFiles);
 	const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
 
-	const { getRootProps, getInputProps } = useDropzone({
-		accept: {
-			"image/*": []
-		},
-		onDrop: acceptedFiles => {
-			if (isUpdate) {
-				setUpdateFiles(acceptedFiles.map(file => Object.assign(file, {
-					preview: URL.createObjectURL(file)
-				})));
-			} else {
-				setFiles(acceptedFiles.map(file => Object.assign(file, {
-					preview: URL.createObjectURL(file)
-				})));
-			}
-		},
-		multiple: firstLetter("lower", type) === "multiImages" || firstLetter("lower", type) === "carousel" ? true : false
-	});
+	// Base64
+	// https://stackoverflow.com/questions/57522493/react-dropzone-how-convert-each-file-to-base64
+	const onDrop = (files) => {
+		files.map((file) => {
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				setFiles(
+					files.map((file) =>
+						Object.assign(file, {
+							preview: URL.createObjectURL(file),
+							base64Image: e.target.result,
+						})
+					)
+				);
+			};
+			reader.readAsDataURL(file);
+		});
+	};
+	useEffect(() => {
+		console.log(files);
+	}, [files]);
+
+	// const { getRootProps, getInputProps } = useDropzone({
+	// 	accept: {
+	// 		"image/*": []
+	// 	},
+	// 	onDrop: acceptedFiles => {
+	// 		if (isUpdate) {
+	// 			setUpdateFiles(acceptedFiles.map(file => Object.assign(file, {
+	// 				preview: URL.createObjectURL(file)
+	// 			})));
+	// 		} else {
+	// 			setFiles(acceptedFiles.map(file => Object.assign(file, {
+	// 				preview: URL.createObjectURL(file)
+	// 			})));
+	// 		}
+	// 	},
+	// 	multiple: firstLetter("lower", type) === "multiImages" || firstLetter("lower", type) === "carousel" ? true : false
+	// });
+	const { getRootProps, getInputProps } = useDropzone({onDrop});
+
   
 	const thumbs = !isUpdate
 		? files.map(file => (

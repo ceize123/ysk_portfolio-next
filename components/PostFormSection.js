@@ -6,15 +6,14 @@ import Button from "./Button";
 import Input from "./Input";
 import UploadImage from "./UploadImage";
 import DetailCols from "./DetailCols";
-import { useShareFiles } from "./ShareStates";
+import { useShareFiles, useShareCategories } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
-import { categories } from "../data/category";
 
 function PostFormSection({ param = "", workId = "", filter }) {
 
 	// Create work part
-	const [category, setCategory] = useState(categories[0]);
+	const {categories, category, setCategory} = useBetween(useShareCategories);
 	const [work, setWork] = useState({
 		title: "",
 		description: "",
@@ -35,7 +34,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 			heroImage: ""
 		});
 		setOverview({
-			subtile: "",
+			subtitle: "",
 			paragraph: "",
 			timeline: "",
 			role: "",
@@ -55,8 +54,10 @@ function PostFormSection({ param = "", workId = "", filter }) {
 	// // Add section part
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
-	const { files } = useBetween(useShareFiles);
+	const { files, setFiles } = useBetween(useShareFiles);
 	const [array, setArray] = useState([]);
+
+	console.log(files);
 
 	// handle array of object from fields
 
@@ -99,7 +100,8 @@ function PostFormSection({ param = "", workId = "", filter }) {
 	};
 
 	useEffect(() => {
-		setOverall({ ...overall, images: files });
+		if (filter === "details") setOverall({ ...overall, images: files });
+		else setWork({ ...work, heroImage: files });
 	}, [files]);
 
 	useEffect(() => {
@@ -196,6 +198,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 			console.log("From Add section");
 			console.log(result);
 		} else {
+			console.log(work);
 			const validInput = validateInput(work.title, work.description, work.navColor, work.heroImage);
 
 			if (!validInput) {
@@ -209,6 +212,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 				}
 			});
 			const result = await response.json();
+			setFiles([]);
 			console.log("From Create work");
 			console.log(result);
 		}
@@ -272,7 +276,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 							<UploadImage type={type} />
 						</div>
 						: <div className="grid grid-cols-1">
-							<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />
+							{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}
 							<div className="mt-3">
 								<h3>Info</h3>
 								{infoCol.map((item, idx) => (
@@ -284,6 +288,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 										}} />
 								))}
 							</div>
+							<UploadImage />
 							{/* add overview */}
 							<div className="mt-3">
 								<h3>Overview</h3>

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
-import { categories } from "../data/category";
+import {useShareCategories} from "../components/ShareStates";
 
 const typeData = [
 	"Add New Section",
@@ -10,9 +11,10 @@ const typeData = [
 
 function Dashboard() {
 	const [isLoading, setIsLoading] = useState(true);
-	const [dashboardData, setDashboardData] = useState(null); 
-	const [isUpdate, setIsUpdate] = useState(true); 
-	const [category, setCategory] = useState(categories[0]);
+	const [dashboardData, setDashboardData] = useState(null);
+	const [isUpdate, setIsUpdate] = useState(true);
+	const {categories, category, setCategory} = useBetween(useShareCategories);
+	// const [category, setCategory] = useState();
 	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();
 	const [type, setType] = useState();
@@ -23,6 +25,7 @@ function Dashboard() {
 			const response = await fetch("/api/works");
 			const data = await response.json();
 			setDashboardData(data);
+			// setCategory(data[0].category);
 			setIsLoading(false);
 			setWork(data[0].works[0]);
 			setType(typeData[0]);
@@ -31,7 +34,9 @@ function Dashboard() {
 	}, []);
 
 	useEffect(() => {
-		setIdx(categories.indexOf(category));
+		if (categories !== undefined && category !== undefined) {
+			setIdx(categories.indexOf(category));
+		}
 	}, [category]);
 
 	useEffect(() => {
@@ -46,7 +51,7 @@ function Dashboard() {
 
 	function handleSubmit() {
 		if (isUpdate) {
-			router.push(`/modifier/updateCurProject/category/${category}/${work.id}`);
+			router.push(`/modifier/updateCurProject/category/${category}/${work._id}`);
 			// router.push(`/modifier/updateCurProject/${work.id}`);
 		} else {
 			router.push("/modifier/createNewProject");
@@ -67,16 +72,19 @@ function Dashboard() {
 					</label>
 					<p className="mt-1 ml-3 text-sm font-medium text-gray-700">Create New Work</p>
 				</div>
-				{isUpdate &&
+				{(isUpdate && dashboardData[idx].works.length !== 0) &&
 					<>
 						{/* Pass data from child to parent */}
 						{/* https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component */}
 						<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory}/>
-						<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork}/>
-						{/* <SelectMenu prop={typeData} option={type} name="Type" onChange={setType}/> */}
+						<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork} />
 					</>
 				}
-				<button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
+				{(isUpdate && dashboardData[idx].works.length === 0)
+					? <h2 className="mt-3">No works in this category, Please create one.</h2>
+					: <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
+				}
+				{/* {(!isUpdate || dashboardData[idx].works.length !== 0) && <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>} */}
 			</div>
 		</>
 	);

@@ -20,11 +20,10 @@ export const infoCol = [
 	"title",
 	"description",
 	"navColor",
-	"heroImage"
 ];
 
 export const overviewCol = [
-	"subtile",
+	"subtitle",
 	"paragraph",
 	"timeline",
 	"role",
