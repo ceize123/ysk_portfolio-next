@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const CategorySchema = new mongoose.Schema({
-	category: { type: String, required: true },	
+	category: { type: String, required: true, index: { unique: true, dropDups: true } },	
 	works: [Object],
 }, { timestamps: true });
 

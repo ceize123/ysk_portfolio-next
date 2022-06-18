@@ -34,7 +34,7 @@ export const useShareProject = () => {
 };
 
 export const useShareCategories = () => {
-	const [categories, setCategories] = useState();
+	const [categories, setCategories] = useState([]);
 	const [category, setCategory] = useState();
 	useEffect(() => {
 		async function fetchData() {
@@ -50,6 +50,14 @@ export const useShareCategories = () => {
 		setCategories,
 		category,
 		setCategory
+	};
+};
+
+export const useShareImageUrls = () => {
+	const [imageUrls, setImageUrls] = useState([]);
+	return {
+		imageUrls,
+		setImageUrls,
 	};
 };
 

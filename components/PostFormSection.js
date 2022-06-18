@@ -5,8 +5,9 @@ import firstLetter from "./FirstLetter";
 import Button from "./Button";
 import Input from "./Input";
 import UploadImage from "./UploadImage";
+import ImageInput from "./ImageInput";
 import DetailCols from "./DetailCols";
-import { useShareFiles, useShareCategories } from "./ShareStates";
+import { useShareFiles, useShareCategories, useShareImageUrls } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
 
@@ -18,7 +19,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 		title: "",
 		description: "",
 		navColor: "",
-		heroImage: ""
+		heroImage: []
 	});
 	const [overview, setOverview] = useState({});
 
@@ -31,7 +32,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 			title: "",
 			description: "",
 			navColor: "",
-			heroImage: ""
+			heroImage: []
 		});
 		setOverview({
 			subtitle: "",
@@ -42,22 +43,32 @@ function PostFormSection({ param = "", workId = "", filter }) {
 		});
 	}, [category]);
 	
-	const validateInput = (title, description, navColor,  heroImage) => {
-		if (title === "" || description === "" || navColor === "" || heroImage === "") {
-			console.log("Invalid Input");
-			return false;
-		}
+	const validateWork = (work) => {
+		let flag = true;
+		const keys = Object.keys(work);
+		const subKeys = Object.keys(overview);
+		keys.map(key => {
+			if (work[key] === "" || work[key].length === 0) {
+				console.log(key, "is invalid input.");
+				flag = false;
+			}
+		});
 
-		return true;
+		subKeys.map(key => {
+			if (work.overview[key] === "") {
+				console.log(key, "is invalid input.");
+				flag = false;
+			}
+		});
+		return flag;
 	};
 
 	// // Add section part
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
 	const { files, setFiles } = useBetween(useShareFiles);
+	const { imageUrls } = useBetween(useShareImageUrls);
 	const [array, setArray] = useState([]);
-
-	console.log(files);
 
 	// handle array of object from fields
 
@@ -103,6 +114,11 @@ function PostFormSection({ param = "", workId = "", filter }) {
 		if (filter === "details") setOverall({ ...overall, images: files });
 		else setWork({ ...work, heroImage: files });
 	}, [files]);
+
+	useEffect(() => {
+		if (filter === "details") setOverall({ ...overall, images: imageUrls });
+		else setWork({ ...work, heroImage: imageUrls });
+	}, [imageUrls]);
 
 	useEffect(() => {
 		setOverall({
@@ -197,13 +213,13 @@ function PostFormSection({ param = "", workId = "", filter }) {
 			const result = await response.json();
 			console.log("From Add section");
 			console.log(result);
+
 		} else {
 			console.log(work);
-			const validInput = validateInput(work.title, work.description, work.navColor, work.heroImage);
-
-			if (!validInput) {
+			if (!validateWork(work)) {
 				return null;
 			}
+
 			const response = await fetch(`/api/works/category/${category}`, {
 				method: "POST",
 				body: JSON.stringify({work}),
@@ -212,7 +228,6 @@ function PostFormSection({ param = "", workId = "", filter }) {
 				}
 			});
 			const result = await response.json();
-			setFiles([]);
 			console.log("From Create work");
 			console.log(result);
 		}
@@ -288,7 +303,8 @@ function PostFormSection({ param = "", workId = "", filter }) {
 										}} />
 								))}
 							</div>
-							<UploadImage />
+							{/* <UploadImage /> */}
+							<ImageInput prop={`${category}/${work.title}/heroImage`} category={category} />
 							{/* add overview */}
 							<div className="mt-3">
 								<h3>Overview</h3>

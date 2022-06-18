@@ -8,7 +8,7 @@ import Hero from "../../../../../components/sections/Hero";
 import Overview from "../../../../../components/sections/Overview";
 import PostFormSection from "../../../../../components/PostFormSection";
 import UpdateFormSection from "../../../../../components/UpdateFormSection";
-import { useShareUpdateNo, useShareProject } from "../../../../../components/ShareStates";
+import { useShareUpdateNo, useShareProject, useShareImageUrls } from "../../../../../components/ShareStates";
 import SelectMenu from "../../../../../components/SelectMenu";
 import Button from "../../../../../components/Button";
 import UpdateBtn from "../../../../../components/UpdateButtons";
@@ -30,7 +30,6 @@ function WorkDetail({ category, work }) {
 
 	useEffect(() => {
 		setProject(work);
-		console.log(work);
 	}, [work]);
 
 
@@ -59,7 +58,7 @@ function WorkDetail({ category, work }) {
 				</section>
 			}
 
-			{/* <section className="mt-5 mx-auto container">
+			<section className="mt-5 mx-auto container">
 				<div className="flex justify-between items-center mt-12 mb-7">
 					<h2 className="text-2xl mb-3">2. Overview</h2>
 					<UpdateBtn number={updateNo} index={2} handleUpdate={handleUpdate} handleCancel={handleCancel} />
@@ -68,7 +67,7 @@ function WorkDetail({ category, work }) {
 					? <Overview prop={project} />
 					: <UpdateFormSection prop={project} isOverview={true} param={category} workId={project.id} filter="overview"  />
 				}
-			</section> */}
+			</section>
 
 			{/* <div className="mx-auto container">
 				{project.sections.map((section, idx) => (

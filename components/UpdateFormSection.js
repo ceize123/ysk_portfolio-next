@@ -3,8 +3,9 @@ import { useBetween } from "use-between";
 import firstLetter from "./FirstLetter";
 import Button from "./Button";
 import Input from "./Input";
+import ImageInput from "./ImageInput";
 import UploadImage from "./UploadImage";
-import { useShareUpdateFiles, useShareUpdateNo } from "./ShareStates";
+import { useShareUpdateFiles, useShareUpdateNo, useShareImageUrls } from "./ShareStates";
 
 function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "" }) {
 
@@ -22,6 +23,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 	const [overall, setOverall] = useState(prop);
 	const [array, setArray] = useState([]);
 	const [hasImage, setHasImage] = useState(false);
+	const { imageUrls } = useBetween(useShareImageUrls);
 	const keys = Object.keys(prop);
 	const subKeys = isOverview
 		? Object.keys(prop.overview)
@@ -75,6 +77,11 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			setWork({ ...work, heroImage: updateFiles });
 		}
 	}, [updateFiles]);
+
+	useEffect(() => {
+		if (filter === "sections") setOverall({ ...overall, images: imageUrls });
+		else setWork({ ...work, heroImage: imageUrls });
+	}, [imageUrls]);
 
 	useEffect(() => {
 		
@@ -176,7 +183,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									</div>
 								))}
 							</div>
-							{hasImage && <UploadImage type={overall.type} isUpdate={true}/>}
+							{/* {hasImage && <UploadImage type={overall.type} isUpdate={true}/>} */}
 						</div> 
 						: <div className="grid grid-cols-1">
 							<div className="mt-3">
@@ -209,7 +216,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									</>
 								}
 							</div>
-							{hasImage && <UploadImage isUpdate={true}/>}
+							{hasImage && <ImageInput prop={`${param}/${work.title}/heroImage`} category={param} />}
+							{/* {hasImage && <UploadImage isUpdate={true}/>} */}
 						</div>	
 					}
 				</div>

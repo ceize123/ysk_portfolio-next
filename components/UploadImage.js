@@ -17,18 +17,27 @@ function UploadImage({ type = "", isUpdate = false }) {
 		files.map((file) => {
 			const reader = new FileReader();
 			reader.onload = (e) => {
-				setFiles(
-					files.map((file) =>
-						Object.assign(file, {
-							preview: URL.createObjectURL(file),
-							base64Image: e.target.result,
-						})
-					)
+				(isUpdate
+					? setUpdateFiles(
+						files.map((file) =>
+							Object.assign(file, {
+								preview: URL.createObjectURL(file),
+								base64Image: e.target.result,
+							})
+						))
+					: setFiles(
+						files.map((file) =>
+							Object.assign(file, {
+								preview: URL.createObjectURL(file),
+								base64Image: e.target.result,
+							})
+						))
 				);
 			};
 			reader.readAsDataURL(file);
 		});
 	};
+
 	useEffect(() => {
 		console.log(files);
 	}, [files]);
@@ -50,7 +59,10 @@ function UploadImage({ type = "", isUpdate = false }) {
 	// 	},
 	// 	multiple: firstLetter("lower", type) === "multiImages" || firstLetter("lower", type) === "carousel" ? true : false
 	// });
-	const { getRootProps, getInputProps } = useDropzone({onDrop});
+	const { getRootProps, getInputProps } = useDropzone({
+		onDrop,
+		multiple: firstLetter("lower", type) === "multiImages" || firstLetter("lower", type) === "carousel" ? true : false
+	});
 
   
 	const thumbs = !isUpdate

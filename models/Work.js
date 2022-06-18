@@ -9,7 +9,7 @@ const OverviewSchema = new mongoose.Schema({
 }, { _id : false });
 
 const WorkSchema = new mongoose.Schema({
-	title: {type: String, required: true},
+	title: {type: String, required: true, index: { unique: true, dropDups: true }},
 	description: {type: String, required: true},
 	navColor: {type: String, required: true},
 	heroImage: [Object],
