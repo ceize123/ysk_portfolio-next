@@ -111,7 +111,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 	const handleSave = async (e) => {
 		e.preventDefault();
-		const data = (filter === "sections" ? overall: work);
+		const data = (filter === "sections" ? overall : work);
+		console.log(data);
 		const response = await fetch(`/api/works/category/${param}/${workId}`, {
 			method: "PUT",
 			body: JSON.stringify({ number: sectionNo, data }),

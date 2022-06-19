@@ -83,15 +83,17 @@ function ImageInput({ prop, type = "", category = "" }) {
 		setImageUrls([]);
 		listAll(imagesListRef)
 			.then((response) => {
+				console.log(response);
 				response.items.forEach((item) => {
 					getDownloadURL(item).then((url) => {
 						setImageUrls((prev) => [...prev, url]);
 					});
 				});
 				return response.items.length;
-			}).then((number) => {
-				setImageUrls(imageUrls.splice(number)); // remove duplicated data
 			});
+		// .then((number) => {
+		// 	setImageUrls(imageUrls.splice(number)); // remove duplicated data
+		// });
 		
 		
 	}, [category, prop]);
