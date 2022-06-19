@@ -35,27 +35,44 @@ export default async function handler(req, res) {
 		try {
 			const { number, data } = req.body;
 
-			// await Work.findByIdAndUpdate(data._id, data,
+			await Work.findByIdAndUpdate(
+				data._id, data
+			);
+
+			// https://stackoverflow.com/questions/32811510/mongoose-findoneandupdate-doesnt-return-updated-document
+			// https://stackoverflow.com/questions/56313376/how-to-return-only-the-updated-subdocument-inside-of-array-after-an-update
+			const cate = await Category.findOneAndUpdate(
+				{ "category": category, "works_id": data._id },
+				{$set: {works: data} },
+				{new: true}
+			);
+			console.log(cate);
+
+			// await Category.findOneAndUpdate(
+			// 	{ "category": category, "works._id": data._id },
+			// 	{ "works.$": data },
 			// 	function (err, work) {
 			// 		if (err) {
 			// 			res.status(500).json(err);
 			// 		} else {
 			// 			res.status(201).json(work);
 			// 		}
-			// 	});
-			console.log(data._id);
+			// 	}
+			// ).exec();
 
-			// const cate = await Work.findOneAndUpdate(
-			// 	{ "category": category, "works._id": data._id },
-			// 	{ "works.$" : data }
-			// );
-			const cate = await Category.findOneAndUpdate(
-				{ "_id": data._id },
-				{ $set: {
-					'works.$.title': "123", 
-					'works.$.description': "333",
-				} }, { new: true }
-			).exec();
+			// await Category.findOneAndUpdate(
+			// 	{ "works._id": data._id },
+			// 	{ $set: {
+			// 		'works.$.title': "123", 
+			// 		'works.$.description': "333",
+			// 	}
+			// 	}, function (err, work) {
+			// 		if (err) {
+			// 			res.status(500).json(err);
+			// 		} else {
+			// 			res.status(201).json(work);
+			// 		}
+			// 	}).exec();
 			
 			res.status(201).json(cate);
 		} catch (err) {
