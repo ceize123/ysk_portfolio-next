@@ -69,8 +69,8 @@ function WorkDetail({ category, work }) {
 				}
 			</section>
 
-			{/* <div className="mx-auto container">
-				{project.sections.map((section, idx) => (
+			<div className="mx-auto container">
+				{/* {project.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
 						<div className="flex justify-between items-center mt-12 mb-7">
 							<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
@@ -87,7 +87,7 @@ function WorkDetail({ category, work }) {
 							/>
 						}
 					</section>
-				))}
+				))} */}
 
 				<section className="mx-10 mt-12">
 					<div className="mt-5 addNewSection">
@@ -95,7 +95,7 @@ function WorkDetail({ category, work }) {
 						<PostFormSection param={category} workId={project.id} filter="details" />
 					</div>
 				</section>
-			</div> */}
+			</div>
 		</div>
 	);
 }

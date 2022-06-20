@@ -202,7 +202,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 		e.preventDefault();
 
 		if (filter === "details") {
-			const response = await fetch(`/api/works/category/${param}/${workId}`, {
+			const response = await fetch(`/api/works/category/${category}/${workId}`, {
 				method: "POST",
 				body: JSON.stringify({ id: workId, type: type, overall }),
 				headers: {
