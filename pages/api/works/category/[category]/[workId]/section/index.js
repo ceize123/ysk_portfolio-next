@@ -24,12 +24,17 @@ export default async function handler(req, res) {
 			const newSection = await Section.create({ type: type, ...overall });
 			await Work.findByIdAndUpdate(
 				workId, { $addToSet: { sections: newSection } },
+			).exec();
+			const work = await Work.findById(workId);
+			// await Category.updateOne(
+			// 	{ works: { $elemMatch: { _id: workId } } },
+			// 	{ $addToSet: { "works.$.sections": newSection } },
+			// );
+
+			const cate = await Category.findOneAndUpdate(
+				{ "category": category, "works_id": workId },
+				{$set: {works: work} },
 			);
-			await Category.updateOne(
-				{ works: { $elemMatch: { _id: workId } } },
-				{ $addToSet: { "works.$.sections": newSection } },
-			);
-			
 
 			// const cate = await Category.findOneAndUpdate(
 			// 	{ "category": category, "works_id": workId },
@@ -38,6 +43,55 @@ export default async function handler(req, res) {
 			// ).exec();
 			
 			res.status(201).json({message: "Section created!"});
+		} catch (err) {
+			res.status(500).json(err);
+		}
+	} 
+
+	if (req.method === "PUT") {
+
+		try {
+			const { data } = req.body;
+
+			await Section.findByIdAndUpdate(
+				data._id, data,
+			);
+			const work = await Work.findOneAndUpdate(
+				{ "_id": workId, "sections_id": data._id },
+			);
+			const cate = await Category.findOneAndUpdate(
+				{ "category": category, "works_id": workId },
+			);
+			
+			const foundIndex = await work.sections.findIndex(item => item._id == data._id);
+			const foundWorkIndex = await cate.works.findIndex(item => item._id == workId);
+			
+			work.sections[foundIndex] = data;
+			work.save();
+			cate.works[foundWorkIndex] = work;
+			cate.save();
+
+			// await Work.findOneAndUpdate(
+			// 	{ "_id": workId, "sections_id": data._id },
+			// 	{$set: {sections: data} },
+			// 	{new: true},
+			// );
+			// await Category.findOneAndUpdate(
+			// 	{ "category": category, "_id": workId, "sections_id": data._id },
+			// 	{$set: {"works.sections": data} },
+			// 	{new: true},
+			// );
+			
+			// const newSection = await Section.create({ type: type, ...overall });
+			// await Work.findByIdAndUpdate(
+			// 	workId, { $addToSet: { sections: newSection } },
+			// );
+			// await Category.updateOne(
+			// 	{ works: { $elemMatch: { _id: workId } } },
+			// 	{ $addToSet: { "works.$.sections": newSection } },
+			// );
+			
+			res.status(201).json({message: "Section modified!"});
 		} catch (err) {
 			res.status(500).json(err);
 		}

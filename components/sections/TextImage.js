@@ -1,14 +1,17 @@
-import Image from "next/image";
+// import Image from "next/image";
+import ImageRender from "../ImageRender";
 
 function TextImage({prop}) {
 	const data = prop;
 	const imageUrl = data.images[0];
 	return (
 		// style={{ maxWidth: `${imageUrl.width}px` }} make div's max width as image width
-		<section className="relative mx-auto text-image" style={{ maxWidth: `${imageUrl.width}px` }} >
+		<section className="relative mx-auto text-image" >
 			<h1 className="text-left">{data.title}</h1>
 			<h2 className="text-left">{data.paragraph}</h2>
-			<Image src={"/image/textImage.png"} alt="image" width={imageUrl.width} height={imageUrl.height}/>
+			<div className="flex justify-center">
+				<ImageRender prop={imageUrl} />
+			</div>
 		</section>
 	);
 }

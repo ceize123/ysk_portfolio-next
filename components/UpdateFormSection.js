@@ -114,18 +114,36 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 	const handleSave = async (e) => {
 		e.preventDefault();
-		const data = (filter === "sections" ? overall : work);
-		console.log(data);
-		const response = await fetch(`/api/works/category/${param}/${workId}`, {
-			method: "PUT",
-			body: JSON.stringify({ number: sectionNo, data }),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		});
+		let data;
+		if (filter === "sections") {
+			data = overall;
+			const response = await fetch(`/api/works/category/${param}/${workId}/section`, {
+				method: "PUT",
+				body: JSON.stringify({ data }),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
+			
+			const result = await response.json();
+			console.log(result);
+			
+
+		} else {
+			data = work;
+			const response = await fetch(`/api/works/category/${param}/${workId}`, {
+				method: "PUT",
+				body: JSON.stringify({ data }),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
+
+			const result = await response.json();
+			console.log(result);
+		}
 		setUpdateNo();
-		const result = await response.json();
-		console.log(result);
+		
 	};
 
 	const handleDelete = async (e) => {
