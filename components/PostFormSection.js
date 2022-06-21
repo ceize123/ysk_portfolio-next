@@ -11,7 +11,7 @@ import { useShareFiles, useShareCategories, useShareImageUrls } from "./ShareSta
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
 
-function PostFormSection({ param = "", workId = "", filter }) {
+function PostFormSection({ param = "", workId = "", filter, title="" }) {
 
 	// Create work part
 	const {categories, category, setCategory} = useBetween(useShareCategories);
@@ -67,18 +67,18 @@ function PostFormSection({ param = "", workId = "", filter }) {
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
 	const { files, setFiles } = useBetween(useShareFiles);
-	const { imageUrls } = useBetween(useShareImageUrls);
+	const { imageUrls, setImageUrls } = useBetween(useShareImageUrls);
 	const [array, setArray] = useState([]);
 
 	// handle array of object from fields
 
 	function pushArray(ary) {
-		if (type === "List") {
+		if (type === "list") {
 			setOverall({
 				...overall,
 				lists: ary
 			});
-		} else if (type === "Carousel") {
+		} else if (type === "carousel") {
 			setOverall({
 				...overall,
 				pages: ary
@@ -103,9 +103,9 @@ function PostFormSection({ param = "", workId = "", filter }) {
 	};
 
 	const handleArrayAdd = () => {
-		if (type === "List") {
+		if (type === "list") {
 			setArray([...array, { listTitle: "", listParagraph: "" }]);
-		} else if (type === "Carousel") {
+		} else if (type === "carousel") {
 			setArray([...array, { issue: "", description: "", solution: "", imagesNeed: 2 }]);
 		}
 	};
@@ -128,12 +128,12 @@ function PostFormSection({ param = "", workId = "", filter }) {
 		});
 
 		switch (type) {
-		case "ImageOnly":
+		case "imageOnly":
 			setOverall({
 				images: [],
 			});
 			break;
-		case "Carousel":
+		case "carousel":
 			setOverall({
 				title: "",
 				paragraph: "",
@@ -145,13 +145,13 @@ function PostFormSection({ param = "", workId = "", filter }) {
 				imagesNeed: 2
 			}]);
 			break;
-		case "TextOnly":
+		case "textOnly":
 			setOverall({
 				title: "",
 				paragraph: ""
 			});
 			break;
-		case "List":
+		case "list":
 			setOverall({
 				title: "",
 				paragraph: "",
@@ -202,9 +202,10 @@ function PostFormSection({ param = "", workId = "", filter }) {
 		e.preventDefault();
 
 		if (filter === "details") {
-			const response = await fetch(`/api/works/category/${category}/${workId}`, {
+			console.log(overall);
+			const response = await fetch(`/api/works/category/${category}/${workId}/section`, {
 				method: "POST",
-				body: JSON.stringify({ id: workId, type: type, overall }),
+				body: JSON.stringify({ type: type, overall }),
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -213,6 +214,9 @@ function PostFormSection({ param = "", workId = "", filter }) {
 			const result = await response.json();
 			console.log("From Add section");
 			console.log(result);
+			setOverall();
+			setArray();
+			setImageUrls([]);
 
 		} else {
 			console.log(work);
@@ -255,12 +259,12 @@ function PostFormSection({ param = "", workId = "", filter }) {
 							</div>
 											
 							<div className="mt-3">
-								<h3 className="col-text">{type === "List" ? "Lists" : "Pages"}</h3>
+								<h3 className="col-text">{type === "list" ? "Lists" : "Pages"}</h3>
 												
-								{(type === "List" || type === "Carousel") && array.map((singleList, index) => (
+								{(type === "list" || type === "carousel") && array.map((singleList, index) => (
 									<div key={index} className="flex mb-5">
 										<div className="w-3/4 shrink-0 sub-section">
-											{type === "List"
+											{type === "list"
 												? listCol.map((item, idx) => (
 													<Input key={idx}
 														prop={item}
@@ -276,7 +280,7 @@ function PostFormSection({ param = "", workId = "", filter }) {
 														onChange={(e) => handleArrayChange(e, index)}
 													/>))}
 											{array.length - 1 === index && (
-												<Button onClick={handleArrayAdd} text={`Add a ${type === "List" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
+												<Button onClick={handleArrayAdd} text={`Add a ${type === "list" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
 											)}
 										</div>
 
@@ -288,7 +292,8 @@ function PostFormSection({ param = "", workId = "", filter }) {
 									</div>
 								))}
 							</div>
-							<UploadImage type={type} />
+							{/* <UploadImage type={type} /> */}
+							<ImageInput prop={`${category}/${title}/${type}`} type={type} />
 						</div>
 						: <div className="grid grid-cols-1">
 							{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}

@@ -43,7 +43,7 @@ function WorkDetail({ category, work }) {
 	return (
 		<div className="mt-3">
 			<h1 className="text-3xl mb-3 text-center">
-				Add New Section to {project.title} | {project.description}
+				Add New Section to {project._id} | {project.title} | {project.description}
 			</h1>
 			<section className="mx-auto container">
 				<div className="flex justify-between items-center mt-12 mb-7">
@@ -54,7 +54,14 @@ function WorkDetail({ category, work }) {
 			{(updateNo !== 1)
 				? <Hero data={project} />
 				: <section className="mx-auto container">
-					<UpdateFormSection prop={project} isOverview={false} param={category} workId={project.id} filter="hero" />
+					<UpdateFormSection
+						prop={project}
+						isOverview={false}
+						param={category}
+						workId={project._id}
+						filter="hero"
+						title={project.title}
+					/>
 				</section>
 			}
 
@@ -65,12 +72,19 @@ function WorkDetail({ category, work }) {
 				</div>
 				{(updateNo !== 2)
 					? <Overview prop={project} />
-					: <UpdateFormSection prop={project} isOverview={true} param={category} workId={project.id} filter="overview"  />
+					: <UpdateFormSection
+						prop={project}
+						isOverview={true}
+						param={category}
+						workId={project._id}
+						filter="overview"
+						title={project.title}
+					/>
 				}
 			</section>
 
 			<div className="mx-auto container">
-				{/* {project.sections.map((section, idx) => (
+				{project.sections.map((section, idx) => (
 					<section className="mt-5" key={idx}>
 						<div className="flex justify-between items-center mt-12 mb-7">
 							<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
@@ -81,18 +95,19 @@ function WorkDetail({ category, work }) {
 							: <UpdateFormSection
 								prop={section}
 								param={category}
-								workId={project.id}
+								workId={project._id}
 								filter="sections"
 								sectionNo={idx}
+								title={project.title}
 							/>
 						}
 					</section>
-				))} */}
+				))}
 
 				<section className="mx-10 mt-12">
 					<div className="mt-5 addNewSection">
 						<h2 className="text-center">Add Sections:</h2>
-						<PostFormSection param={category} workId={project.id} filter="details" />
+						<PostFormSection param={category} workId={project._id} filter="details" title={project.title} />
 					</div>
 				</section>
 			</div>

@@ -1,11 +1,11 @@
 export const types = [
-	"ImageOnly",
-	"TextImage",
-	"MultiImages",
-	"Carousel",
-	"TextOnly",
-	"Horizon",
-	"List"
+	"imageOnly",
+	"textImage",
+	"multiImages",
+	"carousel",
+	"textOnly",
+	"horizon",
+	"list"
 	// {
 	// 	id: 1,
 	// 	title: "Choose a type",

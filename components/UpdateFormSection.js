@@ -7,7 +7,7 @@ import ImageInput from "./ImageInput";
 import UploadImage from "./UploadImage";
 import { useShareUpdateFiles, useShareUpdateNo, useShareImageUrls } from "./ShareStates";
 
-function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "" }) {
+function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "", title="" }) {
 
 	const { setUpdateNo } = useBetween(useShareUpdateNo);
 	// 
@@ -24,7 +24,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 	const [array, setArray] = useState([]);
 	const [hasImage, setHasImage] = useState(false);
 	const { imageUrls } = useBetween(useShareImageUrls);
-	const keys = Object.keys(prop);
+	const [keys, setKeys] = useState(Object.keys(prop));
 	const subKeys = isOverview
 		? Object.keys(prop.overview)
 		: prop.type === "list" ? Object.keys(prop.lists[0])
@@ -86,6 +86,9 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 	useEffect(() => {
 		
 		if (filter === "sections") {
+			// https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+			setKeys(keys.filter(item => !["_id", "__v"].includes(item)));
+
 			if (overall.type === "list") {
 				setArray(overall.lists);
 			} else if (overall.type === "carousel") {
@@ -184,6 +187,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									</div>
 								))}
 							</div>
+							{hasImage && <ImageInput prop={`${param}/${title}/${overall.type}`} category={param} imageAry={prop.images} />}
 							{/* {hasImage && <UploadImage type={overall.type} isUpdate={true}/>} */}
 						</div> 
 						: <div className="grid grid-cols-1">

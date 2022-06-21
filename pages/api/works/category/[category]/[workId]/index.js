@@ -1,10 +1,11 @@
-import findCat from "../../../../../components/FindCat";
-import findId from "../../../../../components/FindId";
-import firstLetter from "../../../../../components/FirstLetter";
+import findCat from "../../../../../../components/FindCat";
+import findId from "../../../../../../components/FindId";
+import firstLetter from "../../../../../../components/FirstLetter";
 
-import dbConnect from "../../../../../util/connection";
-import Category from "../../../../../models/Category";
-import Work from "../../../../../models/Work";
+import dbConnect from "../../../../../../util/connection";
+import Category from "../../../../../../models/Category";
+import Work from "../../../../../../models/Work";
+import Section from "../../../../../../models/Section";
 
 export default async function handler(req, res) {
 	const { category, workId } = req.query;
@@ -31,6 +32,41 @@ export default async function handler(req, res) {
 		// res.status(200).json(work);
 	}
 
+	if (req.method === "POST") {
+
+		try {
+			const { id, type, overall } = req.body;
+			console.log(id);
+			const newSection = await Section.create({ type: type, overall });
+			// await Work.findByIdAndUpdate(
+			// 	id, { $addToSet: { sections: newSection } },
+			// );
+			// const cate = await Category.findOneAndUpdate(
+			// 	{ "category": category, "works_id": id },
+			// 	{ $addToSet: { sections: newSection } },
+			// 	{ new: true }
+			// ).exec();
+			
+			// res.status(201).json(cate);
+		} catch (err) {
+			res.status(500).json(err);
+		}
+
+		// const {id, type, overall} = req.body;
+		// const { category } = req.query;
+
+		// const cat = findCat(category);
+		// const work = findId(cat, id);
+		// const newSection = {
+		// 	type: firstLetter("lower", type),
+		// 	...overall
+		// };
+
+		// work.sections.push(newSection);
+		// res.status(201).json(work);
+
+	} 
+
 	if (req.method === "PUT") {
 		try {
 			const { number, data } = req.body;
@@ -47,53 +83,14 @@ export default async function handler(req, res) {
 				{new: true}
 			);
 			console.log(cate);
-
-			// await Category.findOneAndUpdate(
-			// 	{ "category": category, "works._id": data._id },
-			// 	{ "works.$": data },
-			// 	function (err, work) {
-			// 		if (err) {
-			// 			res.status(500).json(err);
-			// 		} else {
-			// 			res.status(201).json(work);
-			// 		}
-			// 	}
-			// ).exec();
-
-			// await Category.findOneAndUpdate(
-			// 	{ "works._id": data._id },
-			// 	{ $set: {
-			// 		'works.$.title': "123", 
-			// 		'works.$.description': "333",
-			// 	}
-			// 	}, function (err, work) {
-			// 		if (err) {
-			// 			res.status(500).json(err);
-			// 		} else {
-			// 			res.status(201).json(work);
-			// 		}
-			// 	}).exec();
 			
 			res.status(201).json(cate);
 		} catch (err) {
 			res.status(500).json(err);
 		}
 	}
-	// else if (req.method === "POST") {
-	// 	const {id, type, overall} = req.body;
-	// 	const { category } = req.query;
 
-	// 	const cat = findCat(category);
-	// 	const work = findId(cat, id);
-	// 	const newSection = {
-	// 		type: firstLetter("lower", type),
-	// 		...overall
-	// 	};
-
-	// 	work.sections.push(newSection);
-	// 	res.status(201).json(work);
-
-	// } else if (req.method === "PUT") {
+	// else if (req.method === "PUT") {
 
 	// 	const { number, data } = req.body;
 	// 	const cat = findCat(category);

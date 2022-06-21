@@ -13,7 +13,7 @@ function Dashboard() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [dashboardData, setDashboardData] = useState(null);
 	const [isUpdate, setIsUpdate] = useState(true);
-	const {categories, category, setCategory} = useBetween(useShareCategories);
+	const {categories, setCategories, category, setCategory} = useBetween(useShareCategories);
 	// const [category, setCategory] = useState();
 	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();
@@ -25,7 +25,8 @@ function Dashboard() {
 			const response = await fetch("/api/works");
 			const data = await response.json();
 			setDashboardData(data);
-			// setCategory(data[0].category);
+			setCategories(data.map(value => value.category));
+			setCategory(data[0].category);
 			setIsLoading(false);
 			setWork(data[0].works[0]);
 			setType(typeData[0]);

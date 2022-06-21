@@ -9,7 +9,7 @@ import { useBetween } from "use-between";
 
 // Firebase
 // https://www.youtube.com/watch?v=YOAeBSCkArA
-function ImageInput({ prop, type = "", category = "" }) {
+function ImageInput({ prop, type = "", category = "", imageAry }) {
 	const imgRef = useRef();
 	const imagesListRef = ref(storage, `${prop}/`);
 	const [imageUpload, setImageUpload] = useState(null);
@@ -17,32 +17,69 @@ function ImageInput({ prop, type = "", category = "" }) {
 
 	const uploadImage = () => {
 		if (imageUpload === null) return;
-		deleteFromFirebase();
-		const imageRef = ref(storage, `${prop}/${imageUpload.name + v4()}`);
-		uploadBytes(imageRef, imageUpload).then((snapshot) => {
-			getDownloadURL(snapshot.ref).then((url) => {
-				setImageUrls((prev) => [...prev, url]);
+		if (type === "") deleteFromFirebase();
+
+		if (type !== "carousel" && type !== "multiImages") {
+			const imageRef = ref(storage, `${prop}/${imageUpload.name + v4()}`);
+			uploadBytes(imageRef, imageUpload).then((snapshot) => {
+				getDownloadURL(snapshot.ref).then((url) => {
+					setImageUrls((prev) => [...prev, url]);
+				});
 			});
-		});
+		} else {
+			const keys = Object.keys(imageUpload);
+			keys.map(key => {
+				const imageRef = ref(storage, `${prop}/${imageUpload[key].name + v4()}`);
+				uploadBytes(imageRef, imageUpload[key]).then((snapshot) => {
+					getDownloadURL(snapshot.ref).then((url) => {
+						setImageUrls((prev) => [...prev, url]);
+					});
+				});
+			});
+		}
 
 		imgRef.current.value = "";
 	};
 
 	const deleteFromFirebase = () => {
+		// const arr = imageAry.filter(item => item !== url);
+
 		listAll(imagesListRef).then((response) => {
 			response.items.forEach((item) => {
-				const fileRef = ref(storage, `${prop}/${item.name}`);
-				// Delete the file
-				deleteObject(fileRef).then(() => {
-					// File deleted successfully
-					console.log("Deleted!");
-					setImageUrls([]);
-				}).catch((error) => {
-					// Uh-oh, an error occurred!
-					console.log("Something went wrong!");
+				getDownloadURL(item).then((url) => {
+					console.log(url);
+					const arr = imageAry.filter(ele => ele === url);
+					console.log(arr);
+					//  Works but undone...
 				});
+
+				// const fileRef = ref(storage, `${prop}/${item.name}`);
+				// // Delete the file
+				// deleteObject(fileRef).then(() => {
+				// 	// File deleted successfully
+				// 	console.log("Deleted!");
+				// 	setImageUrls([]);
+				// }).catch((error) => {
+				// 	// Uh-oh, an error occurred!
+				// 	console.log("Something went wrong!");
+				// });
 			});
 		});
+
+		// listAll(imagesListRef).then((response) => {
+		// 	response.items.forEach((item) => {
+		// 		const fileRef = ref(storage, `${prop}/${item.name}`);
+		// 		// Delete the file
+		// 		deleteObject(fileRef).then(() => {
+		// 			// File deleted successfully
+		// 			console.log("Deleted!");
+		// 			setImageUrls([]);
+		// 		}).catch((error) => {
+		// 			// Uh-oh, an error occurred!
+		// 			console.log("Something went wrong!");
+		// 		});
+		// 	});
+		// });
 	};
 
 	// const handleSingleDelete = (url) => {
@@ -81,22 +118,22 @@ function ImageInput({ prop, type = "", category = "" }) {
 
 	useEffect(() => {
 		setImageUrls([]);
-		listAll(imagesListRef)
-			.then((response) => {
-				console.log(response);
-				response.items.forEach((item) => {
-					getDownloadURL(item).then((url) => {
-						setImageUrls((prev) => [...prev, url]);
+		if (type === "") {
+			listAll(imagesListRef)
+				.then((response) => {
+					console.log(response);
+					response.items.forEach((item) => {
+						getDownloadURL(item).then((url) => {
+							setImageUrls((prev) => [...prev, url]);
+						});
 					});
+					return response.items.length;
 				});
-				return response.items.length;
-			});
+		}
 		// .then((number) => {
 		// 	setImageUrls(imageUrls.splice(number)); // remove duplicated data
 		// });
-		
-		
-	}, [category, prop]);
+	}, [category, prop, type]);
 
 	useEffect(() => {
 		setImageUrls([]);
