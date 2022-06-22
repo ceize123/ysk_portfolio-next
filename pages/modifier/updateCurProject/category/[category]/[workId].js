@@ -25,7 +25,7 @@ function WorkDetail({ category, work }) {
 		setUpdateNo(idx);
 	};
 	const handleCancel = () => {
-		setUpdateNo();
+		setUpdateNo(null);
 	};
 
 	useEffect(() => {
@@ -104,12 +104,14 @@ function WorkDetail({ category, work }) {
 					</section>
 				))}
 
-				<section className="mx-10 mt-12">
-					<div className="mt-5 addNewSection">
-						<h2 className="text-center">Add Sections:</h2>
-						<PostFormSection param={category} workId={project._id} filter="details" title={project.title} />
-					</div>
-				</section>
+				{!updateNo &&
+					<section className="mx-10 mt-12">
+						<div className="mt-5 addNewSection">
+							<h2 className="text-center">Add Sections:</h2>
+							<PostFormSection param={category} workId={project._id} filter="details" title={project.title} />
+						</div>
+					</section>
+				}
 			</div>
 		</div>
 	);

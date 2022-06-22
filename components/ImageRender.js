@@ -3,27 +3,31 @@ import { useState  } from "react";
 
 function ImageRender({ prop }) {
 	const imageUrl = prop;
-	const [dimension, setDimension] = useState({ width: 0, height: 0 });
+	const [height, setHeight] = useState(0);
 	
 	// https://stackoverflow.com/questions/69318420/next-js-image-component-props-onloadingcomplete-not-working
 	const handleImageLoad = (e) => {
-		setDimension({ width: e.naturalWidth, height: e.naturalHeight });
+		setHeight(e.naturalHeight / e.naturalWidth * 100);
 	};
 	return (
-		<div className="relative"
-			style={{
-				width: dimension.width,
-				height: dimension.height,
-			}}>
-			<Image src={imageUrl} alt="image"
-				onLoadingComplete={(e) => {handleImageLoad(e);}}
-				layout="fill"
-				objectFit="contain"
-			/>
-			{/* <Image src={img2} alt="image" width="200" height="200"/> */}
-			{/* Can't do this */}
-			{/* <Image src={imageUrl} alt="image" width="200" height="200"/> */}
+		<div className="flex justify-center">
+			<div style={{width: "100%", position: "relative"}}
+				// style={{
+				// 	width: dimension.width,
+				// 	height: dimension.height,
+				// }}
+			>
+				<Image src={imageUrl} alt="image"
+					onLoadingComplete={(e) => { handleImageLoad(e); }}
+					width={100} height={height} layout="responsive" objectFit="contain"
+					// layout="fill"
+					// objectFit="contain"
+				/>
+				{/* <Image src={img2} alt="image" width="200" height="200"/> */}
+				{/* Can't do this */}
+				{/* <Image src={imageUrl} alt="image" width="200" height="200"/> */}
+			</div>
 		</div>
-	)
+	);
 }
 export default ImageRender;

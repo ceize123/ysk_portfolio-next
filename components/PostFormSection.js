@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useBetween } from "use-between";
 import SelectMenu from "./SelectMenu";
 import firstLetter from "./FirstLetter";
@@ -13,6 +14,7 @@ import { types } from "../data/type";
 
 function PostFormSection({ param = "", workId = "", filter, title="" }) {
 
+	const router = useRouter();
 	// Create work part
 	const {categories, category, setCategory} = useBetween(useShareCategories);
 	const [work, setWork] = useState({
@@ -217,6 +219,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			setOverall();
 			setArray();
 			setImageUrls([]);
+			window.location.reload();
 
 		} else {
 			console.log(work);
@@ -234,6 +237,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			const result = await response.json();
 			console.log("From Create work");
 			console.log(result);
+			router.push("/dashboard");
 		}
 	};
 

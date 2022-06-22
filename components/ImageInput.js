@@ -135,10 +135,14 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 		if (type === "") {
 			listAll(imagesListRef)
 				.then((response) => {
-					console.log(response);
 					response.items.forEach((item) => {
 						getDownloadURL(item).then((url) => {
-							setImageUrls((prev) => [...prev, url]);
+							if (imageAry !== "") {
+								const check = imageAry.includes(url);
+								if (check) setImageUrls((prev) => [...prev, url]);
+							} else {
+								setImageUrls((prev) => [...prev, url]);
+							}
 						});
 					});
 					return response.items.length;

@@ -9,9 +9,7 @@ function TextImage({prop}) {
 		<section className="relative mx-auto text-image" >
 			<h1 className="text-left">{data.title}</h1>
 			<h2 className="text-left">{data.paragraph}</h2>
-			<div className="flex justify-center">
-				<ImageRender prop={imageUrl} />
-			</div>
+			<ImageRender prop={imageUrl} />
 		</section>
 	);
 }

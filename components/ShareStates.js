@@ -18,7 +18,7 @@ export const useShareUpdateFiles = () => {
 };
 
 export const useShareUpdateNo = () => {
-	const [updateNo, setUpdateNo] = useState();
+	const [updateNo, setUpdateNo] = useState(null);
 	return {
 		updateNo,
 		setUpdateNo,

@@ -142,7 +142,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			const result = await response.json();
 			console.log(result);
 		}
-		setUpdateNo();
+		setUpdateNo(null);
+		window.location.reload();
 		
 	};
 
@@ -150,12 +151,12 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		e.preventDefault();
 		const response = await fetch(`/api/works/category/${param}/${workId}`, {
 			method: "DELETE",
-			body: JSON.stringify({ number: sectionNo }),
+			body: JSON.stringify({ number: sectionNo, data: overall }),
 			headers: {
 				"Content-Type": "application/json"
 			}
 		});
-		setUpdateNo();
+		setUpdateNo(null);
 		const result = await response.json();
 		console.log(result);
 	};

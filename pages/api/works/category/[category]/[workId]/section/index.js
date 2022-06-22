@@ -56,10 +56,16 @@ export default async function handler(req, res) {
 			await Section.findByIdAndUpdate(
 				data._id, data,
 			);
-			const work = await Work.findOneAndUpdate(
+			// const work = await Work.findOneAndUpdate(
+			// 	{ "_id": workId, "sections_id": data._id },
+			// );
+			// const cate = await Category.findOneAndUpdate(
+			// 	{ "category": category, "works_id": workId },
+			// );
+			const work = await Work.findOne(
 				{ "_id": workId, "sections_id": data._id },
 			);
-			const cate = await Category.findOneAndUpdate(
+			const cate = await Category.findOne(
 				{ "category": category, "works_id": workId },
 			);
 			
