@@ -36,6 +36,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 					});
 				});
 			});
+			
 		}
 
 		imgRef.current.value = "";

@@ -5,6 +5,8 @@ import Button from "./Button";
 import Input from "./Input";
 import ImageInput from "./ImageInput";
 import UploadImage from "./UploadImage";
+import { validate } from "./Validate";
+import { failAlert, successAlert } from "./Alerts";
 import { useShareUpdateFiles, useShareUpdateNo, useShareImageUrls } from "./ShareStates";
 
 function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "", title="" }) {
@@ -115,8 +117,13 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 	const handleSave = async (e) => {
 		e.preventDefault();
 		let data;
+		
 		if (filter === "sections") {
 			data = overall;
+			if (!validate(data)) {
+				failAlert("Shin! Please Please Please fill in all the fields!");
+				return null;
+			}
 			const response = await fetch(`/api/works/category/${param}/${workId}/section`, {
 				method: "PUT",
 				body: JSON.stringify({ data }),
@@ -131,6 +138,10 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 		} else {
 			data = work;
+			if (!validate(data)) {
+				failAlert("Shin! Please Please Please fill in all the fields!");
+				return null;
+			}
 			const response = await fetch(`/api/works/category/${param}/${workId}`, {
 				method: "PUT",
 				body: JSON.stringify({ data }),
@@ -143,7 +154,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			console.log(result);
 		}
 		setUpdateNo(null);
-		window.location.reload();
+		successAlert(filter, refresh);
 		
 	};
 
@@ -159,6 +170,10 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		setUpdateNo(null);
 		const result = await response.json();
 		console.log(result);
+	};
+
+	const refresh = async () => {
+		window.location.reload();
 	};
 
 	return (

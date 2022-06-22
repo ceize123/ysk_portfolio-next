@@ -108,7 +108,7 @@ function WorkDetail({ category, work }) {
 					<section className="mx-10 mt-12">
 						<div className="mt-5 addNewSection">
 							<h2 className="text-center">Add Sections:</h2>
-							<PostFormSection param={category} workId={project._id} filter="details" title={project.title} />
+							<PostFormSection param={category} workId={project._id} filter="sections" title={project.title} />
 						</div>
 					</section>
 				}

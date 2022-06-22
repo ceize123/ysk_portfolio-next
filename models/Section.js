@@ -8,8 +8,8 @@ const ListSchema = new mongoose.Schema({
 const PageSchema = new mongoose.Schema({
 	issue: {type: String, required: true},
 	description: {type: String, required: true},
-	solution: {type: String, required: true},
-	images: [Object],
+	solution: { type: String, required: true },
+	imagesNeed: { type: Number, required: true }
 }, { _id : false });
 
 const SectionSchema = new mongoose.Schema({

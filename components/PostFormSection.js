@@ -3,9 +3,11 @@ import { useRouter } from "next/router";
 import { useBetween } from "use-between";
 import SelectMenu from "./SelectMenu";
 import firstLetter from "./FirstLetter";
+import { validate } from "./Validate";
 import Button from "./Button";
 import Input from "./Input";
 import UploadImage from "./UploadImage";
+import { failAlert, successAlert } from "./Alerts";
 import ImageInput from "./ImageInput";
 import DetailCols from "./DetailCols";
 import { useShareFiles, useShareCategories, useShareImageUrls } from "./ShareStates";
@@ -45,25 +47,26 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 		});
 	}, [category]);
 	
-	const validateWork = (work) => {
-		let flag = true;
-		const keys = Object.keys(work);
-		const subKeys = Object.keys(overview);
-		keys.map(key => {
-			if (work[key] === "" || work[key].length === 0) {
-				console.log(key, "is invalid input.");
-				flag = false;
-			}
-		});
+	// const validateWork = (work) => {
+	// 	let flag = true;
+	// 	const keys = Object.keys(work);
+	// 	const subKeys = Object.keys(overview);
+	// 	keys.map(key => {
+	// 		if (work[key] === "" || work[key].length === 0) {
+	// 			flag = false;
+	// 		}
+	// 	});
 
-		subKeys.map(key => {
-			if (work.overview[key] === "") {
-				console.log(key, "is invalid input.");
-				flag = false;
-			}
-		});
-		return flag;
-	};
+	// 	subKeys.map(key => {
+	// 		if (work.overview[key] === "") {
+	// 			flag = false;
+	// 		}
+	// 	});
+	// 	if (!flag) {
+	// 		failAlert("Shin! Please Please Please fill in all the fields!");
+	// 	}
+	// 	return flag;
+	// };
 
 	// // Add section part
 	const [type, setType] = useState(types[0]);
@@ -113,12 +116,12 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 	};
 
 	useEffect(() => {
-		if (filter === "details") setOverall({ ...overall, images: files });
+		if (filter === "sections") setOverall({ ...overall, images: files });
 		else setWork({ ...work, heroImage: files });
 	}, [files]);
 
 	useEffect(() => {
-		if (filter === "details") setOverall({ ...overall, images: imageUrls });
+		if (filter === "sections") setOverall({ ...overall, images: imageUrls });
 		else setWork({ ...work, heroImage: imageUrls });
 	}, [imageUrls]);
 
@@ -203,8 +206,12 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (filter === "details") {
+		if (filter === "sections") {
 			console.log(overall);
+			if (!validate(overall)) {
+				failAlert("Shin! Please Please Please fill in all the fields!");
+				return null;
+			}
 			const response = await fetch(`/api/works/category/${category}/${workId}/section`, {
 				method: "POST",
 				body: JSON.stringify({ type: type, overall }),
@@ -216,14 +223,16 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			const result = await response.json();
 			console.log("From Add section");
 			console.log(result);
-			setOverall();
-			setArray();
+			setOverall({});
+			setArray([]);
 			setImageUrls([]);
-			window.location.reload();
+			successAlert(filter, refresh);
+			// window.location.reload();
 
 		} else {
 			console.log(work);
-			if (!validateWork(work)) {
+			if (!validate(work)) {
+				failAlert("Shin! Please Please Please fill in all the fields!");
 				return null;
 			}
 
@@ -237,15 +246,29 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			const result = await response.json();
 			console.log("From Create work");
 			console.log(result);
-			router.push("/dashboard");
+			if (result._id) {
+				successAlert(filter, redirect);
+					
+			} else {
+				failAlert("This Project name is already exist");
+			}
+			// router.push("/dashboard");
 		}
 	};
+
+	const redirect = async () => {
+		router.push("/dashboard");
+	};
+	const refresh = async () => {
+		window.location.reload();
+	};
+	
 
 	return (
 		<form action="#" method="POST">
 			<div className="shadow overflow-hidden rounded-md">
 				<div className="px-4 py-5 bg-gray-50 sm:p-6">
-					{filter === "details"
+					{filter === "sections"
 						? <div className={`grid grid-cols-1 ${firstLetter("lower", type)}`}>
 							<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
 
