@@ -27,4 +27,27 @@ export default async function handle(req, res) {
 			res.status(500).json(err);
 		}
 	}
+
+	if (req.method === "PUT") {
+		try {
+			const { projects } = req.body;
+
+			await Category.remove({});
+			await Category.insertMany(projects);
+			// categories.forEach((item, idx) => {
+			// 	item = projects[idx];
+			// 	console.log(projects[idx]);
+			// 	console.log("item", item);
+
+			// 	categories.replaceOne({ "category": item.category }, projects[idx]);
+			// });
+
+			// categories.save();
+
+			
+			res.status(201).json({message: "Order is updated!"});
+		} catch (err) {
+			res.status(500).json(err);
+		}
+	}
 }
