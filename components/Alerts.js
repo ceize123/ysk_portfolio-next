@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 
-
 export const failAlert = (text) => {
 	Swal.fire({
 		icon: "error",
@@ -9,12 +8,12 @@ export const failAlert = (text) => {
 	});
 };
 
-export const successAlert = (section, func_param) => {
+export const successAlert = (section, text, func_param) => {
 	Swal.fire({
 		icon: "success",
-		title: "Project is created!",
+		title: text,
 		showCancelButton: true,
-		confirmButtonColor: "#5eead4",
+		confirmButtonColor: "#4f46e5",
 		cancelButtonColor: "#f43f5e",
 		confirmButtonText: (section === "sections") ? "Refresh" : "Redirect",
 		cancelButtonText:  (section === "sections") ? "Don't refresh" : "Don't redirect"

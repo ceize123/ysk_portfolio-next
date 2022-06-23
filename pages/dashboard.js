@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
 import {useShareCategories} from "../components/ShareStates";
 
-const typeData = [
-	"Add New Section",
+const choices = [
 	"Update Section",
+	"Update Order",
 ];
 
 function Dashboard() {
@@ -17,7 +17,7 @@ function Dashboard() {
 	// const [category, setCategory] = useState();
 	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();
-	const [type, setType] = useState();
+	const [choice, setChoice] = useState();
 	const router = useRouter();
 
 	useEffect(() => {
@@ -29,7 +29,7 @@ function Dashboard() {
 			setCategory(data[0].category);
 			setIsLoading(false);
 			setWork(data[0].works[0]);
-			setType(typeData[0]);
+			setChoice(choices[0]);
 		}
 		fetchData();
 	}, []);
@@ -48,12 +48,18 @@ function Dashboard() {
 
 	function handleClick() {
 		setIsUpdate(!isUpdate);
+		setIdx(0);
+		setCategory(dashboardData[0].category);
 	}
 
 	function handleSubmit() {
 		if (isUpdate) {
-			router.push(`/modifier/updateCurProject/category/${category}/${work._id}`);
-			// router.push(`/modifier/updateCurProject/${work.id}`);
+			if (choice === choices[0]) {
+				router.push(`/modifier/updateCurProject/category/${category}/${work._id}`);
+				// router.push(`/modifier/updateCurProject/${work.id}`);
+			} else {
+				router.push("/modifier/order");
+			}
 		} else {
 			router.push("/modifier/createNewProject");
 		}
@@ -77,8 +83,13 @@ function Dashboard() {
 					<>
 						{/* Pass data from child to parent */}
 						{/* https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component */}
-						<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory}/>
-						<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork} />
+						<SelectMenu prop={choices} option={choice} name="Choice" onChange={setChoice} />
+						{choice === choices[0] &&
+						<>
+							<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory}/>
+							<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork} />
+						</>
+						}
 					</>
 				}
 				{(isUpdate && dashboardData[idx].works.length === 0)

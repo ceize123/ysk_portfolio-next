@@ -131,7 +131,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			paragraph: "",
 			images: [],
 		});
-
+		
 		switch (type) {
 		case "imageOnly":
 			setOverall({
@@ -208,7 +208,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 
 		if (filter === "sections") {
 			console.log(overall);
-			if (!validate(overall)) {
+			if (!validate(overall, type)) {
 				failAlert("Shin! Please Please Please fill in all the fields!");
 				return null;
 			}
@@ -226,7 +226,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			setOverall({});
 			setArray([]);
 			setImageUrls([]);
-			successAlert(filter, refresh);
+			successAlert(filter, "Section is created!", refresh);
 			// window.location.reload();
 
 		} else {
@@ -247,7 +247,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			console.log("From Create work");
 			console.log(result);
 			if (result._id) {
-				successAlert(filter, redirect);
+				successAlert(filter, "Project is created!", redirect);
 					
 			} else {
 				failAlert("This Project name is already exist");

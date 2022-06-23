@@ -4,6 +4,7 @@ import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from "firebas
 import { v4 } from "uuid";
 import Image from "next/image";
 import Button from "./Button";
+import { deleteFromFirebase } from "./ImageDelete";
 import { useShareImageUrls } from "./ShareStates";
 import { useBetween } from "use-between";
 
@@ -17,7 +18,10 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 
 	const uploadImage = () => {
 		if (imageUpload === null) return;
-		if (type === "") deleteFromFirebase();
+		if (type === "") {
+			deleteFromFirebase(prop, imageAry);
+			setImageUrls([]);
+		}
 
 		if (type !== "carousel" && type !== "multiImages") {
 			const imageRef = ref(storage, `${prop}/${imageUpload.name + v4()}`);
@@ -42,60 +46,45 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 		imgRef.current.value = "";
 	};
 
-	const deleteFromFirebase = () => {
-		// const arr = imageAry.filter(item => item !== url);
+	// const deleteFromFirebase = () => {
+	// 	// const arr = imageAry.filter(item => item !== url);
 
 
-		listAll(imagesListRef).then((response) => {
-			response.items.forEach((item) => {
-				if (imageAry !== "") { 
-					getDownloadURL(item).then((url) => {
-						// https://stackoverflow.com/questions/71880899/firebase-storage-delete-image-by-downloadurl-v9
-						const link = imageAry.find(ele => ele === url);
-						console.log("link", link);
-						if (link !== undefined) {
-							const fileRef = ref(storage, link);
-							deleteObject(fileRef).then(() => {
-								// File deleted successfully
-								console.log("Deleted!");
-								setImageUrls([]);
-							}).catch((error) => {
-								// Uh-oh, an error occurred!
-								console.log("Something went wrong!");
-							});
-						}
-					});
+	// 	listAll(imagesListRef).then((response) => {
+	// 		response.items.forEach((item) => {
+	// 			if (imageAry !== "") { 
+	// 				getDownloadURL(item).then((url) => {
+	// 					// https://stackoverflow.com/questions/71880899/firebase-storage-delete-image-by-downloadurl-v9
+	// 					const link = imageAry.find(ele => ele === url);
+	// 					console.log("link", link);
+	// 					if (link !== undefined) {
+	// 						const fileRef = ref(storage, link);
+	// 						deleteObject(fileRef).then(() => {
+	// 							// File deleted successfully
+	// 							console.log("Deleted!");
+	// 							setImageUrls([]);
+	// 						}).catch((error) => {
+	// 							// Uh-oh, an error occurred!
+	// 							console.log("Something went wrong!");
+	// 						});
+	// 					}
+	// 				});
 
-				} else {
-					const fileRef = ref(storage, `${prop}/${item.name}`);
-					// Delete the file
-					deleteObject(fileRef).then(() => {
-						// File deleted successfully
-						console.log("Deleted!");
-						setImageUrls([]);
-					}).catch((error) => {
-						// Uh-oh, an error occurred!
-						console.log("Something went wrong!");
-					});
-				}
-			});
-		});
-		// listAll(imagesListRef).then((response) => {
-		// 	response.items.forEach((item) => {
-		// 		const fileRef = ref(storage, `${prop}/${item.name}`);
-		// 		// Delete the file
-		// 		deleteObject(fileRef).then(() => {
-		// 			// File deleted successfully
-		// 			console.log("Deleted!");
-		// 			setImageUrls([]);
-		// 		}).catch((error) => {
-		// 			// Uh-oh, an error occurred!
-		// 			console.log("Something went wrong!");
-		// 		});
-		// 	});
-		// });
-
-	};
+	// 			} else {
+	// 				const fileRef = ref(storage, `${prop}/${item.name}`);
+	// 				// Delete the file
+	// 				deleteObject(fileRef).then(() => {
+	// 					// File deleted successfully
+	// 					console.log("Deleted!");
+	// 					setImageUrls([]);
+	// 				}).catch((error) => {
+	// 					// Uh-oh, an error occurred!
+	// 					console.log("Something went wrong!");
+	// 				});
+	// 			}
+	// 		});
+	// 	});
+	// };
 
 	// const handleSingleDelete = (url) => {
 	// 	// Create a reference to the file to delete
@@ -159,7 +148,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 	}, [imageUpload]);
 
 	return (
-		<div className="mb-2 images">
+		<div className="mb-2 images upload-section">
 			<label htmlFor="images" className="block text-sm font-medium text-gray-700">
 				Images
 			</label>

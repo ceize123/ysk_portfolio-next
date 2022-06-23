@@ -1,4 +1,3 @@
-import Image from "next/image";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -14,11 +13,9 @@ function Carousel({ prop }) {
 	const data = prop;
 	const pages = data.pages;
 	const [array, setArray] = useState([]);
-	
 
 	// https://thewebdev.info/2021/02/21/how-to-split-a-javascript-array-into-chunks/
 	useEffect(() => {
-		console.log(data);
 		let result = [];
 		let count = 0;
 		pages.forEach((item) => {

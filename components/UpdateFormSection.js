@@ -6,8 +6,10 @@ import Input from "./Input";
 import ImageInput from "./ImageInput";
 import UploadImage from "./UploadImage";
 import { validate } from "./Validate";
+import { deleteFromFirebase } from "./ImageDelete";
 import { failAlert, successAlert } from "./Alerts";
 import { useShareUpdateFiles, useShareUpdateNo, useShareImageUrls } from "./ShareStates";
+import Swal from "sweetalert2";
 
 function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "", title="" }) {
 
@@ -120,7 +122,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		
 		if (filter === "sections") {
 			data = overall;
-			if (!validate(data)) {
+			console.log(data);
+			if (!validate(data, data.type)) {
 				failAlert("Shin! Please Please Please fill in all the fields!");
 				return null;
 			}
@@ -134,7 +137,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			
 			const result = await response.json();
 			console.log(result);
-			
+			successAlert(filter, "Section has been updated!", refresh);
 
 		} else {
 			data = work;
@@ -152,24 +155,45 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 			const result = await response.json();
 			console.log(result);
+			successAlert(filter, "Project info has been updated!", refresh);
 		}
 		setUpdateNo(null);
-		successAlert(filter, refresh);
+		
 		
 	};
 
 	const handleDelete = async (e) => {
 		e.preventDefault();
-		const response = await fetch(`/api/works/category/${param}/${workId}`, {
-			method: "DELETE",
-			body: JSON.stringify({ number: sectionNo, data: overall }),
-			headers: {
-				"Content-Type": "application/json"
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#4f46e5",
+			cancelButtonColor: "#f43f5e",
+			confirmButtonText: "Yes, delete it!"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire(
+					"Deleted!",
+					"Section has been deleted.",
+					"success"
+				).then(() => {
+					fetch(`/api/works/category/${param}/${workId}`, {
+						method: "DELETE",
+						body: JSON.stringify({ number: sectionNo, data: overall }),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+					deleteFromFirebase(`${param}/${title}/${overall.type}`, overall.images);
+					setUpdateNo(null);
+				}).then(() => {
+					refresh();
+				});
 			}
 		});
-		setUpdateNo(null);
-		const result = await response.json();
-		console.log(result);
+		
 	};
 
 	const refresh = async () => {

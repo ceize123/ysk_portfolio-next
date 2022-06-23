@@ -65,6 +65,14 @@ p {
 	font-size: 16px;
 }
 
+table {
+	border-collapse: separate;
+	td {
+		cursor: pointer;
+	}
+}
+
+
 // General Ends
 
 // Sections Starts
@@ -179,7 +187,7 @@ section {
 		// Back-end might need
 		// transform: scale(0.8) translateY(-10%);
 
-		> div {
+		.list-section-background {
 			padding: 100px 0;
 			z-index: -1;
 		}
@@ -252,16 +260,6 @@ section {
 		}
 	}
 
-}
-
-.upload-section {
-	.dropzone {
-		max-width: 300px;
-	}
-
-	aside {
-		display: flex;
-	}
 }
 
 // Add new section ends
