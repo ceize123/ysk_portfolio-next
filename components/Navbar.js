@@ -3,26 +3,33 @@ import Link from "next/link";
 function Navbar() {
 	return (
 		<nav className="header">
-			<h1 className="logo">
-				<a href='#'>YSK</a>
-			</h1>
-			<ul className="main-nav">
-				<li>
+			<ul className="main-nav flex justify-center text-primary">
+				<li className="hover:text-secondary">
 					<Link href="/">
 						<a>Home</a>
 					</Link>
 				</li>
-				<li>
-					<Link href="#work">
-						<a>Work</a>
+				<li className="hover:text-secondary">
+					<Link href="/works">
+						<a>Works</a>
 					</Link>
 				</li>
-				<li>
+				<li className="hover:text-secondary">
+					<Link href="/about">
+						<a>About me</a>
+					</Link>
+				</li>
+				<li className="hover:text-secondary">
 					<Link href="#">
 						<a>Resume</a>
 					</Link>
 				</li>
-				<li>
+				<li className="hover:text-secondary">
+					<Link href="#">
+						<a>Contact</a>
+					</Link>
+				</li>
+				<li className="hover:text-secondary">
 					<Link href="/dashboard">
 						<a>Dashboard</a>
 					</Link>

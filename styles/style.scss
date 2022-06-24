@@ -73,8 +73,32 @@ table {
 	}
 }
 
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
 
 // General Ends
+
+
+// Navbar Starts
+
+.main-nav a {
+	padding: 20px 25px;
+	text-transform: uppercase;
+	text-align: center;
+	display: block;
+	line-height: 20px;
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+	background-color: #f4f4f4;
+}
+
+// Navbar Ends
+
 
 // Sections Starts
 section {
@@ -264,3 +288,26 @@ section {
 }
 
 // Add new section ends
+
+// footer starts
+footer {
+
+	.icon {
+		background-color: #222222;
+		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		margin: 0 30px;
+		margin-top: 15px;
+		svg {
+			color: white;
+			font-size: 28px;
+		}
+	}
+
+	p {
+		margin-top: 5px;
+	}
+}
+// footer ends
