@@ -1,0 +1,31 @@
+<svg width="325" height="325" viewBox="0 0 325 325" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_bdii_1661_6707)">
+<circle cx="162.5" cy="158.5" r="158.5" fill="white" fill-opacity="0.2" shape-rendering="crispEdges"/>
+</g>
+<defs>
+<filter id="filter0_bdii_1661_6707" x="-31.0667" y="-35.0667" width="387.133" height="387.133" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImage" stdDeviation="17.5333"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1661_6707"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="effect1_backgroundBlur_1661_6707" result="effect2_dropShadow_1661_6707"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_1661_6707" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="-3.50667" dy="3.50667"/>
+<feGaussianBlur stdDeviation="1.75333"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.4 0"/>
+<feBlend mode="normal" in2="shape" result="effect3_innerShadow_1661_6707"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="3.50667" dy="-3.50667"/>
+<feGaussianBlur stdDeviation="1.75333"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.714824 0 0 0 0 0.714824 0 0 0 0 0.714824 0 0 0 0.4 0"/>
+<feBlend mode="normal" in2="effect3_innerShadow_1661_6707" result="effect4_innerShadow_1661_6707"/>
+</filter>
+</defs>
+</svg>

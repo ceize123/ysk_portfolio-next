@@ -2,8 +2,8 @@ import Link from "next/link";
 
 function Navbar() {
 	return (
-		<nav className="header">
-			<ul className="main-nav flex justify-center text-primary">
+		<nav className="header relative z-20">
+			<ul className="main-nav flex justify-center text-primary absolute right-0 left-0 mx-auto">
 				<li className="hover:text-secondary">
 					<Link href="/">
 						<a>Home</a>
