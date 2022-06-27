@@ -3,34 +3,36 @@ import logo from "../public/image/home-page/logo.png";
 import hero from "../public/image/home-page/hero.png";
 import Tilt from "react-parallax-tilt";
 import Egg from "../components/HomePageEgg";
+import Carousel from "../components/HomePageCarousel";
 
 
-export default function Home() {
+export default function Home({ works }) {
+
 	return (
-		<div className="hero-section relative flex justify-center items-center">
-			{/* <div className="hero absolute z-10">
-				<Image src={hero} alt="hero"
-					placeholder="blur"
-					blurDataURL={hero}
-				/>
-			</div> */}
-			<Egg image={hero} className="hero" />
-			
-			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<Tilt className="z-20 logo flex justify-center items-center"
-				perspective={500}>
-				{/* <div className="logo flex justify-center items-center"> */}
-				<Image src={logo} alt="logo"
-					className="logo-text"
-				/>
+		<div className="home">
+			<section className="relative flex justify-center items-center">
+				<Egg bgImage={hero} centerImage={logo} />
+			</section>
 
-				{/* </div> */}
-			</Tilt>
-			
+			<section>
+				<Carousel works={works} />
+			</section>
 
-			{/* <div className="absolute circle-green">
-				<Image src={circleGreen} alt="green" />
-			</div> */}
+			<section className="relative flex justify-center items-center">
+				<Egg bgImage={hero} text="footer"/>
+			</section>
 		</div>
 	);
+}
+
+export async function getStaticProps() {
+	const response = await fetch("http://localhost:3000/api/works");
+	const data = await response.json();
+	const works = data;
+
+	return {
+		props: {
+			works,
+		},
+	};
 }

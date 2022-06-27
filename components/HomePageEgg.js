@@ -1,13 +1,26 @@
 import Image from "next/image";
+import Tilt from "react-parallax-tilt";
+import Footer from "./Footer";
 
-function Egg({ image, className }) {
+function Egg({ bgImage, centerImage = "", text = "" }) {
 	return (
-		<div className={`absolute z-10 ${className}`} >
-			<Image src={image} alt={image}
-				placeholder="blur"
-				blurDataURL={image}
-			/>
-		</div>
+		<>
+			<div className="absolute z-10 egg-bg" >
+				<Image src={bgImage} alt={bgImage}
+					// placeholder="blur"
+					// blurDataURL={bgImage}
+				/>
+			</div>
+
+			{/* https://www.npmjs.com/package/react-parallax-tilt */}
+			<Tilt className="z-20 egg-center flex justify-center items-center"
+				perspective={550}>
+				{centerImage && <Image src={centerImage} alt={centerImage}
+					className="egg-center-text"
+				/>}
+				{text === "footer" ? <Footer /> : ""}
+			</Tilt>
+		</>
 	);
 }
 

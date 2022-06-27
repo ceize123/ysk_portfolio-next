@@ -1,9 +1,22 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 function Navbar() {
+	const router = useRouter();
+	const [position, setPosition] = useState("absolute");
+
+	useEffect(() => {
+		if (router.pathname === "/") {
+			setPosition("absolute");
+		} else {
+			setPosition("static");
+		}
+	}, [router]);
+
 	return (
 		<nav className="header relative z-20">
-			<ul className="main-nav flex justify-center text-primary absolute right-0 left-0 mx-auto">
+			<ul className={`main-nav flex justify-center text-primary ${position} right-0 left-0 mx-auto`} >
 				<li className="hover:text-secondary">
 					<Link href="/">
 						<a>Home</a>

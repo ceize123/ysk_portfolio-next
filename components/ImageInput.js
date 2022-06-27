@@ -164,7 +164,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 						? e.target.files : e.target.files[0]);
 				}}
 			/>
-			{imageUpload && <Button onClick={uploadImage} text="Upload" color="border-sky-600 hover:bg-sky-500 focus:ring-sky-500" />}
+			{imageUpload && <Button onClick={uploadImage} text="Upload" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" />}
 			<div className="flex mt-3">
 				{imageUrls && imageUrls.map((url, idx) => (
 					<div className="mr-3 relative" key={idx}>

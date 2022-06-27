@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
 			<DndProvider backend={HTML5Backend}>
 				<Component {...pageProps} />
 			</DndProvider>
-			<Footer />
+			{/* <Footer /> */}
 		</>
 	);
 }

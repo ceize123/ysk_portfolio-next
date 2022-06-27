@@ -101,33 +101,27 @@ ul {
 // Navbar Ends
 
 // Home Page Starts
-.hero-section {
-	max-width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-	// background-image: url(../public/image/home-page/hero.png);
-	// background-position: center;
-	// background-repeat: no-repeat;
-	// background-size: 87% auto;
-
-	.hero {
+.home {
+	section {
+		max-width: 100vw;
+		height: 100vh;
+		overflow: hidden;
+		// background-image: url(../public/image/home-page/hero.png);
+		// background-position: center;
+		// background-repeat: no-repeat;
+		// background-size: 87% auto;
+	}
+	.egg-bg {
 		width: 87vw;
 		height: auto;
+
 		img {
 			backdrop-filter: blur(60.4667px);
 		}
-		
-	}
 
-	// .logo {
-	// 	width: 100%;
-	// 	height: 100%;
-	// 	background-image: url(../public/image/home-page/logo.png);
-	// 	background-position: center;
-	// 	background-repeat: no-repeat;
-	// 	background-size: 25% auto;
-	// }
-	.logo {
+	}
+	
+	.egg-center {
 		width: 25vw !important;
 		height: 25vw !important;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 3.50667px -3.50667px 3.50667px rgba(182, 182, 182, 0.4), inset -3.50667px 3.50667px 3.50667px rgba(255, 255, 255, 0.4);
@@ -135,17 +129,18 @@ ul {
 		margin-bottom: 15px;
 		border-radius: 50%;
 		transform-style: preserve-3d;
-		
+
 		&:hover {
 			cursor: pointer;
 		}
 
-		.logo-text {
+		.egg-center-text {
 			transform: translateZ(60px);
 		}
 	}
-		
 }
+
+
 // Home Page Ends
 
 
@@ -340,7 +335,9 @@ section {
 
 // footer starts
 footer {
-
+	h1 {
+		font-size: 40px;
+	}
 	.icon {
 		background-color: #222222;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -348,7 +345,7 @@ footer {
 		height: 48px;
 		border-radius: 50%;
 		margin: 0 30px;
-		margin-top: 15px;
+		margin-top: 20px;
 		svg {
 			color: white;
 			font-size: 28px;
