@@ -14,7 +14,7 @@ export default function Home({ works }) {
 				<Egg bgImage={hero} centerImage={logo} />
 			</section>
 
-			<section>
+			<section className="carousel-section mx-auto">
 				<Carousel works={works} />
 			</section>
 

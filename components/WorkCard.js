@@ -1,8 +1,8 @@
 function Card({ work }) {
-	console.log(work);
+
 	return (
-		<div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6">
-			<h3 className="text-lg leading-6 font-medium text-gray-900">{work.description}</h3>
+		<div className="card hover:text-white p-8">
+			<h3>{work.description}</h3>
 		</div>
 	);
 }

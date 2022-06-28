@@ -9,7 +9,7 @@ import { Pagination } from "swiper";
 import Card from "./WorkCard";
 
 function HomePageCarousel({ works }) {
-	console.log(works);
+
 	const pagination = {
 		clickable: true,
 		renderBullet: function (index, className) {
@@ -21,13 +21,14 @@ function HomePageCarousel({ works }) {
 			<Swiper
 				pagination={pagination}
 				modules={[Pagination]}
-				className="mySwiper"
 			>
 				{works.map((item, idx) => (
-					<SwiperSlide key={idx} className="p-8">
-						{item.works.map((work) => (
-							<Card key={work._id} work={work} />
-						))}
+					<SwiperSlide key={idx}>
+						<div className="grid gap-14 grid-cols-3 slide-page">
+							{item.works.map((work) => (
+								<Card key={work._id} work={work} />
+							))}
+						</div>
 					</SwiperSlide>
 				))}
 			</Swiper>
