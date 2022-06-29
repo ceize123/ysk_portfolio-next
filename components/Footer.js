@@ -14,7 +14,9 @@ function Footer() {
 				</div>
 				<div>
 					<div className="icon flex justify-center items-center">
-						<FaLinkedinIn />
+						<a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/yung-shin-ko-48861215b/">
+							<FaLinkedinIn />
+						</a>
 					</div>
 					<p>LinkedIn</p>
 				</div>

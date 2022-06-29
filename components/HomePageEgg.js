@@ -13,7 +13,7 @@ function Egg({ bgImage, centerImage = "", text = "" }) {
 			</div>
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<Tilt className="z-20 egg-center flex justify-center items-center"
+			<Tilt className={`z-20 ${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
 				perspective={550}>
 				{centerImage && <Image src={centerImage} alt={centerImage}
 					className="egg-center-text"
