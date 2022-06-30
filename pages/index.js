@@ -2,6 +2,7 @@ import Image from "next/image";
 import logo from "../public/image/home-page/logo.png";
 import hero from "../public/image/home-page/hero.png";
 import bgChat from "../public/image/home-page/bg-chat.png";
+import bgAbout from "../public/image/home-page/bg-about.png";
 import Tilt from "react-parallax-tilt";
 import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
@@ -12,7 +13,7 @@ export default function Home({ works }) {
 	return (
 		<div className="home">
 			<section className="relative flex justify-center items-center">
-				<Egg bgImage={hero} centerImage={logo} text="hero" />
+				<Egg bgImage={hero} centerImage={logo} className="hero" />
 			</section>
 
 			<section className="carousel-section mx-auto">
@@ -20,7 +21,11 @@ export default function Home({ works }) {
 			</section>
 
 			<section className="relative flex justify-center items-center">
-				<Egg bgImage={bgChat} text="footer"/>
+				<Egg bgImage={bgAbout} className="about" text="About me" />
+			</section>
+
+			<section className="relative flex justify-center items-center">
+				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>
 	);

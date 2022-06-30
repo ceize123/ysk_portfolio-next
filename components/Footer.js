@@ -4,7 +4,7 @@ import { HiOutlineMail } from "react-icons/hi";
 function Footer() {
 	return (
 		<footer className="text-center">
-			<h1 className="text-primary">Let’s Chat!</h1>
+			<h1>Let’s Chat!</h1>
 			<div className="flex justify-center">
 				<div>
 					<div className="icon flex justify-center items-center">

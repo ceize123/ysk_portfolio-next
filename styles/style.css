@@ -8,7 +8,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Lexend Deca", sans-serif;
-  color: #2C2C2C;
+  color: #666666;
   background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
 }
 
@@ -97,19 +97,25 @@ ul {
   height: 100vh;
   overflow: hidden;
 }
-.home .egg-bg img {
+.home section .egg-bg img {
   backdrop-filter: blur(60.4667px);
 }
-.home .hero {
+.home section .hero, .home section .about, .home section .footer {
+  height: auto;
+}
+.home section .hero {
   width: 87vw;
-  height: auto;
 }
-.home .footer {
+.home section .about {
+  width: 67.7vw;
+  margin-right: 17.4vw;
+  margin-bottom: 3.7vw;
+}
+.home section .footer {
   width: 91.2vw;
-  height: auto;
-  margin-left: 2.9vw;
+  margin-left: 3.15vw;
 }
-.home .egg-center {
+.home section .egg-center {
   width: 25vw !important;
   height: 25vw !important;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 3.50667px -3.50667px 3.50667px rgba(182, 182, 182, 0.4), inset -3.50667px 3.50667px 3.50667px rgba(255, 255, 255, 0.4);
@@ -118,11 +124,21 @@ ul {
   border-radius: 50%;
   transform-style: preserve-3d;
 }
-.home .egg-center .egg-center-text {
+.home section .egg-center .egg-center-text {
   transform: translateZ(60px);
 }
-.home .egg-hover:hover {
+.home section .egg-center h1 {
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 50px;
+}
+.home section .egg-hover:hover {
   cursor: pointer;
+}
+.home section .head-shot {
+  right: 0;
+  bottom: 0;
+  max-width: 446px;
 }
 .home .carousel-section {
   max-width: 1280px;
@@ -310,9 +326,6 @@ section .list-section .list-text p {
   display: none;
 }
 
-footer h1 {
-  font-size: 40px;
-}
 footer .icon {
   background-color: #222222;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
