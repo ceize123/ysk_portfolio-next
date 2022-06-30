@@ -97,12 +97,17 @@ ul {
   height: 100vh;
   overflow: hidden;
 }
-.home .egg-bg {
+.home .egg-bg img {
+  backdrop-filter: blur(60.4667px);
+}
+.home .hero {
   width: 87vw;
   height: auto;
 }
-.home .egg-bg img {
-  backdrop-filter: blur(60.4667px);
+.home .footer {
+  width: 91.2vw;
+  height: auto;
+  margin-left: 2.9vw;
 }
 .home .egg-center {
   width: 25vw !important;

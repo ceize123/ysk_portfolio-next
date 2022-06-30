@@ -7,13 +7,15 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper";
 import Card from "./WorkCard";
+import firstLetter from "./FirstLetter";
 
 function HomePageCarousel({ works }) {
 
 	const pagination = {
 		clickable: true,
 		renderBullet: function (index, className) {
-			return '<span class="' + className + '">' + (index + 1) + "</span>";
+			// return '<span class="' + className + '">' + (index + 1) + "</span>";
+			return `<span class="${className} text-sm"> ${firstLetter("upper", works[index].category)}</span>`;
 		},
 	};
 	return (
@@ -24,7 +26,7 @@ function HomePageCarousel({ works }) {
 			>
 				{works.map((item, idx) => (
 					<SwiperSlide key={idx}>
-						<div className="grid gap-14 grid-cols-3 slide-page">
+						<div className="grid gap-x-14 gap-y-7 grid-cols-3 slide-page">
 							{item.works.map((work) => (
 								<Card key={work._id} work={work} />
 							))}

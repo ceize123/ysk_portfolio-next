@@ -118,13 +118,20 @@ ul {
 		// background-size: 87% auto;
 	}
 	.egg-bg {
-		width: 87vw;
-		height: auto;
-
 		img {
 			backdrop-filter: blur(60.4667px);
 		}
+	}
 
+	.hero {
+		width: 87vw;
+		height: auto;
+	}
+
+	.footer {
+		width: 91.2vw;
+		height: auto;
+		margin-left: 2.9vw;
 	}
 	
 	.egg-center {
@@ -184,6 +191,7 @@ ul {
 
 			.swiper-pagination-bullet-active {
 				animation: bt-effect linear 0.2s;
+
 				&::after {
 					content: " ";
 					position: absolute;

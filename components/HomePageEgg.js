@@ -5,7 +5,7 @@ import Footer from "./Footer";
 function Egg({ bgImage, centerImage = "", text = "" }) {
 	return (
 		<>
-			<div className="absolute z-10 egg-bg" >
+			<div className={`absolute z-10 egg-bg ${text}`} >
 				<Image src={bgImage} alt={bgImage}
 					// placeholder="blur"
 					// blurDataURL={bgImage}
