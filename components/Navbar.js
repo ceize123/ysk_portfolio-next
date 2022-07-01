@@ -8,15 +8,15 @@ function Navbar() {
 
 	useEffect(() => {
 		if (router.pathname === "/") {
-			setPosition("absolute");
+			setPosition("fixed");
 		} else {
 			setPosition("static");
 		}
 	}, [router]);
 
 	return (
-		<nav className="header relative z-20">
-			<ul className={`main-nav flex justify-center text-primary ${position} right-0 left-0 mx-auto`} >
+		<nav className={`header ${position} right-0 left-0 mx-auto z-30`} >
+			<ul className="main-nav flex justify-center text-primary" >
 				<li className="hover:text-secondary">
 					<Link href="/">
 						<a>Home</a>
