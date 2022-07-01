@@ -108,7 +108,7 @@ ul {
 }
 .home section .about {
   width: 68.1vw;
-  margin-right: 17.4vw;
+  margin-right: 17.45vw;
   margin-bottom: 3.7vw;
 }
 .home section .footer {
@@ -139,6 +139,7 @@ ul {
   right: 0;
   bottom: 0;
   max-width: 446px;
+  opacity: 0.5;
 }
 .home .carousel-section {
   max-width: 1280px;

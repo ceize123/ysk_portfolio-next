@@ -23,12 +23,12 @@ function Navbar() {
 					</Link>
 				</li>
 				<li className="hover:text-secondary">
-					<Link href="/works">
+					<Link href="/#works">
 						<a>Works</a>
 					</Link>
 				</li>
 				<li className="hover:text-secondary">
-					<Link href="/about">
+					<Link href="/#about">
 						<a>About me</a>
 					</Link>
 				</li>
@@ -38,7 +38,7 @@ function Navbar() {
 					</Link>
 				</li>
 				<li className="hover:text-secondary">
-					<Link href="#">
+					<Link href="/#footer">
 						<a>Contact</a>
 					</Link>
 				</li>

@@ -12,6 +12,8 @@ function Egg({ bgImage, centerImage = "", text = "", className }) {
 					// blurDataURL={bgImage}
 				/>
 			</div>
+
+			{/* about */}
 			{className === "about" &&
 				<div className="absolute z-10 head-shot">
 					<Image src={headShot} alt="head-shot" />
