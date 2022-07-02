@@ -19,7 +19,7 @@ function HomePageCarousel({ works }) {
 		},
 	};
 	return (
-		<div className="mt-10">
+		<div className="mt-28">
 			<Swiper
 				pagination={pagination}
 				modules={[Pagination]}
