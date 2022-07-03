@@ -6,33 +6,33 @@ import { useState, useEffect } from "react";
 
 function Egg({ bgImage, centerImage = "", text = "", className }) {
 
-	let oldScrollY = 0;
-
-	const [direction, setDirection] = useState('up');
-
-	const controlDirection = (e) => {
-		console.log(e.deltaY);
-		const element = document.querySelector(".egg-hero");
-		console.log(element);
-		// if (window.scrollY > oldScrollY) {
-		// 	setDirection('down');
-		// } else {
-		// 	setDirection('up');
-		// }
-		// oldScrollY = window.scrollY;
-		// console.log(oldScrollY);
-		// if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-		// 	console.log("hey");
-		// }
-	};
-
+	const [scale, setScale] = useState(1);
+	const [width, setWidth] = useState(25);
+	const [height, setHeight] = useState(25);
+	
 	useEffect(() => {
-		
-		window.addEventListener("wheel", controlDirection);
-		return () => {
-			window.removeEventListener("wheel", controlDirection);
+		const element = document.querySelector(".egg-hero");
+		const handleScale = (e) => {
+			console.log(e.deltaY);
+			
+			console.log(element);
+			// setScale(scale + e.deltaY);
+			if (e.deltaY > 0) {
+				setHeight(height + 8);
+				setWidth(width + 8);
+			} else if (e.deltaY < 0 && width > 25) {
+				setHeight(height - 8);
+				setWidth(width - 8);
+			}
 		};
-	},[]);
+
+		window.addEventListener("wheel", handleScale);
+		element.style.width = `${width}vw`;
+		element.style.height = `${height}vw`;
+		return () => {
+			window.removeEventListener("wheel", handleScale);
+		};
+	},[width, height]);
 
 	return (
 		<>
@@ -51,13 +51,15 @@ function Egg({ bgImage, centerImage = "", text = "", className }) {
 			}
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<Tilt className={`z-20 ${text !== "footer" && "egg-hover"} egg-${className} egg-center flex justify-center items-center`}
+			<Tilt className={`z-20 ${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
 				perspective={550}>
 				{centerImage && <Image src={centerImage} alt={centerImage}
 					className="egg-center-text"
 				/>}
 				{text === "footer" ? <Footer /> : <h1>{text}</h1>}
 			</Tilt>
+
+			<div className={`z-20 egg-${className} flex justify-center items-center`}></div>
 		</>
 	);
 }
