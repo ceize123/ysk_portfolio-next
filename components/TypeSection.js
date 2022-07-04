@@ -31,9 +31,9 @@ function TypeSection({prop}) {
 	}
 
 	return (
-		<>
+		<div className="templates">
 			{ dynamicComponent(section, capitalizeFirstLetter(section.type)) }
-		</>
+		</div>
 	);
 }
 

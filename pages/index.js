@@ -7,45 +7,92 @@ import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
 
-
 export default function Home({ works }) {
+	const [scrolled, setScrolled] = useState(false);
+	const [page, setPage] = useState(0);
+	const [height, setHeight] = useState(0);
+	
+	useEffect(() => {
+		// const wHeight = window.innerHeight;
+		const elements = document.querySelectorAll(".home > section");
+		const handleScroll = (e) => {
+			console.log(e);
+			console.log(elements);
+			console.log(page);
+			if (e.deltaY > 0) {
+				setHeight(height + elements[page].offsetHeight);
+				setPage(page < elements.length - 1 && page + 1);
+			} else if (e.deltaY < 0) {
+				setHeight(height - elements[page].offsetHeight);
+				setPage(page > 0 && page - 1);
+			}
+			setScrolled(true);
+		};
 
-	let oldScrollY = 0;
+		if (!scrolled) {
+			window.addEventListener("wheel", handleScroll);
+		}
+		// elements.forEach((item, idx) => {
+		// 	item.style.transform = `translateY(-${page*100}vh)`;
+		// 	// if (page === idx) {
+		// 	// 	console.log(page, "123");
+		// 	// 	setTimeout(() => {
+		// 	// 		item.style.transform = `translateY(-${page*100}vh)`;
+		// 	// 	}, 500);
+		// 	// } else {
+		// 	// 	console.log(idx, item.style.transform);
+		// 	// 	item.style.transform = `translateY(-${page*100}vh)`;
+		// 	// }
 
-	const [direction, setDirection] = useState('up');
+		// });
+		// console.log(page);
 
-	const controlDirection = (e) => {
-		console.log(e.deltaY);
-		// if (window.scrollY > oldScrollY) {
-		// 	setDirection('down');
-		// } else {
-		// 	setDirection('up');
-		// }
-		// oldScrollY = window.scrollY;
-		// console.log(oldScrollY);
-		// if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-		// 	console.log("hey");
-		// }
-	};
+		
+		let timer = setTimeout(() => setScrolled(false), 1500);
 
-	// useEffect(() => {
-	// 	window.addEventListener("wheel", controlDirection);
-	// 	return () => {
-	// 		window.removeEventListener("wheel", controlDirection);
-	// 	};
-	// },[]);
+
+		// const interval = setInterval(() => {
+		// 	console.log(height);
+		// 	// elements[0].style.transform = `translateY(-${height}vh)`;
+		// }, 1500);
+		
+		// window.scrollBy(0, height);
+		// window.scrollTo(0, height);
+		return () => {
+			// clearInterval(interval);
+			clearTimeout(timer);
+			window.removeEventListener("wheel", handleScroll);
+		};
+	}, [scrolled]);
+	
+	useEffect(() => {
+		const elements = document.querySelectorAll(".home > section");
+		elements.forEach((item, idx) => {
+			// item.style.transform = `translateY(-${page*100}vh)`;
+
+			if (page === idx) {
+				setTimeout(() => {
+					item.style.transform = `translateY(-${height}px)`;
+				}, 600);
+			} else {
+				item.style.transform = `translateY(-${height}px)`;
+			}
+		});
+		console.log(page);
+	}, [page]);
+
 	return (
 		<div className="home">
-			<section className="relative flex justify-center items-center">
+			<section id="hero" className="relative flex justify-center items-center">
 				<Egg bgImage={hero} centerImage={logo} className="hero" />
 			</section>
 
-			<div id="works" className="relative">
+			<section id="works" className="relative">
 				<Logo />
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
-			</div>
+			</section>
 
 			<section id="about" className="relative flex justify-center items-center">
 				<Logo />

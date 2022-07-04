@@ -65,7 +65,7 @@ function WorkDetail({ category, work }) {
 				</section>
 			}
 
-			<section className="mt-5 mx-auto container">
+			<section className="mt-5 mx-auto container templates">
 				<div className="flex justify-between items-center mt-12 mb-7">
 					<h2 className="text-2xl mb-3">2. Overview</h2>
 					<UpdateBtn number={updateNo} index={2} handleUpdate={handleUpdate} handleCancel={handleCancel} />
