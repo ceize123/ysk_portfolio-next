@@ -19,12 +19,15 @@ export default function Home({ works }) {
 			console.log(e);
 			console.log(elements);
 			console.log(page);
-			if (e.deltaY > 0) {
-				setHeight(height + elements[page].offsetHeight);
-				setPage(page < elements.length - 1 && page + 1);
-			} else if (e.deltaY < 0) {
-				setHeight(height - elements[page].offsetHeight);
-				setPage(page > 0 && page - 1);
+			if (page >= 0 && page <= elements.length - 1) {
+				if (e.deltaY > 0) {
+					setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
+					console.log(elements[page].offsetHeight);
+					setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+				} else if (e.deltaY < 0) {
+					setHeight(height > 0 && height - elements[page - 1].offsetHeight);
+					setPage(page > 0 ? page - 1 : 0);
+				}
 			}
 			setScrolled(true);
 		};
@@ -67,6 +70,8 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
+		
+		// setHeight(!isUp ? height + elements[page].offsetHeight : height - elements[page+1].offsetHeight);
 		elements.forEach((item, idx) => {
 			// item.style.transform = `translateY(-${page*100}vh)`;
 
@@ -78,7 +83,7 @@ export default function Home({ works }) {
 				item.style.transform = `translateY(-${height}px)`;
 			}
 		});
-		console.log(page);
+
 	}, [page]);
 
 	return (
