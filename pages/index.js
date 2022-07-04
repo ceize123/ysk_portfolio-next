@@ -22,14 +22,13 @@ export default function Home({ works }) {
 			if (page >= 0 && page <= elements.length - 1) {
 				if (e.deltaY > 0) {
 					setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
-					console.log(elements[page].offsetHeight);
 					setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
 				} else if (e.deltaY < 0) {
 					setHeight(height > 0 && height - elements[page - 1].offsetHeight);
 					setPage(page > 0 ? page - 1 : 0);
 				}
+				setScrolled(true);
 			}
-			setScrolled(true);
 		};
 
 		if (!scrolled) {
@@ -70,17 +69,18 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
-		
 		// setHeight(!isUp ? height + elements[page].offsetHeight : height - elements[page+1].offsetHeight);
 		elements.forEach((item, idx) => {
 			// item.style.transform = `translateY(-${page*100}vh)`;
 
 			if (page === idx) {
 				setTimeout(() => {
-					item.style.transform = `translateY(-${height}px)`;
+					// item.style.transform = `translateY(-${height}px)`;
+					item.style.transform = `translateY(-${page*200}vh)`;
 				}, 600);
 			} else {
-				item.style.transform = `translateY(-${height}px)`;
+				// item.style.transform = `translateY(-${height}px)`;
+				item.style.transform = `translateY(-${page*200}vh)`;
 			}
 		});
 
@@ -88,24 +88,22 @@ export default function Home({ works }) {
 
 	return (
 		<div className="home">
+			{page !== 0 && <Logo />}
 			<section id="hero" className="relative flex justify-center items-center">
 				<Egg bgImage={hero} centerImage={logo} className="hero" />
 			</section>
-
+			<div className="empty-div"></div>
 			<section id="works" className="relative">
-				<Logo />
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
-
+			<div className="empty-div"></div>
 			<section id="about" className="relative flex justify-center items-center">
-				<Logo />
 				<Egg bgImage={bgAbout} className="about" text="About me" />
 			</section>
-
+			<div className="empty-div"></div>
 			<section id="footer" className="relative flex justify-center items-center">
-				<Logo />
 				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>
