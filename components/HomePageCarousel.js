@@ -54,6 +54,7 @@ function HomePageCarousel({ works }) {
 				pagination={pagination}
 				modules={[Pagination]}
 				threshold={50}
+				// onSlideChange={(swiper) => { setSlideIdx(swiper.activeIndex); }}
 			>
 				{works.map((item, idx) => (
 					<SwiperSlide key={idx}>
@@ -67,6 +68,7 @@ function HomePageCarousel({ works }) {
 							className="inside-swiper"
 							pagination={insidePagination}
 							modules={[Pagination]}
+							// onSlideChange={(swiper) => { setInsideSlideIdx(swiper.activeIndex); }}
 						>
 							{insideSlide[idx].map((ele, index) => (
 								<SwiperSlide key={index}>

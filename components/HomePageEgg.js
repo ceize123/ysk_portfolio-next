@@ -36,7 +36,7 @@ function Egg({ bgImage, centerImage = "", text = "", className }) {
 		<>
 			<div className={`absolute z-10 egg-bg ${className}`} >
 				<Image src={bgImage} alt={bgImage}
-					// placeholder="blur"
+					placeholder="blur"
 					// blurDataURL={bgImage}
 				/>
 			</div>
@@ -49,7 +49,7 @@ function Egg({ bgImage, centerImage = "", text = "", className }) {
 			}
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<div className="egg-center-div z-20">
+			<div className="egg-center-div z-20 scale-0">
 				<Tilt className={`${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
 					perspective={550}>
 					{centerImage && <Image src={centerImage} alt={centerImage}

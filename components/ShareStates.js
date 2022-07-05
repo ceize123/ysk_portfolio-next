@@ -61,6 +61,15 @@ export const useShareImageUrls = () => {
 	};
 };
 
+export const useSharePage = () => {
+	const [page, setPage] = useState(0);
+	return {
+		page,
+		setPage,
+	};
+};
+
+
 
 
 // export const useShareType = () => {

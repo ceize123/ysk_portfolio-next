@@ -6,25 +6,24 @@ import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
+import { useSharePage } from "../components/ShareStates";
+import { useBetween } from "use-between";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(false);
-	const [page, setPage] = useState(0);
-	const [height, setHeight] = useState(0);
+	// const [page, setPage] = useState(0);
+	const { page, setPage } = useBetween(useSharePage);
 	
 	useEffect(() => {
-		// const wHeight = window.innerHeight;
 		const elements = document.querySelectorAll(".home > section");
 		const handleScroll = (e) => {
 			console.log(e);
-			console.log(elements);
-			console.log(page);
 			if (page >= 0 && page <= elements.length - 1) {
 				if (e.deltaY > 0) {
-					setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
+					// setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
 					setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
 				} else if (e.deltaY < 0) {
-					setHeight(height > 0 && height - elements[page - 1].offsetHeight);
+					// setHeight(height > 0 && height - elements[page - 1].offsetHeight);
 					setPage(page > 0 ? page - 1 : 0);
 				}
 				setScrolled(true);
@@ -69,30 +68,55 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
+		// const outsideSwiper = document.querySelector(".home > section .swiper");
+		// const outsideActiveSlide = outsideSwiper.querySelector(".swiper-slide-active");
+		// console.log(outsideActiveSlide);
 		elements.forEach((item, idx) => {
-			const bg = item.querySelector(".egg-bg");
-			const center = item.querySelector(".egg-center-div");
-			// item.style.transform = `translateY(-${page*100}vh)`;
+			// const bg = item.querySelector(".egg-bg");
+			let center;
+			let cards = [];
+			if (idx === 1) {
+				cards = item.querySelectorAll(".card");
+				// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
+				// cards.forEach((item, idx) => {
+				// 	item.style.setProperty("--custom-index", idx);
+				// });
+				console.log(cards);
+			} else {
+				center = item.querySelector(".egg-center-div");
+				// console.log(center);
+			}
 
 			
 			item.style.transform = `translateY(-${page * 150}vh)`;
 			if (page === idx) {
-
 				setTimeout(() => {
-					bg.classList.remove("opacity-0");
-					// item.classList.remove("opacity-0");
-				}, 800);
-				setTimeout(() => {
-					center.classList.remove("opacity-0");
-				}, 900);
+					item.classList.remove("opacity-0");
+				}, 600);
+				if (idx !== 1) {
+					setTimeout(() => {
+						center.classList.remove("scale-0");
+					}, 1000);
+				} else {
+					setTimeout(() => {
+						cards.forEach((item) => {
+							item.classList.remove("scale-0");
+						});
+					}, 1000);
+				}
 			} else {
-				bg.classList.add("opacity-0");
-				center.classList.add("opacity-0");
-				// item.classList.add("opacity-0");
+				setTimeout(() => {
+					item.classList.add("opacity-0");
+				}, 200);
+				if (idx !== 1) {
+					center.classList.add("scale-0");
+				} else {
+					cards.forEach((item) => {
+						item.classList.add("scale-0");
+					});
+				}
 				
 				// item.style.transform = `translateY(-${height}px)`;
-
-				// item.style.transform = `translateY(-${page * 150}vh)`;
 
 				// center.style.transform = `translateY(${page * 150}vh)`;
 				// setTimeout(() => {
@@ -112,12 +136,12 @@ export default function Home({ works }) {
 				<Egg bgImage={hero} centerImage={logo} className="hero" />
 			</section>
 			<div className="empty-div"></div>
-			{/* <section id="works" className="relative">
+			<section id="works" className="relative">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
-			<div className="empty-div"></div> */}
+			<div className="empty-div"></div>
 			<section id="about" className="relative flex justify-center items-center">
 				<Egg bgImage={bgAbout} className="about" text="About me" />
 			</section>
