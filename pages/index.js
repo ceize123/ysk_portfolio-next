@@ -75,18 +75,20 @@ export default function Home({ works }) {
 			// item.style.transform = `translateY(-${page*100}vh)`;
 
 			
-			setTimeout(() => {
-				item.style.transform = `translateY(-${page * 150}vh)`;
-			}, 200);
+			item.style.transform = `translateY(-${page * 150}vh)`;
 			if (page === idx) {
 
-				center.classList.remove("opacity-0");
-				bg.classList.remove("opacity-0");
-				item.classList.remove("opacity-0");
+				setTimeout(() => {
+					bg.classList.remove("opacity-0");
+					// item.classList.remove("opacity-0");
+				}, 800);
+				setTimeout(() => {
+					center.classList.remove("opacity-0");
+				}, 900);
 			} else {
-				center.classList.add("opacity-0");
 				bg.classList.add("opacity-0");
-				item.classList.add("opacity-0");
+				center.classList.add("opacity-0");
+				// item.classList.add("opacity-0");
 				
 				// item.style.transform = `translateY(-${height}px)`;
 
