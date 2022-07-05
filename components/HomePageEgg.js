@@ -49,13 +49,15 @@ function Egg({ bgImage, centerImage = "", text = "", className }) {
 			}
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<Tilt className={`z-20 ${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
-				perspective={550}>
-				{centerImage && <Image src={centerImage} alt={centerImage}
-					className="egg-center-text"
-				/>}
-				{text === "footer" ? <Footer /> : <h1>{text}</h1>}
-			</Tilt>
+			<div className="egg-center-div z-20">
+				<Tilt className={`${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
+					perspective={550}>
+					{centerImage && <Image src={centerImage} alt={centerImage}
+						className="egg-center-text"
+					/>}
+					{text === "footer" ? <Footer /> : <h1>{text}</h1>}
+				</Tilt>
+			</div>
 
 			{/* <div className={`z-20 egg-${className} flex justify-center items-center`}></div> */}
 		</>

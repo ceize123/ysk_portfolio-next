@@ -69,36 +69,53 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
-		// setHeight(!isUp ? height + elements[page].offsetHeight : height - elements[page+1].offsetHeight);
 		elements.forEach((item, idx) => {
+			const bg = item.querySelector(".egg-bg");
+			const center = item.querySelector(".egg-center-div");
 			// item.style.transform = `translateY(-${page*100}vh)`;
 
+			
+			setTimeout(() => {
+				item.style.transform = `translateY(-${page * 150}vh)`;
+			}, 200);
 			if (page === idx) {
-				setTimeout(() => {
-					// item.style.transform = `translateY(-${height}px)`;
-					item.style.transform = `translateY(-${page*200}vh)`;
-				}, 600);
+
+				center.classList.remove("opacity-0");
+				bg.classList.remove("opacity-0");
+				item.classList.remove("opacity-0");
 			} else {
+				center.classList.add("opacity-0");
+				bg.classList.add("opacity-0");
+				item.classList.add("opacity-0");
+				
 				// item.style.transform = `translateY(-${height}px)`;
-				item.style.transform = `translateY(-${page*200}vh)`;
+
+				// item.style.transform = `translateY(-${page * 150}vh)`;
+
+				// center.style.transform = `translateY(${page * 150}vh)`;
+				// setTimeout(() => {
+				// 	center.style.transform = "translateY(0)";
+				// }, 600);
 			}
+			
 		});
 
 	}, [page]);
 
 	return (
 		<div className="home">
-			{page !== 0 && <Logo />}
+			{/* {page !== 0 && <Logo />} */}
+			<Logo opacity={page !== 0 ? 100 : 0} />
 			<section id="hero" className="relative flex justify-center items-center">
 				<Egg bgImage={hero} centerImage={logo} className="hero" />
 			</section>
 			<div className="empty-div"></div>
-			<section id="works" className="relative">
+			{/* <section id="works" className="relative">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
-			<div className="empty-div"></div>
+			<div className="empty-div"></div> */}
 			<section id="about" className="relative flex justify-center items-center">
 				<Egg bgImage={bgAbout} className="about" text="About me" />
 			</section>
