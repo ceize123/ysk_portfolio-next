@@ -63,7 +63,7 @@ function AddNew() {
 	// 	console.log(result);
 	// };
 	return (
-		<>
+		<div className="back-end">
 			<h1 className="text-3xl text-center font-bold underline my-6">Create New Project</h1>
 			<PostFormSection filter="create" />
 			{/* <form action="#" method="POST">
@@ -106,7 +106,7 @@ function AddNew() {
 						</div>
 					</div>
 				</form> */}
-		</>
+		</div>
 	);
 }
 

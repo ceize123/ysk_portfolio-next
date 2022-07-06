@@ -1,5 +1,6 @@
 import Hero from "../../../components/sections/Hero";
 import Overview from "../../../components/sections/Overview";
+import TypeSection from "../../../components/TypeSection";
 import { useEffect } from "react";
 
 function Work({ category, work }) {
@@ -12,12 +13,17 @@ function Work({ category, work }) {
 	// }, []);
 
 	return (
-		<>
+		<div className="front-end">
 			<Hero data={work} />
-			<section className="mx-auto container templates front-end">
+			<section className="mx-auto container templates">
 				<Overview prop={work} />
+				{work.sections.map((section, idx) => (
+					<section key={idx}>
+						<TypeSection prop={section} />
+					</section>
+				))}
 			</section>
-		</>
+		</div>
 	);
 }
 

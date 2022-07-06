@@ -253,7 +253,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 								{!isOverview
 									? <>
 										<h3>Info</h3>
-										{/* Title, Description, NavColor */}
+										{/* Title, Description, NavColor, NavTextColor */}
 										{keys.slice(1, 4).map((key, idx) => (
 											<Input key={idx}
 												prop={key}

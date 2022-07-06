@@ -65,10 +65,10 @@ function Dashboard() {
 		}
 	}
 
-	if (isLoading) return <h1 className="text-3xl text-center font-bold mt-6">Loading...</h1>;
+	if (isLoading) return <div className="back-end"><h1 className="text-3xl text-center font-bold mt-6">Loading...</h1></div>;
 
 	return (
-		<>
+		<div className="back-end">
 			<h1 className="text-3xl text-center font-bold underline my-6">Dashboard</h1>
 			<div className="mx-10">
 				<div className="flex content-center">
@@ -98,7 +98,7 @@ function Dashboard() {
 				}
 				{/* {(!isUpdate || dashboardData[idx].works.length !== 0) && <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>} */}
 			</div>
-		</>
+		</div>
 	);
 }
 

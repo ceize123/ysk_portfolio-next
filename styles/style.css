@@ -247,7 +247,7 @@ ul {
   margin-top: 115px;
 }
 .home .carousel-section .slide-page .card {
-  transition: 0.5s all cubic-bezier(0.86, 0.01, 0.38, 0.99);
+  transition: 0.5s transform cubic-bezier(0.86, 0.01, 0.38, 0.99);
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 4.76px -4.76px 4.76px rgba(214, 214, 214, 0.4), inset -4.76px 4.76px 4.76px rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(47.6px);
@@ -368,8 +368,15 @@ ul {
   line-height: 22px;
 }
 
+.back-end, .front-end {
+  margin-top: 60px;
+}
+
 .front-end .overview {
   padding: 100px 0;
+}
+.front-end .templates {
+  margin-bottom: 100px;
 }
 
 .addNewSection .col-text, .addNewSection .color, .addNewSection .issue, .addNewSection .description, .addNewSection .solution, .addNewSection .listTitle, .addNewSection .listParagraph {

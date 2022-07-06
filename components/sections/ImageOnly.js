@@ -13,9 +13,9 @@ function ImageOnly({prop}) {
 	// 	setDimension({ width: e.naturalWidth, height: e.naturalHeight });
 	// };
 	return (
-		<>
+		<div className="image-only">
 			<ImageRender prop={imageUrl} />
-		</>
+		</div>
 		// <div className="relative"
 		// 	style={{
 		// 		width: dimension.width,

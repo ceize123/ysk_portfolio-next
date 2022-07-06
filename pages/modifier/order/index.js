@@ -35,7 +35,7 @@ function Order({ works }) {
 	};
 
 	return (
-		<div className="flex justify-center flex-col items-center">
+		<div className="flex justify-center flex-col items-center back-end">
 			<table className="text-center my-12 border-dashed border-2 border-indigo-600 rounded w-1/2">
 				<thead className="bg-indigo-500 text-white">
 					<tr>

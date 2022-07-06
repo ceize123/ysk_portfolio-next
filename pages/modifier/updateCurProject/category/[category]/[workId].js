@@ -41,7 +41,7 @@ function WorkDetail({ category, work }) {
 	}, [pathname]);
 
 	return (
-		<div className="mt-3">
+		<div className="mt-3 back-end">
 			<h1 className="text-3xl mb-3 text-center">
 				Add New Section to {project._id} | {project.title} | {project.description}
 			</h1>

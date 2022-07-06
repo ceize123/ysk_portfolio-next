@@ -23,6 +23,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 		title: "",
 		description: "",
 		navColor: "",
+		navTextColor: "",
 		heroImage: []
 	});
 	const [overview, setOverview] = useState({});
@@ -36,6 +37,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			title: "",
 			description: "",
 			navColor: "",
+			navTextColor: "",
 			heroImage: []
 		});
 		setOverview({

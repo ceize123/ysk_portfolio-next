@@ -20,6 +20,7 @@ export const infoCol = [
 	"title",
 	"description",
 	"navColor",
+	"navTextColor"
 ];
 
 export const overviewCol = [
