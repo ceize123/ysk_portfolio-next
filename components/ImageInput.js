@@ -10,11 +10,28 @@ import { useBetween } from "use-between";
 
 // Firebase
 // https://www.youtube.com/watch?v=YOAeBSCkArA
-function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
+function ImageInput({ prop, type = "", category = "", imageAry = ""}) {
 	const imgRef = useRef();
 	const imagesListRef = ref(storage, `${prop}/`);
 	const [imageUpload, setImageUpload] = useState(null);
 	const {imageUrls, setImageUrls} = useBetween(useShareImageUrls);
+
+	const recursionUpload = (number) => {
+		const imageRef = ref(storage, `${prop}/${imageUpload[number].name + v4()}`);
+		uploadBytes(imageRef, imageUpload[number]).then((snapshot) => {
+			getDownloadURL(snapshot.ref).then((url) => {
+				setImageUrls((prev) => [...prev, url]);
+			}).then(() => {
+				let nextNumber = number + 1;
+				if (nextNumber < imageUpload.length) {
+					recursionUpload(nextNumber);
+				} else {
+					imgRef.current.value = "";
+				}
+			});
+		});
+		
+	};
 
 	const uploadImage = () => {
 		if (imageUpload === null) return;
@@ -23,7 +40,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 			setImageUrls([]);
 		}
 
-		if (type !== "carousel" && type !== "multiImages") {
+		if ((type !== "carousel" && type !== "multiImages") && imageAry.length <= 1) {
 			const imageRef = ref(storage, `${prop}/${imageUpload.name + v4()}`);
 			uploadBytes(imageRef, imageUpload).then((snapshot) => {
 				getDownloadURL(snapshot.ref).then((url) => {
@@ -32,18 +49,20 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 			});
 		} else {
 			const keys = Object.keys(imageUpload);
-			keys.map(key => {
-				const imageRef = ref(storage, `${prop}/${imageUpload[key].name + v4()}`);
-				uploadBytes(imageRef, imageUpload[key]).then((snapshot) => {
-					getDownloadURL(snapshot.ref).then((url) => {
-						setImageUrls((prev) => [...prev, url]);
-					});
-				});
-			});
+			console.log(keys);
+			recursionUpload(0);
+			// keys.map(key => {
+			// 	const imageRef = ref(storage, `${prop}/${imageUpload[key].name + v4()}`);
+			// 	uploadBytes(imageRef, imageUpload[key]).then((snapshot) => {
+			// 		getDownloadURL(snapshot.ref).then((url) => {
+			// 			setImageUrls((prev) => [...prev, url]);
+			// 		});
+			// 	});
+			// });
 			
 		}
 
-		imgRef.current.value = "";
+		// imgRef.current.value = "";
 	};
 
 	// const deleteFromFirebase = () => {
@@ -144,6 +163,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 	}, [category, prop, type]);
 
 	useEffect(() => {
+		console.log(imageUpload);
 		setImageUrls([]);
 	}, [imageUpload]);
 
@@ -158,9 +178,9 @@ function ImageInput({ prop, type = "", category = "", imageAry = "" }) {
 				id="images"
 				required
 				ref={imgRef}
-				multiple={type === "carousel" || type === "multiImages" ? true : false}
+				multiple={(type === "carousel" || type === "multiImages" || imageAry.length > 1) ? true : false}
 				onChange={(e) => {
-					setImageUpload(type === "carousel" || type === "multiImages"
+					setImageUpload((type === "carousel" || type === "multiImages" || imageAry.length > 1)
 						? e.target.files : e.target.files[0]);
 				}}
 			/>

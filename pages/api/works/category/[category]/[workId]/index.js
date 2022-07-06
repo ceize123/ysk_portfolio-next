@@ -71,17 +71,24 @@ export default async function handler(req, res) {
 		try {
 			const { number, data } = req.body;
 
-			await Work.findByIdAndUpdate(
+			const work = await Work.findByIdAndUpdate(
 				data._id, data
 			);
 
 			// https://stackoverflow.com/questions/32811510/mongoose-findoneandupdate-doesnt-return-updated-document
 			// https://stackoverflow.com/questions/56313376/how-to-return-only-the-updated-subdocument-inside-of-array-after-an-update
-			const cate = await Category.findOneAndUpdate(
-				{ "category": category, "works_id": data._id },
-				{$set: {works: data} },
-				{new: true}
+			// const cate = await Category.findOneAndUpdate(
+			// 	{ "category": category, "works_id": data._id },
+			// 	{$set: {works: data} },
+			// 	{new: true}
+			// );
+
+			const cate = await Category.findOne(
+				{ "category": category, "works_id": workId },
 			);
+			const foundWorkIndex = await cate.works.findIndex(item => item._id == workId);
+			cate.works[foundWorkIndex] = work;
+			cate.save();
 			console.log(cate);
 			
 			res.status(201).json(cate);

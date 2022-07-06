@@ -8,7 +8,7 @@ export const validate = (work, type) => {
 		if (work[key] === "" || (type !== "textOnly" && work[key].length === 0)) {
 			if (key === "pages" || key === "lists" || key === "overview") {
 				subKeyName = key;
-			} else {
+			} else if (key !== "sections") {
 				flag = false;
 			}
 		}

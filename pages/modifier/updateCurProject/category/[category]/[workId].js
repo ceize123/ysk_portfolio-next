@@ -85,7 +85,7 @@ function WorkDetail({ category, work }) {
 
 			<div className="mx-auto container">
 				{project.sections.map((section, idx) => (
-					<section className="mt-5" key={idx}>
+					<section className="mt-5 border-t-4" key={idx}>
 						<div className="flex justify-between items-center mt-12 mb-7">
 							<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
 							<UpdateBtn number={updateNo} index={idx + 3} handleUpdate={handleUpdate} handleCancel={handleCancel} />
