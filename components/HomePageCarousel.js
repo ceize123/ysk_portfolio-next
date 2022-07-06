@@ -53,7 +53,7 @@ function HomePageCarousel({ works }) {
 				className="outside-swiper"
 				pagination={pagination}
 				modules={[Pagination]}
-				threshold={50}
+				threshold={70}
 				// onSlideChange={(swiper) => { setSlideIdx(swiper.activeIndex); }}
 			>
 				{works.map((item, idx) => (
@@ -68,13 +68,14 @@ function HomePageCarousel({ works }) {
 							className="inside-swiper"
 							pagination={insidePagination}
 							modules={[Pagination]}
+							threshold={20}
 							// onSlideChange={(swiper) => { setInsideSlideIdx(swiper.activeIndex); }}
 						>
 							{insideSlide[idx].map((ele, index) => (
 								<SwiperSlide key={index}>
 									<div className="grid gap-x-14 gap-y-7 grid-cols-3 slide-page">
 										{ele.map((work) => (
-											<Card key={work._id} work={work} />
+											<Card key={work._id} work={work} category={item.category} />
 										))}
 									</div>
 								</SwiperSlide>

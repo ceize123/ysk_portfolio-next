@@ -15,6 +15,8 @@ function Hero({ data }) {
 					// height={100}
 					layout='fill'
 					alt="Hero Image"
+					placeholder="blur"
+					blurDataURL={heroImage}
 				/>
 			</div>
 		</div>

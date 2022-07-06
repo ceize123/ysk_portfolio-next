@@ -12,10 +12,13 @@ body {
 	margin: 0;
 	font-family: 'Lexend Deca', sans-serif;
 	color: #666666;
-	background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
-
-	overflow: hidden;
+	
 	scroll-behavior: smooth;
+}
+
+body {
+	overflow: hidden;
+	background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
 }
 
 a {
@@ -506,6 +509,11 @@ ul {
 	}
 }
 
+.front-end {
+	.overview {
+		padding: 100px 0;
+	}
+}
 // Sections Ends
 
 // Add new section starts

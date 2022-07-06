@@ -31,10 +31,17 @@ export default async function handler(req, res) {
 			// 	{ $addToSet: { "works.$.sections": newSection } },
 			// );
 
-			const cate = await Category.findOneAndUpdate(
+			// const cate = await Category.findOneAndUpdate(
+			// 	{ "category": category, "works_id": workId },
+			// 	{$set: {works: work} },
+			// );
+			const cate = await Category.findOne(
 				{ "category": category, "works_id": workId },
-				{$set: {works: work} },
 			);
+
+			const foundWorkIndex = await cate.works.findIndex(item => item._id == workId);
+			cate.works[foundWorkIndex] = work;
+			cate.save();
 
 			// const cate = await Category.findOneAndUpdate(
 			// 	{ "category": category, "works_id": workId },
@@ -52,16 +59,10 @@ export default async function handler(req, res) {
 
 		try {
 			const { data } = req.body;
-
 			await Section.findByIdAndUpdate(
 				data._id, data,
 			);
-			// const work = await Work.findOneAndUpdate(
-			// 	{ "_id": workId, "sections_id": data._id },
-			// );
-			// const cate = await Category.findOneAndUpdate(
-			// 	{ "category": category, "works_id": workId },
-			// );
+
 			const work = await Work.findOne(
 				{ "_id": workId, "sections_id": data._id },
 			);
@@ -76,6 +77,7 @@ export default async function handler(req, res) {
 			work.save();
 			cate.works[foundWorkIndex] = work;
 			cate.save();
+
 
 			// await Work.findOneAndUpdate(
 			// 	{ "_id": workId, "sections_id": data._id },

@@ -10,9 +10,14 @@ function Navbar() {
 	const { setPage } = useBetween(useSharePage);
 
 	useEffect(() => {
+		const body = document.querySelector("body");
 		if (router.pathname === "/") {
+			body.style.background = "linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%)";
+			body.style.overflowY = "hidden";
 			setPosition("fixed");
 		} else {
+			body.style.background = "#FFF";
+			body.style.overflowY = "visible";
 			setPosition("static");
 		}
 	}, [router]);
