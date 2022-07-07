@@ -47,6 +47,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = ""}) {
 					setImageUrls((prev) => [...prev, url]);
 				});
 			});
+			imgRef.current.value = "";
 		} else {
 			const keys = Object.keys(imageUpload);
 			console.log(keys);

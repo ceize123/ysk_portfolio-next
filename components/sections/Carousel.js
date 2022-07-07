@@ -19,8 +19,10 @@ function Carousel({ prop }) {
 		let result = [];
 		let count = 0;
 		pages.forEach((item) => {
+			console.log(item.imagesNeed);
 			// result.push(data.images.length % item.imagesNeed ? [] : [data.images.slice(i, i + item.imagesNeed)]);
-			result.push(data.images.length % item.imagesNeed ? [] : [data.images.slice(count, count + item.imagesNeed)]);
+			// result.push(data.images.length % item.imagesNeed ? [] : [data.images.slice(count, count + item.imagesNeed)]);
+			result.push([data.images.slice(count, count + item.imagesNeed)]);
 			count += item.imagesNeed;
 		});
 		setArray(result);
@@ -35,7 +37,6 @@ function Carousel({ prop }) {
 				mousewheel={true}
 				keyboard={true}
 				modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-				className="mySwiper"
 			>
 				{pages.map((page, pIdx) => (
 					<SwiperSlide key={pIdx} className="carousel-page grid grid-cols-12 gap-6">
@@ -54,7 +55,7 @@ function Carousel({ prop }) {
 								// <div key={idx} className={`grid grid-cols-2 ${page.imagesNeed > 2 ? "carousel-image-div" : ""}`} style={{ height: `${elem[0].height}px` }}>
 								<div key={idx} className={`grid grid-cols-2 ${page.imagesNeed > 2 ? "carousel-image-div" : ""}`} style={{ height: "500px" }}>
 									{elem.map((item, index) => (
-										<div className="px-2 text-center" key={index}>
+										<div className="p-2 text-center" key={index}>
 											{index % 2 === 0 ? <h3 className="mb-4">Before</h3> : <h3 className="mb-4">After</h3>}
 											<ImageRender prop={item} />
 											{/* <Image src={`/image/carousel-page${pIdx + 1}-${index + 1}.png`} alt="image" width={item.width} height={item.height} /> */}

@@ -3,7 +3,7 @@ import { HiOutlineMail } from "react-icons/hi";
 
 function Footer() {
 	return (
-		<footer className="text-center">
+		<footer className="text-center mb-5">
 			<h1>Let’s Chat!</h1>
 			<div className="flex justify-center">
 				<div>

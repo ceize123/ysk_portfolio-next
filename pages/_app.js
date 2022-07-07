@@ -6,6 +6,10 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function MyApp({ Component, pageProps }) {
 
+	if (Component.getLayout) {
+		return Component.getLayout(<Component {...pageProps} />);
+	}
+
 	return (
 		<>
 			<Navbar />

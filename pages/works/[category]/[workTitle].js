@@ -2,15 +2,20 @@ import Hero from "../../../components/sections/Hero";
 import Overview from "../../../components/sections/Overview";
 import TypeSection from "../../../components/TypeSection";
 import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Footer from "../../../components/Footer";
 
 function Work({ category, work }) {
-	console.log(work);
-	// useEffect(() => {
-	// 	const body = document.querySelector("body");
-	// 	body.style.background = "#FFF";
-	// 	body.style.overflowY = "visible";
+	useEffect(() => {
+		AOS.init({
+			// initialise with other settings
+			delay: 200,
+			duration: 800,
+			offset: 0
+		});
 
-	// }, []);
+	}, []);
 
 	return (
 		<div className="front-end">
@@ -18,11 +23,16 @@ function Work({ category, work }) {
 			<section className="mx-auto container templates">
 				<Overview prop={work} />
 				{work.sections.map((section, idx) => (
-					<section key={idx}>
+					<section key={idx}
+						data-aos={`${idx % 2 ? "fade-left" : "fade-right"}`}
+						data-aos-easing="ease-out"
+						data-aos-anchor-placement="center-bottom"
+					>
 						<TypeSection prop={section} />
 					</section>
 				))}
 			</section>
+			<Footer />
 		</div>
 	);
 }

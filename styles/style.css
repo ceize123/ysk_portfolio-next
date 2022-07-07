@@ -376,11 +376,17 @@ ul {
 .front-end .templates {
   margin-bottom: 100px;
 }
+.front-end .templates .text-only {
+  padding: 100px 0;
+}
 
 .addNewSection .col-text, .addNewSection .color, .addNewSection .issue, .addNewSection .description, .addNewSection .solution, .addNewSection .listTitle, .addNewSection .listParagraph {
   display: none;
 }
 .addNewSection .imageOnly .title, .addNewSection .imageOnly .paragraph {
+  display: none;
+}
+.addNewSection .carousel .title, .addNewSection .carousel .paragraph, .addNewSection .list .title, .addNewSection .list .paragraph {
   display: none;
 }
 .addNewSection .carousel .col-text, .addNewSection .carousel .issue, .addNewSection .carousel .description, .addNewSection .carousel .solution {

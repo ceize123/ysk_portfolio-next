@@ -514,6 +514,10 @@ ul {
 
 	.templates {
 		margin-bottom: 100px;
+
+		.text-only {
+			padding: 100px 0;
+		}
 	}
 }
 // Sections Ends
@@ -530,6 +534,11 @@ ul {
 		}
 	}
 
+	.carousel, .list {
+		.title, .paragraph {
+			display: none;
+		}
+	}
 	.carousel {
 		.col-text, .issue, .description, .solution {
 			display: block;

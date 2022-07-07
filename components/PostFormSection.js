@@ -141,10 +141,11 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			});
 			break;
 		case "carousel":
-			setOverall({
-				title: "",
-				paragraph: "",
-			});
+			// setOverall({
+			// 	title: "",
+			// 	paragraph: "",
+			// });
+			setOverall({});
 			setArray([{
 				issue: "",
 				description: "",
@@ -159,9 +160,13 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			});
 			break;
 		case "list":
+			// setOverall({
+			// 	title: "",
+			// 	paragraph: "",
+			// 	images: [],
+			// 	color: ""
+			// });
 			setOverall({
-				title: "",
-				paragraph: "",
 				images: [],
 				color: ""
 			});
@@ -267,98 +272,100 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 	
 
 	return (
-		<form action="#" method="POST">
-			<div className="shadow overflow-hidden rounded-md">
-				<div className="px-4 py-5 bg-gray-50 sm:p-6">
-					{filter === "sections"
-						? <div className={`grid grid-cols-1 ${firstLetter("lower", type)}`}>
-							<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
+		<section className="mt-5">
+			<form action="#" method="POST">
+				<div className="shadow overflow-hidden rounded-md">
+					<div className="px-4 py-8 bg-gray-50 sm:p-6">
+						{filter === "sections"
+							? <div className={`grid grid-cols-1 ${firstLetter("lower", type)}`}>
+								<SelectMenu prop={types} option={type} name="Type" onChange={setType} />
 
-							<div className="mt-3">
-								<h3>Overall</h3>
-								{overallCol.map((item, idx) => (
-									<Input key={idx}
-										prop={item}
-										val={overall}
-										// type={type}
-										onChange={e => {
-											setOverall({ ...overall, [item]: e.target.value });
-										}} />
-								))}
-							</div>
-											
-							<div className="mt-3">
-								<h3 className="col-text">{type === "list" ? "Lists" : "Pages"}</h3>
+								<div className="mt-3">
+									<h3>Overall</h3>
+									{overallCol.map((item, idx) => (
+										<Input key={idx}
+											prop={item}
+											val={overall}
+											// type={type}
+											onChange={e => {
+												setOverall({ ...overall, [item]: e.target.value });
+											}} />
+									))}
+								</div>
 												
-								{(type === "list" || type === "carousel") && array.map((singleList, index) => (
-									<div key={index} className="flex mb-5">
-										<div className="w-3/4 shrink-0 sub-section">
-											{type === "list"
-												? listCol.map((item, idx) => (
-													<Input key={idx}
-														prop={item}
-														val={singleList}
-														onChange={(e) => handleArrayChange(e, index)}
-													/>
-												))
-												: pageCol.map((item, idx) => (
-													<Input key={idx}
-														prop={item}
-														val={singleList}
-														// type={type}
-														onChange={(e) => handleArrayChange(e, index)}
-													/>))}
-											{array.length - 1 === index && (
-												<Button onClick={handleArrayAdd} text={`Add a ${type === "list" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
-											)}
-										</div>
+								<div className="mt-3">
+									<h3 className="col-text">{type === "list" ? "Lists" : "Pages"}</h3>
+													
+									{(type === "list" || type === "carousel") && array.map((singleList, index) => (
+										<div key={index} className="flex mb-5">
+											<div className="w-3/4 shrink-0 sub-section">
+												{type === "list"
+													? listCol.map((item, idx) => (
+														<Input key={idx}
+															prop={item}
+															val={singleList}
+															onChange={(e) => handleArrayChange(e, index)}
+														/>
+													))
+													: pageCol.map((item, idx) => (
+														<Input key={idx}
+															prop={item}
+															val={singleList}
+															// type={type}
+															onChange={(e) => handleArrayChange(e, index)}
+														/>))}
+												{array.length - 1 === index && (
+													<Button onClick={handleArrayAdd} text={`Add a ${type === "list" ? "List" : "Page"}`} color="border-cyan-600 hover:bg-cyan-500 focus:ring-cyan-500" />
+												)}
+											</div>
 
-										<div className="ml-10 self-center">
-											{array.length !== 1 && (
-												<Button onClick={() => handleArrayRemove(index)} text="Remove" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
-											)}
+											<div className="ml-10 self-center">
+												{array.length !== 1 && (
+													<Button onClick={() => handleArrayRemove(index)} text="Remove" color="border-red-600 hover:bg-red-500 focus:ring-red-500" />
+												)}
+											</div>
 										</div>
-									</div>
-								))}
+									))}
+								</div>
+								{/* <UploadImage type={type} /> */}
+								<ImageInput prop={`${category}/${title}/${type}`} type={type} />
 							</div>
-							{/* <UploadImage type={type} /> */}
-							<ImageInput prop={`${category}/${title}/${type}`} type={type} />
-						</div>
-						: <div className="grid grid-cols-1">
-							{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}
-							<div className="mt-3">
-								<h3>Info</h3>
-								{infoCol.map((item, idx) => (
-									<Input key={idx}
-										prop={item}
-										val={work}
-										onChange={e => {
-											setWork({ ...work, [item]: e.target.value });
-										}} />
-								))}
+							: <div className="grid grid-cols-1">
+								{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}
+								<div className="mt-3">
+									<h3>Info</h3>
+									{infoCol.map((item, idx) => (
+										<Input key={idx}
+											prop={item}
+											val={work}
+											onChange={e => {
+												setWork({ ...work, [item]: e.target.value });
+											}} />
+									))}
+								</div>
+								{/* <UploadImage /> */}
+								<ImageInput prop={`${category}/${work.title}/heroImage`} category={category} />
+								{/* add overview */}
+								<div className="mt-3">
+									<h3>Overview</h3>
+									{overviewCol.map((item, idx) => (
+										<Input key={idx}
+											prop={item}
+											val={overview}
+											onChange={e => {
+												setOverview({ ...overview, [item]: e.target.value });
+											}} />
+									))}
+								</div>
 							</div>
-							{/* <UploadImage /> */}
-							<ImageInput prop={`${category}/${work.title}/heroImage`} category={category} />
-							{/* add overview */}
-							<div className="mt-3">
-								<h3>Overview</h3>
-								{overviewCol.map((item, idx) => (
-									<Input key={idx}
-										prop={item}
-										val={overview}
-										onChange={e => {
-											setOverview({ ...overview, [item]: e.target.value });
-										}} />
-								))}
-							</div>
-						</div>
-					}
+						}
+					</div>
+					<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+						<Button type="submit" onClick={(e) => handleSubmit(e)} text="Save" color="text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" />
+					</div>
 				</div>
-				<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-					<Button type="submit" onClick={(e) => handleSubmit(e)} text="Save" color="text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" />
-				</div>
-			</div>
-		</form>
+			</form>
+		</section>
 	);
 }
 
