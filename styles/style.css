@@ -278,6 +278,9 @@ ul {
 .templates .overview .right-overview p:not(:last-child) {
   margin-bottom: 40px;
 }
+.templates .text-image, .templates .multi-images {
+  max-width: 1064px;
+}
 .templates .text-image h2, .templates .multi-images h2 {
   margin-bottom: 50px;
 }
