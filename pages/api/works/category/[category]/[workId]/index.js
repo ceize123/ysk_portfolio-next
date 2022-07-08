@@ -15,9 +15,11 @@ export default async function handler(req, res) {
 
 		try {
 			const work = await Work.findOne({ "_id": workId });
-			res.status(200).json(work);
+			// res.status(200).json(work);
+			res.status(200).json(JSON.stringify(work));
 		} catch (err) {
-			res.status(500).json(err);
+			// res.status(500).json(err);
+			res.status(500).json(JSON.stringify(err));
 		}
 		
 		// try {
