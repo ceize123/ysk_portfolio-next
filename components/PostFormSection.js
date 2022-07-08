@@ -9,6 +9,7 @@ import Input from "./Input";
 import UploadImage from "./UploadImage";
 import { failAlert, successAlert } from "./Alerts";
 import ImageInput from "./ImageInput";
+import ImageInputMobile from "./ImageInputMobile";
 import DetailCols from "./DetailCols";
 import { useShareFiles, useShareCategories, useShareImageUrls } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
@@ -24,7 +25,8 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 		description: "",
 		navColor: "",
 		navTextColor: "",
-		heroImage: []
+		heroImage: [],
+		heroImageMobile: [],
 	});
 	const [overview, setOverview] = useState({});
 
@@ -38,7 +40,8 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			description: "",
 			navColor: "",
 			navTextColor: "",
-			heroImage: []
+			heroImage: [],
+			heroImageMobile: [],
 		});
 		setOverview({
 			subtitle: "",
@@ -73,8 +76,8 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 	// // Add section part
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
-	const { files, setFiles } = useBetween(useShareFiles);
-	const { imageUrls, setImageUrls } = useBetween(useShareImageUrls);
+	// const { files, setFiles } = useBetween(useShareFiles);
+	const { imageUrls, setImageUrls, imageUrlsMobile, setImageUrlsMobile } = useBetween(useShareImageUrls);
 	const [array, setArray] = useState([]);
 
 	// handle array of object from fields
@@ -117,15 +120,20 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 		}
 	};
 
-	useEffect(() => {
-		if (filter === "sections") setOverall({ ...overall, images: files });
-		else setWork({ ...work, heroImage: files });
-	}, [files]);
+	// useEffect(() => {
+	// 	if (filter === "sections") setOverall({ ...overall, images: files });
+	// 	else setWork({ ...work, heroImage: files });
+	// }, [files]);
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, images: imageUrls });
 		else setWork({ ...work, heroImage: imageUrls });
 	}, [imageUrls]);
+
+	useEffect(() => {
+		if (filter === "sections") setOverall({ ...overall, imagesMobile: imageUrlsMobile });
+		else setWork({ ...work, heroImageMobile: imageUrlsMobile });
+	}, [imageUrlsMobile]);
 
 	useEffect(() => {
 		setOverall({
@@ -233,6 +241,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 			setOverall({});
 			setArray([]);
 			setImageUrls([]);
+			setImageUrlsMobile([]);
 			successAlert(filter, "Section is created!", refresh);
 			// window.location.reload();
 
@@ -329,6 +338,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 								</div>
 								{/* <UploadImage type={type} /> */}
 								<ImageInput prop={`${category}/${title}/${type}`} type={type} />
+								<ImageInputMobile prop={`${category}/${title}/${type}/mobile`} type={type} />
 							</div>
 							: <div className="grid grid-cols-1">
 								{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}
@@ -345,6 +355,7 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 								</div>
 								{/* <UploadImage /> */}
 								<ImageInput prop={`${category}/${work.title}/heroImage`} category={category} />
+								<ImageInputMobile prop={`${category}/${work.title}/heroImage/mobile`} category={category} />
 								{/* add overview */}
 								<div className="mt-3">
 									<h3>Overview</h3>

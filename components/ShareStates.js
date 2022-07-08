@@ -55,9 +55,12 @@ export const useShareCategories = () => {
 
 export const useShareImageUrls = () => {
 	const [imageUrls, setImageUrls] = useState([]);
+	const [imageUrlsMobile, setImageUrlsMobile] = useState([]);
 	return {
 		imageUrls,
 		setImageUrls,
+		imageUrlsMobile,
+		setImageUrlsMobile
 	};
 };
 

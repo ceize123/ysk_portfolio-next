@@ -5,53 +5,82 @@ import { useSharePage } from "./ShareStates";
 import { useBetween } from "use-between";
 
 function Navbar() {
+	const [toggle, setToggle] = useState(false);
+	const [hideList, setHideList] = useState(true);
+
 	const router = useRouter();
 	// const [position, setPosition] = useState("absolute");
 	const { setPage } = useBetween(useSharePage);
 
 	useEffect(() => {
 		const body = document.querySelector("body");
+		const ul = document.querySelector("nav ul");
 		if (router.pathname === "/") {
-			body.style.background = "linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%)";
+			ul.style.color = "inherit";
+			ul.style.backgroundColor = "inherit";
 			body.style.overflowY = "hidden";
+			setToggle(false);
+			setHideList(true);
 			// setPosition("fixed");
 		} else {
-			body.style.background = "#FFF";
 			body.style.overflowY = "visible";
 			// setPosition("static");
 		}
 	}, [router]);
 
+	const handleClick = () => {
+		setToggle(!toggle);
+		setHideList(!hideList);
+	};
+
 	return (
 		// <nav className={`header ${position} right-0 left-0 mx-auto z-30`} >
-		<nav className="header absolute top-0 right-0 left-0 mx-auto z-30">
-			<ul className="main-nav flex justify-center text-primary" >
-				<li>
+		<nav className="header absolute top-0 right-0 left-0 mx-auto z-30 flex justify-end md:block">
+			<div className="menu-icon mr-3.5 block md:hidden">
+				<svg className={`ham hamRotate ${toggle && "active"}`} viewBox="0 0 100 100" width="50" onClick={handleClick}>
+					<path
+						className="line top"
+						d="m 30,33 h 40 c 0,0 9.044436,-0.654587 9.044436,-8.508902 0,-7.854315 -8.024349,-11.958003 -14.89975,-10.85914 -6.875401,1.098863 -13.637059,4.171617 -13.637059,16.368042 v 40" />
+					<path
+						className="line bottom"
+						d="m 30,50 h 60" />
+					{/* <path
+						className="line bottom"
+						d="m 30,67 h 40 c 12.796276,0 15.357889,-11.717785 15.357889,-26.851538 0,-15.133752 -4.786586,-27.274118 -16.667516,-27.274118 -11.88093,0 -18.499247,6.994427 -18.435284,17.125656 l 0.252538,40" /> */}
+				</svg>
+				{/* <input className="menu-icon__cheeckbox" type="checkbox" />
+				<div>
+					<span className="span-a"></span>
+					<span></span>
+				</div> */}
+			</div>
+			<ul className={`main-nav md:flex justify-center text-primary mt-20 md:mt-0 absolute ${hideList ? "opacity-0" : "opacity-100 left-0 top-0 right-0 bottom-0 text-center"}`} >
+				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>
 					</Link>
 				</li>
-				<li>
+				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(1)}>Works</a>
 					</Link>
 				</li>
-				<li>
+				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(2)}>About me</a>
 					</Link>
 				</li>
-				<li>
+				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(3)}>Contact</a>
 					</Link>
 				</li>
-				<li>
+				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
 					<Link href="/">
 						<a className="hover:text-secondary">Resume</a>
 					</Link>
 				</li>
-				<li>
+				<li className="hidden md:block">
 					<Link href="/dashboard">
 						<a className="hover:text-secondary">Dashboard</a>
 					</Link>

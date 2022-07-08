@@ -4,6 +4,7 @@ import firstLetter from "./FirstLetter";
 import Button from "./Button";
 import Input from "./Input";
 import ImageInput from "./ImageInput";
+import ImageInputMobile from "./ImageInputMobile";
 import UploadImage from "./UploadImage";
 import { validate } from "./Validate";
 import { deleteFromFirebase } from "./ImageDelete";
@@ -23,11 +24,11 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 	}, [overview]);
 
 	// 
-	const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
+	// const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
 	const [overall, setOverall] = useState(prop);
 	const [array, setArray] = useState([]);
 	const [hasImage, setHasImage] = useState(false);
-	const { imageUrls } = useBetween(useShareImageUrls);
+	const { imageUrls, imageUrlsMobile } = useBetween(useShareImageUrls);
 	const [keys, setKeys] = useState(Object.keys(prop));
 	const subKeys = isOverview
 		? Object.keys(prop.overview)
@@ -74,18 +75,23 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		}
 	};
 
-	useEffect(() => {
-		if (filter === "sections") {
-			setOverall({ ...overall, images: updateFiles });
-		} else {
-			setWork({ ...work, heroImage: updateFiles });
-		}
-	}, [updateFiles]);
+	// useEffect(() => {
+	// 	if (filter === "sections") {
+	// 		setOverall({ ...overall, images: updateFiles });
+	// 	} else {
+	// 		setWork({ ...work, heroImage: updateFiles });
+	// 	}
+	// }, [updateFiles]);
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, images: imageUrls });
 		else setWork({ ...work, heroImage: imageUrls });
 	}, [imageUrls]);
+
+	useEffect(() => {
+		if (filter === "sections") setOverall({ ...overall, imagesMobile: imageUrlsMobile });
+		else setWork({ ...work, heroImageMobile: imageUrlsMobile });
+	}, [imageUrlsMobile]);
 
 	useEffect(() => {
 		
@@ -101,13 +107,13 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			
 			if (overall.type !== "textOnly") {
 				setHasImage(true);
-				setUpdateFiles(prop.images);
+				// setUpdateFiles(prop.images);
 			} else {
 				setHasImage(false);
 			}
 		} else {
 			setOverview(prop.overview);
-			setUpdateFiles(prop.heroImage);
+			// setUpdateFiles(prop.heroImage);
 			setHasImage(true);
 			// setSubKeys(Object.keys(work[overview]));
 			if (isOverview) {
@@ -247,6 +253,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									))}
 								</div>
 								{hasImage && <ImageInput prop={`${param}/${title}/${overall.type}`} category={param} imageAry={prop.images} />}
+								{hasImage && <ImageInputMobile prop={`${param}/${title}/${overall.type}/mobile`} category={param} imageAry={prop.imagesMobile} />}
 								{/* {hasImage && <UploadImage type={overall.type} isUpdate={true}/>} */}
 							</div> 
 							: <div className="grid grid-cols-1">
@@ -281,6 +288,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									}
 								</div>
 								{hasImage && <ImageInput prop={`${param}/${work.title}/heroImage`} category={param} />}
+								{hasImage && <ImageInputMobile prop={`${param}/${work.title}/heroImage/mobile`} category={param} />}
 								{/* {hasImage && <UploadImage isUpdate={true}/>} */}
 							</div>	
 						}

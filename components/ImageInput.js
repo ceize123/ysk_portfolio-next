@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { storage } from "../util/firebase";
-import { ref, uploadBytes, listAll, getDownloadURL, deleteObject } from "firebase/storage";
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import Image from "next/image";
 import Button from "./Button";
 import { deleteFromFirebase } from "./ImageDelete";
 import { useShareImageUrls } from "./ShareStates";
 import { useBetween } from "use-between";
+import { HiOutlineCheckCircle } from "react-icons/hi";
 
 // Firebase
 // https://www.youtube.com/watch?v=YOAeBSCkArA
@@ -14,7 +15,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = ""}) {
 	const imgRef = useRef();
 	const imagesListRef = ref(storage, `${prop}/`);
 	const [imageUpload, setImageUpload] = useState(null);
-	const {imageUrls, setImageUrls} = useBetween(useShareImageUrls);
+	const { imageUrls, setImageUrls } = useBetween(useShareImageUrls);
 
 	const recursionUpload = (number) => {
 		const imageRef = ref(storage, `${prop}/${imageUpload[number].name + v4()}`);
@@ -141,6 +142,8 @@ function ImageInput({ prop, type = "", category = "", imageAry = ""}) {
 	// }, []);
 
 	useEffect(() => {
+		setImageUpload(null);
+		imgRef.current.value = "";
 		setImageUrls([]);
 		if (type === "") {
 			listAll(imagesListRef)
@@ -164,14 +167,14 @@ function ImageInput({ prop, type = "", category = "", imageAry = ""}) {
 	}, [category, prop, type]);
 
 	useEffect(() => {
-		console.log(imageUpload);
 		setImageUrls([]);
 	}, [imageUpload]);
 
 	return (
 		<div className="mb-2 images upload-section">
-			<label htmlFor="images" className="block text-sm font-medium text-gray-700">
+			<label htmlFor="images" className="flex items-center text-sm font-medium text-gray-700">
 				Images
+				{imageUrls.length > 0 && <HiOutlineCheckCircle />}
 			</label>
 			<input
 				type="file"

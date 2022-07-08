@@ -16,6 +16,7 @@ module.exports = {
 			red: colors.red,
 			cyan: colors.cyan,
 			lime: colors.lime,
+			black: colors.black
 		},
 		fontFamily: {
 			Lexend: ["Lexend Deca", "sans-serif"],

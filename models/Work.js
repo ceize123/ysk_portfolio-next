@@ -14,6 +14,7 @@ const WorkSchema = new mongoose.Schema({
 	navColor: {type: String, required: true},
 	navTextColor: {type: String, required: true},
 	heroImage: [Object],
+	heroImageMobile: [Object],
 	overview: OverviewSchema,
 	sections: [Object]
 }, { _id: { type: mongoose.Schema.ObjectId, auto: true }});

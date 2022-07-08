@@ -1,4 +1,5 @@
 import firstLetter from "./FirstLetter";
+import { HiOutlineCheckCircle } from "react-icons/hi";
 
 function Input({ prop, val = "", onChange }) {
 	const key = prop;
@@ -13,9 +14,10 @@ function Input({ prop, val = "", onChange }) {
 	return (
 		<div>
 			<div className={`mb-2 ${prop}`}>
-				<label htmlFor={prop} className="block text-sm font-medium text-gray-700">
+				<label htmlFor={prop} className="flex items-center text-sm font-medium text-gray-700">
 					{/* {prop.charAt(0).toUpperCase() + prop.slice(1)} */}
 					{firstLetter("upper", prop)}
+					{val[key] && <HiOutlineCheckCircle />}
 				</label>
 				<input
 					// type={prop === "imagesNeed" ? "number" : "text"}

@@ -19,7 +19,6 @@ function Carousel({ prop }) {
 		let result = [];
 		let count = 0;
 		pages.forEach((item) => {
-			console.log(item.imagesNeed);
 			// result.push(data.images.length % item.imagesNeed ? [] : [data.images.slice(i, i + item.imagesNeed)]);
 			// result.push(data.images.length % item.imagesNeed ? [] : [data.images.slice(count, count + item.imagesNeed)]);
 			result.push([data.images.slice(count, count + item.imagesNeed)]);

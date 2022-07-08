@@ -1,33 +1,22 @@
+import { useEffect } from "react";
 import Hero from "../../../components/sections/Hero";
 import Overview from "../../../components/sections/Overview";
 import TypeSection from "../../../components/TypeSection";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import Footer from "../../../components/Footer";
 
 function Work({ category, work }) {
 	useEffect(() => {
-		AOS.init({
-			// initialise with other settings
-			delay: 200,
-			duration: 800,
-			offset: 0
-		});
-
-	}, []);
-
+		const ul = document.querySelector("nav ul");
+		ul.style.color = work.navTextColor;
+		ul.style.backgroundColor = work.navColor;
+	}, [work]);
 	return (
 		<div className="front-end">
 			<Hero data={work} />
 			<section className="mx-auto container templates">
 				<Overview prop={work} />
 				{work.sections.map((section, idx) => (
-					<section key={idx}
-						data-aos={`${idx % 2 ? "fade-left" : "fade-right"}`}
-						data-aos-easing="ease-out"
-						data-aos-anchor-placement="center-bottom"
-					>
+					<section key={idx} >
 						<TypeSection prop={section} />
 					</section>
 				))}

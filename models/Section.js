@@ -17,6 +17,7 @@ const SectionSchema = new mongoose.Schema({
 	title: {type: String},
 	paragraph: {type: String},
 	images: [Object],
+	imagesMobile: [Object],
 	color: {type: String},
 	pages: [PageSchema],
 	lists: [ListSchema]
