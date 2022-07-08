@@ -1,5 +1,3 @@
-import { workData } from "../data/works";
-
-export default function find(cate) {
-	return workData.find(work => work.category === cate.toLowerCase());
+export default function find(data, cate) {
+	return data.find(work => work.category.toLowerCase() === cate.toLowerCase());
 }

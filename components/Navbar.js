@@ -26,8 +26,8 @@ function Navbar() {
 		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
 		if (router.pathname === "/") {
-			ul.style.color = "inherit";
 			ul.style.backgroundColor = "inherit";
+			ul.style.color = "inherit";
 			body.style.overflowY = "hidden";
 			setToggle(false);
 			setHideList(true);
@@ -70,7 +70,7 @@ function Navbar() {
 					<span></span>
 				</div> */}
 			</div>
-			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 absolute left-0 top-0 right-0 bottom-0 text-center ${hideList && windowWidth < 768 && "hidden"}`} >
+			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${hideList && windowWidth < 768 && "hidden"}`} >
 				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>
