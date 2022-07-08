@@ -150,7 +150,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 	const { params } = context;
 	const { category, workId } = params;
-	const response = await fetch(`http://localhost:3000/api/works/category/${category}/${workId}`);
+	// const response = await fetch(`http://localhost:3000/api/works/category/${category}/${workId}`);
+	const response = await fetch(`${process.env.URL}/api/works/category/${category}/${workId}`);
 	const data = await response.json();
 	const work = data;
 

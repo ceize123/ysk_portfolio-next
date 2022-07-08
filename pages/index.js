@@ -6,13 +6,27 @@ import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
-import { useSharePage } from "../components/ShareStates";
+import { useSharePage, useShareWorks } from "../components/ShareStates";
 import { useBetween } from "use-between";
 
-export default function Home({ works }) {
+export default function Home() {
 	const [scrolled, setScrolled] = useState(true);
 	// const [page, setPage] = useState(0);
 	const { page, setPage } = useBetween(useSharePage);
+	const { works } = useBetween(useShareWorks);
+
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		const response = await fetch("/api/works");
+	// 		const data = await response.json();
+	// 		setWorks(data);
+	// 	};
+
+	// 	// call the function
+	// 	fetchData()
+	// 		// make sure to catch any error
+	// 		.catch(console.error);
+	// }, []);
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
@@ -147,7 +161,7 @@ export default function Home({ works }) {
 			<div className="empty-div"></div>
 			<section id="works" className="relative">
 				<section className="carousel-section mx-auto">
-					<Carousel works={works} />
+					{works !== null && <Carousel works={works} />}
 				</section>
 			</section>
 			<div className="empty-div"></div>
@@ -162,17 +176,17 @@ export default function Home({ works }) {
 	);
 }
 
-export async function getStaticProps() {
-	console.log(process.env.URL);
-	const response = await fetch(`${process.env.URL}/api/works`);
-	// const response = await fetch("/api/works");
-	const data = await response.json();
-	const works = data;
+// export async function getStaticProps() {
+// 	console.log(process.env.URL);
+// 	const response = await fetch(`${process.env.URL}/api/works`);
+// 	// const response = await fetch("/api/works");
+// 	const data = await response.json();
+// 	const works = data;
 
-	return {
-		props: {
-			works,
-		},
-		revalidate: 10
-	};
-}
+// 	return {
+// 		props: {
+// 			works,
+// 		},
+// 		revalidate: 10
+// 	};
+// }

@@ -10,11 +10,9 @@ export default async function handler(req, res) {
 
 		try {
 			const cate = await Category.find({ "category": category });
-			// res.status(200).json(cate);
-			res.status(200).json(JSON.stringify(cate));
+			res.status(200).json(cate);
 		} catch (err) {
-			// res.status(500).json(err);
-			res.status(500).json(JSON.stringify(err));
+			res.status(500).json(err);
 		}
 
 		// console.log(req.query);

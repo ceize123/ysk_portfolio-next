@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
-import {useShareCategories} from "../components/ShareStates";
+import {useShareWorks} from "../components/ShareStates";
 
 const choices = [
 	"Update Section",
@@ -13,7 +13,7 @@ function Dashboard() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [dashboardData, setDashboardData] = useState(null);
 	const [isUpdate, setIsUpdate] = useState(true);
-	const {categories, setCategories, category, setCategory} = useBetween(useShareCategories);
+	const {categories, setCategories, category, setCategory} = useBetween(useShareWorks);
 	// const [category, setCategory] = useState();
 	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();

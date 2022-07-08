@@ -1,31 +1,34 @@
 import React, { useState, useCallback } from "react";
 import { ListItem } from "../../../components/ListItem";
 import Button from "../../../components/Button";
+import { useShareWorks } from "../../../components/ShareStates";
+import { useBetween } from "use-between";
 
 // https://medium.com/nmc-techblog/easy-drag-and-drop-in-react-22778b30ba37
-function Order({ works }) {
-	const [projects, setProjects] = useState(works);
+function Order() {
+	// const [projects, setProjects] = useState(works);
+	const { works, setWorks } = useBetween(useShareWorks);
 
 	const moveProjectListItem = useCallback(
 		(dragIndex, hoverIndex) => {
-			const dragItem = projects[dragIndex];
-			const hoverItem = projects[hoverIndex];
+			const dragItem = works[dragIndex];
+			const hoverItem = works[hoverIndex];
 			// Swap places of dragItem and hoverItem in the projects array
-			setProjects(projects => {
+			setWorks(projects => {
 				const updatedProjects = [...projects];
 				updatedProjects[dragIndex] = hoverItem;
 				updatedProjects[hoverIndex] = dragItem;
 				return updatedProjects;
 			});
 		},
-		[projects],
+		[works],
 	);
 
 	const handleSave = async () => {
-		console.log(projects);
+		console.log(works);
 		const response = await fetch("/api/works", {
 			method: "PUT",
-			body: JSON.stringify({projects}),
+			body: JSON.stringify({works}),
 			headers: {
 				"Content-Type": "application/json"
 			}
@@ -51,7 +54,7 @@ function Order({ works }) {
 							<td className="text-2xl py-3 border">{item.category}</td>
 						</tr>
 					))} */}
-					{projects.map((project, index) => (
+					{works && works.map((project, index) => (
 						<tr key={index} className="hover:bg-indigo-500 hover:text-white">
 							<td className="text-2xl py-3 border">
 								<ListItem
@@ -72,15 +75,15 @@ function Order({ works }) {
 
 export default Order;
 
-export async function getStaticProps() {
-	// const response = await fetch("http://localhost:3000/api/works");
-	const response = await fetch(`${process.env.URL}/api/works`);
-	const data = await response.json();
-	const works = data;
+// export async function getStaticProps() {
+// 	// const response = await fetch("http://localhost:3000/api/works");
+// 	const response = await fetch(`${process.env.URL}/api/works`);
+// 	const data = await response.json();
+// 	const works = data;
 
-	return {
-		props: {
-			works,
-		},
-	};
-}
+// 	return {
+// 		props: {
+// 			works,
+// 		},
+// 	};
+// }

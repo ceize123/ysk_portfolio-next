@@ -6,12 +6,9 @@ export default async function handle(req, res) {
 	if (req.method === "GET") {
 		try {
 			const categories = await Category.find();
-			// res.status(200).json(categories);
-			res.status(200).json(JSON.stringify(categories));
-
+			res.status(200).json(categories);
 		} catch (err) {
-			// res.status(500).json(err);
-			res.status(500).json(JSON.stringify(err));
+			res.status(500).json(err);
 		}
 
 		// const { category } = req.query;

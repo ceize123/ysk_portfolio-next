@@ -33,20 +33,24 @@ export const useShareProject = () => {
 	};
 };
 
-export const useShareCategories = () => {
+export const useShareWorks= () => {
+	const [works, setWorks] = useState(null);
 	const [categories, setCategories] = useState([]);
 	const [category, setCategory] = useState();
 	useEffect(() => {
 		async function fetchData() {
-			// const response = await fetch("/api/works");
-			const response = await fetch(`${process.env.URL}/api/works`);
+			const response = await fetch("/api/works");
 			const data = await response.json();
+			setWorks(data);
 			setCategories(data.map(value => value.category));
 			setCategory(data[0].category);
 		}
 		fetchData();
 	}, []);
+
 	return {
+		works,
+		setWorks,
 		categories,
 		setCategories,
 		category,
@@ -72,4 +76,5 @@ export const useSharePage = () => {
 		setPage,
 	};
 };
+
 
