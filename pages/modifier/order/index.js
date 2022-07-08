@@ -73,7 +73,8 @@ function Order({ works }) {
 export default Order;
 
 export async function getStaticProps() {
-	const response = await fetch("http://localhost:3000/api/works");
+	// const response = await fetch("http://localhost:3000/api/works");
+	const response = await fetch(`${process.env.URL}/api/works`);
 	const data = await response.json();
 	const works = data;
 

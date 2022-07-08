@@ -29,7 +29,8 @@ function Work({ category, work }) {
 export default Work;
 
 export async function getStaticPaths() {
-	const response = await fetch("http://localhost:3000/api/works");
+	// const response = await fetch("http://localhost:3000/api/works");
+	const response = await fetch(`${process.env.URL}/api/works`);
 	const data = await response.json();
 	let dataArray = [];
 

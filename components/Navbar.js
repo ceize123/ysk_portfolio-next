@@ -7,7 +7,7 @@ import { useBetween } from "use-between";
 function Navbar() {
 	const [toggle, setToggle] = useState(false);
 	const [hideList, setHideList] = useState(true);
-	const [windowWidth, setWindowWidth] = useState();
+	const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" && window.innerWidth);
 
 	const router = useRouter();
 	// const [position, setPosition] = useState("absolute");
@@ -51,7 +51,7 @@ function Navbar() {
 
 	return (
 		// <nav className={`header ${position} right-0 left-0 mx-auto z-30`} >
-		<nav className="header absolute top-0 right-0 left-0 mx-auto z-30 flex justify-end md:block">
+		<nav className="header absolute top-0 right-0 left-0 mx-auto z-30 flex justify-end md:justify-center">
 			<div className={`menu-icon mr-3.5 block md:hidden ${toggle && "active"}`}>
 				<svg className={`ham hamRotate ${toggle && "active"}`} viewBox="0 0 100 100" width="50" onClick={handleClick}>
 					<path
@@ -70,7 +70,7 @@ function Navbar() {
 					<span></span>
 				</div> */}
 			</div>
-			<ul className={`main-nav md:flex justify-center text-primary mt-20 md:mt-0 absolute ${hideList ? "hidden" : "block left-0 top-0 right-0 bottom-0 text-center"}`} >
+			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 absolute left-0 top-0 right-0 bottom-0 text-center ${hideList && windowWidth < 768 && "hidden"}`} >
 				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>

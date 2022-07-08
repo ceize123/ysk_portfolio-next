@@ -38,7 +38,8 @@ export const useShareCategories = () => {
 	const [category, setCategory] = useState();
 	useEffect(() => {
 		async function fetchData() {
-			const response = await fetch("/api/works");
+			// const response = await fetch("/api/works");
+			const response = await fetch(`${process.env.URL}/api/works`);
 			const data = await response.json();
 			setCategories(data.map(value => value.category));
 			setCategory(data[0].category);
@@ -72,29 +73,3 @@ export const useSharePage = () => {
 	};
 };
 
-
-
-
-// export const useShareType = () => {
-// 	const [type, setType] = useState(types[0]);
-// 	return {
-// 		type,
-// 		setType,
-// 	};
-// };
-
-// export const useShareOverall = () => {
-// 	const [overall, setOverall] = useState({});
-// 	return {
-// 		overall,
-// 		setOverall,
-// 	};
-// };
-
-// export const useShareArray = () => {
-// 	const [array, setArray] = useState([]);
-// 	return {
-// 		array,
-// 		setArray,
-// 	};
-// };
