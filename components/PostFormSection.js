@@ -10,7 +10,6 @@ import UploadImage from "./UploadImage";
 import { failAlert, successAlert } from "./Alerts";
 import ImageInput from "./ImageInput";
 import ImageInputMobile from "./ImageInputMobile";
-import DetailCols from "./DetailCols";
 import { useShareFiles, useShareCategories, useShareImageUrls } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
