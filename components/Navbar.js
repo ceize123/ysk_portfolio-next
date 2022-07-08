@@ -7,10 +7,20 @@ import { useBetween } from "use-between";
 function Navbar() {
 	const [toggle, setToggle] = useState(false);
 	const [hideList, setHideList] = useState(true);
+	const [windowWidth, setWindowWidth] = useState();
 
 	const router = useRouter();
 	// const [position, setPosition] = useState("absolute");
 	const { setPage } = useBetween(useSharePage);
+
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+
+	const handleClick = () => {
+		setToggle(!toggle);
+		setHideList(!hideList);
+	};
 
 	useEffect(() => {
 		const body = document.querySelector("body");
@@ -28,15 +38,21 @@ function Navbar() {
 		}
 	}, [router]);
 
-	const handleClick = () => {
-		setToggle(!toggle);
-		setHideList(!hideList);
-	};
+	useEffect(() => {
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.addEventListener("resize", handleResize);
+		};
+	}, [windowWidth]);
+
+	
+	
 
 	return (
 		// <nav className={`header ${position} right-0 left-0 mx-auto z-30`} >
 		<nav className="header absolute top-0 right-0 left-0 mx-auto z-30 flex justify-end md:block">
-			<div className="menu-icon mr-3.5 block md:hidden">
+			<div className={`menu-icon mr-3.5 block md:hidden ${toggle && "active"}`}>
 				<svg className={`ham hamRotate ${toggle && "active"}`} viewBox="0 0 100 100" width="50" onClick={handleClick}>
 					<path
 						className="line top"
@@ -54,28 +70,28 @@ function Navbar() {
 					<span></span>
 				</div> */}
 			</div>
-			<ul className={`main-nav md:flex justify-center text-primary mt-20 md:mt-0 absolute ${hideList ? "opacity-0" : "opacity-100 left-0 top-0 right-0 bottom-0 text-center"}`} >
-				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
+			<ul className={`main-nav md:flex justify-center text-primary mt-20 md:mt-0 absolute ${hideList ? "hidden" : "block left-0 top-0 right-0 bottom-0 text-center"}`} >
+				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>
 					</Link>
 				</li>
-				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
+				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(1)}>Works</a>
 					</Link>
 				</li>
-				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
+				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(2)}>About me</a>
 					</Link>
 				</li>
-				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
+				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(3)}>Contact</a>
 					</Link>
 				</li>
-				<li className={`${hideList ? "opacity-0" : "opacity-100"}`}>
+				<li>
 					<Link href="/">
 						<a className="hover:text-secondary">Resume</a>
 					</Link>

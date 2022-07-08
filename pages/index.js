@@ -32,6 +32,7 @@ export default function Home({ works }) {
 
 		if (!scrolled) {
 			window.addEventListener("wheel", handleScroll);
+			window.addEventListener("touchmove", handleScroll);
 		}
 		// elements.forEach((item, idx) => {
 		// 	item.style.transform = `translateY(-${page*100}vh)`;
@@ -63,6 +64,7 @@ export default function Home({ works }) {
 			// clearInterval(interval);
 			clearTimeout(timer);
 			window.removeEventListener("wheel", handleScroll);
+			window.removeEventListener("touchmove", handleScroll);
 		};
 	}, [scrolled]);
 	
