@@ -5,18 +5,13 @@ import { useSharePage, useShareWidth } from "./ShareStates";
 import { useBetween } from "use-between";
 
 function Navbar() {
-	const [position, setPosition] = useState("absolute");
+	// const [position, setPosition] = useState("fixed");
 	const [toggle, setToggle] = useState(false);
 	const [hideList, setHideList] = useState(true);
 	const { windowWidth } = useBetween(useShareWidth);
 
 	const router = useRouter();
-	// const [position, setPosition] = useState("absolute");
 	const { setPage } = useBetween(useSharePage);
-
-	// const handleResize = () => {
-	// 	setWindowWidth(window.innerWidth);
-	// };
 
 	const handleClick = () => {
 		setToggle(!toggle);
@@ -32,11 +27,9 @@ function Navbar() {
 			body.style.overflowY = "hidden";
 			setToggle(false);
 			setHideList(true);
-			setPosition("absolute");
 			// setPosition("fixed");
 		} else {
 			body.style.overflowY = "visible";
-			setPosition("fixed");
 			// setPosition("static");
 		}
 	}, [router]);
@@ -44,7 +37,7 @@ function Navbar() {
 
 	return (
 		// <nav className={`header ${position} right-0 left-0 mx-auto z-30`} >
-		<nav className={`header ${position} top-0 right-0 left-0 mx-auto z-30 flex justify-end md:justify-center`}>
+		<nav className="header fixed top-0 right-0 left-0 mx-auto z-30 flex justify-end md:justify-center">
 			<div className={`menu-icon mr-3.5 block md:hidden ${toggle && "active"}`}>
 				<svg className={`ham hamRotate ${toggle && "active"}`} viewBox="0 0 100 100" width="50" onClick={handleClick}>
 					<path
@@ -63,7 +56,7 @@ function Navbar() {
 					<span></span>
 				</div> */}
 			</div>
-			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${hideList && windowWidth < 768 && "hidden"}`} >
+			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${hideList && windowWidth < 768 && "scale-0 translate-x-1/2 -mt-12"}`} >
 				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>

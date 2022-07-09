@@ -6,13 +6,18 @@ import Footer from "../../../components/Footer";
 import dbConnect from "../../../util/connection";
 import Category from "../../../models/Category";
 import Work from "../../../models/Work";
+import { useShareWidth } from "../../../components/ShareStates";
+import { useBetween } from "use-between";
 
-function WorkDetail({work}) {
+function WorkDetail({ work }) {
+	const { windowWidth } = useBetween(useShareWidth);
 
 	useEffect(() => {
-		const ul = document.querySelector("nav ul");
-		ul.style.color = work.navTextColor;
-		ul.style.backgroundColor = work.navColor;
+		if (windowWidth >= 768) {
+			const ul = document.querySelector("nav ul");
+			ul.style.color = work.navTextColor;
+			ul.style.backgroundColor = work.navColor;
+		}
 	}, [work]);
 
 	return (

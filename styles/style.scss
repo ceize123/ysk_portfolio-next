@@ -147,7 +147,7 @@ ul {
 			transition: all 500ms ease-in-out;
 
 			// that's all the pen about
-			clip-path: circle(30px at calc(100% - 30px) 30px);
+			clip-path: circle(30px at calc(100% - 20px) 20px);
 			// for AT
 			visibility: hidden;
 		}
@@ -246,6 +246,7 @@ ul {
 
 	@media only screen and (max-width: 767px) {
 		.main-nav {
+			transition: 0.5s all 0.2s ease;
 			// li {
 			// 	&:nth-child(1) {
 			// 		transition: 0.7s all ease;
@@ -271,6 +272,11 @@ ul {
 				margin: 15px 0;
 			}
 		} 
+	}
+}
+@media only screen and (max-width: 767px) {
+	.header {
+		height: 50px;
 	}
 }
 
@@ -532,7 +538,7 @@ ul {
 	max-height: 647px;
 	// position: relative;	
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
 	.hero-image {
 		max-height: inherit;
 		height: 65vw;
@@ -694,6 +700,12 @@ ul {
 .back-end, .front-end {
 	margin-top: 60px;
 	background: #FFF;
+}
+
+@media only screen and (max-width: 767px) {
+	.back-end, .front-end {
+	margin-top: 50px;
+}
 }
 .front-end {
 	.overview {
