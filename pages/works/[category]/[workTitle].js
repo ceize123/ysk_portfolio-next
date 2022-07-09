@@ -3,35 +3,11 @@ import Hero from "../../../components/sections/Hero";
 import Overview from "../../../components/sections/Overview";
 import TypeSection from "../../../components/TypeSection";
 import Footer from "../../../components/Footer";
-import findCat from "../../../components/FindCat";
-import findWork from "../../../components/FindWork";
-import { useShareWorks } from "../../../components/ShareStates";
-import { useBetween } from "use-between";
-import { useRouter } from "next/router";
 import dbConnect from "../../../util/connection";
 import Category from "../../../models/Category";
 import Work from "../../../models/Work";
 
 function WorkDetail({work}) {
-	const pathname = useRouter();
-	const { category, workTitle } = pathname.query;
-	const { works } = useBetween(useShareWorks);
-	// const [work, setWork] = useState();
-
-	// useEffect(() => {
-	// 	if (works && category && workTitle) {
-	// 		const cate = findCat(works, category);
-	// 		const w = findWork(cate, workTitle);
-
-	// 		const ul = document.querySelector("ul");
-	// 		ul.style.backgroundColor = w.navColor;
-	// 		ul.style.color = w.navTextColor;
-	// 		setWork(w);
-	// 	}
-	// }, [works, work, category, workTitle]);
-
-	// console.log(works[category]);
-	// const [work, setWork] = useState(works[category])
 
 	useEffect(() => {
 		const ul = document.querySelector("nav ul");
@@ -64,11 +40,10 @@ export default WorkDetail;
 export async function getStaticPaths() {
 	// const response = await fetch("http://localhost:3000/api/works");
 	// const response = await fetch(`${process.env.URL}/api/works`);
+	// const data = await response.json();
 
 	await dbConnect();
 	const response = await Category.find();
-	// const response = await fetch(`${process.env.URL}/api/works`);
-	// const data = await response.json();
 
 	const data = await JSON.parse(JSON.stringify(response));
 	let dataArray = [];
@@ -100,11 +75,10 @@ export async function getStaticProps(context) {
 	const { category, workTitle } = params;
 	// const response = await fetch(`http://localhost:3000/api/works/${workTitle}`);
 	// const response = await fetch(`${process.env.URL}/api/works/${workTitle}`);
+	// const data = await response.json();
 
 	await dbConnect();
 	const response = await Work.findOne({ "title": workTitle });
-	// const response = await fetch(`${process.env.URL}/api/works`);
-	// const data = await response.json();
 
 	const data = await JSON.parse(JSON.stringify(response));
 	const work = data;

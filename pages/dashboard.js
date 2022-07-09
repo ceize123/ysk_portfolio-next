@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
-import {useShareWorks} from "../components/ShareStates";
+import {useShareCategories} from "../components/ShareStates";
 
 const choices = [
 	"Update Section",
@@ -13,13 +13,14 @@ function Dashboard() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [dashboardData, setDashboardData] = useState(null);
 	const [isUpdate, setIsUpdate] = useState(true);
-	const {categories, setCategories, category, setCategory} = useBetween(useShareWorks);
+	const {categories, setCategories, category, setCategory} = useBetween(useShareCategories);
 	// const [category, setCategory] = useState();
 	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();
 	const [choice, setChoice] = useState();
 	const router = useRouter();
 
+	// need to be modified to staticProps
 	useEffect(() => {
 		async function fetchData() {
 			const response = await fetch("/api/works");

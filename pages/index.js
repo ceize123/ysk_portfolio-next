@@ -6,7 +6,7 @@ import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
-import { useSharePage, useShareWorks } from "../components/ShareStates";
+import { useSharePage } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
@@ -15,7 +15,6 @@ export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
 	// const [page, setPage] = useState(0);
 	const { page, setPage } = useBetween(useSharePage);
-	// const { works } = useBetween(useShareWorks);
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {

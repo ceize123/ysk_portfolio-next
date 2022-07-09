@@ -5,11 +5,10 @@ import Button from "./Button";
 import Input from "./Input";
 import ImageInput from "./ImageInput";
 import ImageInputMobile from "./ImageInputMobile";
-import UploadImage from "./UploadImage";
 import { validate } from "./Validate";
 import { deleteFromFirebase } from "./ImageDelete";
 import { failAlert, successAlert } from "./Alerts";
-import { useShareUpdateFiles, useShareUpdateNo, useShareImageUrls } from "./ShareStates";
+import { useShareUpdateNo, useShareImageUrls } from "./ShareStates";
 import Swal from "sweetalert2";
 
 function UpdateFormSection({ prop, isOverview = false, param, workId, filter, sectionNo = "", title="" }) {

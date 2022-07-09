@@ -6,19 +6,18 @@ import firstLetter from "./FirstLetter";
 import { validate } from "./Validate";
 import Button from "./Button";
 import Input from "./Input";
-import UploadImage from "./UploadImage";
 import { failAlert, successAlert } from "./Alerts";
 import ImageInput from "./ImageInput";
 import ImageInputMobile from "./ImageInputMobile";
-import { useShareFiles, useShareWorks, useShareImageUrls } from "./ShareStates";
+import { useShareCategories, useShareImageUrls } from "./ShareStates";
 import { overallCol, pageCol, listCol, infoCol, overviewCol } from "../data/column";
 import { types } from "../data/type";
 
-function PostFormSection({ param = "", workId = "", filter, title="" }) {
+function PostFormSection({ workId = "", filter, title="" }) {
 
 	const router = useRouter();
 	// Create work part
-	const {categories, category, setCategory} = useBetween(useShareWorks);
+	const {categories, category, setCategory} = useBetween(useShareCategories);
 	const [work, setWork] = useState({
 		title: "",
 		description: "",

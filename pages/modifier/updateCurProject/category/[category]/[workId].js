@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import { useBetween } from "use-between";
 import findCat from "../../../../../components/FindCat";
 import findId from "../../../../../components/FindId";
@@ -8,31 +6,23 @@ import Hero from "../../../../../components/sections/Hero";
 import Overview from "../../../../../components/sections/Overview";
 import PostFormSection from "../../../../../components/PostFormSection";
 import UpdateFormSection from "../../../../../components/UpdateFormSection";
-import { useShareUpdateNo, useShareWorks } from "../../../../../components/ShareStates";
+import { useShareUpdateNo } from "../../../../../components/ShareStates";
 import UpdateBtn from "../../../../../components/UpdateButtons";
 
-function WorkDetail() {
+import dbConnect from "../../../../../util/connection";
+import Category from "../../../../../models/Category";
+import Work from "../../../../../models/Work";
+
+function WorkDetail({category, work}) {
 	const { updateNo, setUpdateNo } = useBetween(useShareUpdateNo);
 
 	// Scroll to end of page
 	// https://stackoverflow.com/questions/23843619/js-for-smooth-scroll-to-the-bottom-of-the-page
-	const pathname = useRouter();
+	// const {pathname} = useRouter();
 	// useEffect(() => {
 	// 	window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
 	// }, [pathname]);
 
-	const { category, workId } = pathname.query;
-	const { works } = useBetween(useShareWorks);
-	const [project, setProject] = useState();
-
-	useEffect(() => {
-		if (works && category && workId) {
-			const cate = findCat(works, category);
-			const w = findId(cate, workId);
-
-			setProject(w);
-		}
-	}, [works, project, category, workId]);
 
 	const handleUpdate = (idx) => {
 		setUpdateNo(idx);
@@ -43,10 +33,10 @@ function WorkDetail() {
 
 	return (
 		<div className="mt-3 back-end">
-			{project &&
+			{work &&
 				<>
 					<h1 className="text-3xl mb-3 text-center">
-						Add New Section to {project._id} | {project.title} | {project.description}
+						Add New Section to {work._id} | {work.title} | {work.description}
 					</h1>
 					<section className="mx-auto container">
 						<div className="flex justify-between items-center mt-12 mb-7">
@@ -55,15 +45,15 @@ function WorkDetail() {
 						</div>
 					</section>
 					{(updateNo !== 1)
-						? <Hero data={project} />
+						? <Hero data={work} />
 						: <section className="mx-auto container">
 							<UpdateFormSection
-								prop={project}
+								prop={work}
 								isOverview={false}
 								param={category}
-								workId={project._id}
+								workId={work._id}
 								filter="hero"
-								title={project.title}
+								title={work.title}
 							/>
 						</section>
 					}
@@ -74,20 +64,20 @@ function WorkDetail() {
 							<UpdateBtn number={updateNo} index={2} handleUpdate={handleUpdate} handleCancel={handleCancel} />
 						</div>
 						{(updateNo !== 2)
-							? <Overview prop={project} />
+							? <Overview prop={work} />
 							: <UpdateFormSection
-								prop={project}
+								prop={work}
 								isOverview={true}
 								param={category}
-								workId={project._id}
+								workId={work._id}
 								filter="overview"
-								title={project.title}
+								title={work.title}
 							/>
 						}
 					</section>
 
 					<div className="mx-auto container">
-						{project.sections.map((section, idx) => (
+						{work.sections.map((section, idx) => (
 							<section className="mt-5 border-t-4" key={idx}>
 								<div className="flex justify-between items-center mt-12 mb-7">
 									<h2 className="text-2xl mb-3 text-left">{idx + 3}. {section.type}</h2>
@@ -98,10 +88,10 @@ function WorkDetail() {
 									: <UpdateFormSection
 										prop={section}
 										param={category}
-										workId={project._id}
+										workId={work._id}
 										filter="sections"
 										sectionNo={idx}
-										title={project.title}
+										title={work.title}
 									/>
 								}
 							</section>
@@ -111,7 +101,7 @@ function WorkDetail() {
 							<section className="mx-10 my-12">
 								<div className="mt-5 addNewSection">
 									<h2 className="text-center">Add Sections:</h2>
-									<PostFormSection param={category} workId={project._id} filter="sections" title={project.title} />
+									<PostFormSection param={category} workId={work._id} filter="sections" title={work.title} />
 								</div>
 							</section>
 						}
@@ -124,47 +114,56 @@ function WorkDetail() {
 
 export default WorkDetail;
 
-// export async function getStaticPaths() {
-// 	// const response = await fetch("http://localhost:3000/api/works");
-// 	const response = await fetch(`${process.env.URL}/api/works`);
-// 	const data = await response.json();
-// 	let dataArray = [];
+export async function getStaticPaths() {
+	// const response = await fetch("http://localhost:3000/api/works");
+	// const response = await fetch(`${process.env.URL}/api/works`);
+	// const data = await response.json();
 
-// 	data.map(category => {	
-// 		category.works.map(work => {
-// 			const param = { category: category.category, id: work._id };
-// 			dataArray.push(param);
-// 		});
-// 	});
+	await dbConnect();
+	const response = await Category.find();
 
-// 	const paths = dataArray.map(item => {
-// 		return {
-// 			params: {
-// 				category: `${item.category}`,
-// 				workId: `${item.id}`
-// 			}
-// 		};
-// 	});
+	const data = await JSON.parse(JSON.stringify(response));
+	let dataArray = [];
 
-// 	return {
-// 		paths,
-// 		fallback: false,
-// 	};
-// }
+	data.map(category => {	
+		category.works.map(work => {
+			const param = { category: category.category, id: work._id };
+			dataArray.push(param);
+		});
+	});
 
-// export async function getStaticProps(context) {
-// 	const { params } = context;
-// 	const { category, workId } = params;
-// 	// const response = await fetch(`http://localhost:3000/api/works/category/${category}/${workId}`);
-// 	const response = await fetch(`${process.env.URL}/api/works/category/${category}/${workId}`);
-// 	const data = await response.json();
-// 	const work = data;
+	const paths = dataArray.map(item => {
+		return {
+			params: {
+				category: `${item.category}`,
+				workId: `${item.id}`
+			}
+		};
+	});
 
-// 	return {
-// 		props: {
-// 			category: category,
-// 			work,
-// 		},
-// 		revalidate: 10
-// 	};
-// }
+	return {
+		paths,
+		fallback: false,
+	};
+}
+
+export async function getStaticProps(context) {
+	const { params } = context;
+	const { category, workId } = params;
+	// const response = await fetch(`http://localhost:3000/api/works/category/${category}/${workId}`);
+	// const response = await fetch(`${process.env.URL}/api/works/category/${category}/${workId}`);
+	// const data = await response.json();
+
+	await dbConnect();
+	const response = await Work.findOne({ "_id": workId });
+	const data = await JSON.parse(JSON.stringify(response));
+	const work = data;
+
+	return {
+		props: {
+			category: category,
+			work,
+		},
+		revalidate: 10
+	};
+}

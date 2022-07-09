@@ -33,15 +33,13 @@ export const useShareProject = () => {
 	};
 };
 
-export const useShareWorks= () => {
-	const [works, setWorks] = useState(null);
+export const useShareCategories= () => {
 	const [categories, setCategories] = useState([]);
 	const [category, setCategory] = useState();
 	useEffect(() => {
 		async function fetchData() {
 			const response = await fetch("/api/works");
 			const data = await response.json();
-			setWorks(data);
 			setCategories(data.map(value => value.category));
 			setCategory(data[0].category);
 		}
@@ -49,8 +47,6 @@ export const useShareWorks= () => {
 	}, []);
 
 	return {
-		works,
-		setWorks,
 		categories,
 		setCategories,
 		category,
