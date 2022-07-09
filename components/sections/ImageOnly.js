@@ -4,9 +4,8 @@
 // import img2 from "../../public/image/imageOnly.png"; 
 import ImageRender from "../ImageRender";
 
-function ImageOnly({prop}) {
+function ImageOnly({prop, images}) {
 	const data = prop;
-	const imageUrl = data.images[0];
 	// const [dimension, setDimension] = useState({ width: 0, height: 0 });
 	
 	// const handleImageLoad = (e) => {
@@ -14,7 +13,7 @@ function ImageOnly({prop}) {
 	// };
 	return (
 		<div className="image-only">
-			<ImageRender prop={imageUrl} />
+			<ImageRender prop={images[0]} />
 		</div>
 		// <div className="relative"
 		// 	style={{

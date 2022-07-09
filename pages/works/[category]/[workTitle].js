@@ -19,7 +19,6 @@ function Work() {
 		if (works && category && workTitle) {
 			const cate = findCat(works, category);
 			const w = findWork(cate, workTitle);
-			console.log(w);
 
 			const ul = document.querySelector("ul");
 			ul.style.backgroundColor = w.navColor;
@@ -27,6 +26,7 @@ function Work() {
 			setWork(w);
 		}
 	}, [works, work, category, workTitle]);
+
 	// console.log(works[category]);
 	// const [work, setWork] = useState(works[category])
 
@@ -35,6 +35,7 @@ function Work() {
 	// 	ul.style.color = work.navTextColor;
 	// 	ul.style.backgroundColor = work.navColor;
 	// }, [work]);
+
 	return (
 		<div className="front-end">
 			{work &&
@@ -42,7 +43,7 @@ function Work() {
 					<Hero data={work} />
 					<section className="mx-auto container templates">
 						<Overview prop={work} />
-						{work && work.sections.map((section, idx) => (
+						{work.sections.map((section, idx) => (
 							<section key={idx} >
 								<TypeSection prop={section} />
 							</section>

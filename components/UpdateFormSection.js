@@ -193,6 +193,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 						}
 					});
 					deleteFromFirebase(`${param}/${title}/${overall.type}`, overall.images);
+					deleteFromFirebase(`${param}/${title}/${overall.type}/mobile`, overall.imagesMobile);
 					setUpdateNo(null);
 				}).then(() => {
 					refresh();
@@ -215,7 +216,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 							? <div className={`grid grid-cols-1 ${firstLetter("lower", overall.type)}`}>
 								<div className="mt-3">
 									{keys.map((key, idx) => (
-										(key !== "type" && key !== "images" && key !== "lists" && key !== "pages")
+										(key !== "type" && key !== "images" && key !== "imagesMobile" && key !== "lists" && key !== "pages")
 										&& <Input key={idx}
 											prop={key}
 											val={overall}

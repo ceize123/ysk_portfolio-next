@@ -8,12 +8,14 @@ import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
 import { useSharePage, useShareWorks } from "../components/ShareStates";
 import { useBetween } from "use-between";
+import dbConnect from "../util/connection";
+import Category from "../models/Category";
 
-export default function Home() {
+export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
 	// const [page, setPage] = useState(0);
 	const { page, setPage } = useBetween(useSharePage);
-	const { works } = useBetween(useShareWorks);
+	// const { works } = useBetween(useShareWorks);
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {
@@ -161,7 +163,7 @@ export default function Home() {
 			<div className="empty-div"></div>
 			<section id="works" className="relative">
 				<section className="carousel-section mx-auto">
-					{works !== null && <Carousel works={works} />}
+					<Carousel works={works} />
 				</section>
 			</section>
 			<div className="empty-div"></div>
@@ -176,17 +178,19 @@ export default function Home() {
 	);
 }
 
-// export async function getStaticProps() {
-// 	console.log(process.env.URL);
-// 	const response = await fetch(`${process.env.URL}/api/works`);
-// 	// const response = await fetch("/api/works");
-// 	const data = await response.json();
-// 	const works = data;
+export async function getStaticProps() {
+	await dbConnect();
+	const response = await Category.find();
+	// const response = await fetch(`${process.env.URL}/api/works`);
+	// const data = await response.json();
 
-// 	return {
-// 		props: {
-// 			works,
-// 		},
-// 		revalidate: 10
-// 	};
-// }
+	const data = await JSON.parse(JSON.stringify(response));
+	const works = data;
+
+	return {
+		props: {
+			works,
+		},
+		revalidate: 10
+	};
+}

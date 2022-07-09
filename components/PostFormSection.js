@@ -147,6 +147,12 @@ function PostFormSection({ param = "", workId = "", filter, title="" }) {
 				images: [],
 			});
 			break;
+		case "titleImage":
+			setOverall({
+				title: "",
+				images: [],
+			});	
+			break;
 		case "carousel":
 			// setOverall({
 			// 	title: "",

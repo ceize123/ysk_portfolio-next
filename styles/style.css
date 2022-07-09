@@ -25,12 +25,6 @@ body {
   width: 100%;
 }
 
-.hero-image {
-  width: 100%;
-  height: 100vh;
-  max-height: 647px;
-}
-
 h1 {
   font-weight: 800;
   font-size: 48px;
@@ -63,6 +57,7 @@ a {
 p {
   font-weight: 400;
   font-size: 16px;
+  line-height: 30px;
 }
 
 table {
@@ -79,6 +74,20 @@ ul {
   list-style: none;
 }
 
+@media only screen and (max-width: 992px) {
+  h1 {
+    font-size: 40px;
+    line-height: 36px;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
+.header {
+  height: 60px;
+}
 .header .menu-icon .ham {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -315,6 +324,19 @@ ul {
     margin-right: 290px;
   }
 }
+.hero-image {
+  width: 100%;
+  height: 100vh;
+  max-height: 647px;
+}
+
+@media only screen and (max-width: 768px) {
+  .hero-image {
+    max-height: inherit;
+    height: 65vw;
+    min-height: 246px;
+  }
+}
 .templates {
   color: #2C2C2C;
 }
@@ -352,7 +374,6 @@ ul {
 }
 .templates .carousel-section .carousel-page {
   padding-top: 50px;
-  padding-bottom: 100px;
 }
 .templates .carousel-section .carousel-page h2 {
   margin-bottom: 9px;
@@ -364,10 +385,20 @@ ul {
   margin-top: 50px;
 }
 .templates .carousel-section .carousel-page .carousel-image-div {
+  height: 42vw;
+  max-height: 550px;
   overflow-y: scroll;
+}
+@media only screen and (max-width: 1024px) {
+  .templates .carousel-section .carousel-page .carousel-image-div {
+    height: auto;
+  }
 }
 .templates .carousel-section .carousel-page .carousel-page-active {
   display: block;
+}
+.templates .carousel-section .carousel-text-div {
+  padding-bottom: 100px;
 }
 .templates .carousel-section .swiper-button-next, .templates .carousel-section .swiper-button-prev {
   color: #E5E5E5;
@@ -384,6 +415,12 @@ ul {
 }
 .templates .carousel-section .swiper-pagination-bullet-active {
   background: linear-gradient(180deg, #4F5BD5 0%, #962FBF 24.48%, #D62976 47.92%, #FA7E1E 71.87%, #FEDA75 100%);
+}
+@media only screen and (max-width: 1024px) {
+  .templates .carousel-section .swiper-button-next,
+.templates .carousel-section .swiper-button-prev {
+    display: none;
+  }
 }
 .templates .horizon .horizon-text {
   max-width: 345px;
@@ -432,11 +469,17 @@ ul {
 .front-end .templates .text-only {
   padding: 100px 0;
 }
+.front-end .templates .text-image, .front-end .templates .multi-images {
+  max-width: 83vw;
+}
 
 .addNewSection .col-text, .addNewSection .color, .addNewSection .issue, .addNewSection .description, .addNewSection .solution, .addNewSection .listTitle, .addNewSection .listParagraph {
   display: none;
 }
 .addNewSection .imageOnly .title, .addNewSection .imageOnly .paragraph {
+  display: none;
+}
+.addNewSection .titleImage .paragraph {
   display: none;
 }
 .addNewSection .carousel .title, .addNewSection .carousel .paragraph, .addNewSection .list .title, .addNewSection .list .paragraph {
@@ -467,6 +510,7 @@ footer .icon svg {
 }
 footer p {
   margin-top: 5px;
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=style.css.map */

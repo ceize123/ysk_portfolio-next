@@ -77,4 +77,23 @@ export const useSharePage = () => {
 	};
 };
 
+export const useShareWidth = () => {
+	const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" && window.innerWidth);
+
+	const handleResize = () => {
+		setWindowWidth(window.innerWidth);
+	};
+	useEffect(() => {
+		window.addEventListener("resize", handleResize);
+
+		return () => {
+			window.addEventListener("resize", handleResize);
+		};
+	}, [windowWidth]);
+	return {
+		windowWidth,
+		setWindowWidth,
+	};
+};
+
 

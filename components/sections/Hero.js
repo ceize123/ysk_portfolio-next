@@ -1,28 +1,38 @@
 import Image from "next/image";
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useShareWidth } from "../ShareStates";
+import { useBetween } from "use-between";
 
 
 function Hero({ data }) {
 	const work = data;
-	const heroImage = work.heroImage[0];
-
+	
+	const { windowWidth } = useBetween(useShareWidth);
+	const [heroImage, setHeroImage] = useState(work.heroImage[0]);
 	//https://stackoverflow.com/questions/68732392/window-width-in-react
-	const [width, setWidth] = useState(0);
+	// const [width, setWidth] = useState(0);
   
+	// useEffect(() => {
+	// 	function handleResize() {
+	// 		setWidth(window.innerWidth);
+	// 	}
+	// 	window.addEventListener("resize", handleResize);
+	// 	handleResize();
+	// 	return () => {
+	// 		window.removeEventListener("resize", handleResize);
+	// 	};
+	// }, [width]);
 	useEffect(() => {
-		function handleResize() {
-			setWidth(window.innerWidth);
+		if (windowWidth >= 768) {
+			setHeroImage(work.heroImage[0]);
+		} else {
+			setHeroImage(work.heroImageMobile[0]);
 		}
-		window.addEventListener("resize", handleResize);
-		handleResize();
-		return () => {
-			window.removeEventListener("resize", handleResize);
-		};
-	}, [width]);
+	}, [windowWidth]);
 
 
 	return (
-		<div className="hero-image" style={{ background: `url(${heroImage}) no-repeat ${width < 2200 ? `50% ${width/100 + 50}%/cover` : "center/contain"}` }}>
+		<div className="hero-image" style={{ background: `url(${heroImage}) no-repeat ${windowWidth < 2200 ? `50% ${windowWidth/100 + 50}%/cover` : "center/contain"}` }}>
 			{/* <div className="mr-2">
 				<Image
 					src={heroImage}
