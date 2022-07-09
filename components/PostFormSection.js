@@ -24,7 +24,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		navColor: "",
 		navTextColor: "",
 		heroImage: [],
-		heroImageMobile: [],
+		// heroImageMobile: [],
 	});
 	const [overview, setOverview] = useState({});
 
@@ -39,7 +39,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			navColor: "",
 			navTextColor: "",
 			heroImage: [],
-			heroImageMobile: [],
+			// heroImageMobile: [],
 		});
 		setOverview({
 			subtitle: "",
@@ -130,7 +130,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, imagesMobile: imageUrlsMobile });
-		else setWork({ ...work, heroImageMobile: imageUrlsMobile });
+		// else setWork({ ...work, heroImageMobile: imageUrlsMobile });
 	}, [imageUrlsMobile]);
 
 	useEffect(() => {
@@ -138,18 +138,21 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			title: "",
 			paragraph: "",
 			images: [],
+			imagesMobile: [],
 		});
 		
 		switch (type) {
 		case "imageOnly":
 			setOverall({
 				images: [],
+				imagesMobile: [],
 			});
 			break;
 		case "titleImage":
 			setOverall({
 				title: "",
 				images: [],
+				imagesMobile: [],
 			});	
 			break;
 		case "carousel":
@@ -157,7 +160,11 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			// 	title: "",
 			// 	paragraph: "",
 			// });
-			setOverall({});
+			setOverall({
+				images: [],
+				imagesMobile: [],
+				pages: []
+			});
 			setArray([{
 				issue: "",
 				description: "",
@@ -180,7 +187,9 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			// });
 			setOverall({
 				images: [],
-				color: ""
+				imagesMobile: [],
+				color: "",
+				lists: []
 			});
 			setArray([{
 				listTitle: "",
@@ -247,7 +256,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			setImageUrls([]);
 			setImageUrlsMobile([]);
 			successAlert(filter, "Section is created!", refresh);
-			// window.location.reload();
+
 
 		} else {
 			console.log(work);
@@ -272,7 +281,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			} else {
 				failAlert("This Project name is already exist");
 			}
-			// router.push("/dashboard");
+
 		}
 	};
 
@@ -359,7 +368,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 								</div>
 								{/* <UploadImage /> */}
 								<ImageInput prop={`${category}/${work.title}/heroImage`} category={category} />
-								<ImageInputMobile prop={`${category}/${work.title}/heroImage/mobile`} category={category} />
+								{/* <ImageInputMobile prop={`${category}/${work.title}/heroImage/mobile`} category={category} /> */}
 								{/* add overview */}
 								<div className="mt-3">
 									<h3>Overview</h3>

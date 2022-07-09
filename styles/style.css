@@ -318,6 +318,9 @@ ul {
 .home .carousel-section .slide-page .card img {
   border-radius: 10px;
 }
+.home footer {
+  margin-bottom: 0;
+}
 
 @media only screen and (min-width: 2000px) {
   .home section .about {
@@ -372,17 +375,11 @@ ul {
   border-right-width: 0;
   border-image: linear-gradient(to right, #4F5BD5, #962FBF, #D62976, #FA7E1E, #FEDA75) 1 stretch;
 }
-.templates .carousel-section .carousel-page {
-  padding-top: 50px;
-}
 .templates .carousel-section .carousel-page h2 {
   margin-bottom: 9px;
 }
 .templates .carousel-section .carousel-page p:not(:last-of-type) {
   margin-bottom: 21px;
-}
-.templates .carousel-section .carousel-page .carousel-text-div {
-  margin-top: 50px;
 }
 .templates .carousel-section .carousel-page .carousel-image-div {
   height: 42vw;
@@ -396,9 +393,6 @@ ul {
 }
 .templates .carousel-section .carousel-page .carousel-page-active {
   display: block;
-}
-.templates .carousel-section .carousel-text-div {
-  padding-bottom: 100px;
 }
 .templates .carousel-section .swiper-button-next, .templates .carousel-section .swiper-button-prev {
   color: #E5E5E5;
@@ -429,17 +423,6 @@ ul {
 .templates .horizon .horizon-text h1 {
   line-height: 60px;
 }
-.templates .list-section .list-section-background {
-  padding: 100px 0;
-  z-index: -1;
-}
-.templates .list-section .list-text {
-  margin-left: 30px;
-  margin-bottom: 30px;
-}
-.templates .list-section .list-text h2, .templates .list-section .list-text p {
-  margin: 0 100px;
-}
 .templates .list-section .list-text h2 {
   margin-bottom: 10px;
   position: relative;
@@ -469,9 +452,6 @@ ul {
 .front-end .templates .text-only {
   padding: 100px 0;
 }
-.front-end .templates .text-image, .front-end .templates .multi-images {
-  max-width: 83vw;
-}
 
 .addNewSection .col-text, .addNewSection .color, .addNewSection .issue, .addNewSection .description, .addNewSection .solution, .addNewSection .listTitle, .addNewSection .listParagraph {
   display: none;
@@ -495,6 +475,9 @@ ul {
   display: none;
 }
 
+footer {
+  margin-bottom: 50px;
+}
 footer .icon {
   background-color: #222222;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

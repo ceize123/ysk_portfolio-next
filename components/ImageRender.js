@@ -20,6 +20,8 @@ function ImageRender({ prop }) {
 				<Image src={imageUrl} alt="image"
 					onLoadingComplete={(e) => { handleImageLoad(e); }}
 					width={100} height={height} layout="responsive" objectFit="contain"
+					// placeholder="blur"
+					blurDataURL={imageUrl}
 					// layout="fill"
 					// objectFit="contain"
 				/>

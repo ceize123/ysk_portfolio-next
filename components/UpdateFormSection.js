@@ -89,7 +89,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, imagesMobile: imageUrlsMobile });
-		else setWork({ ...work, heroImageMobile: imageUrlsMobile });
+		// else setWork({ ...work, heroImageMobile: imageUrlsMobile });
 	}, [imageUrlsMobile]);
 
 	useEffect(() => {
@@ -288,7 +288,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									}
 								</div>
 								{hasImage && <ImageInput prop={`${param}/${work.title}/heroImage`} category={param} />}
-								{hasImage && <ImageInputMobile prop={`${param}/${work.title}/heroImage/mobile`} category={param} />}
+								{/* {hasImage && <ImageInputMobile prop={`${param}/${work.title}/heroImage/mobile`} category={param} />} */}
 								{/* {hasImage && <UploadImage isUpdate={true}/>} */}
 							</div>	
 						}

@@ -22,13 +22,14 @@ function Hero({ data }) {
 	// 		window.removeEventListener("resize", handleResize);
 	// 	};
 	// }, [width]);
-	useEffect(() => {
-		if (windowWidth >= 768) {
-			setHeroImage(work.heroImage[0]);
-		} else {
-			setHeroImage(work.heroImageMobile[0]);
-		}
-	}, [windowWidth]);
+	
+	// useEffect(() => {
+	// 	if (windowWidth >= 768) {
+	// 		setHeroImage(work.heroImage[0]);
+	// 	} else {
+	// 		setHeroImage(work.heroImageMobile[0]);
+	// 	}
+	// }, [windowWidth]);
 
 
 	return (

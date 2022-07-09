@@ -33,7 +33,7 @@ function TypeSection({prop}) {
 	function dynamicComponent(prop, type) {
 		const Layout = LAYOUTS[type];
 		return (
-			windowWidth >= 768
+			windowWidth >= 576
 				? <Layout prop={prop} images={prop.images} />
 				: <Layout prop={prop} images={prop.imagesMobile} />
 		);

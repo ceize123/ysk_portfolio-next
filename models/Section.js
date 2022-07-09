@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const ListSchema = new mongoose.Schema({
 	listTitle: {type: String, required: true},
-	listParagraph: {type: String, required: true},
+	listParagraph: {type: String},
 }, { _id : false });
 
 const PageSchema = new mongoose.Schema({

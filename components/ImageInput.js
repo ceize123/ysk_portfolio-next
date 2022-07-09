@@ -8,6 +8,7 @@ import { deleteFromFirebase } from "./ImageDelete";
 import { useShareImageUrls } from "./ShareStates";
 import { useBetween } from "use-between";
 import { HiOutlineCheckCircle } from "react-icons/hi";
+import { GiCrossMark } from "react-icons/gi";
 
 // Firebase
 // https://www.youtube.com/watch?v=YOAeBSCkArA
@@ -174,7 +175,7 @@ function ImageInput({ prop, type = "", category = "", imageAry = ""}) {
 		<div className="mb-2 images upload-section">
 			<label htmlFor="images" className="flex items-center text-sm font-medium text-gray-700">
 				Images
-				{imageUrls.length > 0 && <HiOutlineCheckCircle />}
+				<span className="pl-2">{imageUrls.length > 0 ? <HiOutlineCheckCircle /> : <GiCrossMark />}</span>
 			</label>
 			<input
 				type="file"

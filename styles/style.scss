@@ -507,6 +507,10 @@ ul {
 		}
 	}
 	// Carousel
+
+	footer {
+		margin-bottom: 0;
+	}	
 }
 
 @media only screen and (min-width: 2000px) {
@@ -587,18 +591,12 @@ ul {
 		border-image: linear-gradient(to right, #4F5BD5, #962FBF, #D62976, #FA7E1E, #FEDA75) 1 stretch;
 
 		.carousel-page {
-			padding-top: 50px;
-
 			h2 {
 				margin-bottom: 9px;
 			}
 
 			p:not(:last-of-type) {
 				margin-bottom: 21px;
-			}
-
-			.carousel-text-div {
-				margin-top: 50px;
 			}
 
 			.carousel-image-div {
@@ -616,10 +614,6 @@ ul {
 			.carousel-page-active {
 				display: block;
 			}
-		}
-
-		.carousel-text-div {
-			padding-bottom: 100px;
 		}
 
 		.swiper-button-next, .swiper-button-prev {
@@ -665,17 +659,7 @@ ul {
 		// Back-end might need
 		// transform: scale(0.8) translateY(-10%);
 
-		.list-section-background {
-			padding: 100px 0;
-			z-index: -1;
-		}
 		.list-text {
-			margin-left: 30px;
-			margin-bottom: 30px;
-			h2, p {
-				margin: 0 100px;
-			}
-
 			h2 {
 				margin-bottom: 10px;
 				position: relative;
@@ -723,9 +707,9 @@ ul {
 			padding: 100px 0;
 		}
 
-		.text-image, .multi-images {
-			max-width: 83vw;
-		}
+		// .text-image, .multi-images {
+		// 	max-width: 83vw;
+		// }
 	}
 }
 // Sections Ends
@@ -777,6 +761,7 @@ ul {
 
 // footer starts
 footer {
+	margin-bottom: 50px;
 	.icon {
 		background-color: #222222;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

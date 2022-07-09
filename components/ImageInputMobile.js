@@ -8,6 +8,7 @@ import { deleteFromFirebase } from "./ImageDelete";
 import { useShareImageUrls } from "./ShareStates";
 import { useBetween } from "use-between";
 import { HiOutlineCheckCircle } from "react-icons/hi";
+import { GiCrossMark } from "react-icons/gi";
 
 function ImageInputMobile({ prop, type = "", category = "", imageAry = ""}) {
 	const imgRef = useRef();
@@ -85,8 +86,8 @@ function ImageInputMobile({ prop, type = "", category = "", imageAry = ""}) {
 	return (
 		<div className="mb-2 images-mobile upload-section">
 			<label htmlFor="images-mobile" className="flex items-center text-sm font-medium text-gray-700">
-				Mobile Images
-				{imageUrlsMobile.length > 0 && <HiOutlineCheckCircle />}
+				<span className="text-indigo-500">Mobile-</span>Images
+				<span className="pl-2">{imageUrlsMobile.length > 0 ? <HiOutlineCheckCircle /> : <GiCrossMark />}</span>
 			</label>
 			<input
 				type="file"
