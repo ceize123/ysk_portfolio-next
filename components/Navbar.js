@@ -24,12 +24,12 @@ function Navbar() {
 		if (router.pathname === "/") {
 			ul.style.backgroundColor = "inherit";
 			ul.style.color = "inherit";
-			body.style.overflowY = "hidden";
+			body.style.overflow = "hidden";
 			// setToggle(false);
 			// setHideList(false);
 			// setPosition("fixed");
 		} else {
-			body.style.overflowY = "visible";
+			body.style.overflow = "visible";
 			// setPosition("static");
 		}
 		setToggle(false);

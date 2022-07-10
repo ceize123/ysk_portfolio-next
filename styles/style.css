@@ -237,6 +237,7 @@ ul {
   height: 25vw;
 }
 .home .carousel-section {
+  width: 100%;
   max-width: 1280px;
   height: auto;
 }
@@ -291,6 +292,23 @@ ul {
   background-size: contain;
   background-position: center;
 }
+@media only screen and (max-width: 767px) {
+  .home .carousel-section .outside-swiper > .swiper-pagination .swiper-pagination-bullet {
+    width: 66px;
+    height: 66px;
+    line-height: 66px;
+    margin: 15px;
+    opacity: 1;
+  }
+  .home .carousel-section .outside-swiper > .swiper-pagination .swiper-pagination-bullet-active::after {
+    content: " ";
+    position: absolute;
+    top: -16px;
+    left: -16px;
+    width: 98px;
+    height: 98px;
+  }
+}
 .home .carousel-section .outside-swiper .inside-swiper .swiper-pagination {
   top: inherit;
   bottom: 10px;
@@ -307,7 +325,6 @@ ul {
   color: #358E94;
 }
 .home .carousel-section .slide-page {
-  margin: 0 75px;
   margin-top: 115px;
 }
 .home .carousel-section .slide-page .card {
@@ -323,8 +340,17 @@ ul {
 .home .carousel-section .slide-page .card h4 {
   margin-top: 10px;
 }
+.home .carousel-section .slide-page .card .card-image {
+  width: 100%;
+  height: auto;
+}
 .home .carousel-section .slide-page .card img {
   border-radius: 10px;
+}
+@media only screen and (max-width: 992px) {
+  .home .carousel-section .slide-page .card h4 {
+    font-size: 16px;
+  }
 }
 .home footer {
   margin-bottom: 0;

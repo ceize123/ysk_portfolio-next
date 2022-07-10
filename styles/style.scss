@@ -395,6 +395,7 @@ ul {
 
 	// Carousel
 	.carousel-section {
+		width: 100%;
 		max-width: 1280px;
 		height: auto;
 
@@ -438,7 +439,7 @@ ul {
 					margin: 0 30px;
 					opacity: 1;
 				}
-	
+
 				.swiper-pagination-bullet-active {
 					animation: bt-effect linear 0.2s;
 	
@@ -453,6 +454,28 @@ ul {
 						background-repeat: no-repeat;
 						background-size: contain;
 						background-position: center;
+					}
+				}
+
+				@media only screen and (max-width: 767px) {
+					.swiper-pagination-bullet {
+						width: 66px;
+						height: 66px;
+						line-height: 66px;
+						margin: 15px;
+						// margin-top: 30px;
+						opacity: 1;
+					}
+
+					.swiper-pagination-bullet-active {
+						&::after {
+							content: " ";
+							position: absolute;
+							top: -16px;
+							left: -16px;
+							width: 98px;
+							height: 98px;
+						}
 					}
 				}
 			}
@@ -478,7 +501,6 @@ ul {
 		}
 
 		.slide-page {
-			margin: 0 75px;
 			// margin-top: 90px;
 			margin-top: 115px;
 
@@ -497,6 +519,11 @@ ul {
 				h4 {
 					margin-top: 10px;
 				}
+
+				.card-image {
+					width: 100%;
+					height: auto;
+				}
 				img {
 					border-radius: 10px;
 				}
@@ -509,6 +536,14 @@ ul {
 				// 	transition: 0.8s all calc(0.1s * (var(--custom-index) - 1)) cubic-bezier(.86, .01, .38, .99);
 				// 	transition: 0.8s all cubic-bezier(.86, .01, .38, .99);
 				// }
+			}
+
+			@media only screen and (max-width: 992px) {
+				.card {
+					h4 {
+						font-size: 16px;
+					}
+				}
 			}
 		}
 	}
