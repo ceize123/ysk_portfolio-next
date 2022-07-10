@@ -160,7 +160,7 @@ export default function Home({ works }) {
 				<Egg bgImage={hero} centerImage={logo} className="hero" />
 			</section>
 			<div className="empty-div"></div>
-			<section id="works" className="relative">
+			<section id="works" className="relative flex justify-center items-center">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>

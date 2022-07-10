@@ -48,7 +48,8 @@ function HomePageCarousel({ works }) {
 	};
 
 	return (
-		<div className="pt-24">
+		// <div className="pt-24">
+		<div>
 			<Swiper
 				className="outside-swiper"
 				pagination={pagination}
