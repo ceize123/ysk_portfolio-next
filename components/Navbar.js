@@ -7,9 +7,8 @@ import { useBetween } from "use-between";
 function Navbar() {
 	// const [position, setPosition] = useState("fixed");
 	const [toggle, setToggle] = useState(false);
-	const [hideList, setHideList] = useState(true);
+	const [hideList, setHideList] = useState(false);
 	const { windowWidth } = useBetween(useShareWidth);
-
 	const router = useRouter();
 	const { setPage } = useBetween(useSharePage);
 
@@ -56,7 +55,7 @@ function Navbar() {
 					<span></span>
 				</div> */}
 			</div>
-			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${hideList && windowWidth < 768 && "scale-0 translate-x-1/2 -mt-12"}`} >
+			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${windowWidth < 768 && hideList && "scale-0 translate-x-1/2 -mt-12"}`} >
 				<li>
 					<Link href="/">
 						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>
