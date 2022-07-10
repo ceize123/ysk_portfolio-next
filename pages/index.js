@@ -6,7 +6,7 @@ import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
-import { useSharePage } from "../components/ShareStates";
+import { useSharePage, useShareWidth } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
@@ -15,6 +15,7 @@ export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
 	// const [page, setPage] = useState(0);
 	const { page, setPage } = useBetween(useSharePage);
+	const { windowWidth } = useBetween(useShareWidth);
 
 	// useEffect(() => {
 	// 	const fetchData = async () => {
@@ -31,8 +32,9 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
+		let move = 0;
+
 		const handleScroll = (e) => {
-			console.log(e);
 			if (page >= 0 && page <= elements.length - 1) {
 				if (e.deltaY > 0) {
 					// setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
@@ -45,9 +47,23 @@ export default function Home({ works }) {
 			}
 		};
 
+		const saveStart = (e) => {
+			move = e.changedTouches[0].clientY;
+		};
+
+		const handleTouchScroll = (e) => {
+			if (move - e.changedTouches[0].clientY > 15) {
+				setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+			} else if (move - e.changedTouches[0].clientY < -15) {
+				setPage(page > 0 ? page - 1 : 0);
+			}
+			setScrolled(true);
+		};
+
 		if (!scrolled) {
 			window.addEventListener("wheel", handleScroll);
-			window.addEventListener("touchmove", handleScroll);
+			window.addEventListener("touchstart", saveStart);
+			window.addEventListener("touchend", handleTouchScroll);
 		}
 		// elements.forEach((item, idx) => {
 		// 	item.style.transform = `translateY(-${page*100}vh)`;
@@ -78,8 +94,9 @@ export default function Home({ works }) {
 		return () => {
 			// clearInterval(interval);
 			clearTimeout(timer);
-			window.removeEventListener("wheel", handleScroll);
-			window.removeEventListener("touchmove", handleScroll);
+			window.addEventListener("wheel", handleScroll);
+			window.addEventListener("touchstart", saveStart);
+			window.addEventListener("touchend", handleTouchScroll);
 		};
 	}, [scrolled]);
 	
@@ -98,7 +115,6 @@ export default function Home({ works }) {
 				// cards.forEach((item, idx) => {
 				// 	item.style.setProperty("--custom-index", idx);
 				// });
-				console.log(cards);
 			} else {
 				center = item.querySelector(".egg-center-div");
 				// console.log(center);

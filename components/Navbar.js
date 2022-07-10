@@ -24,12 +24,12 @@ function Navbar() {
 		if (router.pathname === "/") {
 			ul.style.backgroundColor = "inherit";
 			ul.style.color = "inherit";
-			body.style.overflow = "hidden";
+			body.style.overflowY = "hidden";
 			// setToggle(false);
 			// setHideList(false);
 			// setPosition("fixed");
 		} else {
-			body.style.overflow = "visible";
+			body.style.overflowY = "visible";
 			// setPosition("static");
 		}
 		setToggle(false);
@@ -37,9 +37,12 @@ function Navbar() {
 	}, [router]);
 
 	useEffect(() => {
+		const body = document.querySelector("body");
 		if (hideList && windowWidth < 768) {
 			setPosition("scale-0 translate-x-1/2 -mt-12");
+			body.style.overflowY = "visible";
 		} else {
+			body.style.overflowY = "hidden";
 			setPosition("");
 		}
 	}, [hideList, windowWidth]);
@@ -47,7 +50,7 @@ function Navbar() {
 
 	return (
 		// <nav className={`header ${position} right-0 left-0 mx-auto z-30`} >
-		<nav className="header fixed top-0 right-0 left-0 mx-auto z-30 flex justify-end md:justify-center">
+		<nav className="header fixed top-0 right-0 left-0 mx-auto z-30 flex justify-end md:justify-center md:h-14 h-12">
 			<div className={`menu-icon mr-3.5 block md:hidden ${toggle && "active"}`}>
 				<svg className={`ham hamRotate ${toggle && "active"}`} viewBox="0 0 100 100" width="50" onClick={handleClick}>
 					<path

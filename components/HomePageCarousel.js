@@ -106,7 +106,7 @@ function HomePageCarousel({ works }) {
 									<div className="grid lg:mx-20 md:mx-12 mx-5 lg:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3  md:grid-cols-3 grid-cols-2 slide-page">
 										{ele.map((work) => (
 											<Card key={work._id} work={work} category={item.category}
-												text={windowWidth >= 768 ? work.description : `${work.description.slice(0, 30)}...`} />
+												text={windowWidth >= 768 ? work.description : `${work.description.split(" ").slice(0, 3).join(" ")}...`} />
 										))}
 									</div>
 								</SwiperSlide>
