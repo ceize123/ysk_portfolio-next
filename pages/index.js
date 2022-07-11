@@ -1,11 +1,8 @@
 import logo from "../public/image/home-page/logo.png";
-import arrow from "../public/image/home-page/arrow.png";
 import hero from "../public/image/home-page/hero.png";
 import heroMobile from "../public/image/home-page/heroMobile.png";
 import bgChat from "../public/image/home-page/bg-chat.png";
 import bgAbout from "../public/image/home-page/bg-about.png";
-import headShot from "../public/image/home-page/head-shot.png";
-import headShotMobile from "../public/image/home-page/head-shot-mobile.png";
 import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
@@ -185,11 +182,8 @@ export default function Home({ works }) {
 			<Logo opacity={page !== 0 ? 100 : 0} />
 			<section id="hero" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
 				<Egg bgImage={windowWidth >= 768 ? hero : heroMobile} centerImage={logo} className="hero" />
-				<div className="z-20 block md:hidden absolute bottom-5 text-center">
-					<h5 className="mb-5">I am a UIUX Designer</h5>
-					<div className="arrow">
-						<Image src={arrow} alt="arrow" width="76px" height="76px" />
-					</div>
+				<div className="z-20 block md:hidden absolute bottom-5 text-center left-5">
+					<h5 className="mb-16">I am a UIUX Designer</h5>
 				</div>
 			</section>
 			<div className="empty-div hidden lg:block"></div>
@@ -200,10 +194,7 @@ export default function Home({ works }) {
 			</section>
 			<div className="empty-div hidden lg:block"></div>
 			<section id="about" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
-				<Egg bgImage={bgAbout} className="about" text="About me" />
-				<div className="absolute z-10 head-shot">
-					<Image src={windowWidth >= 768 ? headShot : headShotMobile} alt="head-shot" layout={windowWidth < 768 && "fill"} />
-				</div>
+				<Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} />
 			</section>
 			<div className="empty-div hidden lg:block"></div>
 			<section id="footer" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">

@@ -207,9 +207,9 @@ ul {
 }
 @media only screen and (max-width: 767px) {
   .home section .hero {
-    width: 150vw;
+    width: 152vw;
     min-width: 882px;
-    margin-bottom: 39vh;
+    margin-bottom: 45vh;
   }
   .home section .about {
     display: none;
@@ -336,6 +336,7 @@ ul {
 }
 .home .carousel-section .outside-swiper > .swiper-pagination .swiper-pagination-bullet-active {
   animation: bt-effect linear 0.2s;
+  position: relative;
 }
 .home .carousel-section .outside-swiper > .swiper-pagination .swiper-pagination-bullet-active::after {
   content: " ";

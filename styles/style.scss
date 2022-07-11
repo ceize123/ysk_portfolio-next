@@ -373,9 +373,9 @@ ul {
 
 		@media only screen and (max-width: 767px) {
 			.hero {
-				width: 150vw;
+				width: 152vw;
 				min-width: 882px;
-				margin-bottom: 39vh;
+				margin-bottom: 45vh;
 			}
 
 			.about {
@@ -537,6 +537,7 @@ ul {
 
 				.swiper-pagination-bullet-active {
 					animation: bt-effect linear 0.2s;
+					position: relative;
 	
 					&::after {
 						content: " ";
