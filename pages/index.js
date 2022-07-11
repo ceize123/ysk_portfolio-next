@@ -52,10 +52,10 @@ export default function Home({ works }) {
 				}
 			};
 	
-			const handleOverflow = (e) => {
-				console.log(e);
+			const handleOverflow = () => {
 				const body = document.querySelector("body");
 				body.style.overflowY = "visible";
+				elements[0].style.overflowY = "visible";
 				setPage(-1);
 			};
 	
