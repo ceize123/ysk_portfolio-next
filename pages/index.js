@@ -12,6 +12,7 @@ import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
 import Link from "next/link";
+import { set } from "mongoose";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
@@ -51,9 +52,11 @@ export default function Home({ works }) {
 				}
 			};
 	
-			const handleOverflow = () => {
-				const body = document.querySelectorAll("body");
+			const handleOverflow = (e) => {
+				console.log(e);
+				const body = document.querySelector("body");
 				body.style.overflowY = "visible";
+				setPage(-1);
 			};
 	
 			// const handleTouchScroll = (e) => {
@@ -109,73 +112,74 @@ export default function Home({ works }) {
 	useEffect(() => {
 		if (windowWidth > 1024) { 
 			const elements = document.querySelectorAll(".home > section");
-			// const outsideSwiper = document.querySelector(".home > section .swiper");
-			// const outsideActiveSlide = outsideSwiper.querySelector(".swiper-slide-active");
-			// console.log(outsideActiveSlide);
-			elements.forEach((item, idx) => {
-				// const bg = item.querySelector(".egg-bg");
-				let center;
+			if (page !== -1) {
 				
-				let cards = [];
-				if (idx === 1) {
-					cards = item.querySelectorAll(".card");
-					// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
-					// cards.forEach((item, idx) => {
-					// 	item.style.setProperty("--custom-index", idx);
-					// });
-				} else {
-					center = item.querySelector(".egg-center-div");
-					// console.log(center);
-				}
-	
-				
-				item.style.transform = `translateY(-${page * 150}vh)`;
-				if (page === idx) {
-					setTimeout(() => {
-						item.classList.remove("opacity-0");
-					}, 600);
-					if (idx !== 1) {
-						setTimeout(() => {
-							center.classList.remove("lg:scale-0");
-						}, 1000);
+				elements.forEach((item, idx) => {
+					let center;
+					let cards = [];
+					if (idx === 1) {
+						cards = item.querySelectorAll(".card");
+						// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
+						// cards.forEach((item, idx) => {
+						// 	item.style.setProperty("--custom-index", idx);
+						// });
 					} else {
-						setTimeout(() => {
-							cards.forEach((item) => {
-								item.classList.remove("scale-0");
-							});
-						}, 1000);
+						center = item.querySelector(".egg-center-div");
 					}
-				} else {
-					setTimeout(() => {
-						item.classList.add("opacity-0");
-					}, 200);
-					if (idx !== 1) {
-						center.classList.add("lg:scale-0");
+		
+					item.style.transform = `translateY(-${page * 130}vh)`;
+					if (page === idx) {
+						setTimeout(() => {
+							item.classList.remove("opacity-0");
+						}, 600);
+						if (idx !== 1) {
+							setTimeout(() => {
+								center.classList.remove("lg:scale-0");
+							}, 1000);
+						} else {
+							setTimeout(() => {
+								cards.forEach((item) => {
+									item.classList.remove("scale-0");
+								});
+							}, 1000);
+						}
 					} else {
-						cards.forEach((item) => {
-							item.classList.add("scale-0");
-						});
+						setTimeout(() => {
+							item.classList.add("opacity-0");
+						}, 200);
+						if (idx !== 1) {
+							center.classList.add("lg:scale-0");
+						} else {
+							cards.forEach((item) => {
+								item.classList.add("scale-0");
+							});
+						}
 					}
 					
-					// item.style.transform = `translateY(-${height}px)`;
-	
-					// center.style.transform = `translateY(${page * 150}vh)`;
-					// setTimeout(() => {
-					// 	center.style.transform = "translateY(0)";
-					// }, 600);
-				}
-				
-			});
+				});
+			} else {
+				elements.forEach((item, idx) => {
+					let center;
+					let cards = [];
+					if (idx === 1) {
+						cards = item.querySelectorAll(".card");
+					} else {
+						center = item.querySelector(".egg-center-div");
+					}
+		
+					item.classList.remove("opacity-0");
+					if (idx !== 1) {
+						center.classList.remove("lg:scale-0");
+					} else {
+						cards.forEach((item) => {
+							item.classList.remove("scale-0");
+						});
+					}
+				});
+			}
 		}
 
 	}, [page]);
-
-	// useEffect(() => {
-	// 	const body = document.querySelector("body");
-	// 	body.style.background = "linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%)";
-	// 	body.style.overflowY = "hidden";
-
-	// }, []);
 
 	return (
 		<div className="home">

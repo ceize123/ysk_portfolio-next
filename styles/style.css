@@ -167,7 +167,7 @@ ul {
 }
 .home .empty-div {
   width: 100vw;
-  height: 50vh;
+  height: 30vh;
 }
 .home .logo {
   transition: 1.3s opacity cubic-bezier(0.86, 0.01, 0.38, 0.99);
