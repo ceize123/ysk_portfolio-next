@@ -51,9 +51,10 @@ export default function Home({ works }) {
 				}
 			};
 	
-			// const saveStart = (e) => {
-			// 	move = e.changedTouches[0].clientY;
-			// };
+			const handleOverflow = () => {
+				const body = document.querySelectorAll("body");
+				body.style.overflowY = "visible";
+			};
 	
 			// const handleTouchScroll = (e) => {
 			// 	if (move - e.changedTouches[0].clientY > 15) {
@@ -66,7 +67,7 @@ export default function Home({ works }) {
 	
 			if (!scrolled) {
 				window.addEventListener("wheel", handleScroll);
-				// window.addEventListener("touchstart", saveStart);
+				window.addEventListener("touchstart", handleOverflow);
 				// window.addEventListener("touchend", handleTouchScroll);
 			}
 			// elements.forEach((item, idx) => {
@@ -99,7 +100,7 @@ export default function Home({ works }) {
 				// clearInterval(interval);
 				clearTimeout(timer);
 				window.addEventListener("wheel", handleScroll);
-				// window.addEventListener("touchstart", saveStart);
+				window.addEventListener("touchstart", handleOverflow);
 				// window.addEventListener("touchend", handleTouchScroll);
 			};
 		}
@@ -181,10 +182,11 @@ export default function Home({ works }) {
 			{/* {page !== 0 && <Logo />} */}
 			<Logo opacity={page !== 0 ? 100 : 0} />
 			<section id="hero" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
-				{windowWidth >= 768
+				{/* {windowWidth >= 768
 					? <Egg bgImage={hero} centerImage={logo} className="hero" />
 					: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
-				}
+				} */}
+				<Egg bgImage={hero} centerImage={logo} className="hero" />
 				<div className="z-20 block md:hidden absolute bottom-5 text-center left-5">
 					<h5 className="mb-16">I am a UIUX Designer</h5>
 				</div>
