@@ -11,7 +11,7 @@ import { useSharePage, useShareWidth } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
@@ -187,7 +187,7 @@ export default function Home({ works }) {
 				</div>
 			</section>
 			<div className="empty-div hidden lg:block"></div>
-			<section id="works" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
+			<section id="works" className="relative flex justify-center items-center h-auto md:h-screen lg:overflow-x-hidden">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>

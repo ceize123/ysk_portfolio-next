@@ -19,26 +19,33 @@ function HomePageCarousel({ works }) {
 		let slideArray = [];
 		let temp = [];
 		let size;
-		if (windowWidth < 768) {
-			size = 2;
-		} else {
-			size = 3;
-		}
-		
 
 		works.forEach((item) => {
 			slideArray.push(item.works);
 		});
-		slideArray.forEach(item => {
-			temp = [];
-			if (item.length > size) {
-				for (let i = 0; i < item.length; i += size)
-					temp.push(item.slice(i, i + size));
-			}
-			setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
-		});
-		// works.forEach((item) => {
-		// 	setInsideSlide((prev) => [...prev, { [item.category]: item.works }]);
+		if (windowWidth > 768) {
+			size = 3;
+
+			slideArray.forEach(item => {
+				temp = [];
+				if (item.length > size) {
+					for (let i = 0; i < item.length; i += size)
+						temp.push(item.slice(i, i + size));
+				}
+				setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
+			});
+		} else {
+			slideArray.forEach(item => {
+				setInsideSlide((prev) => [...prev, [item]]);
+			});
+		}
+		// slideArray.forEach(item => {
+		// 	temp = [];
+		// 	if (item.length > size) {
+		// 		for (let i = 0; i < item.length; i += size)
+		// 			temp.push(item.slice(i, i + size));
+		// 	}
+		// 	setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
 		// });
 	}, [works]);
 	
@@ -103,10 +110,11 @@ function HomePageCarousel({ works }) {
 						>
 							{insideSlide[idx].map((ele, index) => (
 								<SwiperSlide key={index}>
-									<div className="grid lg:mx-20 md:mx-12 mx-5 lg:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3  md:grid-cols-3 grid-cols-2 slide-page">
+									<div className="grid lg:mx-20 md:mx-12 mx-5 lg:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3 justify-items-center md:grid-cols-3 grid-cols-1 slide-page">
 										{ele.map((work) => (
 											<Card key={work._id} work={work} category={item.category}
-												text={windowWidth >= 768 ? work.description : `${work.description.split(" ").slice(0, 3).join(" ")}...`} />
+												// text={windowWidth >= 768 ? work.description : `${work.description.split(" ").slice(0, 3).join(" ")}...`}
+											/>
 										))}
 									</div>
 								</SwiperSlide>

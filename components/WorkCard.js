@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function Card({ work, category, text }) {
+function Card({ work, category }) {
 	return (
 		<Link href={`/works/${category}/${work.title}`}>
 			<div className="card hover:text-secondary p-3 text-primary card">
@@ -10,7 +10,7 @@ function Card({ work, category, text }) {
 					<Image src={work.heroImage[0]} alt="banner" layout="fill" />
 				</div> */}
 				{/* <h4>{work.description.slice(0, 40)}</h4> */}
-				<h4>{text}</h4>
+				<h4>{work.description}</h4>
 			</div>
 		</Link>
 	);

@@ -135,7 +135,7 @@ ul {
   height: 100vh;
   background: #E5E5E5;
   transition: all 500ms ease-in-out;
-  clip-path: circle(30px at calc(100% - 20px) 20px);
+  clip-path: circle(30px at calc(100% - 10px) 10px);
   visibility: hidden;
 }
 .header .menu-icon.active:before {
@@ -408,6 +408,16 @@ ul {
 @media only screen and (max-width: 992px) {
   .home .carousel-section .slide-page .card h4 {
     font-size: 16px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .home .carousel-section .slide-page .card {
+    max-width: 400px;
+    max-height: 400px;
+    min-height: 337px;
+    height: 90vw;
+    width: 90vw;
+    padding-bottom: 0;
   }
 }
 .home footer {

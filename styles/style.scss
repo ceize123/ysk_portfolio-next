@@ -160,7 +160,7 @@ ul {
 			transition: all 500ms ease-in-out;
 
 			// that's all the pen about
-			clip-path: circle(30px at calc(100% - 20px) 20px);
+			clip-path: circle(30px at calc(100% - 10px) 10px);
 			// for AT
 			visibility: hidden;
 		}
@@ -466,6 +466,7 @@ ul {
 				// margin: auto;
 				margin-top: 10vh;
 				opacity: 1;
+
 			}
 		}
 
@@ -639,6 +640,17 @@ ul {
 					h4 {
 						font-size: 16px;
 					}
+				}
+			}
+
+			@media only screen and (max-width: 767px) {
+				.card {
+					max-width: 400px;
+					max-height: 400px;
+					min-height: 337px;
+					height: 90vw;
+					width: 90vw;
+					padding-bottom: 0;
 				}
 			}
 		}

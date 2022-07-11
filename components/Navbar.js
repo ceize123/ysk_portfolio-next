@@ -41,7 +41,7 @@ function Navbar() {
 	useEffect(() => {
 		const body = document.querySelector("body");
 		if (hideList && windowWidth < 768) {
-			setPosition("scale-0 translate-x-1/2 -mt-12");
+			setPosition("scale-0 translate-x-1/2 -mt-16");
 			body.style.overflowY = "visible";
 		} else if (windowWidth < 768) {
 			body.style.overflowY = "hidden";
