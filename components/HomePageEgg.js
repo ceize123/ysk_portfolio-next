@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Tilt from "react-parallax-tilt";
 import Footer from "./Footer";
-import headShot from "../public/image/home-page/head-shot.png";
+// import headShot from "../public/image/home-page/head-shot.png";
+// import headShotMobile from "../public/image/home-page/head-shot-mobile.png";
 import { useState, useEffect } from "react";
 
 function Egg({ bgImage, centerImage = "", text = "", className }) {
@@ -42,14 +43,14 @@ function Egg({ bgImage, centerImage = "", text = "", className }) {
 			</div>
 
 			{/* about */}
-			{className === "about" &&
+			{/* {className === "about" &&
 				<div className="absolute z-10 head-shot">
 					<Image src={headShot} alt="head-shot" />
 				</div>
-			}
+			} */}
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<div className="egg-center-div z-20 scale-0">
+			<div className="egg-center-div z-20 lg:scale-0">
 				<Tilt className={`${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
 					perspective={550}>
 					{centerImage && <Image src={centerImage} alt={centerImage}

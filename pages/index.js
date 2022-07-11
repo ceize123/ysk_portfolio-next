@@ -1,7 +1,11 @@
 import logo from "../public/image/home-page/logo.png";
+import arrow from "../public/image/home-page/arrow.png";
 import hero from "../public/image/home-page/hero.png";
+import heroMobile from "../public/image/home-page/heroMobile.png";
 import bgChat from "../public/image/home-page/bg-chat.png";
 import bgAbout from "../public/image/home-page/bg-about.png";
+import headShot from "../public/image/home-page/head-shot.png";
+import headShotMobile from "../public/image/home-page/head-shot-mobile.png";
 import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import Logo from "../components/Logo";
@@ -10,6 +14,7 @@ import { useSharePage, useShareWidth } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
+import Image from "next/image";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
@@ -31,133 +36,139 @@ export default function Home({ works }) {
 	// }, []);
 	
 	useEffect(() => {
-		const elements = document.querySelectorAll(".home > section");
-		let move = 0;
+		if (windowWidth > 1024) {
 
-		const handleScroll = (e) => {
-			if (page >= 0 && page <= elements.length - 1) {
-				if (e.deltaY > 0) {
-					// setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
-					setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
-				} else if (e.deltaY < 0) {
-					// setHeight(height > 0 && height - elements[page - 1].offsetHeight);
-					setPage(page > 0 ? page - 1 : 0);
+			const elements = document.querySelectorAll(".home > section");
+			// let move = 0;
+	
+			const handleScroll = (e) => {
+				if (page >= 0 && page <= elements.length - 1) {
+					if (e.deltaY > 0) {
+						// setHeight(page < elements.length - 1 ? height + elements[page].offsetHeight : height);
+						setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+					} else if (e.deltaY < 0) {
+						// setHeight(height > 0 && height - elements[page - 1].offsetHeight);
+						setPage(page > 0 ? page - 1 : 0);
+					}
+					setScrolled(true);
 				}
-				setScrolled(true);
+			};
+	
+			// const saveStart = (e) => {
+			// 	move = e.changedTouches[0].clientY;
+			// };
+	
+			// const handleTouchScroll = (e) => {
+			// 	if (move - e.changedTouches[0].clientY > 15) {
+			// 		setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+			// 	} else if (move - e.changedTouches[0].clientY < -15) {
+			// 		setPage(page > 0 ? page - 1 : 0);
+			// 	}
+			// 	setScrolled(true);
+			// };
+	
+			if (!scrolled) {
+				window.addEventListener("wheel", handleScroll);
+				// window.addEventListener("touchstart", saveStart);
+				// window.addEventListener("touchend", handleTouchScroll);
 			}
-		};
-
-		const saveStart = (e) => {
-			move = e.changedTouches[0].clientY;
-		};
-
-		const handleTouchScroll = (e) => {
-			if (move - e.changedTouches[0].clientY > 15) {
-				setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
-			} else if (move - e.changedTouches[0].clientY < -15) {
-				setPage(page > 0 ? page - 1 : 0);
-			}
-			setScrolled(true);
-		};
-
-		if (!scrolled) {
-			window.addEventListener("wheel", handleScroll);
-			window.addEventListener("touchstart", saveStart);
-			window.addEventListener("touchend", handleTouchScroll);
+			// elements.forEach((item, idx) => {
+			// 	item.style.transform = `translateY(-${page*100}vh)`;
+			// 	// if (page === idx) {
+			// 	// 	console.log(page, "123");
+			// 	// 	setTimeout(() => {
+			// 	// 		item.style.transform = `translateY(-${page*100}vh)`;
+			// 	// 	}, 500);
+			// 	// } else {
+			// 	// 	console.log(idx, item.style.transform);
+			// 	// 	item.style.transform = `translateY(-${page*100}vh)`;
+			// 	// }
+	
+			// });
+			// console.log(page);
+	
+			
+			let timer = setTimeout(() => setScrolled(false), 1500);
+	
+	
+			// const interval = setInterval(() => {
+			// 	console.log(height);
+			// 	// elements[0].style.transform = `translateY(-${height}vh)`;
+			// }, 1500);
+			
+			// window.scrollBy(0, height);
+			// window.scrollTo(0, height);
+			return () => {
+				// clearInterval(interval);
+				clearTimeout(timer);
+				window.addEventListener("wheel", handleScroll);
+				// window.addEventListener("touchstart", saveStart);
+				// window.addEventListener("touchend", handleTouchScroll);
+			};
 		}
-		// elements.forEach((item, idx) => {
-		// 	item.style.transform = `translateY(-${page*100}vh)`;
-		// 	// if (page === idx) {
-		// 	// 	console.log(page, "123");
-		// 	// 	setTimeout(() => {
-		// 	// 		item.style.transform = `translateY(-${page*100}vh)`;
-		// 	// 	}, 500);
-		// 	// } else {
-		// 	// 	console.log(idx, item.style.transform);
-		// 	// 	item.style.transform = `translateY(-${page*100}vh)`;
-		// 	// }
-
-		// });
-		// console.log(page);
-
-		
-		let timer = setTimeout(() => setScrolled(false), 1500);
-
-
-		// const interval = setInterval(() => {
-		// 	console.log(height);
-		// 	// elements[0].style.transform = `translateY(-${height}vh)`;
-		// }, 1500);
-		
-		// window.scrollBy(0, height);
-		// window.scrollTo(0, height);
-		return () => {
-			// clearInterval(interval);
-			clearTimeout(timer);
-			window.addEventListener("wheel", handleScroll);
-			window.addEventListener("touchstart", saveStart);
-			window.addEventListener("touchend", handleTouchScroll);
-		};
 	}, [scrolled]);
 	
 	useEffect(() => {
-		const elements = document.querySelectorAll(".home > section");
-		// const outsideSwiper = document.querySelector(".home > section .swiper");
-		// const outsideActiveSlide = outsideSwiper.querySelector(".swiper-slide-active");
-		// console.log(outsideActiveSlide);
-		elements.forEach((item, idx) => {
-			// const bg = item.querySelector(".egg-bg");
-			let center;
-			let cards = [];
-			if (idx === 1) {
-				cards = item.querySelectorAll(".card");
-				// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
-				// cards.forEach((item, idx) => {
-				// 	item.style.setProperty("--custom-index", idx);
-				// });
-			} else {
-				center = item.querySelector(".egg-center-div");
-				// console.log(center);
-			}
-
-			
-			item.style.transform = `translateY(-${page * 150}vh)`;
-			if (page === idx) {
-				setTimeout(() => {
-					item.classList.remove("opacity-0");
-				}, 600);
-				if (idx !== 1) {
-					setTimeout(() => {
-						center.classList.remove("scale-0");
-					}, 1000);
+		if (windowWidth > 1024) { 
+			const elements = document.querySelectorAll(".home > section");
+			// const outsideSwiper = document.querySelector(".home > section .swiper");
+			// const outsideActiveSlide = outsideSwiper.querySelector(".swiper-slide-active");
+			// console.log(outsideActiveSlide);
+			elements.forEach((item, idx) => {
+				// const bg = item.querySelector(".egg-bg");
+				let center;
+				
+				let cards = [];
+				if (idx === 1) {
+					cards = item.querySelectorAll(".card");
+					// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
+					// cards.forEach((item, idx) => {
+					// 	item.style.setProperty("--custom-index", idx);
+					// });
 				} else {
-					setTimeout(() => {
-						cards.forEach((item) => {
-							item.classList.remove("scale-0");
-						});
-					}, 1000);
+					center = item.querySelector(".egg-center-div");
+					// console.log(center);
 				}
-			} else {
-				setTimeout(() => {
-					item.classList.add("opacity-0");
-				}, 200);
-				if (idx !== 1) {
-					center.classList.add("scale-0");
+	
+				
+				item.style.transform = `translateY(-${page * 150}vh)`;
+				if (page === idx) {
+					setTimeout(() => {
+						item.classList.remove("opacity-0");
+					}, 600);
+					if (idx !== 1) {
+						setTimeout(() => {
+							center.classList.remove("lg:scale-0");
+						}, 1000);
+					} else {
+						setTimeout(() => {
+							cards.forEach((item) => {
+								item.classList.remove("scale-0");
+							});
+						}, 1000);
+					}
 				} else {
-					cards.forEach((item) => {
-						item.classList.add("scale-0");
-					});
+					setTimeout(() => {
+						item.classList.add("opacity-0");
+					}, 200);
+					if (idx !== 1) {
+						center.classList.add("lg:scale-0");
+					} else {
+						cards.forEach((item) => {
+							item.classList.add("scale-0");
+						});
+					}
+					
+					// item.style.transform = `translateY(-${height}px)`;
+	
+					// center.style.transform = `translateY(${page * 150}vh)`;
+					// setTimeout(() => {
+					// 	center.style.transform = "translateY(0)";
+					// }, 600);
 				}
 				
-				// item.style.transform = `translateY(-${height}px)`;
-
-				// center.style.transform = `translateY(${page * 150}vh)`;
-				// setTimeout(() => {
-				// 	center.style.transform = "translateY(0)";
-				// }, 600);
-			}
-			
-		});
+			});
+		}
 
 	}, [page]);
 
@@ -172,21 +183,30 @@ export default function Home({ works }) {
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
 			<Logo opacity={page !== 0 ? 100 : 0} />
-			<section id="hero" className="relative flex justify-center items-center">
-				<Egg bgImage={hero} centerImage={logo} className="hero" />
+			<section id="hero" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
+				<Egg bgImage={windowWidth >= 768 ? hero : heroMobile} centerImage={logo} className="hero" />
+				<div className="z-20 block md:hidden absolute bottom-5 text-center">
+					<h5 className="mb-5">I am a UIUX Designer</h5>
+					<div className="arrow">
+						<Image src={arrow} alt="arrow" width="76px" height="76px" />
+					</div>
+				</div>
 			</section>
-			<div className="empty-div"></div>
-			<section id="works" className="relative flex justify-center items-center">
+			<div className="empty-div hidden lg:block"></div>
+			<section id="works" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
-			<div className="empty-div"></div>
-			<section id="about" className="relative flex justify-center items-center">
+			<div className="empty-div hidden lg:block"></div>
+			<section id="about" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
 				<Egg bgImage={bgAbout} className="about" text="About me" />
+				<div className="absolute z-10 head-shot">
+					<Image src={windowWidth >= 768 ? headShot : headShotMobile} alt="head-shot" layout={windowWidth < 768 && "fill"} />
+				</div>
 			</section>
-			<div className="empty-div"></div>
-			<section id="footer" className="relative flex justify-center items-center">
+			<div className="empty-div hidden lg:block"></div>
+			<section id="footer" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
 				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>

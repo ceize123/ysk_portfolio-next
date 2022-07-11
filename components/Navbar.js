@@ -24,7 +24,9 @@ function Navbar() {
 		if (router.pathname === "/") {
 			ul.style.backgroundColor = "inherit";
 			ul.style.color = "inherit";
-			body.style.overflowY = "hidden";
+			if (windowWidth > 991) {
+				body.style.overflowY = "hidden";
+			}
 			// setToggle(false);
 			// setHideList(false);
 			// setPosition("fixed");
@@ -41,7 +43,7 @@ function Navbar() {
 		if (hideList && windowWidth < 768) {
 			setPosition("scale-0 translate-x-1/2 -mt-12");
 			body.style.overflowY = "visible";
-		} else {
+		} else if (windowWidth < 768) {
 			body.style.overflowY = "hidden";
 			setPosition("");
 		}
