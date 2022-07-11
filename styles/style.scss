@@ -329,10 +329,10 @@ ul {
 		}
 
 		.hero {
-			max-width: 1692px;
-			width: 87vw;
+			max-width: 1550px;
+			width: 82.5vw;
 			min-width: 863px;
-			// margin-top: -9.7vh;
+			margin-left: 5.3vw;
 		}
 
 		.about {
@@ -356,10 +356,10 @@ ul {
 			// margin-left: 3.21vw;
 		}
 		@media only screen and (max-width: 992px) {
-			// .hero {
-			// 	width: 215vw;
-			// 	min-width: 842px;
-			// }
+			.hero {
+				min-width: 863px;
+				margin-left: 52px;
+			}
 
 			.about {
 				margin-right: 165px;
@@ -373,9 +373,10 @@ ul {
 
 		@media only screen and (max-width: 767px) {
 			.hero {
-				width: 152vw;
-				min-width: 882px;
-				margin-bottom: 45vh;
+				width: 145vw;
+				min-width: 800px;
+				margin-bottom: 50vw;
+				margin-left: 9vw;
 			}
 
 			.about {
@@ -387,6 +388,13 @@ ul {
 				min-width: 670px;
 			}
 		}
+
+		@media only screen and (max-width: 595px) {
+			.hero {
+				min-width: 845px;
+				margin-left: 53px;
+			}
+		}
 		// Background
 		
 		.egg-center-div {
@@ -394,8 +402,8 @@ ul {
 			transition: 0.4s all cubic-bezier(.86, .01, .38, .99);
 
 			.egg-center {
-				max-width: 495.3px !important;
-				max-height: 495.3px !important;
+				max-width: 450px !important;
+				max-height: 450px !important;
 				min-width:  254px !important;
 				min-height: 254px !important;
 				width: 25vw !important;
@@ -435,8 +443,8 @@ ul {
 
 			@media only screen and (max-width: 767px) {
 				.egg-center {
-					width: 40vw !important;
-					height: 40vw !important;
+					width: 35vw !important;
+					height: 35vw !important;
 					h1 {
 						font-size: 36px;
 					}
@@ -480,10 +488,36 @@ ul {
 		}
 	}
 
+	@media only screen and (min-width: 1024px) {
+		#hero {
+			.egg-center {
+				max-width: 600px !important;
+				max-height: 600px !important;
+				margin-top: 15.3vw;
+			}
+
+		}
+	}
+
+	@media only screen and (max-width: 1023px) {
+		#hero {
+			.egg-center {
+				top: 0;
+				margin-bottom: 0;
+				margin-top: 170px;
+				width: 254px !important;
+				height: 254px !important;
+				min-width: 254px !important;
+				min-height: 254px !important;
+			}
+
+		}
+	}
+
 	@media only screen and (max-width: 767px) {
 		#hero {
 			.egg-center {
-				margin-bottom: calc(30vh + 15px);
+				margin-top: 120px;
 			}
 
 		}
@@ -665,6 +699,9 @@ ul {
 @media only screen and (min-width: 2000px) {
 	.home {
 		section {
+			.home {
+				margin-left: 106px;
+			}
 			.about {
 				margin-right: 290px;
 			}
@@ -681,6 +718,25 @@ ul {
 
 // }
 // Home Page Ends
+
+// About page Starts
+.about-page {
+	background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
+	> div {
+		max-width: 1280px;
+	}
+
+	.quote {
+		max-width: 579px;
+		q, p {
+			font-weight: 500;
+			font-size: 18px;
+			line-height: 22px;
+		}
+	}
+
+}
+// About page Ends
 
 
 // Sections Starts

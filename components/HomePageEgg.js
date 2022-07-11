@@ -8,7 +8,7 @@ import { useSharePage } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import { useState, useEffect } from "react";
 
-function Egg({ bgImage, centerImage = "", text = "", className, mobile }) {
+function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 	const { setPage } = useBetween(useSharePage);
 
@@ -40,12 +40,12 @@ function Egg({ bgImage, centerImage = "", text = "", className, mobile }) {
 
 	return (
 		<>
-			<div className={`absolute z-10 egg-bg ${className}`} >
+			{bgImage && <div className={`absolute z-10 egg-bg ${className}`} >
 				<Image src={bgImage} alt={bgImage}
 					placeholder="blur"
-					// blurDataURL={bgImage}
+				// blurDataURL={bgImage}
 				/>
-			</div>
+			</div>}
 
 			{/* about */}
 			{className === "about" &&

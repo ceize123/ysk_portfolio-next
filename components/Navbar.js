@@ -46,6 +46,8 @@ function Navbar() {
 		} else if (windowWidth < 768) {
 			body.style.overflowY = "hidden";
 			setPosition("");
+		} else if (windowWidth > 768) {
+			setPosition("");
 		}
 	}, [hideList, windowWidth]);
 

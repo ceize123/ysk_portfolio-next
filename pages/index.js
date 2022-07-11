@@ -1,6 +1,6 @@
 import logo from "../public/image/home-page/logo.png";
+import arrow from "../public/image/home-page/arrow.png";
 import hero from "../public/image/home-page/hero.png";
-import heroMobile from "../public/image/home-page/heroMobile.png";
 import bgChat from "../public/image/home-page/bg-chat.png";
 import bgAbout from "../public/image/home-page/bg-about.png";
 import Egg from "../components/HomePageEgg";
@@ -11,27 +11,26 @@ import { useSharePage, useShareWidth } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
-import Link from "next/link";
-import { set } from "mongoose";
+import Image from "next/image";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
+	const [backgroundSize, setBackgroundSize] = useState(true);
 	// const [page, setPage] = useState(0);
 	const { page, setPage } = useBetween(useSharePage);
 	const { windowWidth } = useBetween(useShareWidth);
 
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		const response = await fetch("/api/works");
-	// 		const data = await response.json();
-	// 		setWorks(data);
-	// 	};
+	useEffect(() => {
+		if (windowWidth > 1024) {
+			setBackgroundSize("top/101%");
+		} else if (windowWidth > 768 && windowWidth <= 1024) {
+			setBackgroundSize("top/1034px 606px");
+		} else {
+			setBackgroundSize("50% -50px/1034px 606px");
+		}
 
-	// 	// call the function
-	// 	fetchData()
-	// 		// make sure to catch any error
-	// 		.catch(console.error);
-	// }, []);
+		
+	}, [windowWidth]);
 	
 	useEffect(() => {
 		if (windowWidth > 1024) {
@@ -185,14 +184,22 @@ export default function Home({ works }) {
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
 			<Logo opacity={page !== 0 ? 100 : 0} />
-			<section id="hero" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
+			<section id="hero"
+				// className="relative flex justify-center md:items-center h-screen lg:overflow-y-hidden"
+				className="relative flex justify-center h-screen lg:overflow-y-hidden"
+				style={{ background: `url("./image/home-page/hero.png") no-repeat ${backgroundSize}` }}
+			>
 				{/* {windowWidth >= 768
 					? <Egg bgImage={hero} centerImage={logo} className="hero" />
 					: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
 				} */}
-				<Egg bgImage={hero} centerImage={logo} className="hero" />
+				{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
+				<Egg centerImage={logo} className="hero" />
 				<div className="z-20 block md:hidden absolute bottom-5 text-center left-5">
 					<h5 className="mb-16">I am a UIUX Designer</h5>
+					<div className="arrow">
+						<Image src={arrow} alt="arrow" width="76px" height="76px" />
+					</div>
 				</div>
 			</section>
 			<div className="empty-div hidden lg:block"></div>
