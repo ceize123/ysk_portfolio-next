@@ -180,24 +180,27 @@ export default function Home({ works }) {
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
 			<Logo opacity={page !== 0 ? 100 : 0} />
-			<section id="hero" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
-				<Egg bgImage={windowWidth >= 768 ? hero : heroMobile} centerImage={logo} className="hero" />
+			<section id="hero" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
+				{windowWidth >= 768
+					? <Egg bgImage={hero} centerImage={logo} className="hero" />
+					: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
+				}
 				<div className="z-20 block md:hidden absolute bottom-5 text-center left-5">
 					<h5 className="mb-16">I am a UIUX Designer</h5>
 				</div>
 			</section>
 			<div className="empty-div hidden lg:block"></div>
-			<section id="works" className="relative flex justify-center items-center h-auto md:h-screen lg:overflow-x-hidden">
+			<section id="works" className="relative flex justify-center items-center h-auto md:h-screen lg:overflow-y-hidden">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
 			<div className="empty-div hidden lg:block"></div>
-			<section id="about" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
+			<section id="about" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
 				<Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} />
 			</section>
 			<div className="empty-div hidden lg:block"></div>
-			<section id="footer" className="relative flex justify-center items-center h-screen lg:overflow-x-hidden">
+			<section id="footer" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
 				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>
