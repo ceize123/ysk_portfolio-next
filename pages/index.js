@@ -55,7 +55,7 @@ export default function Home({ works }) {
 			const handleOverflow = () => {
 				const body = document.querySelector("body");
 				body.style.overflowY = "visible";
-				elements[0].style.overflowY = "visible";
+				elements[0].classList.remove("lg:overflow-y-hidden");
 				setPage(-1);
 			};
 	
