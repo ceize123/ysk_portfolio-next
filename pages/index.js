@@ -104,7 +104,7 @@ export default function Home({ works }) {
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
 		if (page !== -1) {
-			
+			console.log(page);
 			elements.forEach((item, idx) => {
 				let center;
 				let cards = [];

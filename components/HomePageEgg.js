@@ -4,13 +4,9 @@ import Tilt from "react-parallax-tilt";
 import Footer from "./Footer";
 import headShot from "../public/image/home-page/head-shot.png";
 import headShotMobile from "../public/image/home-page/head-shot-mobile.png";
-import { useSharePage } from "../components/ShareStates";
-import { useBetween } from "use-between";
 import { useState, useEffect } from "react";
 
 function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
-
-	const { setPage } = useBetween(useSharePage);
 
 	// const [width, setWidth] = useState(25);
 	// const [height, setHeight] = useState(25);
@@ -49,8 +45,8 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 			{/* about */}
 			{className === "about" &&
-				<div className="absolute z-10 head-shot md:-right-28">
-					{!mobile ? <Image src={headShot} alt="head-shot" width={446} height={433} layout="responsive" /> : <Image src={headShotMobile} alt="head-shot" width={100} height={63} layout="responsive" />}
+				<div className="absolute z-10 head-shot md:-right-28 md:bottom-0">
+					{!mobile ? <Image src={headShot} alt="head-shot" width={100} height={100} layout="responsive" /> : <Image src={headShotMobile} alt="head-shot" width={100} height={100} layout="responsive" />}
 				</div>
 			}
 

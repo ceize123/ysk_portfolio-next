@@ -10,7 +10,7 @@ function Navbar() {
 	const [hideList, setHideList] = useState(true);
 	const [position, setPosition] = useState("");
 	const { windowWidth } = useBetween(useShareWidth);
-	const { setPage } = useBetween(useSharePage);
+	const { page, setPage } = useBetween(useSharePage);
 	const router = useRouter();
 
 	const handleClick = () => {
@@ -26,7 +26,7 @@ function Navbar() {
 			ul.style.color = "inherit";
 			if (windowWidth > 1024) {
 				body.style.overflowY = "hidden";
-				setPage(0);
+				// setPage(0);
 			}
 			// setToggle(false);
 			// setHideList(false);
