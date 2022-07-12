@@ -49,23 +49,34 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 			{/* about */}
 			{className === "about" &&
-				<div className="absolute z-10 head-shot">
-					{!mobile ? <Image src={headShot} alt="head-shot" /> : <Image src={headShotMobile} alt="head-shot" />}
+				<div className="absolute z-10 head-shot md:-right-28">
+					{!mobile ? <Image src={headShot} alt="head-shot" width={446} height={433} layout="responsive" /> : <Image src={headShotMobile} alt="head-shot" width={100} height={63} layout="responsive" />}
 				</div>
 			}
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
-			<Link href={className === "about" ? "/about" : "/"}>
-				<div className="egg-center-div z-20 lg:scale-0" >
+			{text !== "footer"
+				? <Link href={className === "about" ? "/about" : "/"}>
+					<div className="egg-center-div z-20 lg:scale-0" >
+						<Tilt className={`${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
+							perspective={550}>
+							{centerImage && <Image src={centerImage} alt={centerImage}
+								className="egg-center-text"
+							/>}
+							<h1>{text}</h1>
+						</Tilt>
+					</div>
+				</Link>
+				: <div className="egg-center-div z-20 lg:scale-0" >
 					<Tilt className={`${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
 						perspective={550}>
 						{centerImage && <Image src={centerImage} alt={centerImage}
 							className="egg-center-text"
 						/>}
-						{text === "footer" ? <Footer /> : <h1>{text}</h1>}
+						<Footer />
 					</Tilt>
 				</div>
-			</Link>
+			}
 
 			{/* <div className={`z-20 egg-${className} flex justify-center items-center`}></div> */}
 		</>

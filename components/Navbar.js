@@ -10,8 +10,8 @@ function Navbar() {
 	const [hideList, setHideList] = useState(true);
 	const [position, setPosition] = useState("");
 	const { windowWidth } = useBetween(useShareWidth);
-	const router = useRouter();
 	const { setPage } = useBetween(useSharePage);
+	const router = useRouter();
 
 	const handleClick = () => {
 		setToggle(!toggle);
@@ -24,8 +24,9 @@ function Navbar() {
 		if (router.pathname === "/") {
 			ul.style.backgroundColor = "inherit";
 			ul.style.color = "inherit";
-			if (windowWidth > 991) {
+			if (windowWidth > 1024) {
 				body.style.overflowY = "hidden";
+				setPage(0);
 			}
 			// setToggle(false);
 			// setHideList(false);
@@ -50,6 +51,12 @@ function Navbar() {
 			setPosition("");
 		}
 	}, [hideList, windowWidth]);
+
+	const handleNav = (no) => {
+		if (windowWidth > 1024) {
+			setPage(no);
+		}
+	};
 
 
 	return (
@@ -76,22 +83,22 @@ function Navbar() {
 			<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${position}`} >
 				<li>
 					<Link href="/">
-						<a className="hover:text-secondary" onClick={() => setPage(0)}>Home</a>
+						<a className="hover:text-secondary" onClick={() => handleNav(0)}>Home</a>
 					</Link>
 				</li>
 				<li>
-					<Link href="/">
-						<a className="hover:text-secondary" onClick={() => setPage(1)}>Works</a>
+					<Link href={windowWidth > 1024 ? "/" : "/#works"}>
+						<a className="hover:text-secondary" onClick={() => handleNav(1)}>Works</a>
 					</Link>
 				</li>
 				<li>
-					<Link href="/">
-						<a className="hover:text-secondary" onClick={() => setPage(2)}>About me</a>
+					<Link href={windowWidth > 1024 ? "/" : "/#about"}>
+						<a className="hover:text-secondary" onClick={() => handleNav(2)}>About me</a>
 					</Link>
 				</li>
 				<li>
-					<Link href="/">
-						<a className="hover:text-secondary" onClick={() => setPage(3)}>Contact</a>
+					<Link href={windowWidth > 1024 ? "/" : "/#footer"}>
+						<a className="hover:text-secondary" onClick={() => handleNav(3)}>Contact</a>
 					</Link>
 				</li>
 				<li>

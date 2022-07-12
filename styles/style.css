@@ -278,19 +278,17 @@ ul {
   cursor: pointer;
 }
 .home section .head-shot {
-  right: 0;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
   bottom: 0;
   max-width: 446px;
-  opacity: 0.5;
 }
 @media only screen and (max-width: 767px) {
   .home section .head-shot {
     max-width: 100%;
-    width: 100vw;
-    height: 63vw;
     top: 0;
     margin-top: 10vh;
-    opacity: 1;
   }
 }
 .home section .egg-hero {
@@ -424,6 +422,7 @@ ul {
   cursor: pointer;
   height: 0;
   padding-bottom: 96.6%;
+  width: 100%;
 }
 .home .carousel-section .slide-page .card h4 {
   margin-top: 10px;
@@ -451,7 +450,7 @@ ul {
   }
 }
 .home footer {
-  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 @media only screen and (min-width: 2000px) {
@@ -650,14 +649,16 @@ iframe {
 footer {
   padding-bottom: 50px;
 }
+footer .icon-section {
+  margin: 0 30px;
+  margin-top: 20px;
+}
 footer .icon {
   background-color: #222222;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  margin: 0 30px;
-  margin-top: 20px;
 }
 footer .icon svg {
   color: white;

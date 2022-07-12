@@ -21,7 +21,7 @@ function About() {
 		<div className="about-page">
 			<section className="md:pt-14 pt-12 flex justify-center">
 				<div className="md:px-24 px-5 mt-8">
-					<div className="flex justify-between">
+					<div className="flex">
 						<div>
 							<h1 className="mt-12 mb-5">Hello! I am Yung-Shin Ko!</h1>
 							<div className="flex flex-col quote">
@@ -30,7 +30,7 @@ function About() {
 							</div>
 						</div>
 
-						<div className="head-shot hidden lg:block">
+						<div className="head-shot hidden lg:block ml-24">
 							<Image src={headShot} alt="head-shot" />	
 						</div>
 					</div>
