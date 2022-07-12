@@ -92,4 +92,12 @@ export const useShareWidth = () => {
 	};
 };
 
+export const useShareModal = () => {
+	const [open, setOpen] = useState(false);
+	return {
+		open,
+		setOpen,
+	};
+};
+
 
