@@ -6,6 +6,7 @@ import TextOnly from "./sections/TextOnly";
 import TitleImage from "./sections/TitleImage";
 import Horizon from "./sections/Horizon";
 import List from "./sections/List";
+import VideoSec from "./sections/VideoSec";
 import { useShareWidth } from "./ShareStates";
 import { useBetween } from "use-between";
 
@@ -18,7 +19,8 @@ const LAYOUTS = {
 	Carousel,
 	TextOnly,
 	Horizon,
-	List
+	List,
+	VideoSec
 };
 
 function TypeSection({prop}) {

@@ -630,7 +630,7 @@ iframe {
 .addNewSection .imageOnly .title, .addNewSection .imageOnly .paragraph {
   display: none;
 }
-.addNewSection .titleImage .paragraph {
+.addNewSection .titleImage .paragraph, .addNewSection .videoSec .paragraph {
   display: none;
 }
 .addNewSection .carousel .title, .addNewSection .carousel .paragraph, .addNewSection .list .title, .addNewSection .list .paragraph {

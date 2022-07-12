@@ -50,27 +50,6 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		});
 	}, [category]);
 	
-	// const validateWork = (work) => {
-	// 	let flag = true;
-	// 	const keys = Object.keys(work);
-	// 	const subKeys = Object.keys(overview);
-	// 	keys.map(key => {
-	// 		if (work[key] === "" || work[key].length === 0) {
-	// 			flag = false;
-	// 		}
-	// 	});
-
-	// 	subKeys.map(key => {
-	// 		if (work.overview[key] === "") {
-	// 			flag = false;
-	// 		}
-	// 	});
-	// 	if (!flag) {
-	// 		failAlert("Shin! Please Please Please fill in all the fields!");
-	// 	}
-	// 	return flag;
-	// };
-
 	// // Add section part
 	const [type, setType] = useState(types[0]);
 	const [overall, setOverall] = useState({});
@@ -153,6 +132,12 @@ function PostFormSection({ workId = "", filter, title="" }) {
 				title: "",
 				images: [],
 				imagesMobile: [],
+			});	
+			break;
+		case "videoSec":
+			setOverall({
+				title: "",
+				images: [],
 			});	
 			break;
 		case "carousel":
@@ -351,7 +336,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 								</div>
 								{/* <UploadImage type={type} /> */}
 								<ImageInput prop={`${category}/${title}/${type}`} type={type} />
-								<ImageInputMobile prop={`${category}/${title}/${type}/mobile`} type={type} />
+								{type !== "videoSec" && <ImageInputMobile prop={`${category}/${title}/${type}/mobile`} type={type} />}
 							</div>
 							: <div className="grid grid-cols-1">
 								{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}

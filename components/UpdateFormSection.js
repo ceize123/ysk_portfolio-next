@@ -253,7 +253,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									))}
 								</div>
 								{hasImage && <ImageInput prop={`${param}/${title}/${overall.type}`} category={param} imageAry={prop.images} />}
-								{hasImage && <ImageInputMobile prop={`${param}/${title}/${overall.type}/mobile`} category={param} imageAry={prop.imagesMobile} />}
+								{hasImage && overall.type !== "videoSec" && <ImageInputMobile prop={`${param}/${title}/${overall.type}/mobile`} category={param} imageAry={prop.imagesMobile} />}
 								{/* {hasImage && <UploadImage type={overall.type} isUpdate={true}/>} */}
 							</div> 
 							: <div className="grid grid-cols-1">

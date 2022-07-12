@@ -6,7 +6,8 @@ export const types = [
 	"carousel",
 	"textOnly",
 	"horizon",
-	"list"
+	"list",
+	"videoSec"
 	// {
 	// 	id: 1,
 	// 	title: "Choose a type",
