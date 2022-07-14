@@ -12,9 +12,21 @@ import UpdateBtn from "../../../../../components/UpdateButtons";
 import dbConnect from "../../../../../util/connection";
 import Category from "../../../../../models/Category";
 import Work from "../../../../../models/Work";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 function WorkDetail({category, work}) {
 	const { updateNo, setUpdateNo } = useBetween(useShareUpdateNo);
+
+	const { data: session } = useSession();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (!session) {
+			router.push("/");
+		}
+	}, []);
 
 	// Scroll to end of page
 	// https://stackoverflow.com/questions/23843619/js-for-smooth-scroll-to-the-bottom-of-the-page
@@ -33,10 +45,10 @@ function WorkDetail({category, work}) {
 
 	return (
 		<div className="mt-3 back-end">
-			{work &&
+			{session && work &&
 				<>
 					<h1 className="text-3xl mb-3 text-center">
-						Add New Section to {work._id} | {work.title} | {work.description}
+						Add New Section to | {work.title} | {work.description}
 					</h1>
 					<section className="mx-auto container">
 						<div className="flex justify-between items-center mt-12 mb-7">

@@ -3,6 +3,7 @@ import { ListItem } from "../../../components/ListItem";
 import Button from "../../../components/Button";
 import dbConnect from "../../../util/connection";
 import Category from "../../../models/Category";
+import { getSession } from "next-auth/react";
 
 // https://medium.com/nmc-techblog/easy-drag-and-drop-in-react-22778b30ba37
 function Order({works}) {
@@ -74,7 +75,18 @@ function Order({works}) {
 
 export default Order;
 
-export async function getStaticProps() {
+// export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
+	const session = await getSession(context);
+	
+	if (!session) {
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			}
+		};
+	}
 	// const response = await fetch("http://localhost:3000/api/works");
 	// const response = await fetch(`${process.env.URL}/api/works`);
 	// const data = await response.json();

@@ -3,6 +3,9 @@ import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
 import {useShareCategories} from "../components/ShareStates";
+import Link from "next/link";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
+import Button from "../components/Button";
 
 const choices = [
 	"Update Section",
@@ -10,6 +13,8 @@ const choices = [
 ];
 
 function Dashboard() {
+	const { data: session, status } = useSession();
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [dashboardData, setDashboardData] = useState(null);
 	const [isUpdate, setIsUpdate] = useState(true);
@@ -22,17 +27,33 @@ function Dashboard() {
 
 	// need to be modified to staticProps
 	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch("/api/works");
-			const data = await response.json();
-			setDashboardData(data);
-			setCategories(data.map(value => value.category));
-			setCategory(data[0].category);
-			setIsLoading(false);
-			setWork(data[0].works[0]);
-			setChoice(choices[0]);
-		}
-		fetchData();
+		const securePage = async () => {
+			const session = await getSession();
+			if (!session) {
+				signIn();
+			} else {
+				const response = await fetch("/api/works");
+				const data = await response.json();
+				setDashboardData(data);
+				setCategories(data.map(value => value.category));
+				setCategory(data[0].category);
+				setIsLoading(false);
+				setWork(data[0].works[0]);
+				setChoice(choices[0]);
+			}
+		};
+		securePage();
+		// async function fetchData() {
+		// 	const response = await fetch("/api/works");
+		// 	const data = await response.json();
+		// 	setDashboardData(data);
+		// 	setCategories(data.map(value => value.category));
+		// 	setCategory(data[0].category);
+		// 	setIsLoading(false);
+		// 	setWork(data[0].works[0]);
+		// 	setChoice(choices[0]);
+		// }
+		// fetchData();
 	}, []);
 
 	useEffect(() => {
@@ -66,39 +87,57 @@ function Dashboard() {
 		}
 	}
 
+	// if ()
 	if (isLoading) return <div className="back-end"><h1 className="text-3xl text-center font-bold mt-6">Loading...</h1></div>;
 
 	return (
 		<div className="back-end">
 			<h1 className="text-3xl text-center font-bold underline my-6">Dashboard</h1>
-			<div className="mx-10">
-				<div className="flex content-center">
-					<p className="mt-1 mr-3 text-sm font-medium text-gray-700">Update Current Work</p>
-					<label forhtml="toggle" className="inline-flex relative items-center cursor-pointer">
-						<input type="checkbox" value="" id="toggle" className="sr-only peer" onClick={e => { handleClick(e); }}/>
-						<div className="w-12 h-6 bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600"></div>
-					</label>
-					<p className="mt-1 ml-3 text-sm font-medium text-gray-700">Create New Work</p>
+			{/* {!session && status !== "authenticated" &&
+				<div className="flex justify-center items-center h-24">
+					<Link href='/api/auth/signin'>
+						<Button onClick={() => signIn("github")} text="Sign In" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500"/>
+					</Link>
 				</div>
-				{(isUpdate && dashboardData[idx].works.length !== 0) &&
-					<>
-						{/* Pass data from child to parent */}
-						{/* https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component */}
-						<SelectMenu prop={choices} option={choice} name="Choice" onChange={setChoice} />
-						{choice === choices[0] &&
-						<>
-							<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory}/>
-							<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork} />
-						</>
+			} */}
+			{session && status !== "unauthenticated" &&
+				<>
+					<h2 className="text-2xl text-center font-bold my-12">Welcome! {session.user.name}</h2>
+					<div className="mx-10">
+						<div className="flex content-center">
+							<p className="mt-1 mr-3 text-sm font-medium text-gray-700">Update Current Work</p>
+							<label forhtml="toggle" className="inline-flex relative items-center cursor-pointer">
+								<input type="checkbox" value="" id="toggle" className="sr-only peer" onClick={e => { handleClick(e); }} />
+								<div className="w-12 h-6 bg-blue-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600"></div>
+							</label>
+							<p className="mt-1 ml-3 text-sm font-medium text-gray-700">Create New Work</p>
+						</div>
+						{(isUpdate && dashboardData[idx].works.length !== 0) &&
+							<>
+								{/* Pass data from child to parent */}
+								{/* https://stackoverflow.com/questions/55726886/react-hook-send-data-from-child-to-parent-component */}
+								<SelectMenu prop={choices} option={choice} name="Choice" onChange={setChoice} />
+								{choice === choices[0] &&
+									<>
+										<SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />
+										<SelectMenu prop={dashboardData[idx].works} option={work} name="Work" onChange={setWork} />
+									</>
+								}
+							</>
 						}
-					</>
-				}
-				{(isUpdate && dashboardData[idx].works.length === 0)
-					? <h2 className="mt-3">No works in this category, Please create one.</h2>
-					: <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
-				}
-				{/* {(!isUpdate || dashboardData[idx].works.length !== 0) && <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>} */}
-			</div>
+						{(isUpdate && dashboardData[idx].works.length === 0)
+							? <h2 className="mt-3">No works in this category, Please create one.</h2>
+							: <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>
+						}
+						{/* {(!isUpdate || dashboardData[idx].works.length !== 0) && <button className="mt-5 border-4 border-indigo-500/100 rounded-lg p-1" onClick={handleSubmit}>Send</button>} */}
+					</div>
+					<div className="flex justify-center items-center h-24">
+						<Link href='/api/auth/signout'>
+							<Button onClick={() => signOut()} text="Sign Out" color="border-red-600 hover:bg-red-500 focus:ring-red-500"/>
+						</Link>
+					</div>
+				</>
+			}
 		</div>
 	);
 }

@@ -1,10 +1,11 @@
 import "../styles/style.css";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+// import Footer from "../components/Footer";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 
 	if (Component.getLayout) {
 		return Component.getLayout(<Component {...pageProps} />);
@@ -12,10 +13,12 @@ function MyApp({ Component, pageProps }) {
 
 	return (
 		<>
-			<Navbar />
-			<DndProvider backend={HTML5Backend}>
-				<Component {...pageProps} />
-			</DndProvider>
+			<SessionProvider session={session}>
+				<Navbar />
+				<DndProvider backend={HTML5Backend}>
+					<Component {...pageProps} />
+				</DndProvider>
+			</SessionProvider>
 			{/* <Footer /> */}
 		</>
 	);
