@@ -9,4 +9,8 @@ export default NextAuth({
 			clientSecret: process.env.GITHUB_SECRET
 		})
 	],
+	database: process.env.MONGO_URL,
+	session: {
+		jwt: true // ask next auth library to use jwt for session management, not db
+	},
 });
