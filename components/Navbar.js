@@ -26,12 +26,17 @@ function Navbar() {
 		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
 		if (router.pathname === "/") {
+			if (windowWidth <= 1024) {
+				setPage(-1);
+			} else {
+				body.style.overflowY = "hidden";
+			}
 			ul.style.backgroundColor = "inherit";
 			ul.style.color = "inherit";
-			if (windowWidth > 1024) {
-				body.style.overflowY = "hidden";
-				// setPage(0);
-			}
+			// if (windowWidth > 1024) {
+			// 	body.style.overflowY = "hidden";
+			// 	// setPage(0);
+			// }
 			// setToggle(false);
 			// setHideList(false);
 			// setPosition("fixed");
