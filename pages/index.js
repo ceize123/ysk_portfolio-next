@@ -35,9 +35,9 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
-		const h = document.querySelector("html");
+		const body = document.querySelector("body");
 		const handleOverflow = () => {
-			h.style.overflowY = "visible";
+			body.style.overflowY = "visible";
 			elements[0].classList.remove("lg:overflow-y-hidden");
 			setPage(-1);
 		};
@@ -46,7 +46,7 @@ export default function Home({ works }) {
 	
 			const handleScroll = (e) => {
 				if (page === -1) {
-					h.style.overflowY = "hidden";
+					body.style.overflowY = "hidden";
 					elements[0].classList.add("lg:overflow-y-hidden");
 					setPage(0);
 					setScrolled(true);
@@ -176,6 +176,14 @@ export default function Home({ works }) {
 		}
 	};
 
+	const handleArrow = () => {
+		const arrow = document.querySelector(".arrow");
+		arrow.classList.add("arrow-active");
+		setTimeout(() => {
+			arrow.classList.remove("arrow-active");
+		}, 1000);
+	};
+
 	return (
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
@@ -192,9 +200,9 @@ export default function Home({ works }) {
 				<Egg centerImage={logo} className="hero" />
 				<div className="z-20 absolute lg:bottom-8 bottom-5 text-center lg:left-24 md:left-12 left-5 ">
 					<h5 className="mb-4">I am a UIUX Designer</h5>
-					<div className="arrow">
+					<div className="arrow" onClick={handleArrow}>
 						<Link href={windowWidth > 1024 ? "/" : "/#works"}>
-							<Image src={arrow} alt="arrow" width="76px" height="76px" onClick={() => handleNav(1)}/>
+							<Image className="cursor-pointer" src={arrow} alt="arrow" width="76px" height="76px" onClick={() => handleNav(1)}/>
 						</Link>
 					</div>
 				</div>

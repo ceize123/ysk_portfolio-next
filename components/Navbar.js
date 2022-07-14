@@ -39,7 +39,7 @@ function Navbar() {
 	};
 
 	useEffect(() => {
-		const h = document.querySelector("html");
+		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
 		if (router.pathname === "/") {
 			if (windowWidth <= 1024) {
@@ -58,10 +58,10 @@ function Navbar() {
 			// setPosition("fixed");
 		} else if (router.pathname === "/about") {
 			ul.style.backgroundColor = "#E0E0E0";
-			h.style.overflowY = "visible";
+			body.style.overflowY = "visible";
 			// setPosition("static");
 		} else {
-			h.style.overflowY = "visible";
+			body.style.overflowY = "visible";
 		}
 		setToggle(false);
 		setHideList(true);
