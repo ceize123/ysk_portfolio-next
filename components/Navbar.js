@@ -35,9 +35,12 @@ function Navbar() {
 			// setToggle(false);
 			// setHideList(false);
 			// setPosition("fixed");
-		} else {
+		} else if (router.pathname === "/about") {
+			ul.style.backgroundColor = "#FFF";
 			body.style.overflowY = "visible";
 			// setPosition("static");
+		} else {
+			body.style.overflowY = "visible";
 		}
 		setToggle(false);
 		setHideList(true);

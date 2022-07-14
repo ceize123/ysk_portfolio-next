@@ -45,7 +45,7 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 			{/* about */}
 			{className === "about" &&
-				<div className="absolute z-10 head-shot md:-right-28 md:bottom-0">
+				<div className="absolute z-10 head-shot md:-right-28 lg:-bottom-24 md:bottom-0">
 					{!mobile ? <Image src={headShot} alt="head-shot" width={100} height={100} layout="responsive" /> : <Image src={headShotMobile} alt="head-shot" width={100} height={100} layout="responsive" />}
 				</div>
 			}

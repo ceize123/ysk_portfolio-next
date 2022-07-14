@@ -187,7 +187,7 @@ export default function Home({ works }) {
 				} */}
 				{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
 				<Egg centerImage={logo} className="hero" />
-				<div className="z-20 absolute bottom-5 text-center left-5">
+				<div className="z-20 absolute bottom-5 text-center lg:left-24 md:left-12 left-5">
 					<h5 className="mb-4">I am a UIUX Designer</h5>
 					<div className="arrow mb-5 md:mb-0">
 						<Image src={arrow} alt="arrow" width="76px" height="76px" />
