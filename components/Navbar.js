@@ -3,8 +3,12 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSharePage, useShareWidth } from "./ShareStates";
 import { useBetween } from "use-between";
+import { useSession } from "next-auth/react";
 
 function Navbar() {
+
+	const { data: session } = useSession();
+
 	// const [position, setPosition] = useState("fixed");
 	const [toggle, setToggle] = useState(false);
 	const [hideList, setHideList] = useState(true);
@@ -106,11 +110,13 @@ function Navbar() {
 						<a className="hover:text-secondary">Resume</a>
 					</Link>
 				</li>
-				<li className="hidden md:block">
-					<Link href="/dashboard">
-						<a className="hover:text-secondary">Dashboard</a>
-					</Link>
-				</li>
+				{session &&
+					<li className="hidden md:block">
+						<Link href="/dashboard">
+							<a className="hover:text-secondary">Dashboard</a>
+						</Link>
+					</li>
+				}
 			</ul>
 		</nav>
 	);
