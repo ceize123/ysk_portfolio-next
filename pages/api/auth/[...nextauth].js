@@ -9,5 +9,5 @@ export default NextAuth({
 			clientSecret: process.env.GITHUB_SECRET
 		})
 	],
-	secret: process.env.SECRET,
+	secret: "dCVdSHc8MRF@uFyqAS4g^y8f745t*Q@7nG^f&CgYrMzUXcZe**",
 });
