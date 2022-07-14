@@ -5,13 +5,13 @@ import bgChat from "../public/image/home-page/bg-chat.png";
 import bgAbout from "../public/image/home-page/bg-about.png";
 import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
-import Logo from "../components/Logo";
 import { useState, useEffect } from "react";
 import { useSharePage, useShareWidth } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
 import Image from "next/image";
+import Link from "next/link";
 import { set } from "mongoose";
 
 export default function Home({ works }) {
@@ -23,8 +23,8 @@ export default function Home({ works }) {
 
 	useEffect(() => {
 		if (windowWidth > 1024) {
-			setBackgroundSize("45% top/101%");
-		} else if (windowWidth > 768 && windowWidth <= 1024) {
+			setBackgroundSize("48% top/100.5%");
+		} else if (windowWidth >= 768 && windowWidth < 1024) {
 			setBackgroundSize("top/1034px 606px");
 		} else {
 			setBackgroundSize("50% -50px/1034px 606px");
@@ -35,9 +35,9 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
+		const h = document.querySelector("html");
 		const handleOverflow = () => {
-			const body = document.querySelector("body");
-			body.style.overflowY = "visible";
+			h.style.overflowY = "visible";
 			elements[0].classList.remove("lg:overflow-y-hidden");
 			setPage(-1);
 		};
@@ -46,8 +46,7 @@ export default function Home({ works }) {
 	
 			const handleScroll = (e) => {
 				if (page === -1) {
-					const body = document.querySelector("body");
-					body.style.overflowY = "hidden";
+					h.style.overflowY = "hidden";
 					elements[0].classList.add("lg:overflow-y-hidden");
 					setPage(0);
 					setScrolled(true);
@@ -103,8 +102,7 @@ export default function Home({ works }) {
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
-		if (page !== -1) {
-			console.log(page);
+		if (page !== -1 && windowWidth > 1024) {
 			elements.forEach((item, idx) => {
 				let center;
 				let cards = [];
@@ -172,10 +170,15 @@ export default function Home({ works }) {
 
 	}, [page]);
 
+	const handleNav = (no) => {
+		if (windowWidth > 1024) {
+			setPage(no);
+		}
+	};
+
 	return (
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
-			<Logo />
 			<section id="hero"
 				// className="relative flex justify-center md:items-center h-screen lg:overflow-y-hidden"
 				className="relative flex justify-center h-screen lg:overflow-y-hidden"
@@ -187,10 +190,12 @@ export default function Home({ works }) {
 				} */}
 				{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
 				<Egg centerImage={logo} className="hero" />
-				<div className="z-20 absolute bottom-5 text-center lg:left-24 md:left-12 left-5">
+				<div className="z-20 absolute lg:bottom-8 bottom-5 text-center lg:left-24 md:left-12 left-5 ">
 					<h5 className="mb-4">I am a UIUX Designer</h5>
-					<div className="arrow mb-5 md:mb-0">
-						<Image src={arrow} alt="arrow" width="76px" height="76px" />
+					<div className="arrow">
+						<Link href={windowWidth > 1024 ? "/" : "/#works"}>
+							<Image src={arrow} alt="arrow" width="76px" height="76px" onClick={() => handleNav(1)}/>
+						</Link>
 					</div>
 				</div>
 			</section>

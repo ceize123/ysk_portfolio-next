@@ -69,22 +69,26 @@ function About() {
 							I am also interested in...
 						</h2>
 						<div className="flex justify-center text-center md:mt-12 mt-5 flex-col md:flex-row">
-							<div className="md:w-1/2 md:px-12 mb-5 md:mb-0 relative">
+							<div className="md:w-1/2 sm:px-12 mb-5 md:mb-0 relative">
 								<p className="md:mb-5 mb-2.5">
 									Fashion Design
 								</p>
-								<Image className="cursor-pointer" src={fashion} alt="fashion" onClick={() => windowWidth > 768 && handleModal("fashion")} />
-								<div className="block md:hidden absolute bottom-0 w-full see-more py-2.5" onClick={() => handleModal("fashion")}>
-									<h2>See More</h2>
+								<div className="relative image-div cursor-pointer" onClick={() => windowWidth > 768 && handleModal("fashion")}>
+									<Image src={fashion} alt="fashion" />
+									<div className="items-center justify-center absolute bottom-0 w-full md:h-full see-more py-2.5" onClick={() => handleModal("fashion")}>
+										<h2>See More</h2>
+									</div>
 								</div>
 							</div>
-							<div className="md:w-1/2 md:px-12 relative">
+							<div className="md:w-1/2 sm:px-12 relative">
 								<p className="md:mb-5 mb-2.5">
 									Photography
 								</p>
-								<Image className="cursor-pointer" src={photo} alt="photography" onClick={() => windowWidth > 768 && handleModal("photography")} />
-								<div className="block md:hidden absolute bottom-0 w-full see-more py-2.5" onClick={() => handleModal("photography")}>
-									<h2>See More</h2>
+								<div className="relative image-div cursor-pointer" onClick={() => windowWidth > 768 && handleModal("photography")}>
+									<Image src={photo} alt="photography" />
+									<div className="items-center justify-center absolute bottom-0 w-full md:h-full see-more py-2.5" onClick={() => handleModal("photography")}>
+										<h2>See More</h2>
+									</div>
 								</div>
 							</div>
 						</div>

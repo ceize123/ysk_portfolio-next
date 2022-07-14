@@ -4,10 +4,13 @@ import Tilt from "react-parallax-tilt";
 import Footer from "./Footer";
 import headShot from "../public/image/home-page/head-shot.png";
 import headShotMobile from "../public/image/home-page/head-shot-mobile.png";
-import { useState, useEffect } from "react";
+import { useSharePage, useShareWidth } from "./ShareStates";
+import { useBetween } from "use-between";
 
 function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
+	const { windowWidth } = useBetween(useShareWidth);
+	const { setPage } = useBetween(useSharePage);
 	// const [width, setWidth] = useState(25);
 	// const [height, setHeight] = useState(25);
 	
@@ -33,6 +36,11 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 	// 		window.removeEventListener("wheel", handleScale);
 	// 	};
 	// },[width, height]);
+	const handleNav = (no) => {
+		if (windowWidth > 1024 && className === "hero") {
+			setPage(no);
+		}
+	};
 
 	return (
 		<>
@@ -52,8 +60,8 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}
 			{text !== "footer"
-				? <Link href={className === "about" ? "/about" : "/"}>
-					<div className="egg-center-div z-20 lg:scale-0" >
+				? <Link href={className === "about" ? "/about" : windowWidth > 1024 ? "/" : "/#works"}>
+					<div className="egg-center-div z-20 lg:scale-0" onClick={() => handleNav(1)}>
 						<Tilt className={`${text !== "footer" && "egg-hover"} egg-center flex justify-center items-center`}
 							perspective={550}>
 							{centerImage && <Image src={centerImage} alt={centerImage}

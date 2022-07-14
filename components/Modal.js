@@ -5,12 +5,12 @@ import { useShareModal } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import Button from "../components/Button";
 
-export default function Modal({prop}) {
-	const { open, setOpen } = useBetween(useShareModal);
+export default function Modal({prop, resume = ""}) {
+	const { open, setOpen, openR, setOpenR  } = useBetween(useShareModal);
 
 	return (
-		<Transition.Root show={open} as={Fragment}>
-			<Dialog as="div" className="relative z-10" onClose={setOpen}>
+		<Transition.Root show={!resume ? open : openR} as={Fragment}>
+			<Dialog as="div" className="relative z-10" onClose={!resume ? setOpen : setOpenR}>
 				<Transition.Child
 					as={Fragment}
 					enter="ease-out duration-300"
@@ -49,10 +49,10 @@ export default function Modal({prop}) {
 											</p>
 										</div>
 									</div> */}
-									<iframe className="w-full" src={prop === "fashion" ? "./image/about/fashion.pdf" : "./image/about/photography.pdf"} />
+									<iframe className="w-full" src={`./image/about/${prop}.pdf`} />
 								</div>
 								<div className="mt-5 sm:mt-6 text-center">
-									<Button onClick={() => setOpen(false)} text="Go Back" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" />
+									<Button onClick={() => !resume ? setOpen(false) : setOpenR(false)} text="Go Back" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" />
 									{/* <button
 										type="button"
 										className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
