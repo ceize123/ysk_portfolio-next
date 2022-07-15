@@ -26,7 +26,7 @@ function WorkDetail({category, work}) {
 		if (!session) {
 			router.push("/");
 		}
-	}, []);
+	}, [session]);
 
 	// Scroll to end of page
 	// https://stackoverflow.com/questions/23843619/js-for-smooth-scroll-to-the-bottom-of-the-page

@@ -239,7 +239,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			setArray([]);
 			setImageUrls([]);
 			setImageUrlsMobile([]);
-			successAlert(filter, "Section is created!");
+			successAlert(filter, "Section is created!", refresh);
 
 
 		} else {
@@ -260,8 +260,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			console.log("From Create work");
 			console.log(result);
 			if (result._id) {
-				// successAlert(filter, "Project is created!", redirect);
-				successAlert(filter, "Project is created!");
+				successAlert(filter, "Project is created!", redirect);
 					
 			} else {
 				failAlert("This Project name is already exist");
@@ -270,12 +269,12 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		}
 	};
 
-	// const redirect = async () => {
-	// 	router.push("/dashboard");
-	// };
-	// const refresh = async () => {
-	// 	window.location.reload();
-	// };
+	const redirect = async () => {
+		router.push("/dashboard");
+	};
+	const refresh = async () => {
+		window.location.reload();
+	};
 	
 
 	return (
