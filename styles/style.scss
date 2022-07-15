@@ -133,6 +133,11 @@ ul {
 
 .header {
 	// height: 60px;
+
+	.logo {
+		max-width: 35px;
+		max-height: 35px;
+	}
 	.menu-icon {
 
 		// https://codepen.io/ainalem/pen/LJYRxz
@@ -330,12 +335,6 @@ ul {
 		img {
 			animation: bt-effect linear 0.2s;
 		}
-	}
-
-	.logo {
-		// transition: opacity 1s ease-out;
-		transition: 1.3s opacity cubic-bezier(.86, .01, .38, .99);
-		// opacity: 0;
 	}
 
 	section {

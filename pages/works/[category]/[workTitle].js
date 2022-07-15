@@ -93,5 +93,6 @@ export async function getStaticProps(context) {
 			category: category,
 			work,
 		},
+		revalidate: 10
 	};
 }
