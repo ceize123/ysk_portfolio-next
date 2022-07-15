@@ -20,14 +20,15 @@ function WorkDetail({category, work}) {
 	const { updateNo, setUpdateNo } = useBetween(useShareUpdateNo);
 
 	const { data: session } = useSession();
-	const router = useRouter();
+	// const router = useRouter();
 
-	useEffect(() => {
-		if (!session) {
-			router.push("/");
-		}
-	}, [session]);
+	// useEffect(() => {
+	// 	if (!session) {
+	// 		router.push("/");
+	// 	}
+	// }, [session]);
 
+	
 	// Scroll to end of page
 	// https://stackoverflow.com/questions/23843619/js-for-smooth-scroll-to-the-bottom-of-the-page
 	// const {pathname} = useRouter();

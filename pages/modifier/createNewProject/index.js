@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 
 function AddNew() {
 	const { data: session } = useSession();
-	const router = useRouter();
+	// const router = useRouter();
 
-	useEffect(() => {
-		if (!session) {
-			router.push("/");
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (!session) {
+	// 		router.push("/");
+	// 	}
+	// }, []);
 	return (
 		<>
 			{session &&

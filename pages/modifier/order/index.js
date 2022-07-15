@@ -10,12 +10,12 @@ import { useRouter } from "next/router";
 // https://medium.com/nmc-techblog/easy-drag-and-drop-in-react-22778b30ba37
 function Order({works}) {
 	const { data: session } = useSession();
-	const router = useRouter();
-	useEffect(() => {
-		if (!session) {
-			router.push("/");
-		}
-	}, []);
+	// const router = useRouter();
+	// useEffect(() => {
+	// 	if (!session) {
+	// 		router.push("/");
+	// 	}
+	// }, []);
 
 	const [projects, setProjects] = useState(works);
 
