@@ -142,7 +142,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			
 			const result = await response.json();
 			console.log(result);
-			successAlert(filter, "Section has been updated!", refresh);
+			// successAlert(filter, "Section has been updated!", refresh);
+			successAlert(filter, "Section has been updated!");
 
 		} else {
 			data = work;
