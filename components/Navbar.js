@@ -69,14 +69,25 @@ function Navbar() {
 
 	useEffect(() => {
 		const body = document.querySelector("body");
+		const ul = document.querySelector("nav ul");
 		if (hideList && windowWidth < 768) {
-			setPosition("scale-0 translate-x-1/2 -mt-16");
+			
+			ul.classList.remove("mt-20");
+			ul.classList.add("scale-0");
+			ul.classList.add("translate-x-1/2");
+			ul.classList.add("-mt-16");
+			// setPosition("scale-0 translate-x-1/2 -mt-16");
 			body.style.overflowY = "visible";
-		} else if (windowWidth < 768) {
+		} else if (!hideList && windowWidth < 768) {
 			body.style.overflowY = "hidden";
-			setPosition("");
+			ul.classList.remove("scale-0");
+			ul.classList.remove("translate-x-1/2");
+			ul.classList.remove("-mt-16");
+			ul.classList.add("mt-20");
 		} else if (windowWidth > 768) {
-			setPosition("");
+			ul.classList.remove("scale-0");
+			ul.classList.remove("translate-x-1/2");
+			ul.classList.remove("-mt-16");
 		}
 	}, [hideList, windowWidth]);
 
@@ -110,7 +121,7 @@ function Navbar() {
 						<span></span>
 					</div> */}
 				</div>
-				<ul className={`main-nav block md:flex justify-center text-primary mt-20 md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute ${position}`} >
+				<ul className={"main-nav block md:flex justify-center text-primary md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute scale-0 translate-x-1/2 -mt-16"} >
 					<li>
 						<Link href="/">
 							<a className="hover:text-secondary" onClick={() => handleNav(0)}>Home</a>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logoSm from "../public/image/home-page/logo-small.svg";
+import logoSm from "../public/image/home-page/logo-small.png";
 import Link from "next/link";
 
 function Logo({ opacity }) {
