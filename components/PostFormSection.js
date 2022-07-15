@@ -220,7 +220,6 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		e.preventDefault();
 
 		if (filter === "sections") {
-			console.log(overall);
 			if (!validate(overall, type)) {
 				failAlert("Shin! Please Please Please fill in all the fields!");
 				return null;
@@ -240,7 +239,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			setArray([]);
 			setImageUrls([]);
 			setImageUrlsMobile([]);
-			successAlert(filter, "Section is created!", refresh);
+			successAlert(filter, "Section is created!");
 
 
 		} else {
@@ -261,7 +260,8 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			console.log("From Create work");
 			console.log(result);
 			if (result._id) {
-				successAlert(filter, "Project is created!", redirect);
+				// successAlert(filter, "Project is created!", redirect);
+				successAlert(filter, "Project is created!");
 					
 			} else {
 				failAlert("This Project name is already exist");
@@ -270,12 +270,12 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		}
 	};
 
-	const redirect = async () => {
-		router.push("/dashboard");
-	};
-	const refresh = async () => {
-		window.location.reload();
-	};
+	// const redirect = async () => {
+	// 	router.push("/dashboard");
+	// };
+	// const refresh = async () => {
+	// 	window.location.reload();
+	// };
 	
 
 	return (

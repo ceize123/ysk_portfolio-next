@@ -160,7 +160,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 			const result = await response.json();
 			console.log(result);
-			successAlert(filter, "Project info has been updated!", refresh);
+			// successAlert(filter, "Project info has been updated!", refresh);
+			successAlert(filter, "Project info has been updated!");
 		}
 		setUpdateNo(null);
 		
@@ -194,17 +195,15 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 					deleteFromFirebase(`${param}/${title}/${overall.type}`, overall.images);
 					deleteFromFirebase(`${param}/${title}/${overall.type}/mobile`, overall.imagesMobile);
 					setUpdateNo(null);
-				}).then(() => {
-					refresh();
 				});
 			}
 		});
 		
 	};
 
-	const refresh = async () => {
-		window.location.reload();
-	};
+	// const refresh = async () => {
+	// 	window.location.reload();
+	// };
 
 	return (
 		<section className="mb-12">
