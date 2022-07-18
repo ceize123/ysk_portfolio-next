@@ -11,7 +11,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: 'Lexend Deca', sans-serif;
-	color: #666666;
+	// color: #666666;
 	
 	scroll-behavior: smooth;
 }
@@ -488,15 +488,15 @@ ul {
 			// max-width: 100%;
 			width: 100%;
 			height: auto;
-			max-width: 446px;
+			max-width: 229px;
 		}
 
 		@media only screen and (max-width: 767px) {
 			.head-shot {
-				max-width: 100%;
-				// width: 100vw;
+				width: 500px;
+				max-width: 500px;
 				// height: 63vw;
-				top: 0;
+				// top: 0;
 				// bottom: 0;
 				// margin: auto;
 				// margin-top: 5vw;
@@ -519,7 +519,7 @@ ul {
 			.egg-center {
 				max-width: 600px !important;
 				max-height: 600px !important;
-				margin-top: 15.5vw;
+				margin-top: 15.3vw;
 			}
 
 		}

@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Tilt from "react-parallax-tilt";
 import Footer from "./Footer";
-import headShot from "../public/image/home-page/head-shot.png";
+// import headShot from "../public/image/home-page/head-shot.png";
+import headShot from "../public/image/about/about-head-shot.png";
 import headShotMobile from "../public/image/home-page/head-shot-mobile.png";
 import { useSharePage, useShareWidth } from "./ShareStates";
 import { useBetween } from "use-between";
@@ -44,17 +45,23 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 	return (
 		<>
-			{bgImage && <div className={`absolute z-10 egg-bg ${className}`} >
+			{bgImage && <div className={`absolute z-10 egg-bg flex ${className}`} >
 				<Image src={bgImage} alt={bgImage}
 					placeholder="blur"
 				// blurDataURL={bgImage}
 				/>
+				{className === "about" &&
+					// <div className="absolute z-10 head-shot md:-right-28 lg:-bottom-24 md:bottom-0">
+					<div className="absolute md:block hidden z-10 head-shot lg:-right-72 md:-right-52 lg:bottom-12 md:-bottom-14">
+						<Image src={headShot} alt="head-shot" width={100} height={100} layout="responsive" />
+					</div>
+				}
 			</div>}
 
 			{/* about */}
 			{className === "about" &&
-				<div className="absolute z-10 head-shot md:-right-28 lg:-bottom-24 md:bottom-0">
-					{!mobile ? <Image src={headShot} alt="head-shot" width={100} height={100} layout="responsive" /> : <Image src={headShotMobile} alt="head-shot" width={100} height={100} layout="responsive" />}
+				<div className="absolute block md:hidden z-10 head-shot top-12">
+					<Image src={headShotMobile} alt="head-shot" width={100} height={63} layout="responsive" />
 				</div>
 			}
 

@@ -1,6 +1,5 @@
 import logo from "../public/image/home-page/logo.png";
 import arrow from "../public/image/home-page/arrow.png";
-import hero from "../public/image/home-page/hero.png";
 import bgChat from "../public/image/home-page/bg-chat.png";
 import bgAbout from "../public/image/home-page/bg-about.png";
 import Egg from "../components/HomePageEgg";
@@ -23,10 +22,12 @@ export default function Home({ works }) {
 
 	useEffect(() => {
 		if (windowWidth > 1024) {
+			setPage(0);
 			setBackgroundSize("48% top/100.5%");
 		} else if (windowWidth >= 768 && windowWidth < 1024) {
 			setBackgroundSize("top/1034px 606px");
 		} else {
+			setPage(-1);
 			setBackgroundSize("50% -50px/1034px 606px");
 		}
 
@@ -197,13 +198,15 @@ export default function Home({ works }) {
 					: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
 				} */}
 				{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
-				<Egg centerImage={logo} className="hero" />
-				<div className="z-20 absolute lg:bottom-8 bottom-5 text-center lg:left-24 md:left-12 left-5 ">
-					<h5 className="mb-4">I am a UIUX Designer</h5>
-					<div className="arrow" onClick={handleArrow}>
-						<Link href={windowWidth > 1024 ? "/" : "/#works"}>
-							<Image className="cursor-pointer" src={arrow} alt="arrow" width="76px" height="76px" onClick={() => handleNav(1)}/>
-						</Link>
+				<div className="flex flex-col">
+					<Egg centerImage={logo} className="hero" />
+					<div className="z-20 text-center xl:mt-0 mt-20 md:-translate-x-full sm:-translate-x-1/2 -translate-x-1/4">
+						<h5 className="mb-4">I am a UIUX Designer</h5>
+						<div className="arrow" onClick={handleArrow}>
+							<Link href={windowWidth > 1024 ? "/" : "/#works"}>
+								<Image className="cursor-pointer" src={arrow} alt="arrow" width="76px" height="76px" onClick={() => handleNav(1)}/>
+							</Link>
+						</div>
 					</div>
 				</div>
 			</section>

@@ -76,7 +76,7 @@ function About() {
 								<div className="relative image-div cursor-pointer" onClick={() => windowWidth > 768 && handleModal("fashion")}>
 									<Image src={fashion} alt="fashion" />
 									<div className="items-center justify-center absolute bottom-0 w-full md:h-full see-more py-2.5" onClick={() => handleModal("fashion")}>
-										<h2>See More</h2>
+										<h2 className="z-10">See More</h2>
 									</div>
 								</div>
 							</div>
@@ -87,7 +87,7 @@ function About() {
 								<div className="relative image-div cursor-pointer" onClick={() => windowWidth > 768 && handleModal("photography")}>
 									<Image src={photo} alt="photography" />
 									<div className="items-center justify-center absolute bottom-0 w-full md:h-full see-more py-2.5" onClick={() => handleModal("photography")}>
-										<h2>See More</h2>
+										<h2 className="z-10">See More</h2>
 									</div>
 								</div>
 							</div>

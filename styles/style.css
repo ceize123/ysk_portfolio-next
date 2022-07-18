@@ -8,7 +8,6 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Lexend Deca", sans-serif;
-  color: #666666;
   scroll-behavior: smooth;
 }
 
@@ -301,12 +300,12 @@ ul {
 .home section .head-shot {
   width: 100%;
   height: auto;
-  max-width: 446px;
+  max-width: 229px;
 }
 @media only screen and (max-width: 767px) {
   .home section .head-shot {
-    max-width: 100%;
-    top: 0;
+    width: 500px;
+    max-width: 500px;
   }
 }
 .home section .egg-hero {
@@ -320,7 +319,7 @@ ul {
   .home #hero .egg-center {
     max-width: 600px !important;
     max-height: 600px !important;
-    margin-top: 15.5vw;
+    margin-top: 15.3vw;
   }
 }
 @media only screen and (max-width: 1023px) {
