@@ -23,21 +23,35 @@ function HomePageCarousel({ works }) {
 		works.forEach((item) => {
 			slideArray.push(item.works);
 		});
-		if (windowWidth > 768) {
-			size = 3;
 
+		const createAry = (s) => {
 			slideArray.forEach(item => {
 				temp = [];
-				if (item.length > size) {
-					for (let i = 0; i < item.length; i += size)
-						temp.push(item.slice(i, i + size));
+				if (item.length > s) {
+					for (let i = 0; i < item.length; i += s)
+						temp.push(item.slice(i, i + s));
 				}
 				setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
 			});
+		};
+		
+		if (windowWidth > 1024) {
+			// size = 3;
+
+			createAry(3);
+			// slideArray.forEach(item => {
+			// 	temp = [];
+			// 	if (item.length > size) {
+			// 		for (let i = 0; i < item.length; i += size)
+			// 			temp.push(item.slice(i, i + size));
+			// 	}
+			// 	setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
+			// });
 		} else {
-			slideArray.forEach(item => {
-				setInsideSlide((prev) => [...prev, [item]]);
-			});
+			createAry(2);
+			// slideArray.forEach(item => {
+			// 	setInsideSlide((prev) => [...prev, [item]]);
+			// });
 		}
 		// slideArray.forEach(item => {
 		// 	temp = [];
@@ -110,7 +124,7 @@ function HomePageCarousel({ works }) {
 						>
 							{insideSlide[idx].map((ele, index) => (
 								<SwiperSlide key={index}>
-									<div className="grid lg:mx-20 md:mx-12 mx-5 lg:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3 justify-items-center md:grid-cols-3 grid-cols-1 slide-page">
+									<div className="grid lg:mx-20 md:mx-12 mx-5 lg:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3 justify-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 slide-page">
 										{ele.map((work) => (
 											<Card key={work._id} work={work} category={item.category}
 												// text={windowWidth >= 768 ? work.description : `${work.description.split(" ").slice(0, 3).join(" ")}...`}

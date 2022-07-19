@@ -5,7 +5,7 @@ import Link from "next/link";
 function Logo({ opacity }) {
 
 	return (
-		<div className={`fixed left-6 top-3.5 z-30 cursor-pointer logo opacity-${opacity}`}>
+		<div className={`fixed md:left-6 left-3 top-3.5 z-30 cursor-pointer logo opacity-${opacity}`}>
 			<Link href="/">
 				<Image src={logoSm} alt="logo" />
 			</Link>

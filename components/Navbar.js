@@ -42,20 +42,14 @@ function Navbar() {
 		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
 		if (router.pathname === "/") {
-			if (windowWidth <= 1024) {
-				setPage(-1);
-			} else {
-				// body.style.overflowY = "hidden";
-			}
+			// if (windowWidth <= 1024) {
+			// 	setPage(-1);
+			// } else {
+			// 	// body.style.overflowY = "hidden";
+			// }
 			ul.style.backgroundColor = "inherit";
 			ul.style.color = "inherit";
-			// if (windowWidth > 1024) {
-			// 	body.style.overflowY = "hidden";
-			// 	// setPage(0);
-			// }
-			// setToggle(false);
-			// setHideList(false);
-			// setPosition("fixed");
+
 		} else if (router.pathname === "/about") {
 			ul.style.backgroundColor = "#E0E0E0";
 			body.style.overflowY = "visible";
@@ -77,14 +71,14 @@ function Navbar() {
 			ul.classList.add("translate-x-1/2");
 			ul.classList.add("-mt-16");
 			// setPosition("scale-0 translate-x-1/2 -mt-16");
-			body.style.overflowY = "visible";
+			// body.style.overflowY = "visible";
 		} else if (!hideList && windowWidth < 768) {
-			body.style.overflowY = "hidden";
+			// body.style.overflowY = "hidden";
 			ul.classList.remove("scale-0");
 			ul.classList.remove("translate-x-1/2");
 			ul.classList.remove("-mt-16");
 			ul.classList.add("mt-20");
-		} else if (windowWidth > 768) {
+		} else if (windowWidth >= 768) {
 			ul.classList.remove("scale-0");
 			ul.classList.remove("translate-x-1/2");
 			ul.classList.remove("-mt-16");
@@ -92,9 +86,9 @@ function Navbar() {
 	}, [hideList, windowWidth]);
 
 	const handleNav = (no) => {
-		if (windowWidth > 1024) {
+		setTimeout(() => {
 			setPage(no);
-		}
+		}, 1000);
 	};
 
 
@@ -128,24 +122,22 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link href={windowWidth > 1024 ? "/" : "/#works"}>
+						<Link href="/">
 							<a className="hover:text-secondary" onClick={() => handleNav(1)}>Works</a>
 						</Link>
 					</li>
 					<li>
-						<Link href={windowWidth > 1024 ? "/" : "/#about"}>
+						<Link href="/">
 							<a className="hover:text-secondary" onClick={() => handleNav(2)}>About me</a>
 						</Link>
 					</li>
 					<li>
-						<Link href={windowWidth > 1024 ? "/" : "/#footer"}>
+						<Link href="/">
 							<a className="hover:text-secondary" onClick={() => handleNav(3)}>Contact</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="">
-							<a className="hover:text-secondary" onClick={() => windowWidth > 768 && handleModal()}>Resume</a>
-						</Link>
+						<a className="hover:text-secondary cursor-pointer" onClick={() => windowWidth > 768 && handleModal()}>Resume</a>
 					</li>
 					{session &&
 						<li className="hidden md:block">

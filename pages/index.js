@@ -22,159 +22,291 @@ export default function Home({ works }) {
 
 	useEffect(() => {
 		if (windowWidth > 1024) {
-			setPage(0);
+			// setPage(0);
 			setBackgroundSize("48% top/100.5%");
 		} else if (windowWidth >= 768 && windowWidth < 1024) {
 			setBackgroundSize("top/1034px 606px");
 		} else {
-			setPage(-1);
+			// setPage(-1);
 			setBackgroundSize("50% -50px/1034px 606px");
 		}
 
 		
 	}, [windowWidth]);
+
+	const pageEffect = () => {
+		const elements = document.querySelectorAll(".home > section");
+		elements.forEach((item, idx) => {
+			let center;
+			let cards = [];
+			if (idx === 1) {
+				cards = item.querySelectorAll(".card");
+				// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
+				// cards.forEach((item, idx) => {
+				// 	item.style.setProperty("--custom-index", idx);
+				// });
+			} else {
+				center = item.querySelector(".egg-center-div");
+			}
+
+			item.style.transform = `translateY(-${page * 130}vh)`;
+			if (page === idx) {
+				setTimeout(() => {
+					item.classList.remove("opacity-0");
+				}, 600);
+				if (idx !== 1) {
+					setTimeout(() => {
+						center.classList.remove("scale-0");
+					}, 1000);
+				} else {
+					setTimeout(() => {
+						cards.forEach((item) => {
+							item.classList.remove("scale-0");
+						});
+					}, 1000);
+				}
+			} else {
+				setTimeout(() => {
+					item.classList.add("opacity-0");
+				}, 200);
+				if (idx !== 1) {
+					center.classList.add("scale-0");
+				} else {
+					cards.forEach((item) => {
+						item.classList.add("scale-0");
+					});
+				}
+			}
+		});
+	};
+
+	useEffect(() => {
+		pageEffect();
+	}, []);
 	
 	useEffect(() => {
 		const elements = document.querySelectorAll(".home > section");
 		const body = document.querySelector("body");
-		const handleOverflow = () => {
-			body.style.overflowY = "visible";
-			elements[0].classList.remove("lg:overflow-y-hidden");
-			setPage(-1);
+		let move = 0;
+		
+		const handleScroll = (e) => {
+			if (page >= 0 && page <= elements.length - 1) {
+				if (e.deltaY > 0) {
+					setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+				} else if (e.deltaY < 0) {
+					setPage(page > 0 ? page - 1 : 0);
+				}
+				setScrolled(true);
+			}
 		};
 
-		if (windowWidth > 1024) {
-	
-			const handleScroll = (e) => {
-				if (page === -1) {
-					body.style.overflowY = "hidden";
-					elements[0].classList.add("lg:overflow-y-hidden");
-					setPage(0);
-					setScrolled(true);
-				} else if (page >= 0 && page <= elements.length - 1) {
-					if (e.deltaY > 0) {
-						setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
-					} else if (e.deltaY < 0) {
-						setPage(page > 0 ? page - 1 : 0);
-					}
-					setScrolled(true);
-				}
-			};
-	
-			// const handleTouchScroll = (e) => {
-			// 	if (move - e.changedTouches[0].clientY > 15) {
-			// 		setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
-			// 	} else if (move - e.changedTouches[0].clientY < -15) {
-			// 		setPage(page > 0 ? page - 1 : 0);
-			// 	}
-			// 	setScrolled(true);
-			// };
-	
-			if (!scrolled) {
-				window.addEventListener("wheel", handleScroll);
-				window.addEventListener("touchstart", handleOverflow);
+		const saveStart = (e) => {
+			move = e.changedTouches[0].clientY;
+		};
+
+		const handleTouchScroll = (e) => {
+			if (move - e.changedTouches[0].clientY > 15) {
+				setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+			} else if (move - e.changedTouches[0].clientY < -15) {
+				setPage(page > 0 ? page - 1 : 0);
 			}
+			setScrolled(true);
+		};
+
+		if (!scrolled) {
+			window.addEventListener("wheel", handleScroll);
+			window.addEventListener("touchstart", saveStart);
+			window.addEventListener("touchend", handleTouchScroll);
+		}
+
+		let timer = setTimeout(() => setScrolled(false), 1500);
+
+		return () => {
+			clearTimeout(timer);
+			window.addEventListener("wheel", handleScroll);
+			window.addEventListener("touchstart", saveStart);
+			window.addEventListener("touchend", handleTouchScroll);
+		};
+		
+		// const handleOverflow = () => {
+		// 	body.style.overflowY = "visible";
+		// 	elements[0].classList.remove("lg:overflow-y-hidden");
+		// 	setPage(-1);
+		// };
+		// if (windowWidth > 1024) {
 	
-			let timer = setTimeout(() => setScrolled(false), 1500);
+		// 	const handleScroll = (e) => {
+		// 		if (page === -1) {
+		// 			body.style.overflowY = "hidden";
+		// 			elements[0].classList.add("lg:overflow-y-hidden");
+		// 			setPage(0);
+		// 			setScrolled(true);
+		// 		} else if (page >= 0 && page <= elements.length - 1) {
+		// 			if (e.deltaY > 0) {
+		// 				setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+		// 			} else if (e.deltaY < 0) {
+		// 				setPage(page > 0 ? page - 1 : 0);
+		// 			}
+		// 			setScrolled(true);
+		// 		}
+		// 	};
+	
+		// 	// const handleTouchScroll = (e) => {
+		// 	// 	if (move - e.changedTouches[0].clientY > 15) {
+		// 	// 		setPage(page < elements.length - 1 ? page + 1 : elements.length - 1);
+		// 	// 	} else if (move - e.changedTouches[0].clientY < -15) {
+		// 	// 		setPage(page > 0 ? page - 1 : 0);
+		// 	// 	}
+		// 	// 	setScrolled(true);
+		// 	// };
+	
+		// 	if (!scrolled) {
+		// 		window.addEventListener("wheel", handleScroll);
+		// 		window.addEventListener("touchstart", handleOverflow);
+		// 	}
+	
+		// 	let timer = setTimeout(() => setScrolled(false), 1500);
 
 			
-			// window.scrollBy(0, height);
-			// window.scrollTo(0, height);
-			return () => {
-				clearTimeout(timer);
-				window.addEventListener("wheel", handleScroll);
-				window.addEventListener("touchstart", handleOverflow);
-			};
-		} else {
-			if (!scrolled) {
-				window.addEventListener("wheel", handleOverflow);
-				window.addEventListener("touchstart", handleOverflow);
-			}
+		// 	// window.scrollBy(0, height);
+		// 	// window.scrollTo(0, height);
+		// 	return () => {
+		// 		clearTimeout(timer);
+		// 		window.addEventListener("wheel", handleScroll);
+		// 		window.addEventListener("touchstart", handleOverflow);
+		// 	};
+		// } else {
+		// 	if (!scrolled) {
+		// 		window.addEventListener("wheel", handleOverflow);
+		// 		window.addEventListener("touchstart", handleOverflow);
+		// 	}
 	
-			let timer = setTimeout(() => setScrolled(false), 1500);
+		// 	let timer = setTimeout(() => setScrolled(false), 1500);
 
-			return () => {
-				clearTimeout(timer);
-				window.addEventListener("wheel", handleOverflow);
-				window.addEventListener("touchstart", handleOverflow);
-			};
-		}
+		// 	return () => {
+		// 		clearTimeout(timer);
+		// 		window.addEventListener("wheel", handleOverflow);
+		// 		window.addEventListener("touchstart", handleOverflow);
+		// 	};
+		// }
 	}, [scrolled]);
 	
 	useEffect(() => {
-		const elements = document.querySelectorAll(".home > section");
-		if (page !== -1 && windowWidth > 1024) {
-			elements.forEach((item, idx) => {
-				let center;
-				let cards = [];
-				if (idx === 1) {
-					cards = item.querySelectorAll(".card");
-					// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
-					// cards.forEach((item, idx) => {
-					// 	item.style.setProperty("--custom-index", idx);
-					// });
-				} else {
-					center = item.querySelector(".egg-center-div");
-				}
+		pageEffect();
+		// const elements = document.querySelectorAll(".home > section");
+		// elements.forEach((item, idx) => {
+		// 	let center;
+		// 	let cards = [];
+		// 	if (idx === 1) {
+		// 		cards = item.querySelectorAll(".card");
+		// 		// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
+		// 		// cards.forEach((item, idx) => {
+		// 		// 	item.style.setProperty("--custom-index", idx);
+		// 		// });
+		// 	} else {
+		// 		center = item.querySelector(".egg-center-div");
+		// 	}
+
+		// 	item.style.transform = `translateY(-${page * 130}vh)`;
+		// 	if (page === idx) {
+		// 		setTimeout(() => {
+		// 			item.classList.remove("opacity-0");
+		// 		}, 600);
+		// 		if (idx !== 1) {
+		// 			setTimeout(() => {
+		// 				center.classList.remove("scale-0");
+		// 			}, 1000);
+		// 		} else {
+		// 			setTimeout(() => {
+		// 				cards.forEach((item) => {
+		// 					item.classList.remove("scale-0");
+		// 				});
+		// 			}, 1000);
+		// 		}
+		// 	} else {
+		// 		setTimeout(() => {
+		// 			item.classList.add("opacity-0");
+		// 		}, 200);
+		// 		if (idx !== 1) {
+		// 			center.classList.add("scale-0");
+		// 		} else {
+		// 			cards.forEach((item) => {
+		// 				item.classList.add("scale-0");
+		// 			});
+		// 		}
+		// 	}
+		// });
+		
+		// if (page !== -1 && windowWidth > 1024) {
+		// 	elements.forEach((item, idx) => {
+		// 		let center;
+		// 		let cards = [];
+		// 		if (idx === 1) {
+		// 			cards = item.querySelectorAll(".card");
+		// 			// https://stackoverflow.com/questions/70915932/is-it-possible-to-use-child-index-in-calc-in-css
+		// 			// cards.forEach((item, idx) => {
+		// 			// 	item.style.setProperty("--custom-index", idx);
+		// 			// });
+		// 		} else {
+		// 			center = item.querySelector(".egg-center-div");
+		// 		}
 	
-				item.style.transform = `translateY(-${page * 130}vh)`;
-				if (page === idx) {
-					setTimeout(() => {
-						item.classList.remove("opacity-0");
-					}, 600);
-					if (idx !== 1) {
-						setTimeout(() => {
-							center.classList.remove("lg:scale-0");
-						}, 1000);
-					} else {
-						setTimeout(() => {
-							cards.forEach((item) => {
-								item.classList.remove("scale-0");
-							});
-						}, 1000);
-					}
-				} else {
-					setTimeout(() => {
-						item.classList.add("opacity-0");
-					}, 200);
-					if (idx !== 1) {
-						center.classList.add("lg:scale-0");
-					} else {
-						cards.forEach((item) => {
-							item.classList.add("scale-0");
-						});
-					}
-				}
+		// 		item.style.transform = `translateY(-${page * 130}vh)`;
+		// 		if (page === idx) {
+		// 			setTimeout(() => {
+		// 				item.classList.remove("opacity-0");
+		// 			}, 600);
+		// 			if (idx !== 1) {
+		// 				setTimeout(() => {
+		// 					center.classList.remove("lg:scale-0");
+		// 				}, 1000);
+		// 			} else {
+		// 				setTimeout(() => {
+		// 					cards.forEach((item) => {
+		// 						item.classList.remove("scale-0");
+		// 					});
+		// 				}, 1000);
+		// 			}
+		// 		} else {
+		// 			setTimeout(() => {
+		// 				item.classList.add("opacity-0");
+		// 			}, 200);
+		// 			if (idx !== 1) {
+		// 				center.classList.add("lg:scale-0");
+		// 			} else {
+		// 				cards.forEach((item) => {
+		// 					item.classList.add("scale-0");
+		// 				});
+		// 			}
+		// 		}
 				
-			});
-		} else {
-			elements.forEach((item, idx) => {
-				let center;
-				let cards = [];
-				if (idx === 1) {
-					cards = item.querySelectorAll(".card");
-				} else {
-					center = item.querySelector(".egg-center-div");
-				}
+		// 	});
+		// } else {
+		// 	elements.forEach((item, idx) => {
+		// 		let center;
+		// 		let cards = [];
+		// 		if (idx === 1) {
+		// 			cards = item.querySelectorAll(".card");
+		// 		} else {
+		// 			center = item.querySelector(".egg-center-div");
+		// 		}
 	
-				item.style.transform = "translateY(-0vh)";
-				item.classList.remove("opacity-0");
-				if (idx !== 1) {
-					center.classList.remove("lg:scale-0");
-				} else {
-					cards.forEach((item) => {
-						item.classList.remove("scale-0");
-					});
-				}
-			});
-		}
+		// 		item.style.transform = "translateY(-0vh)";
+		// 		item.classList.remove("opacity-0");
+		// 		if (idx !== 1) {
+		// 			center.classList.remove("lg:scale-0");
+		// 		} else {
+		// 			cards.forEach((item) => {
+		// 				item.classList.remove("scale-0");
+		// 			});
+		// 		}
+		// 	});
+		// }
 
 	}, [page]);
 
 	const handleNav = (no) => {
-		if (windowWidth > 1024) {
-			setPage(no);
-		}
+		setPage(no);
 	};
 
 	const handleArrow = () => {
@@ -190,7 +322,7 @@ export default function Home({ works }) {
 			{/* {page !== 0 && <Logo />} */}
 			<section id="hero"
 				// className="relative flex justify-center md:items-center h-screen lg:overflow-y-hidden"
-				className="relative flex justify-center h-screen lg:overflow-y-hidden"
+				className="relative flex justify-center h-screen overflow-y-hidden"
 				style={{ background: `url("./image/home-page/hero.png") no-repeat ${backgroundSize}` }}
 			>
 				{/* {windowWidth >= 768
@@ -203,25 +335,25 @@ export default function Home({ works }) {
 					<div className="z-20 text-center xl:mt-0 mt-20 md:-translate-x-full sm:-translate-x-1/2 -translate-x-1/4">
 						<h5 className="mb-4">I am a UIUX Designer</h5>
 						<div className="arrow" onClick={handleArrow}>
-							<Link href={windowWidth > 1024 ? "/" : "/#works"}>
+							<Link href="/">
 								<Image className="cursor-pointer" src={arrow} alt="arrow" width="76px" height="76px" onClick={() => handleNav(1)}/>
 							</Link>
 						</div>
 					</div>
 				</div>
 			</section>
-			<div className="empty-div hidden lg:block"></div>
-			<section id="works" className="relative flex justify-center items-center h-auto md:h-screen lg:overflow-y-hidden">
+			<div className="empty-div"></div>
+			<section id="works" className="relative flex justify-center items-center h-screen overflow-y-hidden">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
-			<div className="empty-div hidden lg:block"></div>
-			<section id="about" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
+			<div className="empty-div"></div>
+			<section id="about" className="relative flex justify-center items-center h-screen overflow-y-hidden">
 				<Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} />
 			</section>
-			<div className="empty-div hidden lg:block"></div>
-			<section id="footer" className="relative flex justify-center items-center h-screen lg:overflow-y-hidden">
+			<div className="empty-div"></div>
+			<section id="footer" className="relative flex justify-center items-center h-screen overflow-y-hidden">
 				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>
