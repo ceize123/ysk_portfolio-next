@@ -2,6 +2,7 @@ import logo from "../public/image/home-page/logo.png";
 import arrow from "../public/image/home-page/arrow.png";
 import bgChat from "../public/image/home-page/bg-chat.png";
 import bgAbout from "../public/image/home-page/bg-about.png";
+import headShot from "../public/image/about/about-head-shot.png";
 import hero from "../public/image/home-page/hero.png";
 import heroMobile from "../public/image/home-page/hero-mobile.png";
 import Egg from "../components/HomePageEgg";
@@ -185,8 +186,15 @@ export default function Home({ works }) {
 				</section>
 			</section>
 			{/* <div className="empty-div"></div> */}
-			<section id="about" className="relative flex justify-center items-center overflow-x-hidden">
-				<Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} />
+			<section id="about" className="relative flex flex-col justify-center items-center px-10">
+				{/* <Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} /> */}
+				<div className="about-image mb-9">
+					<Image src={headShot} alt="head-shot" />
+				</div>
+				<h1>Hello! I am Yung-Shin Ko! </h1>
+				<Link href="/about">
+					<button className="py-6 px-8 mt-8"><h4>About Me</h4></button>
+				</Link>
 			</section>
 			{/* <div className="empty-div"></div> */}
 			<section id="footer" className="relative flex justify-center items-center overflow-x-hidden">

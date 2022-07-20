@@ -185,17 +185,11 @@ ul {
 .home section .egg-bg {
   transition: 1s opacity cubic-bezier(0.86, 0.01, 0.38, 0.99);
 }
-.home section .hero, .home section .about, .home section .footer {
+.home section .hero, .home section .footer {
   height: auto;
 }
 .home section .hero {
   width: 102vw;
-}
-.home section .about {
-  max-width: 1323.43px;
-  width: 66.5vw;
-  margin-right: 16.7vw;
-  min-width: 659px;
 }
 .home section .footer {
   max-width: 1272.87px;
@@ -203,15 +197,7 @@ ul {
   min-width: 654px;
   margin-bottom: 0.5vh;
 }
-@media only screen and (max-width: 992px) {
-  .home section .about {
-    margin-right: 165px;
-  }
-}
 @media only screen and (max-width: 767px) {
-  .home section .about {
-    display: none;
-  }
   .home section .footer {
     width: 110vw;
     min-width: 670px;
@@ -281,13 +267,19 @@ ul {
   width: 25vw;
   height: 25vw;
 }
-.home #hero {
-  margin-bottom: 100px;
+.home section button {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 1.74px -1.74px 1.74px rgba(182, 182, 182, 0.4), inset -1.74px 1.74px 1.74px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(17.4px);
+  border-radius: 10px;
+}
+.home section .about-image {
+  max-width: 229px;
 }
 .home #works,
 .home #about,
 .home #footer {
-  padding-top: 100px;
+  padding-top: 200px;
 }
 .home #footer {
   padding-bottom: 100px;
