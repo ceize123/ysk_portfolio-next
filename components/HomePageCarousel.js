@@ -13,55 +13,48 @@ import { useShareWidth } from "./ShareStates";
 
 function HomePageCarousel({ works }) {
 	const [insideSlide, setInsideSlide] = useState([]);
+	const [slideIdx, setSlideIdx] = useState(0);
 	const { windowWidth } = useBetween(useShareWidth);
 
-	useEffect(() => {
-		let slideArray = [];
-		let temp = [];
-		let size;
+	// useEffect(() => {
+	// 	let slideArray = [];
+	// 	let temp = [];
+	// 	let size;
 
-		works.forEach((item) => {
-			slideArray.push(item.works);
-		});
+	// 	works.forEach((item) => {
+	// 		slideArray.push(item.works);
+	// 	});
 
-		const createAry = (s) => {
-			slideArray.forEach(item => {
-				temp = [];
-				if (item.length > s) {
-					for (let i = 0; i < item.length; i += s)
-						temp.push(item.slice(i, i + s));
-				}
-				setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
-			});
-		};
+	// 	const createAry = (s) => {
+	// 		slideArray.forEach(item => {
+	// 			temp = [];
+	// 			if (item.length > s) {
+	// 				for (let i = 0; i < item.length; i += s)
+	// 					temp.push(item.slice(i, i + s));
+	// 			}
+	// 			setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
+	// 		});
+	// 	};
 		
-		if (windowWidth > 1024) {
-			// size = 3;
+	// 	if (windowWidth > 768) {
+	// 		// size = 3;
 
-			createAry(3);
-			// slideArray.forEach(item => {
-			// 	temp = [];
-			// 	if (item.length > size) {
-			// 		for (let i = 0; i < item.length; i += size)
-			// 			temp.push(item.slice(i, i + size));
-			// 	}
-			// 	setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
-			// });
-		} else {
-			createAry(2);
-			// slideArray.forEach(item => {
-			// 	setInsideSlide((prev) => [...prev, [item]]);
-			// });
-		}
-		// slideArray.forEach(item => {
-		// 	temp = [];
-		// 	if (item.length > size) {
-		// 		for (let i = 0; i < item.length; i += size)
-		// 			temp.push(item.slice(i, i + size));
-		// 	}
-		// 	setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
-		// });
-	}, [works]);
+	// 		createAry(3);
+	// 		// slideArray.forEach(item => {
+	// 		// 	temp = [];
+	// 		// 	if (item.length > size) {
+	// 		// 		for (let i = 0; i < item.length; i += size)
+	// 		// 			temp.push(item.slice(i, i + size));
+	// 		// 	}
+	// 		// 	setInsideSlide((prev) => [...prev, temp.length > 0 ? temp : [item]]);
+	// 		// });
+	// 	} else {
+	// 		// createAry(2);
+	// 		slideArray.forEach(item => {
+	// 			setInsideSlide((prev) => [...prev, [item]]);
+	// 		});
+	// 	}
+	// }, [works]);
 	
 	const pagination = {
 		clickable: true,
@@ -70,25 +63,30 @@ function HomePageCarousel({ works }) {
 			return `<span class="${className} text-sm">${firstLetter("upper", works[index].category)}</span>`;
 		},
 	};
-	const insidePagination = {
-		clickable: true,
-		renderBullet: function (index, className) {
-			return `<span class=${className}>${index + 1}</span>`;
-		},
-	};
+	// const insidePagination = {
+	// 	clickable: true,
+	// 	renderBullet: function (index, className) {
+	// 		return `<span class=${className}>${index + 1}</span>`;
+	// 	},
+	// };
 
 	return (
-		// <div className="pt-24">
 		<div>
 			<Swiper
 				className="outside-swiper"
 				pagination={pagination}
 				modules={[Pagination]}
 				threshold={70}
-				// onSlideChange={(swiper) => { setSlideIdx(swiper.activeIndex); }}
+				onSlideChange={(swiper) => { setSlideIdx(swiper.activeIndex); }}
 			>
 				{works.map((item, idx) => (
 					<SwiperSlide key={idx}>
+						<div className="grid xl:mx-20 md:mx-12 mx-5 xl:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3 justify-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 slide-page mb-5">
+							{slideIdx === idx && item.works.map((work) => (
+								<Card key={work._id} work={work} />
+							))}
+						</div>
+
 						{/* {windowWidth < 768
 							? <div className="flex flex-col slide-page items-center">
 								{item.works.map((work) => (
@@ -115,7 +113,8 @@ function HomePageCarousel({ works }) {
 							
 							</Swiper>
 						} */}
-						{insideSlide.length > 0 && <Swiper
+						
+						{/* {insideSlide.length > 0 && <Swiper
 							className="inside-swiper"
 							pagination={insidePagination}
 							modules={[Pagination]}
@@ -134,7 +133,7 @@ function HomePageCarousel({ works }) {
 								</SwiperSlide>
 							))}
 						
-						</Swiper>}
+						</Swiper>} */}
 					</SwiperSlide>
 				))}
 			</Swiper>

@@ -30,7 +30,7 @@ function Navbar() {
 	const [hideList, setHideList] = useState(true);
 	const [position, setPosition] = useState("");
 	const { windowWidth } = useBetween(useShareWidth);
-	const { page, setPage } = useBetween(useSharePage);
+	// const { page, setPage } = useBetween(useSharePage);
 	const router = useRouter();
 
 	const handleClick = () => {
@@ -52,11 +52,11 @@ function Navbar() {
 
 		} else if (router.pathname === "/about") {
 			ul.style.backgroundColor = "#E0E0E0";
-			body.style.overflowY = "visible";
-			// setPosition("static");
-		} else {
-			body.style.overflowY = "visible";
+			// body.style.overflowY = "visible";
 		}
+		// else {
+		// 	body.style.overflowY = "visible";
+		// }
 		setToggle(false);
 		setHideList(true);
 	}, [router]);
@@ -85,11 +85,11 @@ function Navbar() {
 		}
 	}, [hideList, windowWidth]);
 
-	const handleNav = (no) => {
-		setTimeout(() => {
-			setPage(no);
-		}, 1000);
-	};
+	// const handleNav = (no) => {
+	// 	setTimeout(() => {
+	// 		setPage(no);
+	// 	}, 1000);
+	// };
 
 
 	return (
@@ -118,22 +118,22 @@ function Navbar() {
 				<ul className={"main-nav block md:flex justify-center text-primary md:mt-0 left-0 top-0 right-0 bottom-0 text-center absolute scale-0 translate-x-1/2 -mt-16"} >
 					<li>
 						<Link href="/">
-							<a className="hover:text-secondary" onClick={() => handleNav(0)}>Home</a>
+							<a className="hover:text-secondary">Home</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="/">
-							<a className="hover:text-secondary" onClick={() => handleNav(1)}>Works</a>
+						<Link href="/#works">
+							<a className="hover:text-secondary">Works</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="/">
-							<a className="hover:text-secondary" onClick={() => handleNav(2)}>About me</a>
+						<Link href="/#about">
+							<a className="hover:text-secondary">About me</a>
 						</Link>
 					</li>
 					<li>
-						<Link href="/">
-							<a className="hover:text-secondary" onClick={() => handleNav(3)}>Contact</a>
+						<Link href="/#footer">
+							<a className="hover:text-secondary">Contact</a>
 						</Link>
 					</li>
 					<li>
