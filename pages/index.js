@@ -157,7 +157,7 @@ export default function Home({ works }) {
 	return (
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
-			<div className="h-screen -translate-y-14 md:-translate-y-0 mb-12 md:mb-24">
+			<div className="h-screen -translate-y-14 md:-translate-y-0 mb-20 md:mb-28">
 
 				<section id="hero"
 					className="relative flex justify-center items-center h-screen lg:h-auto lg:-ml-1 lg:-mt-1"
@@ -180,13 +180,13 @@ export default function Home({ works }) {
 				</section>
 			</div>
 			{/* <div className="empty-div"></div> */}
-			<section id="works" className="relative flex justify-center items-center overflow-x-hidden py-12 md:py-24">
+			<section id="works" className="relative flex justify-center items-center overflow-x-hidden pt-4 pb-12 lg:pt-20 md:pt-16 md:pb-28">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
 			{/* <div className="empty-div"></div> */}
-			<section id="about" className="relative flex flex-col justify-center items-center md:px-10 px-5 py-12 md:py-24">
+			<section id="about" className="relative flex flex-col justify-center items-center md:px-10 px-5 pt-12 pb-24 md:pt-24 md:pb-28">
 				{/* <Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} /> */}
 				<div className="about-image md:mb-9 mb-2">
 					<Image src={headShot} alt="head-shot" />
@@ -197,7 +197,7 @@ export default function Home({ works }) {
 				</Link>
 			</section>
 			{/* <div className="empty-div"></div> */}
-			<section id="footer" className="relative flex justify-center items-center overflow-x-hidden py-20 md:py-28">
+			<section id="footer" className="relative flex justify-center items-center overflow-x-hidden pt-16 pb-24 md:pt-20 md:pb-28">
 				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>

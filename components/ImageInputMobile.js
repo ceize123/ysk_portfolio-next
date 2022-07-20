@@ -40,7 +40,7 @@ function ImageInputMobile({ prop, type = "", category = "", imageAry = ""}) {
 			setImageUrlsMobile([]);
 		}
 
-		if ((type !== "carousel" && type !== "multiImages") && imageAry.length <= 1) {
+		if ((type !== "carousel" && type !== "multiImages" && type !== "titleImage") && imageAry.length <= 1) {
 			const imageRef = ref(storage, `${prop}/${imageUpload.name + v4()}`);
 			uploadBytes(imageRef, imageUpload).then((snapshot) => {
 				getDownloadURL(snapshot.ref).then((url) => {
@@ -95,9 +95,9 @@ function ImageInputMobile({ prop, type = "", category = "", imageAry = ""}) {
 				id="images-mobile"
 				required
 				ref={imgRef}
-				multiple={(type === "carousel" || type === "multiImages" || imageAry.length > 1) ? true : false}
+				multiple={(type === "carousel" || type === "multiImages" || type === "titleImage" || imageAry.length > 1) ? true : false}
 				onChange={(e) => {
-					setImageUpload((type === "carousel" || type === "multiImages" || imageAry.length > 1)
+					setImageUpload((type === "carousel" || type === "multiImages" || type === "titleImage" || imageAry.length > 1)
 						? e.target.files : e.target.files[0]);
 				}}
 			/>

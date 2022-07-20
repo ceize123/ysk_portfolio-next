@@ -10,11 +10,11 @@ function VideoSec({ prop, images }) {
 		<section className="relative video-section mx-5 xl:mx-auto lg:mx-12 md:mx-10" >
 			<h1 className="text-left">{data.title}</h1>
 			<div className="flex justify-center">
-				{/* <ReactPlayer url={images[0]} controls={true} width="57vw" height="42vw" /> */}
-				{/* {windowWidth >= 768
-					? <ReactPlayer url={images[0]} controls={true} width="57vw" height="42vw" />
-					: <ReactPlayer url={images[0]} controls={true} width="90vw" height="66vw" />
-				} */}
+				{/* <ReactPlayer url={images[0]} controls={true} width="640px" height="400px" /> */}
+				{windowWidth >= 768
+					? <ReactPlayer url={images[0]} controls={true} width="640px" height="400px" />
+					: <ReactPlayer url={images[0]} controls={true} width="375px" height="200px" />
+				}
 			</div>
 		</section>
 	);
