@@ -45,18 +45,17 @@ function Egg({ bgImage = "", centerImage = "", text = "", className, mobile }) {
 
 	return (
 		<>
-			{bgImage && <div className={`z-10 egg-bg flex justify-center items-center ${className}`} >
-				<Image src={bgImage} alt={bgImage}
-					placeholder="blur"
-				// blurDataURL={bgImage}
-				/>
-				{/* {className === "about" &&
-					// <div className="absolute z-10 head-shot md:-right-28 lg:-bottom-24 md:bottom-0">
-					<div className="absolute md:block hidden z-10 head-shot lg:-right-72 md:-right-52 lg:bottom-12 md:-bottom-14">
-						<Image src={headShot} alt="head-shot" width={100} height={100} layout="responsive" />
-					</div>
-				} */}
-			</div>}
+			{bgImage ? className === "hero" ?
+				<div className={`hidden z-10 egg-bg lg:flex justify-center items-center ${className}`} >
+					<Image src={bgImage} alt={bgImage}
+						placeholder="blur"
+					/>
+				</div>
+				: <div className={`z-10 egg-bg flex justify-center items-center ${className}`} >
+					<Image src={bgImage} alt={bgImage}
+						placeholder="blur" />
+				</div> : ""
+			}
 
 			{/* about */}
 			{/* {className === "about" &&

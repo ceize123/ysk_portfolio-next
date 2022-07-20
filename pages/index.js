@@ -160,7 +160,7 @@ export default function Home({ works }) {
 			<div className="h-screen -translate-y-14 md:-translate-y-0">
 
 				<section id="hero"
-					className="relative flex justify-center items-center h-screen lg:h-auto"
+					className="relative flex justify-center items-center h-screen lg:h-auto lg:-ml-1 lg:-mt-1"
 					style={{ background: windowWidth < 1024 && `url("./image/home-page/hero-mobile.png") no-repeat ${backgroundSize}` }}
 				>
 					{/* {windowWidth >= 768
@@ -168,12 +168,12 @@ export default function Home({ works }) {
 						: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
 					} */}
 					{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
-					<Egg bgImage={windowWidth >= 1024 && hero} centerImage={logo} className="hero" />
+					<Egg bgImage={hero} centerImage={logo} className="hero" />
 					<div className="absolute bottom-0 lg:-bottom-8 z-20 text-center lg:translate-x-0 md:-translate-x-full -translate-x-1/2">
 						<h5 className="mb-4">UIUX Designer</h5>
 						<div className="arrow" onClick={handleArrow}>
 							<Link href="/#works">
-								<Image className="cursor-pointer" src={arrow} alt="arrow" width="76px" height="76px" />
+								<Image className="cursor-pointer z-20" src={arrow} alt="arrow" width="76px" height="76px" />
 							</Link>
 						</div>
 					</div>
@@ -191,7 +191,7 @@ export default function Home({ works }) {
 				<div className="about-image mb-9">
 					<Image src={headShot} alt="head-shot" />
 				</div>
-				<h1>Hello! I am Yung-Shin Ko! </h1>
+				<h1 className="leading-10 text-center">Hello! I am Yung-Shin Ko! </h1>
 				<Link href="/about">
 					<button className="py-6 px-8 mt-8"><h4>About Me</h4></button>
 				</Link>
