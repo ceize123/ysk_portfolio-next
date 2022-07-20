@@ -157,7 +157,7 @@ export default function Home({ works }) {
 	return (
 		<div className="home">
 			{/* {page !== 0 && <Logo />} */}
-			<div className="h-screen -translate-y-14 md:-translate-y-0">
+			<div className="h-screen -translate-y-14 md:-translate-y-0 mb-12 md:mb-24">
 
 				<section id="hero"
 					className="relative flex justify-center items-center h-screen lg:h-auto lg:-ml-1 lg:-mt-1"
@@ -169,8 +169,8 @@ export default function Home({ works }) {
 					} */}
 					{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
 					<Egg bgImage={hero} centerImage={logo} className="hero" />
-					<div className="absolute bottom-0 lg:-bottom-8 z-20 text-center lg:translate-x-0 md:-translate-x-full -translate-x-1/2">
-						<h5 className="mb-4">UIUX Designer</h5>
+					<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 -translate-x-1/2 sm:left-20 lg:left-auto">
+						<h5 className="md:mb-4 mb-2">UIUX Designer</h5>
 						<div className="arrow" onClick={handleArrow}>
 							<Link href="/#works">
 								<Image className="cursor-pointer z-20" src={arrow} alt="arrow" width="76px" height="76px" />
@@ -180,24 +180,24 @@ export default function Home({ works }) {
 				</section>
 			</div>
 			{/* <div className="empty-div"></div> */}
-			<section id="works" className="relative flex justify-center items-center overflow-x-hidden">
+			<section id="works" className="relative flex justify-center items-center overflow-x-hidden py-12 md:py-24">
 				<section className="carousel-section mx-auto">
 					<Carousel works={works} />
 				</section>
 			</section>
 			{/* <div className="empty-div"></div> */}
-			<section id="about" className="relative flex flex-col justify-center items-center px-10">
+			<section id="about" className="relative flex flex-col justify-center items-center md:px-10 px-5 py-12 md:py-24">
 				{/* <Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} /> */}
-				<div className="about-image mb-9">
+				<div className="about-image md:mb-9 mb-2">
 					<Image src={headShot} alt="head-shot" />
 				</div>
-				<h1 className="leading-10 text-center">Hello! I am Yung-Shin Ko! </h1>
+				<h1 className="text-center">Hello! I am Yung-Shin Ko! </h1>
 				<Link href="/about">
-					<button className="py-6 px-8 mt-8"><h4>About Me</h4></button>
+					<button className="py-4 px-5 mt-8"><h4>About Me</h4></button>
 				</Link>
 			</section>
 			{/* <div className="empty-div"></div> */}
-			<section id="footer" className="relative flex justify-center items-center overflow-x-hidden">
+			<section id="footer" className="relative flex justify-center items-center overflow-x-hidden py-20 md:py-28">
 				<Egg bgImage={bgChat} className="footer" text="footer" />
 			</section>
 		</div>

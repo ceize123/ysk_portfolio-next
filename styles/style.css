@@ -277,16 +277,14 @@ ul {
   backdrop-filter: blur(17.4px);
   border-radius: 10px;
 }
+.home section button h4 {
+  font-weight: 800;
+}
 .home section .about-image {
   max-width: 229px;
 }
-.home #works,
-.home #about,
-.home #footer {
-  padding-top: 200px;
-}
-.home #footer {
-  padding-bottom: 100px;
+.home #about h1 {
+  line-height: 50px;
 }
 @media only screen and (min-width: 1024px) {
   .home #hero .egg-center {
