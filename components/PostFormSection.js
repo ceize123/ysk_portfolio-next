@@ -308,7 +308,6 @@ function PostFormSection({ workId = "", filter, title="" }) {
 										</div>
 									))}
 								</div>
-								{/* <UploadImage type={type} /> */}
 								<ImageInput prop={`${category}/${title}/${type}`} type={type} />
 								<ImageInputMobile prop={`${category}/${title}/${type}/mobile`} type={type} />
 							</div>
