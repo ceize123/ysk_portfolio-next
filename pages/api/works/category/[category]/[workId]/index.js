@@ -71,8 +71,12 @@ export default async function handler(req, res) {
 		try {
 			const { number, data } = req.body;
 
-			const work = await Work.findByIdAndUpdate(
+			await Work.findByIdAndUpdate(
 				data._id, data
+			);
+			
+			const work = await Work.findOne(
+				{ "_id": workId, "sections_id": data._id },
 			);
 
 			// https://stackoverflow.com/questions/32811510/mongoose-findoneandupdate-doesnt-return-updated-document
@@ -87,9 +91,10 @@ export default async function handler(req, res) {
 				{ "category": category, "works_id": workId },
 			);
 			const foundWorkIndex = await cate.works.findIndex(item => item._id == workId);
+			console.log(work);
 			cate.works[foundWorkIndex] = work;
 			cate.save();
-			console.log(cate);
+			// console.log(cate);
 			
 			res.status(201).json(cate);
 		} catch (err) {

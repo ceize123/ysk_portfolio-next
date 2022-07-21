@@ -84,7 +84,9 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, images: imageUrls });
-		else setWork({ ...work, heroImage: imageUrls });
+		else if (!isOverview) {
+			setWork({ ...work, heroImage: imageUrls });
+		}
 	}, [imageUrls]);
 
 	useEffect(() => {
@@ -145,6 +147,8 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 		} else {
 			data = work;
+			console.log(prop);
+			console.log(data);
 			if (!validate(data)) {
 				failAlert("Shin! Please Please Please fill in all the fields!");
 				return null;
@@ -267,7 +271,9 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 													val={work}
 													onChange={e => {
 														setWork({ ...work, [key]: e.target.value });
-													}} />
+													}}
+													note={key === "title" && "url"}
+												/>
 												
 											))}
 										</>

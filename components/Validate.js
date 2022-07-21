@@ -11,7 +11,6 @@ export const validate = (work, type) => {
 		keys.map(key => {
 			// if (work[key] === "" || (type !== "textOnly" && work[key].length === 0)) {
 			if (work[key] === "" || work[key].length === 0) {
-				console.log(keys);
 				console.log(key);
 				if (key === "pages" || key === "lists" || key === "overview") {
 					subKeyName = key;
