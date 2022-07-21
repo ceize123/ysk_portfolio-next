@@ -484,8 +484,8 @@ iframe {
 @media only screen and (max-width: 767px) {
   .hero-image {
     max-height: inherit;
-    height: 65vw;
-    min-height: 246px;
+    height: 54.4vw;
+    min-height: 204px;
   }
 }
 .templates {
