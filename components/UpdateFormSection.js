@@ -113,10 +113,9 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		} else {
 			setOverview(prop.overview);
 			// setUpdateFiles(prop.heroImage);
-			setHasImage(true);
 			// setSubKeys(Object.keys(work[overview]));
-			if (isOverview) {
-				setHasImage(false);
+			if (!isOverview) {
+				setHasImage(true);
 			}
 		}
 	}, []);

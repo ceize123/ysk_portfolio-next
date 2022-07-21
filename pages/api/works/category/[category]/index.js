@@ -24,8 +24,9 @@ export default async function handler(req, res) {
 		try {
 			const newWork = await Work.create(req.body.work);
 			const cate = await Category.findOneAndUpdate({ category: category },
-				{ $addToSet: { works: newWork } }
-			);
+				{ $addToSet: { works: newWork } },
+				{ new: true }
+			).exec();
 			
 			res.status(201).json(cate);
 		} catch (err) {

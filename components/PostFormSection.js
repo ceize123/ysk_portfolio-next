@@ -347,7 +347,9 @@ function PostFormSection({ workId = "", filter, title="" }) {
 											val={work}
 											onChange={e => {
 												setWork({ ...work, [item]: e.target.value });
-											}} />
+											}}
+											note={item === "title" && "url"}
+										/>
 									))}
 								</div>
 								{/* <UploadImage /> */}
