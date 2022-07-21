@@ -3,7 +3,7 @@ export const validate = (work, type) => {
 	const keys = Object.keys(work);
 	let subKeys;
 	let subKeyName;
-	if (type === "textOnly") {
+	if (type === "textOnly" || type === "videoSec") {
 		if (keys[0] === "") {
 			flag = false;
 		}

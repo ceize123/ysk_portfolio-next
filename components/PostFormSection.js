@@ -186,39 +186,12 @@ function PostFormSection({ workId = "", filter, title="" }) {
 
 		}
 		
-		// if (type === "List") {
-		// 	setOverall({
-		// 		...overall,
-		// 		color: ""
-		// 	});
-		// 	setArray([{
-		// 		listTitle: "",
-		// 		listParagraph: ""
-		// 	}]);
-		// } else if (type === "Carousel") {
-		// 	setArray([{
-		// 		issue: "",
-		// 		description: "",
-		// 		solution: ""
-		// 	}]);
-		// }
 	}, [type]);
 	// handle array of object from fields
 
-
-	// useEffect(() => {
-
-	// 	setOverall(prevState => ({
-	// 		...overall,
-	// 		pages: [...prevState.pages, page],
-	// 		lists: [...prevState.lists, list],
-	// 	}));
-	// },[list, page]);
-
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		console.log(overall);
 		if (filter === "sections") {
 			if (!validate(overall, type)) {
 				failAlert("Shin! Please Please Please fill in all the fields!");
