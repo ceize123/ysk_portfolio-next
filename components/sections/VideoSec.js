@@ -10,7 +10,7 @@ function VideoSec({ prop, images }) {
 		<section className="relative video-section mx-5 xl:mx-auto lg:mx-12 md:mx-10" >
 			<h1 className="text-center">{data.title}</h1>
 			<div className="flex justify-center">
-				<ReactPlayer url={data.paragraph} controls={true} width="100%" height="auto" />
+				<ReactPlayer url={data.paragraph} controls={true} width="800px" height="auto" />
 			</div>
 			{/* <div className="md:flex justify-center hidden lg:hidden">
 				<ReactPlayer url={data.paragraph} controls={true} width="720px" height="auto" />

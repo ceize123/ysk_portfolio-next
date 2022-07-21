@@ -14,6 +14,8 @@ function Navbar() {
 	const { openR, setOpenR } = useBetween(useShareModal);
 	const handleModal = () => {
 		setOpenR(true);
+		setToggle(!toggle);
+		setHideList(!hideList);
 	};
 
 	useEffect(() => {
@@ -137,7 +139,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<a className="hover:text-secondary cursor-pointer" onClick={() => windowWidth > 768 && handleModal()}>Resume</a>
+						<a className="hover:text-secondary cursor-pointer" onClick={() => handleModal()}>Resume</a>
 					</li>
 					{session &&
 						<li className="hidden md:block">

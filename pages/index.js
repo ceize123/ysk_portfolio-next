@@ -169,7 +169,7 @@ export default function Home({ works }) {
 					} */}
 					{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
 					<Egg bgImage={hero} centerImage={logo} className="hero" />
-					<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 -translate-x-1/2 sm:left-20 lg:left-auto">
+					<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 left-8 sm:left-20 lg:left-auto">
 						<h5 className="md:mb-4 mb-2">UIUX Designer</h5>
 						<div className="arrow" onClick={handleArrow}>
 							<Link href="/#works">
