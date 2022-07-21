@@ -13,7 +13,8 @@ export default NextAuth({
 	callbacks: {
 		async signIn({ user, account, profile, email, credentials }) {
 			
-			const isAllowedToSignIn = (profile.login === "YSK530" && profile.id === 108098846);
+			const isAllowedToSignIn = (profile.login === "YSK530" && profile.id === 108098846)
+				|| (profile.login === "ceize123" && profile.id === 64736206);
 			if (isAllowedToSignIn) {
 				return true;
 			} else {

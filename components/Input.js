@@ -2,7 +2,7 @@ import firstLetter from "./FirstLetter";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 import { GiCrossMark } from "react-icons/gi";
 
-function Input({ prop, val = "", onChange, note = "" }) {
+function Input({ prop, val = "", onChange, note = "", video = false }) {
 	const key = prop;
 	let type;
 	if (prop === "imagesNeed") {
@@ -16,8 +16,10 @@ function Input({ prop, val = "", onChange, note = "" }) {
 		<div>
 			<div className={`mb-2 ${prop}`}>
 				<label htmlFor={prop} className="flex items-center text-sm font-medium text-gray-700">
-					{/* {prop.charAt(0).toUpperCase() + prop.slice(1)} */}
-					{firstLetter("upper", prop)} {note && `(${note})`}
+					{video && prop === "paragraph"
+						? "Link"
+						: firstLetter("upper", prop)} {note && `(${note})`
+					}
 					<span className="pl-2">{val[key] ? <HiOutlineCheckCircle /> : <GiCrossMark />}</span>
 				</label>
 				<input

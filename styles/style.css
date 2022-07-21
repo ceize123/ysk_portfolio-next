@@ -612,7 +612,7 @@ iframe {
 .addNewSection .imageOnly .title, .addNewSection .imageOnly .paragraph {
   display: none;
 }
-.addNewSection .titleImage .paragraph, .addNewSection .videoSec .paragraph {
+.addNewSection .titleImage .paragraph {
   display: none;
 }
 .addNewSection .carousel .title, .addNewSection .carousel .paragraph, .addNewSection .list .title, .addNewSection .list .paragraph {
@@ -624,7 +624,7 @@ iframe {
 .addNewSection .list .col-text, .addNewSection .list .color, .addNewSection .list .listTitle, .addNewSection .list .listParagraph {
   display: block;
 }
-.addNewSection .textOnly .upload-section {
+.addNewSection .textOnly .upload-section, .addNewSection .videoSec .upload-section {
   display: none;
 }
 

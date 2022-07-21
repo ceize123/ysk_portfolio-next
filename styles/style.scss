@@ -1037,7 +1037,7 @@ iframe {
 		}
 	}
 
-	.titleImage, .videoSec {
+	.titleImage {
 		.paragraph {
 			display: none;
 		}
@@ -1060,7 +1060,7 @@ iframe {
 		}
 	}
 
-	.textOnly {
+	.textOnly, .videoSec {
 		.upload-section {
 			display: none;
 		}

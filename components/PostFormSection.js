@@ -137,7 +137,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		case "videoSec":
 			setOverall({
 				title: "",
-				images: [],
+				paragraph: "",
 			});	
 			break;
 		case "carousel":
@@ -295,7 +295,9 @@ function PostFormSection({ workId = "", filter, title="" }) {
 											// type={type}
 											onChange={e => {
 												setOverall({ ...overall, [item]: e.target.value });
-											}} />
+											}}
+											video={type === "videoSec" && true}
+										/>
 									))}
 								</div>
 												
@@ -335,7 +337,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 								</div>
 								{/* <UploadImage type={type} /> */}
 								<ImageInput prop={`${category}/${title}/${type}`} type={type} />
-								{type !== "videoSec" && <ImageInputMobile prop={`${category}/${title}/${type}/mobile`} type={type} />}
+								<ImageInputMobile prop={`${category}/${title}/${type}/mobile`} type={type} />
 							</div>
 							: <div className="grid grid-cols-1">
 								{category !== undefined && <SelectMenu prop={categories} option={category} name="Category" onChange={setCategory} />}

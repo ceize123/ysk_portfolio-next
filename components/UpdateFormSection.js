@@ -106,7 +106,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 				setArray(overall.pages);
 			}
 			
-			if (overall.type !== "textOnly") {
+			if (overall.type !== "textOnly" && overall.type !== "videoSec") {
 				setHasImage(true);
 				// setUpdateFiles(prop.images);
 			} else {
@@ -256,7 +256,7 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 									))}
 								</div>
 								{hasImage && <ImageInput prop={`${param}/${title}/${overall.type}`} category={param} imageAry={prop.images} />}
-								{hasImage && overall.type !== "videoSec" && <ImageInputMobile prop={`${param}/${title}/${overall.type}/mobile`} category={param} imageAry={prop.imagesMobile} />}
+								{hasImage && <ImageInputMobile prop={`${param}/${title}/${overall.type}/mobile`} category={param} imageAry={prop.imagesMobile} />}
 								{/* {hasImage && <UploadImage type={overall.type} isUpdate={true}/>} */}
 							</div> 
 							: <div className="grid grid-cols-1">
