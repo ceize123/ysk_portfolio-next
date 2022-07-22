@@ -129,7 +129,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link href="/#about">
+						<Link href="/about">
 							<a className="hover:text-secondary">About me</a>
 						</Link>
 					</li>
