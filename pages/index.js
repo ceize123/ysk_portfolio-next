@@ -153,6 +153,15 @@ export default function Home({ works }) {
 	// 	setPage(no);
 	// };
 
+	useEffect(() => {
+		const loadingPage = document.querySelector(".loading");
+		if (loaded) {
+			setTimeout(() => {
+				loadingPage.classList.add("hidden");
+			}, 3000);
+		}
+	}, [loaded]);
+
 	const handleArrow = () => {
 		const arrow = document.querySelector(".arrow");
 		arrow.classList.add("arrow-active");
@@ -163,7 +172,7 @@ export default function Home({ works }) {
 
 	return (
 		<>
-			<div className={`loading fixed h-screen w-screen ${loaded && "opacity-0"}`}>
+			<div className={`loading fixed h-screen w-screen ${loaded ? "opacity-0 z-40" : "z-50"}`}>
 				<div className="loading-text">
 					<span className="loading-text-words">L</span>
 					<span className="loading-text-words">O</span>
@@ -174,7 +183,7 @@ export default function Home({ works }) {
 					<span className="loading-text-words">G</span>
 				</div>
 			</div>
-			<div className={`home ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100"}`} onLoad={() => setLoaded(true)}>
+			<div className={`home ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`} onLoad={() => setLoaded(true)}>
 				{/* {page !== 0 && <Logo />} */}
 				<div className="h-screen -translate-y-14 md:-translate-y-0 mb-20 md:mb-28">
 
