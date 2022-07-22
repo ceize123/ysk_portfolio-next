@@ -4,6 +4,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useShareModal } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import Button from "../components/Button";
+import resumeImg from "../public/image/about/resume-mobile.png";
+import Image from "next/image";
 
 export default function Modal({prop, resume = ""}) {
 	const { open, setOpen, openR, setOpenR  } = useBetween(useShareModal);
@@ -24,7 +26,7 @@ export default function Modal({prop, resume = ""}) {
 				</Transition.Child>
 
 				<div className="fixed z-10 inset-0 overflow-y-auto">
-					<div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+					<div className="flex items-center justify-center min-h-full p-4 text-center sm:p-0">
 						<Transition.Child
 							as={Fragment}
 							enter="ease-out duration-300"
@@ -34,32 +36,15 @@ export default function Modal({prop, resume = ""}) {
 							leaveFrom="opacity-100 translate-y-0 sm:scale-100"
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
-							<Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 w-full h-full sm:p-6">
-								<div>
-									{/* <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-										<CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
-									</div>
-									<div className="mt-3 text-center sm:mt-5">
-										<Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-											Payment successful
-										</Dialog.Title>
-										<div className="mt-2">
-											<p className="text-sm text-gray-500">
-												Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.
-											</p>
-										</div>
-									</div> */}
-									<iframe className="w-full" src={`./image/about/${prop}.pdf`} />
+							<Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 w-5/6 sm:p-6">
+								<div className="hidden md:block">
+									<iframe src={`./image/about/${prop}.pdf`} width="100%" height="auto" scrolling="no"> </iframe>
+								</div>
+								<div className="md:hidden w-full">
+									<Image src={resumeImg} alt="resume" />
 								</div>
 								<div className="mt-5 sm:mt-6 text-center">
 									<Button onClick={() => !resume ? setOpen(false) : setOpenR(false)} text="Go Back" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" />
-									{/* <button
-										type="button"
-										className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-										onClick={() => setOpen(false)}
-									>
-										Go back to about page
-									</button> */}
 								</div>
 							</Dialog.Panel>
 						</Transition.Child>

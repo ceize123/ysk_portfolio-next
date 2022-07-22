@@ -103,6 +103,25 @@ ul {
     line-height: 30px;
   }
 }
+embed {
+  width: 100%;
+  height: 80vh;
+}
+
+@media only screen and (max-width: 991px) {
+  embed {
+    height: 800;
+  }
+}
+@media only screen and (max-width: 767px) {
+  embed {
+    height: 600px;
+  }
+}
+.modal-body img {
+  max-width: 100%;
+}
+
 .header .logo {
   max-width: 35px;
   max-height: 35px;

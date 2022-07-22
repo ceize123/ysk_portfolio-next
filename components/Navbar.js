@@ -13,9 +13,11 @@ function Navbar() {
 
 	const { openR, setOpenR } = useBetween(useShareModal);
 	const handleModal = () => {
+		if (windowWidth < 768) {
+			setToggle(!toggle);
+			setHideList(!hideList);
+		}
 		setOpenR(true);
-		setToggle(!toggle);
-		setHideList(!hideList);
 	};
 
 	useEffect(() => {

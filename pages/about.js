@@ -96,7 +96,11 @@ function About() {
 				</div>
 			</section>
 			<Footer />
-			{open && <Modal prop={PDF} />}
+			{open &&
+				<div className="absolute top-20">
+					<Modal prop={PDF} />
+				</div>
+			}
 		</div>
 	);
 }
