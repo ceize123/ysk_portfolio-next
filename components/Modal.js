@@ -25,7 +25,7 @@ export default function Modal({prop, resume = ""}) {
 					<div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 				</Transition.Child>
 
-				<div className="fixed z-10 inset-0 overflow-y-auto">
+				<div className="fixed inset-0 overflow-y-auto">
 					<div className="flex items-center justify-center min-h-full p-4 text-center sm:p-0">
 						<Transition.Child
 							as={Fragment}
@@ -44,7 +44,8 @@ export default function Modal({prop, resume = ""}) {
 									<Image src={resumeImg} alt="resume" />
 								</div>
 								<div className="mt-5 sm:mt-6 text-center">
-									<Button onClick={() => !resume ? setOpen(false) : setOpenR(false)} text="Go Back" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" />
+									<button className="py-4 px-5" onClick={() => !resume ? setOpen(false) : setOpenR(false)}><h4 className="hover:text-secondary">Go Back</h4></button>
+									{/* <Button onClick={() => !resume ? setOpen(false) : setOpenR(false)} text="Go Back" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500" /> */}
 								</div>
 							</Dialog.Panel>
 						</Transition.Child>

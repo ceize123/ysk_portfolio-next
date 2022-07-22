@@ -18,6 +18,7 @@ import { set } from "mongoose";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
+	const [loaded, setLoaded] = useState(false);
 	const [backgroundSize, setBackgroundSize] = useState(true);
 	// const [page, setPage] = useState(0);
 	// const { page, setPage } = useBetween(useSharePage);
@@ -42,6 +43,12 @@ export default function Home({ works }) {
 
 		
 	}, [windowWidth]);
+
+	// useEffect(() => {
+	// 	if (loaded) {
+	// 		const elements = document.querySelectorAll(".home > section");
+	// 	}
+	// }, [loaded]);
 
 	// const pageEffect = () => {
 	// 	const elements = document.querySelectorAll(".home > section");
@@ -155,52 +162,72 @@ export default function Home({ works }) {
 	};
 
 	return (
-		<div className="home">
-			{/* {page !== 0 && <Logo />} */}
-			<div className="h-screen -translate-y-14 md:-translate-y-0 mb-20 md:mb-28">
+		<>
+			<div className={`loading fixed h-screen w-screen ${loaded && "opacity-0"}`}>
+				<div className="loading-text">
+					<span className="loading-text-words">L</span>
+					<span className="loading-text-words">O</span>
+					<span className="loading-text-words">A</span>
+					<span className="loading-text-words">D</span>
+					<span className="loading-text-words">I</span>
+					<span className="loading-text-words">N</span>
+					<span className="loading-text-words">G</span>
+				</div>
+			</div>
+			<div className={`home ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100"}`} onLoad={() => setLoaded(true)}>
+				{/* {page !== 0 && <Logo />} */}
+				<div className="h-screen -translate-y-14 md:-translate-y-0 mb-20 md:mb-28">
 
-				<section id="hero"
-					className="relative flex justify-center items-center h-screen lg:h-auto lg:-ml-1 lg:-mt-1"
-					style={{ background: windowWidth < 1024 && `url("./image/home-page/hero-mobile.png") no-repeat ${backgroundSize}` }}
-				>
-					{/* {windowWidth >= 768
-						? <Egg bgImage={hero} centerImage={logo} className="hero" />
-						: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
-					} */}
-					{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
-					<Egg bgImage={hero} centerImage={logo} className="hero" />
-					<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 left-8 sm:left-20 lg:left-auto">
-						<h5 className="md:mb-4 mb-2">UIUX Designer</h5>
-						<div className="arrow" onClick={handleArrow}>
-							<Link href="/#works">
-								<Image className="cursor-pointer z-20" src={arrow} alt="arrow" width="76px" height="76px" />
-							</Link>
+					<section id="hero"
+						className="relative flex justify-center items-center h-screen lg:h-auto lg:-ml-1 lg:-mt-1"
+						style={{ background: windowWidth < 1024 && `url("./image/home-page/hero-mobile.png") no-repeat ${backgroundSize}` }}
+					>
+						{/* {windowWidth >= 768
+							? <Egg bgImage={hero} centerImage={logo} className="hero" />
+							: <Egg bgImage={heroMobile} centerImage={logo} className="hero" />
+						} */}
+						{/* <Egg bgImage={hero} centerImage={logo} className="hero" /> */}
+						<Egg bgImage={hero} centerImage={logo} className="hero" />
+						<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 left-8 sm:left-20 lg:left-auto">
+							<h5 className="md:mb-4 mb-2">UIUX Designer</h5>
+							<div className="arrow" onClick={handleArrow}>
+								<Link href="/#works">
+									<Image className="cursor-pointer z-20" src={arrow} alt="arrow" width="76px" height="76px" />
+								</Link>
+							</div>
+						</div>
+					</section>
+				</div>
+				<section id="works" className="relative flex justify-center items-center overflow-x-hidden pt-4 pb-12 lg:pt-20 md:pt-16 md:pb-28">
+					<section className="carousel-section mx-auto">
+						<Carousel works={works} />
+					</section>
+				</section>
+				<section id="about" className="relative flex flex-col justify-center items-center md:px-10 px-5 pt-12 pb-24 md:pt-24 md:pb-28">
+					{/* <Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} /> */}
+					<div className="about-image md:mb-9 mb-2">
+						<Image src={headShot} alt="head-shot" />
+					</div>
+					<div className="flex flex-col md:flex-row">
+						<h1 className="mr-3">Hello! I am</h1>
+						<div className="text-carousel overflow-hidden h-14">
+							<div className="inner">
+								<h1 className="inner-element mb-2">Yung-Shin Ko!</h1>
+								<h1 className="inner-element mb-2">a designer</h1>
+								<h1 className="inner-element mb-2">a researcher</h1>
+								<h1 className="inner-element">a creator</h1>
+							</div>
 						</div>
 					</div>
+					<Link href="/about">
+						<button className="py-4 px-5 mt-6"><h4 className="hover:text-secondary">About Me</h4></button>
+					</Link>
+				</section>
+				<section id="footer" className="relative flex justify-center items-center overflow-x-hidden pt-16 pb-24 md:pt-20 md:pb-28">
+					<Egg bgImage={bgChat} className="footer" text="footer" />
 				</section>
 			</div>
-			{/* <div className="empty-div"></div> */}
-			<section id="works" className="relative flex justify-center items-center overflow-x-hidden pt-4 pb-12 lg:pt-20 md:pt-16 md:pb-28">
-				<section className="carousel-section mx-auto">
-					<Carousel works={works} />
-				</section>
-			</section>
-			{/* <div className="empty-div"></div> */}
-			<section id="about" className="relative flex flex-col justify-center items-center md:px-10 px-5 pt-12 pb-24 md:pt-24 md:pb-28">
-				{/* <Egg bgImage={bgAbout} className="about" text="About me" mobile={windowWidth < 768} /> */}
-				<div className="about-image md:mb-9 mb-2">
-					<Image src={headShot} alt="head-shot" />
-				</div>
-				<h1 className="text-center">Hello! I am Yung-Shin Ko! </h1>
-				<Link href="/about">
-					<button className="py-4 px-5 mt-8"><h4>About Me</h4></button>
-				</Link>
-			</section>
-			{/* <div className="empty-div"></div> */}
-			<section id="footer" className="relative flex justify-center items-center overflow-x-hidden pt-16 pb-24 md:pt-20 md:pb-28">
-				<Egg bgImage={bgChat} className="footer" text="footer" />
-			</section>
-		</div>
+		</>
 	);
 }
 

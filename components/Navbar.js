@@ -24,7 +24,7 @@ function Navbar() {
 		const h = document.querySelector("html");
 		
 		if (!openR) {
-			h.style.overflow = "visible";
+			// h.style.overflow = "visible";
 			h.style.paddingRight = "0px";
 		}
 	}, [openR]);
