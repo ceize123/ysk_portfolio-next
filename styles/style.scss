@@ -552,9 +552,9 @@ button {
 		.text-carousel {
 			.inner {
 				animation: scroll 5s ease-in-out infinite;
-				.inner-element {
-					text-shadow: 0px 2px 2px #fba09d;
-				}
+				// .inner-element {
+				// 	text-shadow: 0px 2px 2px #fba09d;
+				// }
 			}
 		}
 	}
@@ -883,6 +883,9 @@ button {
 	}
 
 	@media only screen and (max-width: 767px) {
+		h1 {
+			line-height: 50px;
+		}
 		.see-more {
 			display: flex;
 			background: #222;

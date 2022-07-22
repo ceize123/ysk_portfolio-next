@@ -8,7 +8,7 @@ import heroMobile from "../public/image/home-page/hero-mobile.png";
 import Egg from "../components/HomePageEgg";
 import Carousel from "../components/HomePageCarousel";
 import { useState, useEffect } from "react";
-import { useSharePage, useShareWidth } from "../components/ShareStates";
+import { useSharePage, useShareWidth, useShareLoading } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import dbConnect from "../util/connection";
 import Category from "../models/Category";
@@ -18,7 +18,7 @@ import { set } from "mongoose";
 
 export default function Home({ works }) {
 	const [scrolled, setScrolled] = useState(true);
-	const [loaded, setLoaded] = useState(false);
+	const {loaded, setLoaded} = useBetween(useShareLoading);
 	const [backgroundSize, setBackgroundSize] = useState(true);
 	// const [page, setPage] = useState(0);
 	// const { page, setPage } = useBetween(useSharePage);

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { useSharePage, useShareWidth, useShareModal } from "./ShareStates";
+import { useSharePage, useShareWidth, useShareModal, useShareModalDis } from "./ShareStates";
 import { useBetween } from "use-between";
 import { useSession } from "next-auth/react";
 import Logo from "./Logo";
@@ -11,23 +11,16 @@ function Navbar() {
 
 	const { data: session } = useSession();
 
-	const { openR, setOpenR } = useBetween(useShareModal);
-	const handleModal = () => {
+	const { open, setOpen } = useBetween(useShareModal);
+	const { modalDis, setModalDis } = useBetween(useShareModalDis);
+	const handleModalResume = () => {
 		if (windowWidth < 768) {
 			setToggle(!toggle);
 			setHideList(!hideList);
 		}
-		setOpenR(true);
+		setOpen(true);
+		setModalDis("resume");
 	};
-
-	useEffect(() => {
-		const h = document.querySelector("html");
-		
-		if (!openR) {
-			// h.style.overflow = "visible";
-			h.style.paddingRight = "0px";
-		}
-	}, [openR]);
 
 	// const [position, setPosition] = useState("fixed");
 	const [toggle, setToggle] = useState(false);
@@ -141,7 +134,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<a className="hover:text-secondary cursor-pointer" onClick={() => handleModal()}>Resume</a>
+						<a className="hover:text-secondary cursor-pointer" onClick={() => handleModalResume()}>Resume</a>
 					</li>
 					{session &&
 						<li className="hidden md:block">
@@ -152,7 +145,10 @@ function Navbar() {
 					}
 				</ul>
 			</nav>
-			{openR && <Modal prop={"resume_yung-shin_ko"} resume={true} />}
+			{/* {open && <Modal prop={"resume_yung-shin_ko"} resume={true} />} */}
+			{open &&
+				<Modal prop={modalDis} />
+			}
 		</>
 	);
 }

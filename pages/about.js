@@ -4,17 +4,16 @@ import fashion from "../public/image/about/fashion.png";
 import photo from "../public/image/about/photo.png";
 import Footer from "../components/Footer";
 import Modal from "../components/Modal";
-import { useShareModal, useShareWidth } from "../components/ShareStates";
+import { useShareModal, useShareModalDis, useShareWidth } from "../components/ShareStates";
 import { useBetween } from "use-between";
-import { useState } from "react";
 
 function About() {
-	const { open, setOpen } = useBetween(useShareModal);
+	const { setOpen } = useBetween(useShareModal);
+	const { setModalDis } = useBetween(useShareModalDis);
 	const { windowWidth } = useBetween(useShareWidth);
-	const [PDF, setPDF] = useState("");
 	const handleModal = (option) => {
 		setOpen(true);
-		setPDF(option);
+		setModalDis(option);
 	};
 
 	return (
@@ -34,7 +33,9 @@ function About() {
 							<Image src={headShot} alt="head-shot" />	
 						</div>
 					</div>
-
+					<div className="mt-6 mb-12" onClick={() => handleModal("resume")}>
+						<button className="py-4 px-5 mt-6"><h4 className="hover:text-secondary">Resume</h4></button>
+					</div>
 					<div className="lg:mt-8 mt-12 md:mb-24 mb-12">
 						<h2 className="mb-5">
 							8 “W” Get To Know Me
@@ -96,11 +97,9 @@ function About() {
 				</div>
 			</section>
 			<Footer />
-			{open &&
-				<div className="absolute top-20">
-					<Modal prop={PDF} />
-				</div>
-			}
+			{/* {open &&
+				<Modal prop={modalDis} />
+			} */}
 		</div>
 	);
 }

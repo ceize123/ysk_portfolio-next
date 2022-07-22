@@ -367,9 +367,6 @@ button h4 {
 .home section .text-carousel .inner {
   animation: scroll 5s ease-in-out infinite;
 }
-.home section .text-carousel .inner .inner-element {
-  text-shadow: 0px 2px 2px #fba09d;
-}
 .home #about h1 {
   line-height: 50px;
 }
@@ -552,6 +549,9 @@ button h4 {
   }
 }
 @media only screen and (max-width: 767px) {
+  .about-page h1 {
+    line-height: 50px;
+  }
   .about-page .see-more {
     display: flex;
     background: #222;
