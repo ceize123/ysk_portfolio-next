@@ -158,7 +158,7 @@ export default function Home({ works }) {
 		if (loaded) {
 			setTimeout(() => {
 				loadingPage.classList.add("hidden");
-			}, 3000);
+			}, 4000);
 		}
 	}, [loaded]);
 
