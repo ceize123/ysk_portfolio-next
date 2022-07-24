@@ -153,14 +153,14 @@ export default function Home({ works }) {
 	// 	setPage(no);
 	// };
 
-	useEffect(() => {
-		const loadingPage = document.querySelector(".loading");
-		if (loaded) {
-			setTimeout(() => {
-				loadingPage.classList.add("hidden");
-			}, 4000);
-		}
-	}, [loaded]);
+	// useEffect(() => {
+	// 	const loadingPage = document.querySelector(".loading");
+	// 	if (loaded) {
+	// 		setTimeout(() => {
+	// 			loadingPage.classList.add("hidden");
+	// 		}, 4000);
+	// 	}
+	// }, [loaded]);
 
 	const handleArrow = () => {
 		const arrow = document.querySelector(".arrow");
@@ -172,7 +172,7 @@ export default function Home({ works }) {
 
 	return (
 		<>
-			<div className={`loading fixed h-screen w-screen ${loaded ? "opacity-0 z-40" : "z-50"}`}>
+			<div className={`loading fixed h-screen w-screen ${loaded ? "opacity-0" : "z-50"}`}>
 				<div className="loading-text">
 					<span className="loading-text-words">L</span>
 					<span className="loading-text-words">O</span>

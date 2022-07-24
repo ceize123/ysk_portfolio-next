@@ -133,6 +133,9 @@ button h4 {
   font-weight: 800;
 }
 
+.header {
+  transition: opacity 0.5s linear 3s;
+}
 .header .logo {
   max-width: 35px;
   max-height: 35px;
@@ -174,7 +177,7 @@ button h4 {
   width: 100vw;
   height: 100vh;
   background: #E5E5E5;
-  transition: all 500ms ease-in-out;
+  transition: all 0.5s ease-in-out;
   clip-path: circle(30px at calc(100% - 10px) 10px);
   visibility: hidden;
 }
@@ -192,7 +195,7 @@ button h4 {
 }
 @media only screen and (max-width: 767px) {
   .header .main-nav {
-    transition: 0.5s all 0.2s ease;
+    transition: 0.8s all ease;
   }
   .header .main-nav a {
     display: inline-block;
