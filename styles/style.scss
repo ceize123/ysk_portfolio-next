@@ -570,6 +570,9 @@ button {
 			// 		}
 			// 	}
 			// }
+			.slide-element {
+				transition: opacity 0.5s linear;
+			}
 
 			.swiper-pagination-bullet {
 				background: rgba(255, 255, 255, 0.1);

@@ -409,6 +409,9 @@ button h4 {
   width: 100%;
   max-width: 1280px;
 }
+.home .carousel-section .outside-swiper .slide-element {
+  transition: opacity 0.5s linear;
+}
 .home .carousel-section .outside-swiper .swiper-pagination-bullet {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15), inset 4.49333px -4.49333px 4.49333px rgba(182, 182, 182, 0.4), inset -4.49333px 4.49333px 4.49333px rgba(255, 255, 255, 0.4);

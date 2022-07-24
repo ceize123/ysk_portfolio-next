@@ -81,7 +81,7 @@ function HomePageCarousel({ works }) {
 			>
 				{works.map((item, idx) => (
 					<SwiperSlide key={idx}>
-						<div className="grid xl:mx-20 md:mx-12 mx-5 xl:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3 justify-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 slide-page mb-2">
+						<div className={`slide-element grid xl:mx-20 md:mx-12 mx-5 xl:gap-x-14 md:gap-x-7 gap-x-3 md:gap-y-7 gap-y-3 justify-items-center lg:grid-cols-3 md:grid-cols-2 grid-cols-1 slide-page mb-2 ${slideIdx === idx ? "opacity-100" : "opacity-0"}`}>
 							{slideIdx === idx && item.works.map((work) => (
 								<Card key={work._id} work={work} category={item.category} />
 							))}
