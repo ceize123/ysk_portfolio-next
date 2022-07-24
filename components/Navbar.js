@@ -39,11 +39,10 @@ function Navbar() {
 	useEffect(() => {
 		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
-		if (router.pathname === "/" || router.pathname === "/about") {
+		if (router.pathname === "/" || router.pathname === "/about" || router.pathname === "/resume") {
 			ul.style.background = "#EDEDED";
-			ul.style.color = "inherit";
-
-		}
+			ul.style.color = "#2C2C2C";
+		} 
 		// else if (router.pathname === "/about") {
 		// 	ul.style.backgroundColor = "#E0E0E0";
 		// }
@@ -88,6 +87,17 @@ function Navbar() {
 	return (
 		<>
 			{/* <nav className={`header ${position} right-0 left-0 mx-auto z-30`} > */}
+			<div className={`loading fixed top-0 h-screen w-screen ${loaded ? "opacity-0" : "z-50"}`}>
+				<div className="loading-text">
+					<span className="loading-text-words">L</span>
+					<span className="loading-text-words">O</span>
+					<span className="loading-text-words">A</span>
+					<span className="loading-text-words">D</span>
+					<span className="loading-text-words">I</span>
+					<span className="loading-text-words">N</span>
+					<span className="loading-text-words">G</span>
+				</div>
+			</div>
 			<nav className={`header fixed top-0 right-0 left-0 mx-auto flex justify-end md:justify-center md:h-14 h-12 ${!loaded ? "opacity-0" : "opacity-100 z-30"}`}>
 				<Logo />
 				<div className={`menu-icon mr-3.5 block md:hidden ${toggle && "active"}`}>
@@ -130,7 +140,9 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<a className="hover:text-secondary cursor-pointer" onClick={() => handleModalResume()}>Resume</a>
+						<Link href="/resume">
+							<a className="hover:text-secondary cursor-pointer">Resume</a>
+						</Link>
 					</li>
 					{session &&
 						<li className="hidden md:block">

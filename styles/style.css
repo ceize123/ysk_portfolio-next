@@ -133,8 +133,12 @@ button h4 {
   font-weight: 800;
 }
 
-.header {
+.home, .about-page, .resume-page, .photography-page, .fashion-page, .front-end {
   transition: opacity 0.5s linear 3s;
+}
+
+.header {
+  transition: opacity 0.5s linear 2.5s;
 }
 .header .logo {
   max-width: 35px;
@@ -207,7 +211,7 @@ button h4 {
 
 .loading {
   background: linear-gradient(80.33deg, #e5e5e5 13.28%, whitesmoke 46.01%, #e6e6e6 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
-  transition: opacity 0.5s linear 3s;
+  transition: opacity 0.5s linear 2.2s;
 }
 
 .loading-text {
@@ -266,7 +270,6 @@ button h4 {
 }
 .home {
   background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
-  transition: opacity 0.5s linear 3.5s;
 }
 .home .arrow-active img {
   animation: bt-effect linear 0.2s;
@@ -676,16 +679,10 @@ iframe {
   line-height: 22px;
 }
 
-.back-end, .front-end {
-  margin-top: 56px;
+.back-end, .front-end, .resume-page, .fashion-page, .photography-page {
   background: #FFF;
 }
 
-@media only screen and (max-width: 767px) {
-  .back-end, .front-end {
-    margin-top: 48px;
-  }
-}
 .front-end .overview {
   padding: 100px 0;
 }

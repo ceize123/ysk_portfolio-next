@@ -152,6 +152,10 @@ button {
 		font-weight: 800;
 	}
 }
+
+.home, .about-page, .resume-page, .photography-page, .fashion-page, .front-end {
+	transition: opacity 0.5s linear 3s;
+}
 // General Ends
 
 
@@ -159,7 +163,7 @@ button {
 
 .header {
 	// height: 60px;
-	transition: opacity 0.5s linear 3s;
+	transition: opacity 0.5s linear 2.5s;
 
 	.logo {
 		max-width: 35px;
@@ -295,7 +299,7 @@ button {
 	// left: 50%;
 	// // transform: translateY(-50%);
 	// transform: translate(-50%, -50%);
-	transition: opacity 0.5s linear 3s;
+	transition: opacity 0.5s linear 2.2s;
 }
 
 .loading-text {
@@ -323,7 +327,6 @@ button {
 
 .home {
 	background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
-	transition: opacity 0.5s linear 3.5s;
 
 	.arrow-active {
 		img {
@@ -994,16 +997,16 @@ iframe {
 }
 
 
-.back-end, .front-end {
-	margin-top: 56px;
+.back-end, .front-end, .resume-page, .fashion-page, .photography-page {
+	// margin-top: 56px;
 	background: #FFF;
 }
 
-@media only screen and (max-width: 767px) {
-	.back-end, .front-end {
-	margin-top: 48px;
-}
-}
+// @media only screen and (max-width: 767px) {
+// 	.back-end, .front-end, .resume-page, .fashion-page, .photography-page {
+// 		margin-top: 48px;
+// 	}
+// }
 .front-end {
 	.overview {
 		padding: 100px 0;

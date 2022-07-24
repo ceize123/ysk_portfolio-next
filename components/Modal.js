@@ -5,7 +5,7 @@ import { useShareModal } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import photography from "../public/image/about/photography.png";
 import fashionDesign from "../public/image/about/fashionDesign.png";
-import resumeImg from "../public/image/about/resume-mobile.png";
+import resumeImg from "../public/image/about/resume.png";
 import Image from "next/image";
 
 export default function Modal({prop}) {

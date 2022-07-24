@@ -6,11 +6,12 @@ import Footer from "../../../components/Footer";
 import dbConnect from "../../../util/connection";
 import Category from "../../../models/Category";
 import Work from "../../../models/Work";
-import { useShareWidth } from "../../../components/ShareStates";
+import { useShareWidth, useShareLoading } from "../../../components/ShareStates";
 import { useBetween } from "use-between";
 
 function WorkDetail({ work }) {
 	const { windowWidth } = useBetween(useShareWidth);
+	const {loaded, setLoaded} = useBetween(useShareLoading);
 
 	useEffect(() => {
 		if (windowWidth >= 768) {
@@ -21,7 +22,7 @@ function WorkDetail({ work }) {
 	}, [work]);
 
 	return (
-		<div className="front-end">
+		<div className={`front-end ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50 md:mt-14 mt-12"}`} onLoad={() => setLoaded(true)}>
 			{work &&
 				<>
 					<Hero data={work} />

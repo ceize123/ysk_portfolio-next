@@ -3,21 +3,23 @@ import headShot from "../public/image/about/about-head-shot.png";
 import fashion from "../public/image/about/fashion.png";
 import photo from "../public/image/about/photo.png";
 import Footer from "../components/Footer";
-import Modal from "../components/Modal";
-import { useShareModal, useShareModalDis, useShareWidth } from "../components/ShareStates";
+// import Modal from "../components/Modal";
+import { useShareModal, useShareModalDis, useShareWidth, useShareLoading } from "../components/ShareStates";
 import { useBetween } from "use-between";
+import { useRouter } from "next/router";
 
 function About() {
-	const { setOpen } = useBetween(useShareModal);
-	const { setModalDis } = useBetween(useShareModalDis);
+	// const { setOpen } = useBetween(useShareModal);
+	// const { setModalDis } = useBetween(useShareModalDis);
+	const router = useRouter();
+	const {loaded, setLoaded} = useBetween(useShareLoading);
 	const { windowWidth } = useBetween(useShareWidth);
 	const handleModal = (option) => {
-		setOpen(true);
-		setModalDis(option);
+		router.push(`/${option}`);
 	};
 
 	return (
-		<div className="about-page">
+		<div className={`about-page ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`} onLoad={() => setLoaded(true)}>
 			<section className="md:pt-14 pt-12 flex justify-center">
 				<div className="md:px-24 px-5 mt-8">
 					<div className="flex">
