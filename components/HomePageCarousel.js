@@ -60,7 +60,7 @@ function HomePageCarousel({ works }) {
 		clickable: true,
 		renderBullet: function (index, className) {
 			// return '<span class="' + className + '">' + (index + 1) + "</span>";
-			return `<span class="${className} text-sm">${firstLetter("upper", works[index].category)}</span>`;
+			return `<span class="${className} text-sm">${works[index].category !== "UIUX" ? firstLetter("upper", works[index].category) : "UI/UX"}</span>`;
 		},
 	};
 	// const insidePagination = {
