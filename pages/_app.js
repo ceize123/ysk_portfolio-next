@@ -50,7 +50,6 @@ function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 					</DndProvider>
 				</SessionProvider>
 			</div>
-			{/* <Footer /> */}
 		</>
 	);
 }

@@ -22,8 +22,6 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		setWork({ ...work, overview: overview });
 	}, [overview]);
 
-	// 
-	// const { updateFiles, setUpdateFiles } = useBetween(useShareUpdateFiles);
 	const [overall, setOverall] = useState(prop);
 	const [array, setArray] = useState([]);
 	const [hasImage, setHasImage] = useState(false);
@@ -74,14 +72,6 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (filter === "sections") {
-	// 		setOverall({ ...overall, images: updateFiles });
-	// 	} else {
-	// 		setWork({ ...work, heroImage: updateFiles });
-	// 	}
-	// }, [updateFiles]);
-
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, images: imageUrls });
 		else if (!isOverview) {
@@ -91,7 +81,6 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, imagesMobile: imageUrlsMobile });
-		// else setWork({ ...work, heroImageMobile: imageUrlsMobile });
 	}, [imageUrlsMobile]);
 
 	useEffect(() => {
@@ -108,14 +97,12 @@ function UpdateFormSection({ prop, isOverview = false, param, workId, filter, se
 			
 			if (overall.type !== "textOnly" && overall.type !== "videoSec") {
 				setHasImage(true);
-				// setUpdateFiles(prop.images);
 			} else {
 				setHasImage(false);
 			}
 		} else {
 			setOverview(prop.overview);
-			// setUpdateFiles(prop.heroImage);
-			// setSubKeys(Object.keys(work[overview]));
+
 			if (!isOverview) {
 				setHasImage(true);
 			}

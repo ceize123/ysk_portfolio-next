@@ -14,10 +14,6 @@ export default async function handler(req, res) {
 		} catch (err) {
 			res.status(500).json(err);
 		}
-
-		// console.log(req.query);
-		// const works = findCat(category);
-		// res.status(200).json(works);
 	}
 
 	if (req.method === "POST") {
@@ -33,16 +29,4 @@ export default async function handler(req, res) {
 			res.status(500).json(err);
 		}
 	}
-	// else if (req.method === "POST") {
-	// 	const { work } = req.body;
-	// 	const { category } = req.query;
-		
-	// 	const cat = findCat(category);
-	// 	const newWork = {
-	// 		...work
-	// 	};
-
-	// 	cat.works.push(newWork);
-	// 	res.status(201).json(cat);
-	// }
 }

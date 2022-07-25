@@ -25,9 +25,6 @@ function ImageRender({ prop }) {
 					// layout="fill"
 					// objectFit="contain"
 				/>
-				{/* <Image src={img2} alt="image" width="200" height="200"/> */}
-				{/* Can't do this */}
-				{/* <Image src={imageUrl} alt="image" width="200" height="200"/> */}
 			</div>
 		</div>
 	);

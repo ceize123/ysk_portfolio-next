@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
-import {useShareCategories, useShareLoading} from "../components/ShareStates";
+import {useShareCategories} from "../components/ShareStates";
 import Link from "next/link";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Button from "../components/Button";
@@ -13,14 +13,12 @@ const choices = [
 ];
 
 function Dashboard() {
-	const {loaded} = useBetween(useShareLoading);
 	const { data: session, status } = useSession();
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [dashboardData, setDashboardData] = useState(null);
 	const [isUpdate, setIsUpdate] = useState(true);
 	const {categories, setCategories, category, setCategory} = useBetween(useShareCategories);
-	// const [category, setCategory] = useState();
 	const [idx, setIdx] = useState(0);
 	const [work, setWork] = useState();
 	const [choice, setChoice] = useState();
@@ -44,17 +42,6 @@ function Dashboard() {
 			}
 		};
 		securePage();
-		// async function fetchData() {
-		// 	const response = await fetch("/api/works");
-		// 	const data = await response.json();
-		// 	setDashboardData(data);
-		// 	setCategories(data.map(value => value.category));
-		// 	setCategory(data[0].category);
-		// 	setIsLoading(false);
-		// 	setWork(data[0].works[0]);
-		// 	setChoice(choices[0]);
-		// }
-		// fetchData();
 	}, []);
 
 	useEffect(() => {
@@ -79,7 +66,6 @@ function Dashboard() {
 		if (isUpdate) {
 			if (choice === choices[0]) {
 				router.push(`/modifier/updateCurProject/category/${category}/${work._id}`);
-				// router.push(`/modifier/updateCurProject/${work.id}`);
 			} else {
 				router.push("/modifier/order");
 			}
@@ -88,19 +74,11 @@ function Dashboard() {
 		}
 	}
 
-	// if ()
 	if (isLoading) return <div className="back-end md:mt-16 mt-12"><h1 className="text-3xl text-center font-bold mt-6">Loading...</h1></div>;
 
 	return (
 		<div className="back-end md:mt-16 mt-12">
 			<h1 className="text-3xl text-center font-bold underline my-6">Dashboard</h1>
-			{/* {!session && status !== "authenticated" &&
-				<div className="flex justify-center items-center h-24">
-					<Link href='/api/auth/signin'>
-						<Button onClick={() => signIn("github")} text="Sign In" color="border-indigo-600 hover:bg-indigo-500 focus:ring-indigo-500"/>
-					</Link>
-				</div>
-			} */}
 			{session && status !== "unauthenticated" &&
 				<>
 					<h2 className="text-2xl text-center font-bold my-12">Welcome! {session.user.name}</h2>

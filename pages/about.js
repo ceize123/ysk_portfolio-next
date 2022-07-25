@@ -9,8 +9,6 @@ import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 
 function About() {
-	// const { setOpen } = useBetween(useShareModal);
-	// const { setModalDis } = useBetween(useShareModalDis);
 	const router = useRouter();
 	const {loaded} = useBetween(useShareLoading);
 	const { windowWidth } = useBetween(useShareWidth);
@@ -99,9 +97,6 @@ function About() {
 				</div>
 			</section>
 			<Footer />
-			{/* {open &&
-				<Modal prop={modalDis} />
-			} */}
 		</div>
 	);
 }

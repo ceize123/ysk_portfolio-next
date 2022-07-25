@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -8,13 +8,10 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import Card from "./WorkCard";
 import firstLetter from "./FirstLetter";
-import { useBetween } from "use-between";
-import { useShareWidth } from "./ShareStates";
 
 function HomePageCarousel({ works }) {
-	const [insideSlide, setInsideSlide] = useState([]);
+	// const [insideSlide, setInsideSlide] = useState([]);
 	const [slideIdx, setSlideIdx] = useState(0);
-	const { windowWidth } = useBetween(useShareWidth);
 
 	// useEffect(() => {
 	// 	let slideArray = [];
@@ -63,12 +60,6 @@ function HomePageCarousel({ works }) {
 			return `<span class="${className} text-sm">${works[index].category !== "UIUX" ? firstLetter("upper", works[index].category) : "UI/UX"}</span>`;
 		},
 	};
-	// const insidePagination = {
-	// 	clickable: true,
-	// 	renderBullet: function (index, className) {
-	// 		return `<span class=${className}>${index + 1}</span>`;
-	// 	},
-	// };
 
 	return (
 		<div>

@@ -1,18 +1,8 @@
 import PostFormSection from "../../../components/PostFormSection";
 import { useSession } from "next-auth/react";
-import { useBetween } from "use-between";
-import {useShareLoading} from "../../../components/ShareStates";
 
 function AddNew() {
 	const { data: session } = useSession();
-	const {loaded} = useBetween(useShareLoading);
-	// const router = useRouter();
-
-	// useEffect(() => {
-	// 	if (!session) {
-	// 		router.push("/");
-	// 	}
-	// }, []);
 	return (
 		<>
 			{session &&

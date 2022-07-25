@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import ImageRender from "../ImageRender";
 
 function Horizon({prop, images}) {
@@ -10,10 +9,8 @@ function Horizon({prop, images}) {
 				<h1>{data.title}</h1>
 				<h2>{data.paragraph}</h2>
 			</div>
-			{/* <div className="shrink-0"> */}
-			{/* Have to have w-1/2 to render image */}
+
 			<div className="shrink-0 lg:w-1/2">
-				{/* <Image src={"/image/horizon.png"} alt="image" width={imageUrl.width} height={imageUrl.height}/> */}
 				<ImageRender prop={images[0]} />
 			</div>
 		</section>

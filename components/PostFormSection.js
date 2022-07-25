@@ -100,10 +100,6 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (filter === "sections") setOverall({ ...overall, images: files });
-	// 	else setWork({ ...work, heroImage: files });
-	// }, [files]);
 
 	useEffect(() => {
 		if (filter === "sections") setOverall({ ...overall, images: imageUrls });

@@ -57,18 +57,11 @@ function Order({works}) {
 					<table className="text-center my-12 border-dashed border-2 border-indigo-600 rounded w-1/2">
 						<thead className="bg-indigo-500 text-white">
 							<tr>
-								{/* <th className="text-3xl px-8 py-3 border">No.</th> */}
 								<th className="text-3xl py-3 border">Category</th>
 							</tr>
 						</thead>
 						
 						<tbody>
-							{/* {works.map((item, idx) => (
-								<tr key={idx} className="hover:bg-indigo-500 hover:text-white">
-									<td className="text-2xl py-3 border">{idx+1}</td>
-									<td className="text-2xl py-3 border">{item.category}</td>
-								</tr>
-							))} */}
 							{works && projects.map((project, index) => (
 								<tr key={index} className="hover:bg-indigo-500 hover:text-white">
 									<td className="text-2xl py-3 border">

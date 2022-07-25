@@ -11,12 +11,6 @@ export default async function handle(req, res) {
 			res.status(500).json(err);
 		}
 
-		// const { category } = req.query;
-		// if (category !== undefined) {
-		// 	const cat = findCat(category);
-		// 	res.status(200).json(cat.works);
-		// }
-		// res.status(200).json(workData);
 	}
 
 	if (req.method === "POST") {
@@ -34,16 +28,6 @@ export default async function handle(req, res) {
 
 			await Category.remove({});
 			await Category.insertMany(projects);
-			// categories.forEach((item, idx) => {
-			// 	item = projects[idx];
-			// 	console.log(projects[idx]);
-			// 	console.log("item", item);
-
-			// 	categories.replaceOne({ "category": item.category }, projects[idx]);
-			// });
-
-			// categories.save();
-
 			
 			res.status(201).json({message: "Order is updated!"});
 		} catch (err) {
