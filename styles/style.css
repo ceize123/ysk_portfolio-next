@@ -731,6 +731,7 @@ footer .icon {
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  transition: all 0.15s linear;
 }
 footer .icon svg {
   color: white;

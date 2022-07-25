@@ -41,7 +41,12 @@ function Navbar() {
 	useEffect(() => {
 		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
-		if ((router.pathname === "/" || router.pathname === "/about" || router.pathname === "/resume") && windowWidth >= 768) {
+		if ((router.pathname === "/"
+			|| router.pathname === "/about"
+			|| router.pathname === "/resume"
+			|| router.pathname === "/fashion"
+			|| router.pathname === "/photography"
+		) && windowWidth >= 768) {
 			ul.style.background = "#EDEDED";
 			ul.style.color = "#2C2C2C";
 		} 

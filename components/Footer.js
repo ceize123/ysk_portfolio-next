@@ -20,14 +20,14 @@ function Footer() {
 			<h1>Let’s Chat!</h1>
 			<div className="flex justify-center">
 				<div className="icon-section">
-					<div className="icon flex justify-center items-center cursor-pointer" onClick={() => copyText()}>
+					<div className="icon flex justify-center items-center cursor-pointer hover:scale-105" onClick={() => copyText()}>
 						<HiOutlineMail />
 					</div>
 					<p>Mail</p>
 				</div>
 				<div className="icon-section flex flex-col items-center">
 					<a target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/yung-shin-ko-48861215b/">
-						<div className="icon flex justify-center items-center">
+						<div className="icon flex justify-center items-center hover:scale-105">
 							<FaLinkedinIn />
 						</div>
 					</a>

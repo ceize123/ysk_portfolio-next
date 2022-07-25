@@ -4,7 +4,7 @@ import fashion from "../public/image/about/fashion.png";
 import photo from "../public/image/about/photo.png";
 import Footer from "../components/Footer";
 // import Modal from "../components/Modal";
-import { useShareModal, useShareModalDis, useShareWidth, useShareLoading } from "../components/ShareStates";
+import { useShareWidth, useShareLoading } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 
