@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { useShareLoading } from "../components/ShareStates";
 import { useBetween } from "use-between";
 import { useEffect } from "react";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 	const { loaded, setLoaded } = useBetween(useShareLoading);
@@ -27,6 +28,9 @@ function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 
 	return (
 		<>
+			<Head>
+				<link rel="shortcut icon" href="/logo-small.png" />
+			</Head>
 			<div className={`loading fixed top-0 h-screen w-screen ${loaded ? "opacity-0" : "z-50"}`}>
 				<div className="loading-text">
 					<span className="loading-text-words">L</span>
