@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manuale:ital,wght@1,600&display=swap');
 
 
 // General Starts
@@ -155,6 +156,22 @@ button {
 
 .home, .about-page, .resume-page, .photography-page, .fashion-page, .front-end {
 	transition: opacity 0.5s linear 3s;
+}
+
+.photography-page {
+	.container {
+		h1, h4 {
+			font-family: 'Manuale', serif;
+			font-weight: 600;
+			font-style: italic;
+			color: #FFFBF6;
+		}
+		background-color: #2C2C2C;;
+
+		.photo-gallery > div {
+			transition: all 0.1s ease;
+		}
+	}
 }
 // General Ends
 
