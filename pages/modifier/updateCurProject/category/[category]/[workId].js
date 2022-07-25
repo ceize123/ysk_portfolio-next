@@ -6,7 +6,7 @@ import Hero from "../../../../../components/sections/Hero";
 import Overview from "../../../../../components/sections/Overview";
 import PostFormSection from "../../../../../components/PostFormSection";
 import UpdateFormSection from "../../../../../components/UpdateFormSection";
-import { useShareUpdateNo } from "../../../../../components/ShareStates";
+import { useShareUpdateNo, useShareLoading } from "../../../../../components/ShareStates";
 import UpdateBtn from "../../../../../components/UpdateButtons";
 
 import dbConnect from "../../../../../util/connection";
@@ -20,6 +20,7 @@ function WorkDetail({category, work}) {
 	const { updateNo, setUpdateNo } = useBetween(useShareUpdateNo);
 
 	const { data: session } = useSession();
+	const {loaded} = useBetween(useShareLoading);
 	// const router = useRouter();
 
 	// useEffect(() => {
@@ -45,7 +46,7 @@ function WorkDetail({category, work}) {
 	};
 
 	return (
-		<div className="mt-3 back-end">
+		<div className={`mt-3 back-end ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50 md:mt-14 mt-12"}`}>
 			{session && work &&
 				<>
 					<h1 className="text-3xl mb-3 text-center">

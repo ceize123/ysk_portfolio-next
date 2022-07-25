@@ -6,6 +6,7 @@ const OverviewSchema = new mongoose.Schema({
 	timeline: {type: String, required: true},
 	role: {type: String, required: true},
 	team: {type: String, required: true},
+	link: {type: String},
 }, { _id : false });
 
 const WorkSchema = new mongoose.Schema({

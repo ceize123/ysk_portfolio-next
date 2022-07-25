@@ -11,7 +11,7 @@ import { useBetween } from "use-between";
 
 function WorkDetail({ work }) {
 	const { windowWidth } = useBetween(useShareWidth);
-	const {loaded, setLoaded} = useBetween(useShareLoading);
+	const {loaded} = useBetween(useShareLoading);
 
 	useEffect(() => {
 		if (windowWidth >= 768) {
@@ -22,7 +22,7 @@ function WorkDetail({ work }) {
 	}, [work]);
 
 	return (
-		<div className={`front-end ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50 md:mt-14 mt-12"}`} onLoad={() => setLoaded(true)}>
+		<div className={`front-end ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50 md:mt-14 mt-12"}`}>
 			{work &&
 				<>
 					<Hero data={work} />

@@ -163,7 +163,7 @@ button {
 
 .header {
 	// height: 60px;
-	transition: opacity 0.5s linear 2.5s;
+	transition: opacity 0.5s linear 2.5s, transform 0.3s linear;
 
 	.logo {
 		max-width: 35px;
@@ -245,7 +245,7 @@ button {
 
 	@media only screen and (max-width: 767px) {
 		.main-nav {
-			transition: 0.8s all ease;
+			transition: 0.4s all ease;
 			// li {
 			// 	&:nth-child(1) {
 			// 		transition: 0.7s all ease;
@@ -565,7 +565,7 @@ button {
 			// 	.swiper-slide {
 			// 		margin-bottom: 10px;
 
-			// 		.swiper-wrapper {
+			// 		.swiper-wrapper { 
 			// 			padding-bottom: 50px;
 			// 		}
 			// 	}

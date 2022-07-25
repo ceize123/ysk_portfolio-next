@@ -28,5 +28,6 @@ export const overviewCol = [
 	"paragraph",
 	"timeline",
 	"role",
-	"team"
+	"team",
+	"link"
 ];

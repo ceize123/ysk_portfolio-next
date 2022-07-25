@@ -12,14 +12,14 @@ function About() {
 	// const { setOpen } = useBetween(useShareModal);
 	// const { setModalDis } = useBetween(useShareModalDis);
 	const router = useRouter();
-	const {loaded, setLoaded} = useBetween(useShareLoading);
+	const {loaded} = useBetween(useShareLoading);
 	const { windowWidth } = useBetween(useShareWidth);
 	const handleModal = (option) => {
 		router.push(`/${option}`);
 	};
 
 	return (
-		<div className={`about-page ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`} onLoad={() => setLoaded(true)}>
+		<div className={`about-page ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`}>
 			<section className="md:pt-14 pt-12 flex justify-center">
 				<div className="md:px-24 px-5 mt-8">
 					<div className="flex">

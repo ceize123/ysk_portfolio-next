@@ -172,7 +172,7 @@ export default function Home({ works }) {
 
 	return (
 		<>
-			<div className={`home ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`} onLoad={() => setLoaded(true)}>
+			<div className={`home ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`}>
 				{/* {page !== 0 && <Logo />} */}
 				<div className="h-screen -translate-y-14 md:-translate-y-0 mb-20 md:mb-28">
 

@@ -6,10 +6,13 @@ import Category from "../../../models/Category";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useBetween } from "use-between";
+import {useShareLoading} from "../../../components/ShareStates";
 
 // https://medium.com/nmc-techblog/easy-drag-and-drop-in-react-22778b30ba37
 function Order({works}) {
 	const { data: session } = useSession();
+	const {loaded} = useBetween(useShareLoading);
 	// const router = useRouter();
 	// useEffect(() => {
 	// 	if (!session) {
@@ -48,7 +51,7 @@ function Order({works}) {
 	};
 
 	return (
-		<div className="flex justify-center flex-col items-center back-end">
+		<div className={`flex justify-center flex-col items-center back-end ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`}>
 			{session && 
 				<>
 					<table className="text-center my-12 border-dashed border-2 border-indigo-600 rounded w-1/2">

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useBetween } from "use-between";
 import { useRouter } from "next/router";
 import SelectMenu from "../components/SelectMenu";
-import {useShareCategories} from "../components/ShareStates";
+import {useShareCategories, useShareLoading} from "../components/ShareStates";
 import Link from "next/link";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Button from "../components/Button";
@@ -13,6 +13,7 @@ const choices = [
 ];
 
 function Dashboard() {
+	const {loaded} = useBetween(useShareLoading);
 	const { data: session, status } = useSession();
 
 	const [isLoading, setIsLoading] = useState(true);
@@ -88,10 +89,10 @@ function Dashboard() {
 	}
 
 	// if ()
-	if (isLoading) return <div className="back-end"><h1 className="text-3xl text-center font-bold mt-6">Loading...</h1></div>;
+	if (isLoading) return <div className="back-end md:mt-16 mt-12"><h1 className="text-3xl text-center font-bold mt-6">Loading...</h1></div>;
 
 	return (
-		<div className="back-end">
+		<div className="back-end md:mt-16 mt-12">
 			<h1 className="text-3xl text-center font-bold underline my-6">Dashboard</h1>
 			{/* {!session && status !== "authenticated" &&
 				<div className="flex justify-center items-center h-24">

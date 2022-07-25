@@ -25,6 +25,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 		navTextColor: "",
 		heroImage: [],
 		// heroImageMobile: [],
+		overview: ""
 	});
 	const [overview, setOverview] = useState({});
 
@@ -40,6 +41,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			navTextColor: "",
 			heroImage: [],
 			// heroImageMobile: [],
+			overview: ""
 		});
 		setOverview({
 			subtitle: "",
@@ -47,6 +49,7 @@ function PostFormSection({ workId = "", filter, title="" }) {
 			timeline: "",
 			role: "",
 			team: "",
+			link: ""
 		});
 	}, [category]);
 	

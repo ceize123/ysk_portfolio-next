@@ -12,18 +12,20 @@ function Navbar() {
 	const { data: session } = useSession();
 
 	const {loaded, setLoaded} = useBetween(useShareLoading);
-	const { open, setOpen } = useBetween(useShareModal);
-	const { modalDis, setModalDis } = useBetween(useShareModalDis);
-	const handleModalResume = () => {
-		if (windowWidth < 768) {
-			setToggle(!toggle);
-			setHideList(!hideList);
-		}
-		setOpen(true);
-		setModalDis("resume");
-	};
+	// const { open, setOpen } = useBetween(useShareModal);
+	// const { modalDis, setModalDis } = useBetween(useShareModalDis);
+	// const handleModalResume = () => {
+	// 	if (windowWidth < 768) {
+	// 		setToggle(!toggle);
+	// 		setHideList(!hideList);
+	// 	}
+	// 	setOpen(true);
+	// 	setModalDis("resume");
+	// };
 
 	// const [position, setPosition] = useState("fixed");
+	const [showFixedNav, setShowFixedNav] = useState(true);
+	// const [countNav, setCountNav] = useState(0);
 	const [toggle, setToggle] = useState(false);
 	const [hideList, setHideList] = useState(true);
 	const [position, setPosition] = useState("");
@@ -39,7 +41,7 @@ function Navbar() {
 	useEffect(() => {
 		const body = document.querySelector("body");
 		const ul = document.querySelector("nav ul");
-		if (router.pathname === "/" || router.pathname === "/about" || router.pathname === "/resume") {
+		if ((router.pathname === "/" || router.pathname === "/about" || router.pathname === "/resume") && windowWidth >= 768) {
 			ul.style.background = "#EDEDED";
 			ul.style.color = "#2C2C2C";
 		} 
@@ -83,11 +85,37 @@ function Navbar() {
 	// 	}, 1000);
 	// };
 
+	useEffect(() => {
+		let count = 1;
+		let lastScroll = 0;
+		window.onscroll = function () {
+			let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			if (scrollTop === 0) {
+				setShowFixedNav(true);
+			} else if (scrollTop > lastScroll) {
+				lastScroll = scrollTop;
+				if (count > 0) {
+					count--;
+				} else {
+					setShowFixedNav(false);
+				}
+			} else if (count > 20) {
+				lastScroll = scrollTop;
+				setShowFixedNav(true);
+			} else {
+				count++;
+			}
+
+			// console.log(countNav);
+			
+		};
+	});
+
 
 	return (
 		<>
 			{/* <nav className={`header ${position} right-0 left-0 mx-auto z-30`} > */}
-			<div className={`loading fixed top-0 h-screen w-screen ${loaded ? "opacity-0" : "z-50"}`}>
+			{/* <div className={`loading fixed top-0 h-screen w-screen ${loaded ? "opacity-0" : "z-50"}`}>
 				<div className="loading-text">
 					<span className="loading-text-words">L</span>
 					<span className="loading-text-words">O</span>
@@ -97,8 +125,8 @@ function Navbar() {
 					<span className="loading-text-words">N</span>
 					<span className="loading-text-words">G</span>
 				</div>
-			</div>
-			<nav className={`header fixed top-0 right-0 left-0 mx-auto flex justify-end md:justify-center md:h-14 h-12 ${!loaded ? "opacity-0" : "opacity-100 z-30"}`}>
+			</div> */}
+			<nav className={`header fixed top-0 right-0 left-0 mx-auto flex justify-end md:justify-center md:h-14 h-12 ${!loaded ? "opacity-0" : "opacity-100 z-30"} ${!showFixedNav && "-translate-y-14"}`}>
 				<Logo />
 				<div className={`menu-icon mr-3.5 block md:hidden ${toggle && "active"}`}>
 					<svg className={`ham hamRotate ${toggle && "active"}`} viewBox="0 0 100 100" width="50" onClick={handleClick}>
@@ -154,9 +182,9 @@ function Navbar() {
 				</ul>
 			</nav>
 			{/* {open && <Modal prop={"resume_yung-shin_ko"} resume={true} />} */}
-			{open &&
+			{/* {open &&
 				<Modal prop={modalDis} />
-			}
+			} */}
 		</>
 	);
 }
