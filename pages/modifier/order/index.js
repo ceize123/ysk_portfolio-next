@@ -4,8 +4,6 @@ import Button from "../../../components/Button";
 import dbConnect from "../../../util/connection";
 import Category from "../../../models/Category";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { useBetween } from "use-between";
 import {useShareLoading} from "../../../components/ShareStates";
 
