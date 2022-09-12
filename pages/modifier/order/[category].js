@@ -27,7 +27,7 @@ function OrderSub({work}) {
 		},
 		[workSub],
 	);
- 
+
 	const handleSave = async () => {
 
 		const response = await fetch(`/api/works/category/${work.category}`, {
