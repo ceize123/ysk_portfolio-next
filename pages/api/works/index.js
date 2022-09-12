@@ -26,6 +26,7 @@ export default async function handle(req, res) {
 		try {
 			const { projects } = req.body;
 
+			// too dangerous
 			await Category.remove({});
 			await Category.insertMany(projects);
 			
