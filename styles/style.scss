@@ -743,6 +743,14 @@ iframe {
 		}
 	}
 
+	@media only screen and (max-width: 767px) {
+		.text-image, .multi-images {
+			h1 {
+				line-height: 50px;
+			}
+		}
+	}
+
 	// Text-only
 	.text-only {
 		h1 {

@@ -619,6 +619,11 @@ iframe {
 .templates .text-image h2, .templates .multi-images h2 {
   margin-bottom: 50px;
 }
+@media only screen and (max-width: 767px) {
+  .templates .text-image h1, .templates .multi-images h1 {
+    line-height: 50px;
+  }
+}
 .templates .text-only h1 {
   margin-bottom: 0;
   line-height: 60px;
