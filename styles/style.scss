@@ -744,7 +744,7 @@ iframe {
 	}
 
 	@media only screen and (max-width: 767px) {
-		.text-image, .multi-images {
+		.text-image, .multi-images, .title-image {
 			h1 {
 				line-height: 50px;
 			}
@@ -832,6 +832,16 @@ iframe {
 				line-height: 60px;
 			}
 		}
+	}
+
+	@media only screen and (max-width: 1024px) {
+		.horizon {
+		.horizon-text {
+			h1 {
+				line-height: 50px;
+			}
+		}
+	}
 	}
 
 	// List

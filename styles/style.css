@@ -620,7 +620,7 @@ iframe {
   margin-bottom: 50px;
 }
 @media only screen and (max-width: 767px) {
-  .templates .text-image h1, .templates .multi-images h1 {
+  .templates .text-image h1, .templates .multi-images h1, .templates .title-image h1 {
     line-height: 50px;
   }
 }
@@ -685,6 +685,11 @@ iframe {
 }
 .templates .horizon .horizon-text h1 {
   line-height: 60px;
+}
+@media only screen and (max-width: 1024px) {
+  .templates .horizon .horizon-text h1 {
+    line-height: 50px;
+  }
 }
 .templates .list-section .list-text h2 {
   margin-bottom: 10px;
