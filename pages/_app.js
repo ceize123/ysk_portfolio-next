@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 	return (
 		<>
 			<Head>
+				<title>Yung-Shin Ko</title>
 				<link rel="shortcut icon" href="/logo-small.png" />
 			</Head>
 			<div className={`loading fixed top-0 h-screen w-screen ${loaded ? "opacity-0" : "z-50"}`}>
