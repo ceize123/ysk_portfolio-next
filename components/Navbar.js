@@ -120,8 +120,11 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link href="/resume">
-							<a className="hover:text-secondary cursor-pointer">Resume</a>
+						<Link href="https://drive.google.com/file/d/1WpcWRy7LDH-qVVqLpjjjP28VBn6AIQa4/view?usp=sharing" passHref>
+							<a
+								target="_blank"
+								rel="noopener noreferrer"	
+								className="hover:text-secondary cursor-pointer">Resume</a>
 						</Link>
 					</li>
 					{session &&

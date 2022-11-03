@@ -3,18 +3,12 @@ import headShot from "../public/image/about/about-head-shot.png";
 import fashion from "../public/image/about/fashion.png";
 import photo from "../public/image/about/photo.png";
 import Footer from "../components/Footer";
-// import Modal from "../components/Modal";
 import { useShareWidth, useShareLoading } from "../components/ShareStates";
 import { useBetween } from "use-between";
-import { useRouter } from "next/router";
 
 function About() {
-	const router = useRouter();
 	const {loaded} = useBetween(useShareLoading);
 	const { windowWidth } = useBetween(useShareWidth);
-	const handleModal = (option) => {
-		router.push(`/${option}`);
-	};
 
 	return (
 		<div className={`about-page ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`}>
@@ -33,8 +27,14 @@ function About() {
 							<Image src={headShot} alt="head-shot" />	
 						</div>
 					</div>
-					<div className="mt-6 mb-12" onClick={() => handleModal("resume")}>
-						<button className="py-4 px-5 mt-6"><h4 className="hover:text-secondary">Resume</h4></button>
+					<div className="mt-6 mb-12">
+						<button className="py-4 px-5 mt-6">
+							<a
+								href="https://drive.google.com/file/d/1WpcWRy7LDH-qVVqLpjjjP28VBn6AIQa4/view?usp=sharing"
+								target="_blank"
+								rel="noopener noreferrer"	
+								className="hover:text-secondary cursor-pointer text-xl font-bold">Resume</a>
+						</button>
 					</div>
 					<div className="lg:mt-8 mt-12 md:mb-24 mb-12">
 						<h2 className="mb-5">
