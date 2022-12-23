@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 		}
 	}, [loaded]);
 	
-
+ 
 	if (Component.getLayout) {
 		return Component.getLayout(<Component {...pageProps} />);
 	}
