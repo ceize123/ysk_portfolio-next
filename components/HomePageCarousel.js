@@ -10,7 +10,6 @@ import Card from "./WorkCard";
 import firstLetter from "./FirstLetter";
 
 function HomePageCarousel({ works }) {
-	// const [insideSlide, setInsideSlide] = useState([]);
 	const [slideIdx, setSlideIdx] = useState(0);
 
 	// useEffect(() => {
@@ -56,7 +55,6 @@ function HomePageCarousel({ works }) {
 	const pagination = {
 		clickable: true,
 		renderBullet: function (index, className) {
-			// return '<span class="' + className + '">' + (index + 1) + "</span>";
 			return `<span class="${className} text-sm">${works[index].category !== "UIUX" ? firstLetter("upper", works[index].category) : "UI/UX"}</span>`;
 		},
 	};
