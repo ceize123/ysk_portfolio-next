@@ -120,7 +120,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link href="https://drive.google.com/file/d/1WpcWRy7LDH-qVVqLpjjjP28VBn6AIQa4/view?usp=sharing" passHref>
+						<Link href="https://drive.google.com/file/d/126EtvxRQHBxIWrL6ZoivwnY3IL9DoJlz/view?usp=sharing" passHref>
 							<a
 								target="_blank"
 								rel="noopener noreferrer"	

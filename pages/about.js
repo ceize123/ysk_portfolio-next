@@ -30,7 +30,7 @@ function About() {
 					<div className="mt-6 mb-12">
 						<button className="py-4 px-5 mt-6">
 							<a
-								href="https://drive.google.com/file/d/1WpcWRy7LDH-qVVqLpjjjP28VBn6AIQa4/view?usp=sharing"
+								href="https://drive.google.com/file/d/126EtvxRQHBxIWrL6ZoivwnY3IL9DoJlz/view?usp=sharing"
 								target="_blank"
 								rel="noopener noreferrer"	
 								className="hover:text-secondary cursor-pointer text-xl font-bold">Resume</a>
