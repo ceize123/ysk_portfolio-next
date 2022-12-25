@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps: {session, ...pageProps } }) {
 			}, 4000);
 		}
 	}, [loaded]);
-	
+
  
 	if (Component.getLayout) {
 		return Component.getLayout(<Component {...pageProps} />);
