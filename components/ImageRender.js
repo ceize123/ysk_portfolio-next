@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState  } from "react";
+import { useState, useEffect  } from "react";
 
 function ImageRender({ prop }) {
 	const imageUrl = prop;
@@ -11,12 +11,7 @@ function ImageRender({ prop }) {
 	};
 	return (
 		<div className="flex justify-center">
-			<div style={{width: "100%", position: "relative"}}
-				// style={{
-				// 	width: dimension.width,
-				// 	height: dimension.height,
-				// }}
-			>
+			<div className={imageUrl.includes('gif') && "gif" } style={{width: "100%", position: "relative"}}>
 				<Image src={imageUrl} alt="image"
 					onLoadingComplete={(e) => { handleImageLoad(e); }}
 					width={100} height={height} layout="responsive" objectFit="contain"
