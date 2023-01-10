@@ -48,8 +48,9 @@ export default function Home({ works }) {
 						style={{ background: windowWidth < 1024 && `url("./image/home-page/hero-mobile.png") no-repeat ${backgroundSize}` }}
 					>
 						<Egg bgImage={hero} centerImage={logo} className="hero" />
-						<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 left-8 sm:left-20 lg:left-auto">
-							<h5 className="md:mb-4 mb-2">UI/UX Designer</h5>
+						<div className="absolute -bottom-1 lg:-bottom-8 z-20 text-center lg:translate-x-0 sm:-translate-x-0 left-8 sm:left-20 lg:left-auto text-secondary">
+							<h5 className="mb-2">This is Shin!</h5>
+							<h5 className="md:mb-4 mb-2">A UX designer based in Toronto</h5>
 							<div className="arrow" onClick={handleArrow}>
 								<Link href="/#works">
 									<Image className="cursor-pointer z-20" src={arrow} alt="arrow" width="76px" height="76px" />

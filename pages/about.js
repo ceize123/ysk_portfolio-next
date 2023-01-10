@@ -5,10 +5,15 @@ import photo from "../public/image/about/photo.png";
 import Footer from "../components/Footer";
 import { useShareWidth, useShareLoading } from "../components/ShareStates";
 import { useBetween } from "use-between";
+import { useRouter } from "next/router";
 
 function About() {
+	const router = useRouter();
 	const {loaded} = useBetween(useShareLoading);
 	const { windowWidth } = useBetween(useShareWidth);
+	const handleModal = (option) => {
+		router.push(`/${option}`);
+	};
 
 	return (
 		<div className={`about-page ${!loaded ? "overflow-hidden h-screen opacity-0" : "opacity-100 z-50"}`}>
@@ -18,8 +23,7 @@ function About() {
 						<div>
 							<h1 className="mt-12 mb-5">Hello! I am Yung-Shin Ko!</h1>
 							<div className="flex flex-col quote">
-								<q>Life is a series of experience, each one of which makes us bigger, even though sometimes it is hard to realize this.</q>
-								<p className="self-end">By Henry Ford</p>
+								<p>Hello! My name is Shin and I am a dedicated and passionate UI/UX designer. I am currently volunteering at NEX Foundation, where I am excited to take on challenges and improve my skills. In my free time, I enjoy exploring new and exciting experiences through activities such as dancing, travel, photography, and fashion design. I am always looking for ways to grow and learn, and I am excited to see where my passions and talents will take me next.</p>
 							</div>
 						</div>
 
