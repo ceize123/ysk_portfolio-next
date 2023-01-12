@@ -22,7 +22,7 @@ function About() {
 					<div className="flex">
 						<div>
 							<h1 className="mt-12 mb-5">Hello! I am Yung-Shin Ko!</h1>
-							<div className="flex flex-col quote">
+							<div className="flex flex-col introduction">
 								<p>Hello! My name is Shin and I am a dedicated and passionate UI/UX designer. I am currently volunteering at NEX Foundation, where I am excited to take on challenges and improve my skills. In my free time, I enjoy exploring new and exciting experiences through activities such as dancing, travel, photography, and fashion design. I am always looking for ways to grow and learn, and I am excited to see where my passions and talents will take me next.</p>
 							</div>
 						</div>
@@ -34,7 +34,7 @@ function About() {
 					<div className="mt-6 mb-12">
 						<button className="py-4 px-5 mt-6">
 							<a
-								href="https://drive.google.com/file/d/126EtvxRQHBxIWrL6ZoivwnY3IL9DoJlz/view?usp=sharing"
+								href="https://drive.google.com/file/d/1sYVBZfGD5MJ5tieahrnH58IXlSbIt0su/view"
 								target="_blank"
 								rel="noopener noreferrer"	
 								className="hover:text-secondary cursor-pointer text-xl font-bold">Resume</a>
@@ -42,32 +42,74 @@ function About() {
 					</div>
 					<div className="lg:mt-8 mt-12 md:mb-24 mb-12">
 						<h2 className="mb-5">
-							8 “W” Get To Know Me
+							6 “W” Get To Know Me
 						</h2>
-						<p className="mb-10">
-							Where am I from: <span className="text-secondary">Taiwan</span>
-						</p>
-						<p className="mb-10">
-							Where do I currently live in: <span className="text-secondary">Toronto Canada</span>
-						</p>
-						<p className="mb-10">
-							What did I major before: <span className="text-secondary">Interactive Media Design and Fashion design</span>
-						</p>
-						<p className="mb-10">
-							What do I dislike: <span className="text-secondary">Being late, Irresponsible, Mean and Rude</span>
-						</p>
-						<p className="mb-10">
-							What my friends said about me: <span className="text-secondary">Considerate Friend, Good listener, Calming decision maker, Problem solver </span>
-						</p>
-						<p className="mb-10">
-							What’s my personality: <span className="text-secondary">Responsible, Empathy, Open-minded, Diligent, Proactive</span>
-						</p>
-						<p className="mb-10">
-							What’s my hobby: <span className="text-secondary">Dance, Exercise, Travel, Eating</span>
-						</p>
-						<p>
-							What’s my faith: <span className="text-secondary">Life is all about experience</span>
-						</p>
+						<div className="flex md:flex-wrap flex-col md:flex-row md:justify-between md:items-stretch items-center about-me-div">
+							<div className="about-me-card p-7">
+								<div className="card-text">
+									<h5>What did I major before?</h5>
+									<ul className="mt-4 text-secondary">
+										<li>Interactive media design</li>
+										<li>Fashion design</li>
+									</ul>
+								</div>
+							</div>
+							<div className="about-me-card p-7">
+								<div className="card-text">
+									<h5>What do I dislike?</h5>
+									<ul className="mt-4 text-secondary">
+										<li>Being late</li>
+										<li>Irresponsible</li>
+										<li>Mean and Rude</li>
+									</ul>
+								</div>
+							</div>
+							<div className="about-me-card p-7">
+								<div className="card-text">
+									<h5>What my friends said about me?</h5>
+									<ul className="mt-4 text-secondary">
+										<li>Considerate Friend</li>
+										<li>Good listener</li>
+										<li>Calming decision maker</li>
+										<li>Problem solver </li>
+									</ul>
+								</div>
+							</div>
+							<div className="about-me-card p-7">
+								<div className="card-text">
+									<h5>What my ex-bosses said about me?</h5>
+									<ul className="mt-4 text-secondary">
+										<li>Efficient</li>
+										<li>Precise</li>
+										<li>Calm</li>
+										<li>Reliable</li>
+									</ul>
+								</div>
+							</div>
+							<div className="about-me-card p-7">
+								<div className="card-text">
+									<h5>What’s my personality?</h5>
+									<ul className="mt-4 text-secondary">
+										<li>Responsible</li>
+										<li>Empathy</li>
+										<li>Open-minded</li>
+										<li>Diligent</li>
+										<li>Proactive</li>
+									</ul>
+								</div>
+							</div>
+							<div className="about-me-card p-7">
+								<div className="card-text">
+									<h5>What’s my hobby?</h5>
+									<ul className="mt-4 text-secondary">
+										<li>Dancing</li>
+										<li>Traveling</li>
+										<li>Eating</li>
+										<li>Playing Board Game</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div className="md:mb-24 mb-12">
 						<h2>

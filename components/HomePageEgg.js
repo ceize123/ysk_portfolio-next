@@ -7,16 +7,11 @@ function Egg({ bgImage = "", centerImage = "", text = "", className }) {
 
 	return (
 		<>
-			{bgImage ? className === "hero" ?
-				<div className={`hidden z-10 egg-bg lg:flex justify-center items-center ${className}`} >
-					<Image src={bgImage} alt={bgImage}
-						placeholder="blur"
-					/>
-				</div>
-				: <div className={`z-10 egg-bg flex justify-center items-center ${className}`} >
+			{bgImage &&
+				<div className={`z-10 egg-bg flex justify-center items-center ${className}`} >
 					<Image src={bgImage} alt={bgImage}
 						placeholder="blur" />
-				</div> : ""
+				</div>
 			}
 
 			{/* https://www.npmjs.com/package/react-parallax-tilt */}

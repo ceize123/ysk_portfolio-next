@@ -31,7 +31,7 @@ function Navbar() {
 			|| router.pathname === "/fashion"
 			|| router.pathname === "/photography"
 		) && windowWidth >= 768) {
-			ul.style.background = "#EDEDED";
+			ul.style.background = "#F0F0F0";
 			ul.style.color = "#2C2C2C";
 		} 
 
@@ -120,7 +120,7 @@ function Navbar() {
 						</Link>
 					</li>
 					<li>
-						<Link href="https://drive.google.com/file/d/126EtvxRQHBxIWrL6ZoivwnY3IL9DoJlz/view?usp=sharing" passHref>
+						<Link href="https://drive.google.com/file/d/1sYVBZfGD5MJ5tieahrnH58IXlSbIt0su/view" passHref>
 							<a
 								target="_blank"
 								rel="noopener noreferrer"	

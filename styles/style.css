@@ -10,6 +10,7 @@ body {
   margin: 0;
   font-family: "Lexend Deca", sans-serif;
   scroll-behavior: smooth;
+  background-color: #F0F0F0;
 }
 
 * {
@@ -95,22 +96,66 @@ ul {
 }
 @keyframes scroll {
   0%, 5% {
-    transform: translateY(60px);
+    transform: translateY(57px);
   }
   5%, 20% {
     transform: translateY(0);
   }
   25%, 45% {
-    transform: translateY(-58px);
+    transform: translateY(-57px);
   }
   50%, 70% {
-    transform: translateY(-116px);
+    transform: translateY(-114px);
   }
   75%, 95% {
-    transform: translateY(-174px);
+    transform: translateY(-171px);
   }
   100% {
-    transform: translateY(-240px);
+    transform: translateY(-228px);
+  }
+}
+@media only screen and (max-width: 1024px) {
+  @keyframes scroll {
+    0%, 5% {
+      transform: translateY(61px);
+    }
+    5%, 20% {
+      transform: translateY(0);
+    }
+    25%, 45% {
+      transform: translateY(-61px);
+    }
+    50%, 70% {
+      transform: translateY(-122px);
+    }
+    75%, 95% {
+      transform: translateY(-183px);
+    }
+    100% {
+      transform: translateY(-244px);
+    }
+  }
+}
+@media only screen and (max-width: 992px) {
+  @keyframes scroll {
+    0%, 5% {
+      transform: translateY(56px);
+    }
+    5%, 20% {
+      transform: translateY(0);
+    }
+    25%, 45% {
+      transform: translateY(-56px);
+    }
+    50%, 70% {
+      transform: translateY(-112px);
+    }
+    75%, 95% {
+      transform: translateY(-168px);
+    }
+    100% {
+      transform: translateY(-224px);
+    }
   }
 }
 @media only screen and (max-width: 992px) {
@@ -164,8 +209,8 @@ button h4 {
   transition: opacity 0.5s linear 2.5s, transform 0.3s linear;
 }
 .header .logo {
-  max-width: 35px;
-  max-height: 35px;
+  max-width: 72px;
+  max-height: 28px;
 }
 .header .menu-icon .ham {
   cursor: pointer;
@@ -218,7 +263,6 @@ button h4 {
   text-align: center;
   display: block;
   line-height: 20px;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 @media only screen and (max-width: 767px) {
   .header .main-nav {
@@ -291,12 +335,6 @@ button h4 {
     filter: blur(4px);
   }
 }
-.home {
-  background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
-}
-.home .arrow-active img {
-  animation: bt-effect linear 0.2s;
-}
 .home section {
   max-width: 100vw;
   transition: 0.7s opacity cubic-bezier(0.86, 0.01, 0.38, 0.99), 0.8s transform 0.4s cubic-bezier(0.86, 0.01, 0.38, 0.99);
@@ -365,23 +403,9 @@ button h4 {
     width: 35vw !important;
     height: 35vw !important;
   }
-  .home section .egg-center-div .egg-center h1 {
-    font-size: 36px;
-  }
 }
 .home section .egg-center-div .egg-hover:hover {
   cursor: pointer;
-}
-.home section .head-shot {
-  width: 100%;
-  height: auto;
-  max-width: 229px;
-}
-@media only screen and (max-width: 767px) {
-  .home section .head-shot {
-    width: 500px;
-    max-width: 500px;
-  }
 }
 .home section .egg-hero {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 3.50667px -3.50667px 3.50667px rgba(182, 182, 182, 0.4), inset -3.50667px 3.50667px 3.50667px rgba(255, 255, 255, 0.4);
@@ -390,25 +414,34 @@ button h4 {
   width: 25vw;
   height: 25vw;
 }
-.home section .about-image {
-  max-width: 229px;
-}
 .home section .text-carousel .inner {
   animation: scroll 5s ease-in-out infinite;
 }
 .home #about h1 {
   line-height: 50px;
 }
-@media only screen and (min-width: 1024px) {
-  .home #hero .egg-center {
-    max-width: 550px !important;
-    max-height: 550px !important;
-    width: 23vw !important;
-    height: 23vw !important;
-    min-width: 225px !important;
-    min-height: 225px !important;
-    margin-left: 5px;
-  }
+.home #hero .egg-center {
+  max-width: 350px !important;
+  max-height: 350px !important;
+  width: 23vw !important;
+  height: 23vw !important;
+  min-width: 225px !important;
+  min-height: 225px !important;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 3.50667px -3.50667px 3.50667px rgba(182, 182, 182, 0.4), inset -3.50667px 3.50667px 3.50667px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(17.5333px);
+  border-radius: 50%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  background-image: url("../public/image/home-page/logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 71%;
+}
+.home #hero .rotate {
+  background-image: url("../public/image/about/about-head-shot.png");
+  background-size: 100%;
+  box-shadow: inherit;
 }
 @media only screen and (max-width: 1023px) {
   .home #hero .egg-center {
@@ -416,7 +449,6 @@ button h4 {
     height: calc(18vw + 15vh) !important;
     min-width: 220px !important;
     min-height: 220px !important;
-    margin-bottom: 5px;
   }
 }
 @media only screen and (max-width: 576px) {
@@ -534,36 +566,56 @@ button h4 {
     margin-right: 290px;
   }
 }
-.about-page {
-  background: linear-gradient(80.33deg, rgba(229, 229, 229, 0.7) 13.28%, rgba(245, 245, 245, 0.7) 46.01%, rgba(230, 230, 230, 0.7) 65.96%, rgba(255, 255, 255, 0.175) 95.62%), linear-gradient(252.44deg, #D2D2D2 5.8%, rgba(255, 255, 255, 0.45) 100%);
-}
 .about-page > div {
   max-width: 1280px;
 }
 .about-page h2 {
   font-size: 32px;
 }
-.about-page q, .about-page p {
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-}
-.about-page .quote {
+.about-page .introduction {
   max-width: 630px;
 }
-.about-page .quote q {
-  max-width: 579px;
-}
-.about-page .quote p {
-  margin-top: 10px;
+.about-page .introduction p {
+  line-height: 25.2px;
+  font-weight: 500;
+  font-size: 18px;
 }
 .about-page .head-shot {
-  width: 229px;
-  height: 229px;
+  width: 300px;
+  height: 300px;
 }
 .about-page .see-more {
   display: none;
   color: #FFF;
+}
+.about-page .about-me-div {
+  max-width: 1280px;
+}
+.about-page .about-me-card {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 4.76px -4.76px 4.76px rgba(214, 214, 214, 0.4), inset -4.76px 4.76px 4.76px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(23.8px);
+  border-radius: 5px;
+  width: 30%;
+  margin: 8px 0;
+  transition: transform 0.2s;
+}
+.about-page .about-me-card:hover {
+  transform: scale(1.02);
+}
+.about-page .about-me-card ul {
+  list-style: inside;
+}
+@media only screen and (max-width: 992px) {
+  .about-page .about-me-card {
+    width: 48%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .about-page .about-me-card {
+    width: 55%;
+    min-width: 300px;
+  }
 }
 @media only screen and (min-width: 767px) {
   .about-page .image-div:hover .see-more {
@@ -713,10 +765,6 @@ iframe {
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-}
-
-.back-end, .front-end, .resume-page, .fashion-page, .photography-page {
-  background: #FFF;
 }
 
 .front-end .overview {
