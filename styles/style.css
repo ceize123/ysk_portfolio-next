@@ -10,7 +10,6 @@ body {
   margin: 0;
   font-family: "Lexend Deca", sans-serif;
   scroll-behavior: smooth;
-  background-color: #F0F0F0;
 }
 
 * {
@@ -767,8 +766,12 @@ iframe {
   line-height: 22px;
 }
 
+.home, .about-page {
+  background-color: #F0F0F0;
+}
+
 .back-end, .front-end, .fashion-page, .photography-page {
-  background: #F0F0F0;
+  background: #FFF;
 }
 
 .front-end .overview {
