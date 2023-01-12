@@ -767,6 +767,10 @@ iframe {
   line-height: 22px;
 }
 
+.back-end, .front-end, .fashion-page, .photography-page {
+  background: #F0F0F0;
+}
+
 .front-end .overview {
   padding: 100px 0;
 }
